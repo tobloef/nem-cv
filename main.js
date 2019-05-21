@@ -5,6 +5,8 @@ RootPages.define();
 import Router from "./lib/Router.js";
 import Pages from "./lib/Pages.js";
 
+const root = document.querySelector('root-pages');
+
 const pages = new Pages();
 const router = new Router();
 
@@ -12,11 +14,11 @@ const router = new Router();
 router.config({mode: "history"});
 
 //Register pages
-pages.add("home", document.querySelector("page-home"))
-    .add("theme", document.querySelector("page-theme"))
-    .add("editor", document.querySelector("page-editor"))
-    .add("about", document.querySelector("page-about"))
-    .add("not-found", document.querySelector("page-not-found"));
+pages.add("home", root.shadowRoot.querySelector("page-home"))
+    .add("theme", root.shadowRoot.querySelector("page-theme"))
+    .add("editor", root.shadowRoot.querySelector("page-editor"))
+    .add("about", root.shadowRoot.querySelector("page-about"))
+    .add("not-found", root.shadowRoot.querySelector("page-not-found"));
 
 //Register routes
 router.add(/about/, _ => {
