@@ -1,5 +1,7 @@
 "use strict";
 
+import {classNameToElementName} from "../lib/string-utils.js";
+
 export default class BaseComponent extends HTMLElement {
     constructor() {
         super();
@@ -40,12 +42,8 @@ export default class BaseComponent extends HTMLElement {
         }
     }
 
-    static classNameToElementName(str) {
-        return str.replace(/\.?([A-Z]+)/g, (x, y) => "-" + y.toLowerCase()).replace(/^-/, "");
-    }
-
     static define() {
-        const elementName = this.classNameToElementName(this.name);
+        const elementName = classNameToElementName(this.name);
         if (customElements.get(elementName) != null) {
             return;
         }
