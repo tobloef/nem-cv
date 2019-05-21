@@ -1,7 +1,7 @@
 'use strict';
 import BaseComponent from "../../lib/BaseComponent.js";
 
-export default class AddButton extends BaseComponent {
+export default class ${NAME} extends BaseComponent {
     usedComponents = [
 
     ];
