@@ -1,31 +1,26 @@
 "use strict";
 
-import BaseComponent from "../lib/BaseComponent.js";
+import BaseComponent from "./BaseComponent.js";
 import PageHome from "./home/PageHome.js";
-import PageTheme from "./theme/PageTheme.js";
 import PageEditor from "./editor/PageEditor.js";
-import PageAbout from "./about/PageAbout.js";
+import PageTemplates from "./templates/PageTemplates.js";
 import PageNotFound from "./not-found/PageNotFound.js";
-
-
 
 export default class RootPages extends BaseComponent {
     usedComponents = [
         PageHome,
-        PageTheme,
+        PageTemplates,
         PageEditor,
-        PageAbout,
         PageNotFound
     ];
 
     // language=HTML
     html = `
         <div class="pages">
-            <page-home class="page"></page-home>
-            <page-theme class="page"></page-theme>
-            <page-editor class="page"></page-editor>
-            <page-about class="page"></page-about>
-            <page-not-found class="page"></page-not-found>
+	        <page-home class="page"></page-home>
+	        <page-templates class="page"></page-templates>
+	        <page-editor class="page"></page-editor>
+	        <page-not-found class="page"></page-not-found>
         </div>
     `;
 
@@ -34,7 +29,6 @@ export default class RootPages extends BaseComponent {
         .pages {
             height: 100%;
             position: relative;
-        
             overflow: hidden;
         }
         
