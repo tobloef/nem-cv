@@ -1,10 +1,10 @@
-export default class PageHome extends HTMLElement {
-    connectedCallback() {
-        this.innerHTML = `
-            <h1>NemCV</h1>
-            <a href="/theme">Get Started</a>
-        `;
-    }
-}
+import BaseComponent from "../../lib/BaseComponent.js";
+import Router from '../../lib/Router.js';
 
-customElements.define('page-home', PageHome);
+export default class PageHome extends BaseComponent {
+    html = `
+        <h1>NemCV</h1>
+        <a href="${Router.prefix}/theme">Get Started</a>
+        <a href="${Router.prefix}/about">About</a>
+    `;
+}
