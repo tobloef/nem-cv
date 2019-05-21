@@ -1,9 +1,10 @@
 import BaseComponent from "../../lib/BaseComponent.js";
+import Router from "../../lib/Router.js";
 
 export default class PageEditor extends BaseComponent {
     html = `
         <h1>Selected a theme</h1>
-        <a href="/">Back</a>
+        <a href="${Router.prefix}/">Back</a>
     `;
 
     //Proof of concept. Not clean at all :)
