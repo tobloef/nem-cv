@@ -3,6 +3,8 @@
 import {classNameToElementName} from "../lib/string-utils.js";
 
 export default class BaseComponent extends HTMLElement {
+    enableResetCSS = true;
+
     constructor() {
         super();
         this.attachShadow({mode: "open"});
@@ -26,8 +28,16 @@ export default class BaseComponent extends HTMLElement {
 
     _updateDOM() {
         this.shadowRoot.innerHTML = "";
+        if (this.externalStyles != null) {
+            for (const externalStyle of this.externalStyles) {
+                this.shadowRoot.innerHTML += ` <style>@import "${externalStyle}";</style>`;
+            }
+        }
+        if (this.enableResetCSS) {
+            this.shadowRoot.innerHTML += ` <style>@import "/css/reset.css";</style>`;
+        }
         if (this.style != null) {
-            this.shadowRoot.innerHTML = `<style>${this.style}</style>`;
+            this.shadowRoot.innerHTML += `<style>${this.style}</style>`;
         }
         if (this.html) {
             this.shadowRoot.innerHTML += this.html;
