@@ -3,7 +3,7 @@ import Pages from './lib/Pages.js';
 
 import PageHome from './components/home/PageHome.js';
 import PageAbout from './components/about/PageAbout.js';
-import PageTheme from './components/theme/PageTheme.js';
+import PageEditor from './components/editor/PageEditor.js';
 import PageNotFound from './components/notfound/PageNotFound.js';
 
 const pages = new Pages();
@@ -14,7 +14,7 @@ router.config({ mode: 'history'});
 
 //Register pages
 pages.add('home', document.querySelector('page-home'))
-     .add('theme', document.querySelector('page-theme'))
+     .add('editor', document.querySelector('page-editor'))
      .add('about', document.querySelector('page-about'))
      .add('notfound', document.querySelector('page-notfound'));
 
@@ -22,9 +22,9 @@ pages.add('home', document.querySelector('page-home'))
 router.add(/about/, _=>{
         pages.show('about');
     })
-    .add(/theme\/(.*)/, args => {
+    .add(/editor\/(.*)/, args => {
         try {
-            pages.get('theme').setTheme(args);
+            pages.get('editor').setTheme(args);
         }
         catch(e) {
             alert(e.message);
@@ -32,7 +32,7 @@ router.add(/about/, _=>{
             return;
         }
 
-        pages.show('theme');
+        pages.show('editor');
     })
     //The default route, which will be called if no other match is found.
     .add(args =>{

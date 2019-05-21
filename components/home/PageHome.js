@@ -1,16 +1,14 @@
-import HelloWorld from './HelloWorld.js';
-
 export default class PageHome extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
-            <hello-world></hello-world>
+            <h1>NemCV</h1>
             <b>Choose a theme</b>
-            <a href="/theme/red">Red theme</a>
-            <a href="/theme/blue">Blue theme</a>
-            <a href="/theme/green">Green theme</a>
-            <a href="/theme/purple">Purple theme</a>
-            <a href="/theme/special">Special theme</a>
-            <a href="/theme/invalid">Invalid theme</a>
+            <a href="/editor/red">Red theme</a>
+            <a href="/editor/blue">Blue theme</a>
+            <a href="/editor/green">Green theme</a>
+            <a href="/editor/purple">Purple theme</a>
+            <a href="/editor/special">Special theme</a>
+            <a href="/editor/invalid">Invalid theme</a>
             <br>
             <b>Other pages</b>
             <a href="/about">About</a>

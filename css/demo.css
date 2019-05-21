@@ -38,7 +38,7 @@ body {
 }
 
 page-home,
-page-theme,
+page-editor,
 page-notfound {
     justify-content: center;
 }
@@ -54,35 +54,35 @@ page-home a {
     color: black;
 }
 
-page-theme {
+page-editor {
     color: white;
 }
 
-page-theme a {
+page-editor a {
     color: white;
 }
 
-page-theme.theme-blue {
+page-editor.theme-blue {
     background: hsl(215, 70%, 48%);
 }
 
-page-theme.theme-red {
+page-editor.theme-red {
     background: hsla(0, 90%, 60%, 1);
 }
 
-page-theme.theme-green {
+page-editor.theme-green {
     background: hsl(146, 81%, 32%);
 }
 
-page-theme.theme-purple {
+page-editor.theme-purple {
     background: hsla(300, 45%, 45%, 1);
 }
 
-page-theme.theme-special {
+page-editor.theme-special {
     background: linear-gradient(to right, orange , yellow, green, cyan, blue, violet);
 }
 
-page-theme.theme-special h1 {
+page-editor.theme-special h1 {
     animation-name: spin;
     animation-duration: 1000ms;
     animation-timing-function: ease-in-out;

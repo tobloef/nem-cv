@@ -1,4 +1,4 @@
-export default class PageTheme extends HTMLElement {
+export default class PageEditor extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
             <h1>Selected a theme</h1>
@@ -32,4 +32,4 @@ export default class PageTheme extends HTMLElement {
     }
 }
 
-customElements.define('page-theme', PageTheme);
+customElements.define('page-editor', PageEditor);
