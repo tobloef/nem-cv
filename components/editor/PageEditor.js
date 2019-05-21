@@ -1,38 +1,33 @@
-import AbstractComponent from '../../lib/AbstractComponent.js';
+import BaseComponent from "../../lib/BaseComponent.js";
 
-export default class PageEditor extends AbstractComponent {
+export default class PageEditor extends BaseComponent {
     html = `
         <h1>Selected a theme</h1>
         <a href="/">Back</a>
     `;
 
-
     //Proof of concept. Not clean at all :)
     setTheme(name) {
-        this.classList.remove('theme-red', 'theme-blue', 'theme-green', 'theme-purple', 'theme-special');
+        this.classList.remove("theme-red", "theme-blue", "theme-green", "theme-purple", "theme-special");
 
         switch(name) {
-            case 'blue':
-                this.classList.add('theme-blue');
+            case "blue":
+                this.classList.add("theme-blue");
                 break;
-            case 'red':
-                this.classList.add('theme-red');
+            case "red":
+                this.classList.add("theme-red");
                 break;
-            case 'green':
-                this.classList.add('theme-green');
+            case "green":
+                this.classList.add("theme-green");
                 break;
-            case 'purple':
-                this.classList.add('theme-purple');
+            case "purple":
+                this.classList.add("theme-purple");
                 break;
-            case 'special':
-                this.classList.add('theme-special');
+            case "special":
+                this.classList.add("theme-special");
                 break;
             default:
-                throw new Error(`Invalid Theme '${name}'.`);
+                throw new Error(`Invalid Theme "${name}".`);
         }
     }
-
-    script() {}
 }
-
-customElements.define('page-editor', PageEditor);

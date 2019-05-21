@@ -1,6 +1,6 @@
-import AbstractComponent from '../../lib/AbstractComponent.js';
+import BaseComponent from "../../lib/BaseComponent.js";
 
-export default class PageTheme extends AbstractComponent {
+export default class PageTheme extends BaseComponent {
     html = `
         <h1>Choose a theme</h1>
 
@@ -15,8 +15,4 @@ export default class PageTheme extends AbstractComponent {
 
         <a href="/">Back</a>
     `;
-
-    script() {}
 }
-
-customElements.define('page-theme', PageTheme);
