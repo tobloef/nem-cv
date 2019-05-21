@@ -8,7 +8,7 @@ export default class RouterLink extends BaseComponent {
         ];
     }
 
-    html = `<a href="${this.href}"><slot></slot></a>`;
+    html = `<a href="${Router.prefix + this.href}"><slot></slot></a>`;
 
     script = () => {
         const a = this.shadowRoot.querySelector("a");
