@@ -38,19 +38,22 @@ body {
 }
 
 page-home,
+page-theme,
 page-editor,
 page-notfound {
     justify-content: center;
 }
 
-page-home b {
+page-home b,
+page-theme b, {
     color: black;
     font-size: 25px;
     padding: 20px 0px 10px;
     font-weight: 400;
 }
 
-page-home a {
+page-home a,
+page-theme a{
     color: black;
 }
 

@@ -2,6 +2,7 @@ import Router from './lib/Router.js';
 import Pages from './lib/Pages.js';
 
 import PageHome from './components/home/PageHome.js';
+import PageTheme from './components/theme/PageTheme.js';
 import PageAbout from './components/about/PageAbout.js';
 import PageEditor from './components/editor/PageEditor.js';
 import PageNotFound from './components/notfound/PageNotFound.js';
@@ -14,6 +15,7 @@ router.config({ mode: 'history'});
 
 //Register pages
 pages.add('home', document.querySelector('page-home'))
+     .add('theme', document.querySelector('page-theme'))
      .add('editor', document.querySelector('page-editor'))
      .add('about', document.querySelector('page-about'))
      .add('notfound', document.querySelector('page-notfound'));
@@ -33,6 +35,9 @@ router.add(/about/, _=>{
         }
 
         pages.show('editor');
+    })
+    .add(/theme/, _=> {
+        pages.show('theme');
     })
     //The default route, which will be called if no other match is found.
     .add(args =>{
