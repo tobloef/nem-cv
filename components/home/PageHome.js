@@ -41,10 +41,10 @@ export default class PageHome extends BaseComponent {
 
         header {
             padding-top: 50px;
-            height: 75vh;
+            height: 100vh;
             background-image: url('/img/landing-bg.webp');
             background-repeat: no-repeat;
-            background-size: auto 150%;
+            background-size: cover;
             background-position: center 20%;
         }
 
@@ -62,8 +62,8 @@ export default class PageHome extends BaseComponent {
 
             background-image: url('/img/landing-bg.webp');
             background-repeat: no-repeat;
-            background-size: 150% 100%;
-            /*background-position: center -120px*/
+            background-size: 100% auto;
+            background-position: -20px -70px;
 
             transition: 1s cubic-bezier(0.77, 0, 0.175, 1) width, 1s cubic-bezier(0.77, 0, 0.175, 1) height;
         }
@@ -71,6 +71,7 @@ export default class PageHome extends BaseComponent {
         header .image-container.small {
             width: 25%;
             height: 100px;
+            background-position: 0;
         }
 
         header .fakecv {
