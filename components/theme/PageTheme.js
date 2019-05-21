@@ -1,20 +1,19 @@
-export default class PageTheme extends HTMLElement {
-    connectedCallback() {
-        this.innerHTML = `
-            <h1>Choose a theme</h1>
+import BaseComponent from "../../lib/BaseComponent.js";
+import Router from "../../lib/Router.js";
 
-            <a href="/editor/red">Red theme</a>
-            <a href="/editor/blue">Blue theme</a>
-            <a href="/editor/green">Green theme</a>
-            <a href="/editor/purple">Purple theme</a>
-            <a href="/editor/special">Special theme</a>
-            <a href="/editor/invalid">Invalid theme</a>
+export default class PageTheme extends BaseComponent {
+    html = `
+        <h1>Choose a theme</h1>
 
-            <br>
+        <a href="${Router.prefix}/editor/red">Red theme</a>
+        <a href="${Router.prefix}/editor/blue">Blue theme</a>
+        <a href="${Router.prefix}/editor/green">Green theme</a>
+        <a href="${Router.prefix}/editor/purple">Purple theme</a>
+        <a href="${Router.prefix}/editor/special">Special theme</a>
+        <a href="${Router.prefix}/editor/invalid">Invalid theme</a>
 
-            <a href="/">Back</a>
-        `;
-    }
+        <br>
+
+        <a href="${Router.prefix}/">Back</a>
+    `;
 }
-
-customElements.define('page-theme', PageTheme);

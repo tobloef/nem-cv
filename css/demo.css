@@ -40,12 +40,12 @@ body {
 page-home,
 page-theme,
 page-editor,
-page-notfound {
+page-not-found {
     justify-content: center;
 }
 
 page-home b,
-page-theme b, {
+page-theme b {
     color: black;
     font-size: 25px;
     padding: 20px 0px 10px;
