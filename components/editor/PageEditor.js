@@ -1,10 +1,11 @@
-export default class PageEditor extends HTMLElement {
-    connectedCallback() {
-        this.innerHTML = `
-            <h1>Selected a theme</h1>
-            <a href="/">Back</a>
-        `;
-    }
+import AbstractComponent from '../../lib/AbstractComponent.js';
+
+export default class PageEditor extends AbstractComponent {
+    html = `
+        <h1>Selected a theme</h1>
+        <a href="/">Back</a>
+    `;
+
 
     //Proof of concept. Not clean at all :)
     setTheme(name) {
@@ -30,6 +31,8 @@ export default class PageEditor extends HTMLElement {
                 throw new Error(`Invalid Theme '${name}'.`);
         }
     }
+
+    script() {}
 }
 
 customElements.define('page-editor', PageEditor);
