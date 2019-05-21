@@ -12,35 +12,23 @@ const pages = new Pages();
 
 //Register pages
 pages.add("home", root.shadowRoot.querySelector("page-home"))
-    .add("theme", root.shadowRoot.querySelector("page-theme"))
+    .add("templates", root.shadowRoot.querySelector("page-templates"))
     .add("editor", root.shadowRoot.querySelector("page-editor"))
-    .add("about", root.shadowRoot.querySelector("page-about"))
     .add("not-found", root.shadowRoot.querySelector("page-not-found"));
 
 //Register routes
-Router.add(/about/, _ => {
-    pages.show("about");
-})
-    .add(/editor\/(.*)/, args => {
-        try {
-            pages.get("editor").setTheme(args);
-        }
-        catch (e) {
-            alert(e.message);
-            Router.navigate("");
-            return;
-        }
-
-        pages.show("editor");
-    })
-    .add(/theme/, _ => {
-        pages.show("theme");
-    })
-    //The default route, which will be called if no other match is found.
-    .add(args => {
-        //Since this route is both invoked for home and 404 we need to figure out which route to show
-        pages.show(Router.currentUrl === "" ? "home" : "not-found");
-    });
-
-//Attach and enable Router
-Router.listen().captureAnchors();
+Router.add(/editor/, args => {
+    console.log("Router hit \"editor\"");
+    pages.show("editor");
+});
+Router.add(/templates/, () => {
+    console.log("Router hit \"templates\"");
+    pages.show("templates");
+});
+Router.add("", () => {
+    if (Router.currentUrl === "") {
+        return pages.show("home");
+    }
+    pages.show("not-found");
+});
+Router.listen();
