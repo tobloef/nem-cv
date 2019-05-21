@@ -1,0 +1,90 @@
+@keyframes spin {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.4);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+body {
+    font-family: sans-serif;
+}
+
+.page {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.page h1 {
+    font-size: 70px;
+    font-weight: 300;
+}
+
+.page a {
+    display: block;
+    font-size: 25px;
+    padding: 10px;
+    font-weight: 300;
+    text-decoration: none;
+}
+
+.page a:hover {
+    text-decoration: underline;
+}
+
+page-home,
+page-theme,
+page-notfound {
+    justify-content: center;
+}
+
+page-home b {
+    color: black;
+    font-size: 25px;
+    padding: 20px 0px 10px;
+    font-weight: 400;
+}
+
+page-home a {
+    color: black;
+}
+
+page-theme {
+    color: white;
+}
+
+page-theme a {
+    color: white;
+}
+
+page-theme.theme-blue {
+    background: hsl(215, 70%, 48%);
+}
+
+page-theme.theme-red {
+    background: hsla(0, 90%, 60%, 1);
+}
+
+page-theme.theme-green {
+    background: hsl(146, 81%, 32%);
+}
+
+page-theme.theme-purple {
+    background: hsla(300, 45%, 45%, 1);
+}
+
+page-theme.theme-special {
+    background: linear-gradient(to right, orange , yellow, green, cyan, blue, violet);
+}
+
+page-theme.theme-special h1 {
+    animation-name: spin;
+    animation-duration: 1000ms;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
