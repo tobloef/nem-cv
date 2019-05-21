@@ -1,10 +1,9 @@
-'use strict';
-import BaseComponent from "../../lib/BaseComponent.js";
-
 export default class ${NAME} extends BaseComponent {
     usedComponents = [
 
     ];
+
+    // language=HTML
     html = `
         <div id="root"></div>
     `;
@@ -13,6 +12,7 @@ export default class ${NAME} extends BaseComponent {
 
     };
 
+    // language=CSS
     style = `
         #root {
         
