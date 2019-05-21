@@ -9,17 +9,20 @@ p:empty:not(:focus)::before {
     width: 150px;
     background: black;
 }
-.hexagon:before{
+
+.hexagon:before {
     position: absolute;
     content: '';
 }
+
 .hexagon:before {
-    top: 1px;  /* border width */
-    left: 1px;  /* border width */
-    height: calc(100% - 2px);  /* 100% - (2 * border width) */
-    width: calc(100% - 2px);  /* 100% - (2 * border width) */
+    top: 1px; /* border width */
+    left: 1px; /* border width */
+    height: calc(100% - 2px); /* 100% - (2 * border width) */
+    width: calc(100% - 2px); /* 100% - (2 * border width) */
     background: black;
 }
+
 .hexagon, .hexagon:before {
     --l: 14.645%;
     --h: 85.355%;
@@ -27,6 +30,7 @@ p:empty:not(:focus)::before {
     clip-path: polygon(50% 0%, var(--h) var(--l), 100% 50%, var(--h) var(--h), 50% 100%, var(--l) var(--h), 0% 50%, var(--l) var(--l));
 
 }
+
 .image:before {
     background: url(http://lorempixel.com/output/food-q-c-1920-1920-10.jpg);
 }

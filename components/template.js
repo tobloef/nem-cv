@@ -1,12 +1,11 @@
-export default class ${NAME} extends BaseComponent {
-    usedComponents = [
-
-    ];
+export default class ${NAME}
+    extends BaseComponent {
+    usedComponents = [];
 
     // language=HTML
-    html = `
-        <div id="root"></div>
-    `;
+    get html() {
+        return `<div id="root"></div>`;
+    };
 
     script = () => {
 
@@ -15,7 +14,7 @@ export default class ${NAME} extends BaseComponent {
     // language=CSS
     style = `
         #root {
-        
+
         }
     `;
 }
