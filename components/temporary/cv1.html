@@ -7,6 +7,7 @@
 <body>
 <script type="module" src="minimain.js"></script>
 <script type="module" src="edit-toggle.js"></script>
+<link rel="stylesheet" href="temp.css">
 <main>
 	<button onclick="toggleAllEditors()">Toggle editing</button>
 	<section class="introbox">
@@ -22,23 +23,20 @@
 	</section>
 	<section class="description">
 		<h1>Om mig</h1>
-		<p class="editable" contenteditable="true">Her kan du skrive en kort beskrivelse af dig selv.</p>
+		<editable-component element="h1" placeholder="Her kan du skrive en kort beskrivelse af dig selv."></editable-component>
 	</section>
 	<section class="education">
 		<h1>Uddannelse</h1>
 		<ul class="education-list">
 			<li class="education-item editable" contenteditable="true">Skriv din uddannelse her</li>
 		</ul>
-		<add-button class="add-button">+</add-button>
 	</section>
 	<section class="experience">
 		<h1>Erfaring</h1>
 		<ul class="experience-list">
 			<li class="experience-item editable" contenteditable="true">Skriv din erfaring her</li>
 		</ul>
-		<add-button class="add-button">+</add-button>
 		<ul class="work-areas">
-			<add-button class="add-button">+</add-button>
 		</ul>
 	</section>
 </main>
