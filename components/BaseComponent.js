@@ -1,7 +1,7 @@
 "use strict";
 
 import {classNameToElementName, kebabToCamelCase} from "../lib/string-utils.js";
-import {resetCSSString, resetCSSStyleSheet} from "../css/reset-css.js";
+import {resetCSSString, resetCSSStyleSheet} from "../lib/reset-css.js";
 
 export default class BaseComponent extends HTMLElement {
     enableResetCSS = true;
