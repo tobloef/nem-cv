@@ -1,8 +1,9 @@
 'use strict';
-import BaseComponent from "../../lib/BaseComponent.js";
+import AddButton from "./AddButton.js";
+import BaseComponent from "../BaseComponent.js";
 
 export default class CvSimple extends BaseComponent {
-     static toggleAllEditors() {
+    static toggleAllEditors() {
         const editors = document.querySelectorAll(".editable");
         const addButtons = document.querySelectorAll(".add-button");
 
@@ -10,6 +11,7 @@ export default class CvSimple extends BaseComponent {
             const edit = "contenteditable";
             item.setAttribute(edit, "" + !(item.getAttribute(edit) === "true"));
         }
+
         editors.forEach(toggleEdit);
         addButtons.forEach(item => item.style.display === "block" ? item.style.visibility = "block" : item.style.display = "none");
 
@@ -18,7 +20,9 @@ export default class CvSimple extends BaseComponent {
     usedComponents = [
         AddButton
     ];
-    html = `
+
+    get html() {
+        return `
 <div id="root">
         <main>
         <section class="introbox">
@@ -55,7 +59,8 @@ export default class CvSimple extends BaseComponent {
         </section>
     </main>
 </div>
-    `;
+`;
+    };
 
     script = () => {
     };

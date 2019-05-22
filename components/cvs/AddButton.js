@@ -2,9 +2,11 @@
 import BaseComponent from "../../lib/BaseComponent.js";
 
 export default class AddButton extends BaseComponent {
-    html = `
+    get html() {
+        return `
         <span id="root">+</span>
-    `;
+    `
+    };
 
     script = () => {
         this.addEventListener("click", () => console.log("Cool"))

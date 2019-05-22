@@ -2,13 +2,13 @@ import BaseComponent from "../BaseComponent.js";
 import Router from "../../lib/Router.js";
 
 export default class RouterLink extends BaseComponent {
-    static get observedAttributes() {
-        return [
-            "href"
-        ];
-    }
+    static observedAttributes = [
+        "href"
+    ];
 
-    html = `<a href="${this.href}"><slot></slot></a>`;
+    get html() {
+        return `<a href="${Router.prefix + this.href}"><slot></slot></a>`;
+    };
 
     script = () => {
         const a = this.shadowRoot.querySelector("a");

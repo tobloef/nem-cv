@@ -1,8 +1,11 @@
 "use strict";
 
-import {classNameToElementName} from "../lib/string-utils.js";
+import {classNameToElementName, kebabToCamelCase} from "../lib/string-utils.js";
 
 export default class BaseComponent extends HTMLElement {
+    _externalStyles = null;
+    enableResetCSS = false;
+
     constructor() {
         super();
         this.attachShadow({mode: "open"});
@@ -10,12 +13,14 @@ export default class BaseComponent extends HTMLElement {
 
     connectedCallback() {
         this._defineUsedComponents();
-        this._updateDOM();
+        this._checkForUndefinedComponents();
+        this.render();
     }
 
     attributeChangedCallback(attrName, oldValue, newValue) {
         if (oldValue !== newValue) {
-            this[attrName] = this.getAttribute(attrName);
+            const propName = kebabToCamelCase(attrName);
+            this[propName] = this.getAttribute(attrName);
             this.connectedCallback();
         }
     }
@@ -24,14 +29,25 @@ export default class BaseComponent extends HTMLElement {
         this.shadowRoot.innerHTML = "";
     }
 
-    _updateDOM() {
-        this.shadowRoot.innerHTML = "";
+    //////////
+
+    render() {
+        console.debug(`Updating DOM of ${this.constructor.name}`);
+        let newHTML = "";
+        if (this.externalStyles != null) {
+            for (const externalStyle of this.externalStyles) {
+                newHTML += `<link rel="stylesheet" href="${externalStyle}">`;
+            }
+        }
+        if (this.enableResetCSS) {
+            newHTML += `<link rel="stylesheet" href="/css/reset.css">`;
+        }
         if (this.style != null) {
-            this.shadowRoot.innerHTML = `<style>${this.style}</style>`;
+            newHTML += `<style>${this.style}</style>`;
         }
-        if (this.html) {
-            this.shadowRoot.innerHTML += this.html;
-        }
+        newHTML += this.html;
+
+        this.shadowRoot.innerHTML = newHTML;
         if (this.script != null) {
             this.script();
         }
@@ -43,6 +59,22 @@ export default class BaseComponent extends HTMLElement {
         }
         for (const component of this.usedComponents) {
             component.define();
+        }
+    }
+
+    _checkForUndefinedComponents() {
+        if (this.html == null) {
+            return;
+        }
+        const matches = this.html.matchAll(/<([a-z]+-[a-z]*)[ \/].*>/g);
+        if (matches == null) {
+            return;
+        }
+        const tags = Array.from(matches).map(m => m[1]);
+        for (const tag of tags) {
+            if (customElements.get(tag) == null) {
+                console.error(`${this.constructor.name} tried to use tag ${tag}, but it has not been defined yet.`);
+            }
         }
     }
 
