@@ -1,6 +1,6 @@
 import BaseComponent from "../BaseComponent.js";
 import ColorHolder from "./ColorHolder.js";
-import {templates} from "../../constants/editor-definitions.js";
+import Router from "../../lib/Router.js";
 
 export default class ColorList extends BaseComponent {
     static observedAttributes = [];
