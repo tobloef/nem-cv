@@ -11,9 +11,7 @@ export default class ColorList extends BaseComponent {
 
     // language=HTML
     get html() {
-        return `
-            <div id="list"></div>
-        `;
+        return ``;
     }
 
     script = () => {
@@ -32,6 +30,9 @@ export default class ColorList extends BaseComponent {
     // language=CSS
     get style() {
         return `
+            :host {
+                display: flex;
+            }
             
         `
     };

@@ -38,8 +38,23 @@ export default class LayoutDescriptor extends BaseComponent {
     // language=CSS
     get style() {
         return `
+            @media(max-width: 700px) {
+                :host {
+                    padding: 3em 0 2em 0;
+                    margin: 0 0.5em;
+                }
+            }
+            
+            @media(min-width: 700px) {
+                :host {
+                    margin: 2em;
+                }
+            }
+            
             :host {
-                padding: 3pt;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
             }
             
             #buttons {
@@ -49,11 +64,18 @@ export default class LayoutDescriptor extends BaseComponent {
             
             #image {
                 padding: 2px;
+                margin: 0 0 0.5rem 0;
                 border: 1px solid #aaa;
             }
             
             img {
                 width: 100%;
+                padding: 0;
+            }
+            
+            h1, p {
+                margin: 0 0 0.5rem 0;
+                padding: 0;
             }
         `
     };

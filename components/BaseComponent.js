@@ -26,13 +26,26 @@ export default class BaseComponent extends HTMLElement {
     }
 
     empty() {
-        this.shadowRoot.innerHTML = "";
+        this.shadowRoot.innerHTML = this._getStylingHTML();
     }
 
     //////////
 
     render() {
         console.debug(`Updating DOM of ${this.constructor.name}`);
+        let newHTML = "";
+        newHTML += this._getStylingHTML();
+        newHTML += this.html;
+        if(this.constructor.name == "LayoutList") {
+            console.log(newHTML);
+        }
+        this.shadowRoot.innerHTML = newHTML;
+        if (this.script != null) {
+            this.script();
+        }
+    }
+
+    _getStylingHTML() {
         let newHTML = "";
         if (this.externalStyles != null) {
             for (const externalStyle of this.externalStyles) {
@@ -45,12 +58,7 @@ export default class BaseComponent extends HTMLElement {
         if (this.style != null) {
             newHTML += `<style>${this.style}</style>`;
         }
-        newHTML += this.html;
-
-        this.shadowRoot.innerHTML = newHTML;
-        if (this.script != null) {
-            this.script();
-        }
+        return newHTML;
     }
 
     _defineUsedComponents() {
