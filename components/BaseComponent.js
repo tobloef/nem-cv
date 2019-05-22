@@ -42,7 +42,8 @@ export default class BaseComponent extends HTMLElement {
             }
         }
         if (this.enableResetCSS) {
-            this.shadowRoot.adoptedStyleSheets = [resetCSSStyleSheet];
+            //this.shadowRoot.adoptedStyleSheets = [resetCSSStyleSheet];
+            newHTML += `<style>${resetCSSString}</style>`;
         }
         if (this.style != null) {
             newHTML += `<style>${this.style}</style>`;
