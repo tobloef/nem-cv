@@ -1,21 +1,32 @@
 export default class ${NAME} extends BaseComponent {
+    static observedAttributes = [
+
+    ];
     usedComponents = [
 
     ];
 
     // language=HTML
-    get html() { return `
-        
-    ` }
+    get html() {
+        return `
+            
+        `;
+    }
 
     script = () => {
 
     };
 
+    externalStyles = [
+
+    ];
+
     // language=CSS
-    style = `
-        #root {
-        
-        }
-    `;
+    get style() {
+        return `
+            :host {
+            
+            }
+        `
+    };
 }
