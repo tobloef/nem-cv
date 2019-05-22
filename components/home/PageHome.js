@@ -1,18 +1,8 @@
-<<<<<<< HEAD
 import BaseComponent from "../BaseComponent.js";
 import Router from "../../lib/Router.js"
 import RouterLink from "../shared/RouterLink.js";
 import wait from "../../lib/wait.js";
 
-// background-image: url('/img/landing-bg.webp');
-// background-repeat: no-repeat;
-// background-size: 100% auto;
-// background-position: -20px -70px;
-=======
-import BaseComponent from "../../lib/BaseComponent.js";
-import wait from "../../lib/wait.js";
-import Router from '../../lib/Router.js';
->>>>>>> 74309b68ef71d3a1a78b4c50c2729025a29dae06
 
 export default class PageHome extends BaseComponent {
     usedComponents = [
@@ -82,10 +72,11 @@ export default class PageHome extends BaseComponent {
         }
 
         header {
-            padding-top: 50px;
+            padding-top: 60px;
             height: 100vh;
             background-image: url('/img/landing-bg.webp');
             background-repeat: no-repeat;
+            background-color: red;
             background-size: 120vw auto;
             /*background-position: center 20%;*/
             background-position: left 0%;
@@ -97,6 +88,8 @@ export default class PageHome extends BaseComponent {
             padding: var(--content-padding);
             clip-path: none;
             margin: 10px;
+
+            min-height: 40em;
 
             position: absolute;
             width: calc(100% - 20px);
@@ -126,10 +119,6 @@ export default class PageHome extends BaseComponent {
         header .fakecv.visible {
             transform: translateY(0%) scale(1);
             opacity: 1;
-        }
-
-        header .fakecv .filler {
-            height: 25vh;
         }
 
         header h1 {
@@ -171,7 +160,7 @@ export default class PageHome extends BaseComponent {
 
         header .image-container.small {
             width: 50vw;
-            height: 30vh;
+            height: 150px;
         }
 
         header .fake-content-title,
@@ -231,7 +220,7 @@ export default class PageHome extends BaseComponent {
             width: 100%;
             background: rgba(0,0,0,0.6);
             padding: 30px 40px;
-            bottom: 5%;
+            top: 25em;
 
             transform: translateY(100px);
             opacity: 0;
@@ -271,9 +260,9 @@ export default class PageHome extends BaseComponent {
         await wait(1300);
 
         const rect = image.getBoundingClientRect();
-        image.style.transform = `translate(-${rect.left}px, -${rect.top}px)`;
+        const scrollTop = document.documentElement.scrollTop;
+        image.style.transform = `translate(-${rect.left}px, -${rect.top + scrollTop}px)`;
         fakecv.classList.remove('clip');
-
 
         await wait(400);
         imageContainer.classList.add('small');
