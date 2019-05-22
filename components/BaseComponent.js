@@ -2,8 +2,12 @@
 
 import {classNameToElementName, kebabToCamelCase} from "../lib/string-utils.js";
 import {resetCSSString, resetCSSStyleSheet} from "../lib/reset-css.js";
+import {stringToStyleSheet} from "../lib/stylesheet-utils.js";
 
 export default class BaseComponent extends HTMLElement {
+    static _template = null;
+    static _colors = null;
+
     enableResetCSS = true;
 
     constructor() {
@@ -42,15 +46,17 @@ export default class BaseComponent extends HTMLElement {
             }
         }
         const adoptedStyleSheets = [];
-        if (this.enableResetCSS) {
+        if (this.enableResetCSS != null) {
             adoptedStyleSheets.push(resetCSSStyleSheet);
-            //newHTML += `<style>${resetCSSString}</style>`;
+        }
+        if (BaseComponent.colors != null) {
+            adoptedStyleSheets.push(BaseComponent.colors);
+        }
+        if (BaseComponent.template != null) {
+            adoptedStyleSheets.push(BaseComponent.template);
         }
         if (this.style != null) {
-            const styleSheet = new CSSStyleSheet();
-            styleSheet.replace(this.style);
-            adoptedStyleSheets.push(styleSheet);
-            //newHTML += `<style>${this.style}</style>`;
+            adoptedStyleSheets.push(stringToStyleSheet(this.style));
         }
         this.shadowRoot.adoptedStyleSheets = adoptedStyleSheets;
         newHTML += this.html;
@@ -68,6 +74,30 @@ export default class BaseComponent extends HTMLElement {
             if (contentKey != null) {
 
             }
+        }
+    }
+
+    static get template() {
+        return BaseComponent._template;
+    }
+
+    static set template(value) {
+        if ((typeof value) === "string") {
+            BaseComponent._template = stringToStyleSheet(value);
+        } else {
+            BaseComponent._template = value;
+        }
+    }
+
+    static get colors() {
+        return BaseComponent._colors;
+    }
+
+    static set colors(value) {
+        if ((typeof value) === "string") {
+            BaseComponent._colors = stringToStyleSheet(value);
+        } else {
+            BaseComponent._colors = value;
         }
     }
 

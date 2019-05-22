@@ -1,6 +1,8 @@
 import BaseComponent from "../../BaseComponent.js";
 import EditableComponent from "../../shared/EditableComponent.js";
 import IntroBox from "./IntroBox.js";
+import simple from "../../../templates/simple.js";
+import {stringToStyleSheet} from "../../../lib/stylesheet-utils.js";
 
 export default class CVSimple extends BaseComponent {
     static observedAttributes = [];
@@ -56,7 +58,10 @@ export default class CVSimple extends BaseComponent {
     }
 
     script = () => {
-
+        BaseComponent.template = stringToStyleSheet(simple);
+        BaseComponent.color = `
+            
+        `;
     };
 
     externalStyles = [];
