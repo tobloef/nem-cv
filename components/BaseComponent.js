@@ -20,6 +20,10 @@ export default class BaseComponent extends HTMLElement {
         }
     }
 
+    empty() {
+        this.shadowRoot.innerHTML = "";
+    }
+
     _updateDOM() {
         this.shadowRoot.innerHTML = "";
         if (this.style != null) {
@@ -42,11 +46,14 @@ export default class BaseComponent extends HTMLElement {
         }
     }
 
+    static get elementName() {
+        return classNameToElementName(this.name);
+    }
+
     static define() {
-        const elementName = classNameToElementName(this.name);
-        if (customElements.get(elementName) != null) {
+        if (customElements.get(this.elementName) != null) {
             return;
         }
-        customElements.define(elementName, this);
+        customElements.define(this.elementName, this);
     }
 }
