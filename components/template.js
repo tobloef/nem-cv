@@ -1,20 +1,31 @@
-export default class ${NAME}
-    extends BaseComponent {
-    usedComponents = [];
+export default class ${NAME} extends BaseComponent {
+    static observedAttributes = [
+
+    ];
+
+    usedComponents = [
+
+    ];
 
     // language=HTML
     get html() {
-        return `<div id="root"></div>`;
-    };
+        return `
+            
+        `;
+    }
 
     script = () => {
 
     };
 
-    // language=CSS
-    style = `
-        #root {
+    externalStyles = [
 
-        }
-    `;
+    ];
+
+    // language=CSS
+    get style() {
+        return `
+            
+        `
+    };
 }

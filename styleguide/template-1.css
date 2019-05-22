@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css?family=Exo:800|Oswald:500|Raleway&display=swap');
+
+:root{
+    --h1: 'exo', sans-serif;
+    --h2: 'oswald', sans-serif;
+    --p: 'raleway', sans-serif;
+}
+
+a, a:visited{
+    text-decoration: none;
+    color: darkgreen;
+    font-family: var(--p);
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+button {
+    border: 3px solid black;
+    padding: 5px;
+    background-color: white;
+    font-family: var(--h2);
+}

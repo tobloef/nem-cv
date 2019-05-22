@@ -1,0 +1,53 @@
+@import "template-1.css";
+@import "colors-1.css";
+
+body {
+    display: flex;
+    justify-content: center;
+}
+main {
+    display: flex;
+    max-width: 1000px;
+    padding-top: 200px;
+}
+
+.left{
+    padding-right: 40px;
+}
+
+h1 {
+    font-family: var(--h1);
+}
+h2 {
+    font-family: var(--h2);
+}
+p {
+    font-family: var(--p);
+}
+
+.right{
+    width: 50%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.color {
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    border-radius: 10%;
+}
+
+.one{
+    background-color: var(--c1);
+}
+.two{
+    background-color: var(--c2);
+}
+.three{
+    background-color: var(--c3);
+}
+.four{
+    background-color: var(--c4);
+}

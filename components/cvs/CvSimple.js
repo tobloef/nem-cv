@@ -1,5 +1,6 @@
 'use strict';
-import BaseComponent from "../../lib/BaseComponent.js";
+import AddButton from "./AddButton.js";
+import BaseComponent from "../BaseComponent.js";
 
 export default class CvSimple extends BaseComponent {
     static toggleAllEditors() {
@@ -15,6 +16,10 @@ export default class CvSimple extends BaseComponent {
         addButtons.forEach(item => item.style.display === "block" ? item.style.visibility = "block" : item.style.display = "none");
 
     };
+
+    usedComponents = [
+        AddButton
+    ];
 
     get html() {
         return `
