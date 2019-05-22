@@ -41,13 +41,18 @@ export default class BaseComponent extends HTMLElement {
                 newHTML += `<link rel="stylesheet" href="${externalStyle}">`;
             }
         }
+        const adoptedStyleSheets = [];
         if (this.enableResetCSS) {
-            //this.shadowRoot.adoptedStyleSheets = [resetCSSStyleSheet];
-            newHTML += `<style>${resetCSSString}</style>`;
+            adoptedStyleSheets.push(resetCSSStyleSheet);
+            //newHTML += `<style>${resetCSSString}</style>`;
         }
         if (this.style != null) {
-            newHTML += `<style>${this.style}</style>`;
+            const styleSheet = new CSSStyleSheet();
+            styleSheet.replace(this.style);
+            adoptedStyleSheets.push(styleSheet);
+            //newHTML += `<style>${this.style}</style>`;
         }
+        this.shadowRoot.adoptedStyleSheets = adoptedStyleSheets;
         newHTML += this.html;
 
         this.shadowRoot.innerHTML = newHTML;
