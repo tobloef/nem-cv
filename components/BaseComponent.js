@@ -1,10 +1,10 @@
 "use strict";
 
 import {classNameToElementName, kebabToCamelCase} from "../lib/string-utils.js";
+import {resetCSSString, resetCSSStyleSheet} from "../css/reset-css.js";
 
 export default class BaseComponent extends HTMLElement {
-    _externalStyles = null;
-    enableResetCSS = false;
+    enableResetCSS = true;
 
     constructor() {
         super();
@@ -20,7 +20,11 @@ export default class BaseComponent extends HTMLElement {
     attributeChangedCallback(attrName, oldValue, newValue) {
         if (oldValue !== newValue) {
             const propName = kebabToCamelCase(attrName);
-            this[propName] = this.getAttribute(attrName);
+            if (this.getAttribute(attrName) === "") {
+                this[propName] = true;
+            } else {
+                this[propName] = this.getAttribute(attrName);
+            }
             this.connectedCallback();
         }
     }
@@ -28,8 +32,6 @@ export default class BaseComponent extends HTMLElement {
     empty() {
         this.shadowRoot.innerHTML = "";
     }
-
-    //////////
 
     render() {
         console.debug(`Updating DOM of ${this.constructor.name}`);
@@ -40,7 +42,7 @@ export default class BaseComponent extends HTMLElement {
             }
         }
         if (this.enableResetCSS) {
-            newHTML += `<link rel="stylesheet" href="/css/reset.css">`;
+            this.shadowRoot.adoptedStyleSheets = [resetCSSStyleSheet];
         }
         if (this.style != null) {
             newHTML += `<style>${this.style}</style>`;
@@ -50,6 +52,13 @@ export default class BaseComponent extends HTMLElement {
         this.shadowRoot.innerHTML = newHTML;
         if (this.script != null) {
             this.script();
+        }
+    }
+
+    getContent() {
+        let obj = {};
+        for (const child of this.shadowRoot.children) {
+
         }
     }
 
