@@ -11,11 +11,4 @@ export default class ${NAME} extends BaseComponent {
     script = () => {
 
     };
-
-    // language=CSS
-    style = `
-        #root {
-        
-        }
-    `;
 }
