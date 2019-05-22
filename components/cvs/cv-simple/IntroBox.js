@@ -12,7 +12,7 @@ export default class IntroBox extends BaseComponent {
         return `
             <section class="introbox">
                 <img class="profile-picture" src="../../../img/placeholder-person.png" alt="image of you">
-                <editable-component placeholder="Dit fulde navn" element="h1"></editable-component>
+                <editable-component class="name" placeholder="Dit fulde navn" element="h1"></editable-component>
                 <ul class="facts">
                     <li class="age">
                         <editable-component placeholder="Din alder" element="div"></editable-component>
@@ -25,8 +25,7 @@ export default class IntroBox extends BaseComponent {
                     </li>
                 </ul>
                 <h1>Om mig</h1>
-                <editable-component element="p"
-                                    placeholder="Her kan du skrive en kort beskrivelse af dig selv."></editable-component>
+                <editable-component element="p" placeholder="Her kan du skrive en kort beskrivelse af dig selv."/>
             </section>
         `;
     }
@@ -47,11 +46,23 @@ export default class IntroBox extends BaseComponent {
                 background-color: aquamarine;
                 height: 100vh;
                 max-height: 100vh;
-                padding: 20px;
+                padding: 2em;
             }
             
             .profile-picture {
                 max-width: 400px;
+                margin-bottom: 2em;
+            }
+            
+            h1 {
+                font-size: 2em;
+                margin-bottom: 1em;
+            }
+            
+            .facts {
+                list-style-type: disc;
+                padding-left: 1.6em;
+                margin-bottom: 1.5em;
             }
         `
     };
