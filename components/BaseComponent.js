@@ -20,7 +20,11 @@ export default class BaseComponent extends HTMLElement {
     attributeChangedCallback(attrName, oldValue, newValue) {
         if (oldValue !== newValue) {
             const propName = kebabToCamelCase(attrName);
-            this[propName] = this.getAttribute(attrName);
+            if (this.getAttribute(attrName) === "") {
+                this[propName] = true;
+            } else {
+                this[propName] = this.getAttribute(attrName);
+            }
             this.connectedCallback();
         }
     }

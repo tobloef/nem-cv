@@ -1,5 +1,4 @@
 import BaseComponent from "../BaseComponent.js";
-import RouterLink from "../shared/RouterLink.js";
 import AppendableComponentList from "../shared/AppendableComponentList.js";
 import AppendButton from "../shared/AppendButton.js";
 import TestComponent from "../shared/TestComponent.js";

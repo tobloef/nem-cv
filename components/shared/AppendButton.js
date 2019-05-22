@@ -15,9 +15,11 @@ export default class AppendButton extends BaseComponent {
                 return;
             }
             const redCheckbox = this.shadowRoot.getElementById("red-checkbox");
-            this.onAppend({
-                color: redCheckbox.checked ? "red" : null,
-            });
+            const attributes = {};
+            if (redCheckbox.checked) {
+                attributes.color = "red";
+            }
+            this.onAppend(attributes);
         };
     }
 }
