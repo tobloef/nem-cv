@@ -26,7 +26,7 @@ export default class PageTest extends BaseComponent {
 
     script = () => {
         const button = this.shadowRoot.getElementById("theme-switch");
-        button.onclick = () => {
+        button.addEventListener("click", () => {
             let newStyles = this.externalStyles;
             if (newStyles.some(s => s.includes("theme1.css"))) {
                 newStyles = newStyles.filter(s => !s.includes("theme1.css"));
@@ -37,6 +37,6 @@ export default class PageTest extends BaseComponent {
             }
             this.externalStyles = newStyles;
             this.render();
-        }
+        });
     }
 }

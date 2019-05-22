@@ -3,7 +3,6 @@
 import {classNameToElementName, kebabToCamelCase} from "../lib/string-utils.js";
 
 export default class BaseComponent extends HTMLElement {
-    _externalStyles = null;
     enableResetCSS = false;
 
     constructor() {
@@ -32,8 +31,6 @@ export default class BaseComponent extends HTMLElement {
     empty() {
         this.shadowRoot.innerHTML = "";
     }
-
-    //////////
 
     render() {
         console.debug(`Updating DOM of ${this.constructor.name}`);

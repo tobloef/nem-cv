@@ -10,7 +10,7 @@ export default class AppendButton extends BaseComponent {
 
     script = () => {
         const button = this.shadowRoot.getElementById("button");
-        button.onclick = () => {
+        button.addEventListener("click", () => {
             if (this.onAppend == null) {
                 return;
             }
@@ -20,6 +20,6 @@ export default class AppendButton extends BaseComponent {
                 attributes.color = "red";
             }
             this.onAppend(attributes);
-        };
+        });
     }
 }
