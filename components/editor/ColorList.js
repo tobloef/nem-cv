@@ -32,8 +32,20 @@ export default class ColorList extends BaseComponent {
         return `
             :host {
                 display: flex;
+                flex-direction: row;
+                justify-content: space-around;
             }
             
+            @media(max-width: 340px) {
+                color-holder p {
+                    font-size: 2em;
+                }
+                
+                color-holder #outer {
+                    width: 3em;
+                    height: 3em;
+                }
+            }
         `
     };
 }

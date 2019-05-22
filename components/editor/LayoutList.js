@@ -13,9 +13,7 @@ export default class LayoutList extends BaseComponent {
 
     // language=HTML
     get html() {
-        return `
-            <div></div>
-        `;
+        return ``;
     }
 
     script = () => {
@@ -44,7 +42,7 @@ export default class LayoutList extends BaseComponent {
                     flex-direction: column;
                 }
 
-                layout-descriptor:nth-child(n):not(:last-child) {
+                layout-descriptor:not(:last-child) {
                     border-bottom: 1px solid #aaa;
                 }
             }
@@ -61,6 +59,12 @@ export default class LayoutList extends BaseComponent {
 
                 layout-descriptor:nth-child(2n) {
                     grid-column: 1 / 2;
+                }
+            }
+            
+            @media(min-width: 1200px) {
+                :host {
+                    max-width: 1200px;
                 }
             }
         `
