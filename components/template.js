@@ -1,4 +1,7 @@
 export default class ${NAME} extends BaseComponent {
+    static observedAttributes = [
+
+    ];
     usedComponents = [
 
     ];
@@ -11,4 +14,15 @@ export default class ${NAME} extends BaseComponent {
     script = () => {
 
     };
+
+    externalStyles = [
+
+    ];
+
+    // language=CSS
+    get style() { return `
+        #root {
+        
+        }
+    `};
 }
