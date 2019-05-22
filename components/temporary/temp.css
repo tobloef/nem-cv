@@ -1,3 +1,19 @@
-editable-component::part(inner) {
-    background-color: black;
+editable-component {
+    min-width: 40px;
+}
+
+editable-component *:before:empty{
+    content: attr(placeholder);
+}
+
+li {
+    user-select: none;
+}
+
+.divider {
+    display: flex;
+    flex-direction: row;
+}
+.facts li {
+    display: flex;
 }

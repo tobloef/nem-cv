@@ -30,9 +30,9 @@ export default class CvSimple extends BaseComponent {
                 <img src="https://prd-wret.s3-us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/styles/full_width/public/thumbnails/image/placeholder-profile_3.png" alt="image of you">
                 <h1 class="editable" contenteditable="true">Full name</h1>
                 <ul class="facts">
-                    <li class="age editable" contenteditable="true">Din alder</li>
-                    <li class="city editable" contenteditable="true">Din by</li>
-                    <li class="email editable" contenteditable="true">Din email</li>
+                    <editable-component class="age" placeholder="Din alder" element="li"></editable-component>
+                    <li class="city">Din by</li>
+                    <li class="email editable">Din email</li>
                 </ul>
             </div>
         </section>
