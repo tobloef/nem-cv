@@ -1,4 +1,4 @@
-@import "fonts-1.css";
+@import "template-1.css";
 @import "colors-1.css";
 
 body {
@@ -34,7 +34,9 @@ p {
 .color {
     width: 200px;
     height: 200px;
-    border: 1px solid black;
+    margin: 10px;
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    border-radius: 10%;
 }
 
 .one{
