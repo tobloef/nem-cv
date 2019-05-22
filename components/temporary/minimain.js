@@ -1,3 +1,3 @@
-import AddButton from "./AddButton.js";
+import AddButton from "../cvs/AddButton.js";
 
 AddButton.define();

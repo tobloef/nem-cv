@@ -4,9 +4,9 @@ export default class ${NAME} extends BaseComponent {
     ];
 
     // language=HTML
-    html = `
-        <div id="root"></div>
-    `;
+    get html() { return `
+        
+    ` }
 
     script = () => {
 

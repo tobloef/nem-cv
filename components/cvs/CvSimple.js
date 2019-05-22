@@ -14,6 +14,10 @@ export default class CvSimple extends BaseComponent {
         addButtons.forEach(item => item.style.display === "block" ? item.style.visibility = "block" : item.style.display = "none");
 
     };
+
+    usedComponents = [
+        AddButton
+    ];
     html = `
 <div id="root">
         <main>
