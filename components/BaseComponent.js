@@ -34,7 +34,7 @@ export default class BaseComponent extends HTMLElement {
     }
 
     render() {
-        console.debug(`Updating DOM of ${this.constructor.name}`);
+        //console.debug(`Updating DOM of ${this.constructor.name}`);
         let newHTML = "";
         if (this.externalStyles != null) {
             for (const externalStyle of this.externalStyles) {
