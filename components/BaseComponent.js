@@ -54,6 +54,10 @@ export default class BaseComponent extends HTMLElement {
         }
     }
 
+    getContent() {
+        let obj = {};
+    }
+
     _defineUsedComponents() {
         if (this.usedComponents == null) {
             return;

@@ -7,6 +7,9 @@ import PageTesting from "./testing/PageTest.js";
 import PageTemplates from "./templates/PageTemplates.js";
 import PageNotFound from "./not-found/PageNotFound.js";
 import Router from "../lib/Router.js";
+import CVModern from "./cvs/cv-modern/CVModern.js";
+import CVSimple from "./cvs/cv-simple/CVSimple.js";
+import CVOctagon from "./cvs/cv-octagon/CVOctagon.js";
 
 export default class RootRoutes extends BaseComponent {
     usedComponents = [
@@ -14,7 +17,11 @@ export default class RootRoutes extends BaseComponent {
         PageTemplates,
         PageTesting,
         PageEditor,
-        PageNotFound
+        PageNotFound,
+
+        CVModern,
+        CVSimple,
+        CVOctagon,
     ];
 
     routes = [
@@ -22,6 +29,11 @@ export default class RootRoutes extends BaseComponent {
         {pattern: "^/testing$", component: PageTesting},
         {pattern: "^/templates$", component: PageTemplates},
         {pattern: "^/editor$", component: PageEditor},
+
+        {pattern: "^/cv-simple$", component: CVSimple},
+        {pattern: "^/cv-octagon", component: CVOctagon},
+        {pattern: "^/cv-modern$", component: CVModern},
+
         {pattern: "", component: PageNotFound},
     ];
 

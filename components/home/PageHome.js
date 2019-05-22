@@ -14,6 +14,10 @@ export default class PageHome extends BaseComponent {
               <router-link href="/templates">Templates</router-link>
               <router-link href="/editor">Editor</router-link>
               <router-link href="/blabla">Blabla (Not found)</router-link>
+
+              <router-link href="/cv-simple">CV Simple</router-link>
+              <router-link href="/cv-octagon">CV Octagon</router-link>
+              <router-link href="/cv-modern">CV Modern</router-link>
             </div>
         `;
     };
