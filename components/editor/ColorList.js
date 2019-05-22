@@ -1,17 +1,9 @@
 import BaseComponent from "../BaseComponent.js";
 import ColorHolder from "./ColorHolder.js";
-import Router from "../../lib/Router.js";
+import {templates} from "../../constants/editor-definitions.js";
 
 export default class ColorList extends BaseComponent {
     static observedAttributes = [];
-
-    templates = [
-        {fontColor:"#373737", backgroundColor:"#F6F5EE", accentColor:"#E4E3D9"},
-        {fontColor:"#222222", backgroundColor:"#E9E9E9", accentColor:"#595959"},
-        {fontColor:"#222222", backgroundColor:"#E6F4F2", accentColor:"#2B62B4"},
-        {fontColor:"#282828", backgroundColor:"#F6E5E4", accentColor:"#33B827"},
-        {fontColor:"#cfcfcf", backgroundColor:"#39312D", accentColor:"#C00000"}
-    ];
 
     usedComponents = [
         ColorHolder
@@ -26,7 +18,7 @@ export default class ColorList extends BaseComponent {
 
     script = () => {
         this.empty();
-        for (const item of this.templates) {
+        for (const item of templates) {
             const element = document.createElement(ColorHolder.elementName);
             element.setAttribute("font-color", item.fontColor);
             element.setAttribute("background-color", item.backgroundColor);
