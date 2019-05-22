@@ -1,9 +1,10 @@
 "use strict";
 
 import {classNameToElementName, kebabToCamelCase} from "../lib/string-utils.js";
+import resetCSS from "../css/reset-css.js";
 
 export default class BaseComponent extends HTMLElement {
-    enableResetCSS = false;
+    enableResetCSS = true;
 
     constructor() {
         super();
@@ -41,7 +42,8 @@ export default class BaseComponent extends HTMLElement {
             }
         }
         if (this.enableResetCSS) {
-            newHTML += `<link rel="stylesheet" href="/css/reset.css">`;
+            //newHTML += `<link rel="stylesheet" href="/css/reset.css">`;
+            newHTML += `<style>${resetCSS}</style>`;
         }
         if (this.style != null) {
             newHTML += `<style>${this.style}</style>`;
@@ -56,6 +58,9 @@ export default class BaseComponent extends HTMLElement {
 
     getContent() {
         let obj = {};
+        for (const child of this.shadowRoot.children) {
+
+        }
     }
 
     _defineUsedComponents() {
