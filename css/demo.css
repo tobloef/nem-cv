@@ -53,7 +53,7 @@ page-theme b {
 }
 
 page-home a,
-page-theme a{
+page-theme a {
     color: black;
 }
 
@@ -82,7 +82,7 @@ page-editor.theme-purple {
 }
 
 page-editor.theme-special {
-    background: linear-gradient(to right, orange , yellow, green, cyan, blue, violet);
+    background: linear-gradient(to right, orange, yellow, green, cyan, blue, violet);
 }
 
 page-editor.theme-special h1 {

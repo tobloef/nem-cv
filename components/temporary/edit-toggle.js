@@ -6,6 +6,7 @@ function toggleAllEditors() {
         const edit = "contenteditable";
         item.setAttribute(edit, "" + !(item.getAttribute(edit) === "true"));
     }
+
     editors.forEach(toggleEdit);
     addButtons.forEach(item => item.style.visibility === "hidden" ? item.style.display = "block" : item.style.display = "none");
 
