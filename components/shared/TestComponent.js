@@ -8,6 +8,4 @@ export default class TestComponent extends BaseComponent {
     get html() {
         return `<p style="color: ${this.color || "unset"}">Test</p>`;
     }
-
-
 }

@@ -3,6 +3,7 @@
 import {classNameToElementName, kebabToCamelCase} from "../lib/string-utils.js";
 
 export default class BaseComponent extends HTMLElement {
+    _externalStyles = null;
     enableResetCSS = false;
 
     constructor() {
@@ -13,7 +14,7 @@ export default class BaseComponent extends HTMLElement {
     connectedCallback() {
         this._defineUsedComponents();
         this._checkForUndefinedComponents();
-        this._updateDOM();
+        this.render();
     }
 
     attributeChangedCallback(attrName, oldValue, newValue) {
@@ -28,7 +29,9 @@ export default class BaseComponent extends HTMLElement {
         this.shadowRoot.innerHTML = "";
     }
 
-    _updateDOM() {
+    //////////
+
+    render() {
         console.debug(`Updating DOM of ${this.constructor.name}`);
         let newHTML = "";
         if (this.externalStyles != null) {
