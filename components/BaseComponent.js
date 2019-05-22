@@ -58,7 +58,10 @@ export default class BaseComponent extends HTMLElement {
     getContent() {
         let obj = {};
         for (const child of this.shadowRoot.children) {
+            const contentKey = child.getAttribute("content-key");
+            if (contentKey != null) {
 
+            }
         }
     }
 
