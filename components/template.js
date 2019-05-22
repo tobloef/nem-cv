@@ -7,9 +7,11 @@ export default class ${NAME} extends BaseComponent {
     ];
 
     // language=HTML
-    get html() { return `
-        
-    ` }
+    get html() {
+        return `
+            
+        `;
+    }
 
     script = () => {
 
@@ -20,9 +22,11 @@ export default class ${NAME} extends BaseComponent {
     ];
 
     // language=CSS
-    get style() { return `
-        #root {
-        
-        }
-    `};
+    get style() {
+        return `
+            :host {
+            
+            }
+        `
+    };
 }
