@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import BaseComponent from "../BaseComponent.js";
 import Router from "../../lib/Router.js"
 import RouterLink from "../shared/RouterLink.js";
@@ -7,6 +8,11 @@ import wait from "../../lib/wait.js";
 // background-repeat: no-repeat;
 // background-size: 100% auto;
 // background-position: -20px -70px;
+=======
+import BaseComponent from "../../lib/BaseComponent.js";
+import wait from "../../lib/wait.js";
+import Router from '../../lib/Router.js';
+>>>>>>> 74309b68ef71d3a1a78b4c50c2729025a29dae06
 
 export default class PageHome extends BaseComponent {
     usedComponents = [
