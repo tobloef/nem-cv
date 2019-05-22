@@ -1,5 +1,4 @@
-editable-component {
-    min-width: 40px;
+editable-component:empty {
 }
 
 editable-component *:before:empty{

@@ -42,6 +42,7 @@ export default class EditableComponent extends BaseComponent {
     };
 
     onFocus = () => {
+        this.node.style.minWidth = this.node.getBoundingClientRect().width + "px";
         if (this.empty) {
             this.node.innerHTML = "";
             this.empty = false;
@@ -50,6 +51,7 @@ export default class EditableComponent extends BaseComponent {
         this.selectTextInNode();
     };
     focusOut = () => {
+        this.node.style.minWidth = "0";
         if (this.node.innerHTML === "") {
             this.empty = true;
             this.node.innerHTML = this.placeholder;
@@ -57,10 +59,18 @@ export default class EditableComponent extends BaseComponent {
         }
     };
 
+    keyPress = () => {
+        console.log("hola")
+        if (!this.empty) {
+            this.node.style.minWidth = "0";
+        }
+    }
+
     script = () => {
         this.node = this.shadowRoot.querySelector("#content");
         this.node.addEventListener("focus", this.onFocus);
         this.node.addEventListener("focusout", this.focusOut);
+        this.node.addEventListener("keypress", this.keyPress);
     };
 
     // language=CSS
@@ -68,6 +78,9 @@ export default class EditableComponent extends BaseComponent {
         return `
             .empty-text {
                 color: #aaa;
+            }
+            :host {
+                display: flex;
             }
         `
     };
