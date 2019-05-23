@@ -94,7 +94,8 @@ export default class HomeHeader extends BaseComponent {
 
                 --image-extra-top-offset: 60px;
                 --top-padding: 60px;
-                --mobile-header-max-height: 825px;
+
+                --height: 100vh;
             }
 
             .background-container {
@@ -117,8 +118,7 @@ export default class HomeHeader extends BaseComponent {
 
             header {
                 padding-top: var(--top-padding);
-                height: 100vh;
-                max-height: var(--mobile-header-max-height);
+                height: var(--height);
                 background: hsl(12, 5%, 80%);
                 background: radial-gradient(circle, hsl(12, 5%, 80%) 0%, hsl(12, 5%, 30%) 100%);
 
@@ -134,8 +134,8 @@ export default class HomeHeader extends BaseComponent {
                 clip-path: none;
                 margin: 0px 0 0 0;
 
-                height: calc(100vh - var(--top-padding));
-                max-height: calc(var(--mobile-header-max-height) - var(--top-padding));
+                height: calc(var(--height) - var(--top-padding));
+                max-height: calc(var(--height) - var(--top-padding));
                 overflow: hidden;
 
                 position: absolute;
@@ -189,7 +189,7 @@ export default class HomeHeader extends BaseComponent {
 
 
             .image-container img {
-                height: calc(100vh - var(--top-padding));
+                height: calc(var(--height) - var(--top-padding));
             }
 
             .image-container img.animatable {
@@ -211,7 +211,7 @@ export default class HomeHeader extends BaseComponent {
                 position: absolute;
                 z-index: -1;
                 width: 100vw;
-                height: 100vh;
+                height: var(--height);
                 top: -100px;
             }
 

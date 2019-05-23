@@ -218,26 +218,6 @@ export default class PageHome extends BaseComponent {
                .card {
                    padding: 50px;
                }
-
-               .card .split {
-                   flex-direction: row;
-               }
-
-               .card .left {
-                   width: 50%;
-               }
-
-               .card .right {
-                   padding-left: 50px;
-               }
-
-               section.features router-link custom-button {
-                   --padding-x: 50px;
-               }
-
-               .card.colors .line {
-                   font-size: 4em;
-               }
            }
 
            @media(min-width: 750px) {
@@ -265,7 +245,6 @@ export default class PageHome extends BaseComponent {
            @media(min-width: 1200px) {
                .cards {
                    display: flex;
-                   flex-direction: column;
                    max-width: 1000px;
                }
            }
