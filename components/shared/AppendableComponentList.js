@@ -9,8 +9,8 @@ export default class AppendableComponentList extends BaseComponent {
     get html() {
         return `
             <div style="display: flex; flex-direction: column;">
-                <ul id="list"></ul>
-                <slot name="append-button"/>
+                <ul id="list" part="list"></ul>
+                <slot name="append-button" part="button"/>
             </div>
         `;
     };
@@ -24,6 +24,7 @@ export default class AppendableComponentList extends BaseComponent {
             for (const attribute in attributes) {
                 newChild.setAttribute(attribute, attributes[attribute]);
             }
+            newChild.setAttribute("part", "list-item")
             list.appendChild(newChild);
         };
         for (let i = 0; i < (this.startingAmount || 0); i++) {
