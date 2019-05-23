@@ -13,7 +13,7 @@ export default class CVModern extends BaseComponent {
         return `
             <header>
                 <div class="left">
-                    <profile-image aspect_ratio="2"></profile-image>
+                    <profile-image class="image" aspect_ratio="1.5"></profile-image>
                 </div>
                 <div class = "right">
                     <h1>JENS HANSEN</h1>
@@ -46,10 +46,10 @@ export default class CVModern extends BaseComponent {
                     <h2>UDDANNELSE</h2>
                     <div class = "educations">
                         <div class = "oneeducation">
-                            <div class="left">
+                            <div class="left1">
                                 <p class="year">2018-2019</p> 
                             </div>
-                            <div class = "right">
+                            <div class = "right1">
                                 <p class="place">IT Universitetet</p>
                                 <p class="title">Softwareudvikling</p>
                             </div>
@@ -63,11 +63,11 @@ export default class CVModern extends BaseComponent {
                     <h2>ERFARING</h2>
                     <div class="experiences">
                         <div class="oneexperience">
-                            <div class="left">
+                            <div class="left2">
                                 <p class = "place">Arbejdsplads</p>
                                 <p class = "title">Beskrivelse</p>
                             </div>
-                            <div class="right">
+                            <div class="right2">
                                 <p class = "year">2019-2019</p>
                             </div>
                         </div>
@@ -87,10 +87,9 @@ export default class CVModern extends BaseComponent {
     get style() {
         return `
             header {
-                display: flex;
                 margin-bottom: 50px;
             }
-
+            
             h1 {
             }
 
@@ -119,7 +118,9 @@ export default class CVModern extends BaseComponent {
             }
 
             .left {
+                margin: 100px;
                 justify-content: flex-start;
+                max-width: 400px;
             }
 
             .right {
