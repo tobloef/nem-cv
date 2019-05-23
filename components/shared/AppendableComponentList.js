@@ -1,14 +1,11 @@
 import BaseComponent from "../BaseComponent.js";
-import {pascalToKebabCase} from "../../lib/string-utils.js";
 
 export default class AppendableComponentList extends BaseComponent {
-    itemAttributePrefix = "itemAttribute";
-
     static observedAttributes = [
         "item-component",
         "starting-amount",
         "separator",
-        "item-attribute-experience-type"
+        "item-attributes"
     ];
 
     get html() {
@@ -33,14 +30,10 @@ export default class AppendableComponentList extends BaseComponent {
             }
             const newChild = document.createElement(this.itemComponent);
             // Add attributes based on the this component's item attributes.
-            for (let prop in this) {
-                if (
-                    typeof prop === "string" &&
-                    prop !== "itemAttributePrefix" &&
-                    prop.startsWith(this.itemAttributePrefix)
-                ) {
-                    const attribute = pascalToKebabCase(prop.replace(this.itemAttributePrefix, ""));
-                    newChild.setAttribute(attribute, this[prop]);
+            if (this.itemAttributes != null) {
+                for (const attribute in this.itemAttributes) {
+                    //const attributeName = camelToKebabCase(attribute);
+                    newChild.setAttribute(attribute, this.itemAttributes[attribute]);
                 }
             }
             // Set attributes based on the append button.

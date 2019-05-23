@@ -29,18 +29,24 @@ export default class CVSimple extends BaseComponent {
                     <section class="experience">
                         <h1>Erfaring</h1>
                         <appendable-component-list
+                            id="experience-list"
                             content-key="employers"
                             content-type="array"
                             item-component="${ExperienceItem.elementName}" 
-                            item-attribute-experience-type="Firma"
                             starting-amount="1"
                         >
                             <list-button icon="add" slot="append-button"></list-button>
                             <list-button icon="remove" slot="remove-button"></list-button>
                         </appendable-component-list>
                         <appendable-component-list
+                            id="sector-list"
                             content-key="sectors"
-                            content-type="array" class="work-areas" item-component="${WorkAreaItem.elementName}" separator=", " starting-amount="1">
+                            content-type="array"
+                            class="work-areas"
+                            item-component="${WorkAreaItem.elementName}"
+                            separator=", "
+                            starting-amount="1"
+                        >
                             <list-button icon="add" slot="append-button"></list-button>
                             <list-button icon="remove" slot="remove-button"></list-button>
                         </appendable-component-list>
@@ -48,10 +54,10 @@ export default class CVSimple extends BaseComponent {
                     <section class="education">
                         <h1>Uddannelse</h1>
                         <appendable-component-list
+                            id="education-list"
                             content-key="education"
                             content-type="array"
                             item-component="${ExperienceItem.elementName}" 
-                            item-attribute-experience-type="Uddannelsessted"
                             starting-amount="1"
                         >
                             <list-button icon="add" slot="append-button"></list-button>
@@ -68,8 +74,19 @@ export default class CVSimple extends BaseComponent {
         BaseComponent.colors = theme1;
         setInterval(() => {
             const content = this.getContent();
-            localStorage.setItem("cv-data", content);
+            localStorage.setItem("cv-data", JSON.stringify(content));
+            console.log(content);
         }, 5000);
+
+        const experienceList = this.shadowRoot.getElementById("experience-list");
+        experienceList.itemAttributes = {"experience-type": "Firma"};
+        experienceList.render();
+        const educationList = this.shadowRoot.getElementById("education-list");
+        educationList.itemAttributes = {"experience-type": "Uddannelsessted"};
+        educationList.render();
+        const sectorList = this.shadowRoot.getElementById("sector-list");
+        sectorList.itemAttributes = {"content-type": "component"};
+        sectorList.render();
     };
 
     getContent = () => {
@@ -122,16 +139,16 @@ export default class CVSimple extends BaseComponent {
             .experience {
                 background-color: rebeccapurple;
             }
-            
+
             .education, .experience {
                 padding: 2em;
             }
-            
+
             appendable-component-list {
                 display: block;
                 padding-left: 1em;
             }
-            
+
             appendable-component-list::part(list) {
                 margin-bottom: 0.8em;
             }

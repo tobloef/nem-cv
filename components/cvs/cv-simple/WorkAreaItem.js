@@ -31,6 +31,10 @@ export default class WorkAreaItem extends BaseComponent {
         this.updateStyles();
     };
 
+    getContent = () => {
+        return this.span.innerText;
+    };
+
     externalStyles = [];
 
     // language=CSS
