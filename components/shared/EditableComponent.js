@@ -21,7 +21,7 @@ export default class EditableComponent extends BaseComponent {
                 data-placeholder=${this.placeholder}
             >
                 ${this.placeholder}
-            <${this.element}/>
+            </${this.element}>
         `;
     }
 

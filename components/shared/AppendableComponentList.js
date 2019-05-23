@@ -10,7 +10,7 @@ export default class AppendableComponentList extends BaseComponent {
         return `
             <div style="display: flex; flex-direction: column;">
                 <ul id="list"></ul>
-                <slot name="append-button"/>
+                <slot name="append-button"></slot>
             </div>
         `;
     };

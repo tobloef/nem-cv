@@ -13,23 +13,27 @@ export default class IntroBox extends BaseComponent {
     // language=HTML
     get html() {
         return `
-            <section class="introbox">
-                <profile-image aspect_ratio="2"></profile-image>
-                <editable-component class="name" placeholder="Dit fulde navn" element="h1"></editable-component>
-                <ul class="facts">
-                    <li class="age">
-                        <editable-component placeholder="Din alder" element="div"></editable-component>
-                    </li>
-                    <li class="city">
-                        <editable-component placeholder="Din by" element="div"></editable-component>
-                    </li>
-                    <li class="email">
-                        <editable-component placeholder="Din email" element="div"></editable-component>
-                    </li>
-                </ul>
-                <h1 class="s-h1">Om mig</h1>
-                <editable-component class="description" element="p" placeholder="Her kan du skrive en kort beskrivelse af dig selv."/>
-            </section>
+	        <section class="introbox">
+		        <profile-image aspect_ratio="2"></profile-image>
+		        <editable-component class="name" placeholder="Dit fulde navn" element="h1"></editable-component>
+		        <ul class="facts">
+			        <li class="age">
+				        <editable-component placeholder="Din alder" element="div"></editable-component>
+			        </li>
+			        <li class="city">
+				        <editable-component placeholder="Din by" element="div"></editable-component>
+			        </li>
+			        <li class="email">
+				        <editable-component placeholder="Din email" element="div"></editable-component>
+			        </li>
+		        </ul>
+		        <h1 class="s-h1">Om mig</h1>
+		        <editable-component
+                        class="description"
+                        element="p"
+                        placeholder="Her kan du skrive en kort beskrivelse af dig selv.">
+                </editable-component>
+	        </section>
         `;
     }
 
