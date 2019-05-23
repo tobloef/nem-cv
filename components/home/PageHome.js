@@ -39,7 +39,7 @@ export default class PageHome extends BaseComponent {
         }
     `;
 
-    async script() {
+    script() {
 
     }
 }

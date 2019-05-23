@@ -110,6 +110,8 @@ export default class HomeHeader extends BaseComponent {
             display: flex;
             justify-content: center;
 
+            margin-bottom: 0px;
+
             position: relative;
         }
 
@@ -153,11 +155,11 @@ export default class HomeHeader extends BaseComponent {
             opacity: 1;
         }
 
-        header .image-row {
+        .image-row {
             display: flex;
         }
 
-        header .image-container {
+        .image-container {
             overflow: hidden;
             width: 100%;
             height: 300px;
@@ -167,34 +169,30 @@ export default class HomeHeader extends BaseComponent {
 
             position: relative;
 
-            /*background: hsl(12, 5%, 80%);
-            background: radial-gradient(circle, hsl(12, 5%, 70%) 0%, hsl(12, 5%, 30%) 160%);*/
-
             transition: 1s cubic-bezier(0.77, 0, 0.175, 1) width, 1s cubic-bezier(0.77, 0, 0.175, 1) height;
         }
 
 
-        header .image-container img {
+        .image-container img {
             height: calc(100vh - 60px);
         }
 
-        header .image-container img.animatable {
+        .image-container img.animatable {
             transition: 1s cubic-bezier(0.77, 0, 0.175, 1) transform;
         }
 
-        header .image-container.small {
+        .image-container.small {
             width: 50%;
             height: 200px;
         }
 
-        header .image-container.small img {
+        .image-container.small img {
             transform: scale(0.5) translateY(-50%);
         }
 
-        header .image-container .image-bg {
+        .image-container .image-bg {
             background: hsl(12, 5%, 80%);
             background: radial-gradient(circle, hsl(12, 5%, 80%) 0%, hsl(12, 5%, 30%) 100%);
-            /*background: red;*/
             position: absolute;
             z-index: -1;
             width: 100vw;
@@ -202,20 +200,20 @@ export default class HomeHeader extends BaseComponent {
             top: -100px;
         }
 
-        header .fake-content-title,
-        header .fake-content-body,
-        header .fake-content-extra {
+        .fake-content-title,
+        .fake-content-body,
+        .fake-content-extra {
             opacity: 0;
             transition: 1s cubic-bezier(0.77, 0, 0.175, 1) opacity;
         }
 
-        header .fake-content-title.visible,
-        header .fake-content-body.visible,
-        header .fake-content-extra.visible {
+        .fake-content-title.visible,
+        .fake-content-body.visible,
+        .fake-content-extra.visible {
             opacity: 1;
         }
 
-        header .fake-content-title {
+        .fake-content-title {
             flex: 1;
 
             display: flex;
@@ -223,25 +221,25 @@ export default class HomeHeader extends BaseComponent {
             justify-content: flex-end;
         }
 
-        header .fake-content-title.visible {
+        .fake-content-title.visible {
             padding-left: 20px;
             padding-top: 0px;
         }
 
-        header .fake-content-body {
+        .fake-content-body {
             margin-top: 30px;
         }
 
-        header .fake-content-extra {
-            display: flex;
+        .fake-content-extra {
+            display: none;
         }
 
-        header .fake-content-extra-col {
+        .fake-content-extra-col {
             flex: 1;
             margin-top: 10px;
         }
 
-        header .fake-content-extra-col:not(:last-child) {
+        .fake-content-extra-col:not(:last-child) {
             padding-right: 20px;
         }
 
@@ -307,6 +305,10 @@ export default class HomeHeader extends BaseComponent {
         }
 
         @media(min-width: 1024px) {
+            header {
+                margin-bottom: 230px;
+            }
+
             .fakecv {
                 max-width: 750px;
             }
@@ -314,30 +316,28 @@ export default class HomeHeader extends BaseComponent {
             .infobox {
                 max-width: 800px;
             }
-        /*}
 
-        @media(min-width: 1200px) {*/
             .image-row {
                 flex-direction: column;
             }
 
-            header .fake-content-title.visible {
+            .fake-content-title.visible {
                 padding-left: 0px;
+                padding-top: 40px;
             }
 
-            header .image-container.small {
+            .image-container.small {
                 height: 300px;
             }
 
-            header .image-container.small img {
-                transform: scale(0.7) translateY(-25%);
+            .image-container.small img {
+                transform: scale(0.65) translateY(-25%);
             }
 
             .infobox {
                 --infobox-large-left-margin: 20px;
                 top: 100px;
                 left: calc(50% + var(--infobox-large-left-margin));
-                /*right: 0;*/
                 height: 100%;
                 max-height: 300px;
                 max-width: 430px;
@@ -346,6 +346,10 @@ export default class HomeHeader extends BaseComponent {
 
             .infobox h1 {
                 font-size: 3.5em;
+            }
+
+            .fake-content-extra {
+                display: flex;
             }
         }
 
@@ -358,6 +362,7 @@ export default class HomeHeader extends BaseComponent {
     `;
 
     async script() {
+        const header = this.shadowRoot.querySelector("header");
         const fakecv = this.shadowRoot.querySelector(".fakecv");
         const fakeContentTitle = this.shadowRoot.querySelector(".fake-content-title");
         const fakeContentBody = this.shadowRoot.querySelector(".fake-content-body");
@@ -374,8 +379,9 @@ export default class HomeHeader extends BaseComponent {
         const rect = image.getBoundingClientRect();
         const scrollTop = document.documentElement.scrollTop;
 
+        const headerTopMargin = parseInt(getComputedStyle(header).getPropertyValue('padding-top'), 10);
         const xCenterOffset = (document.documentElement.clientWidth / 2) - (image.offsetWidth / 2);
-        const styleString = `translate(${-rect.left + xCenterOffset}px, ${-rect.top - scrollTop + 60}px)`;
+        const styleString = `translate(${-rect.left + xCenterOffset}px, ${-rect.top - scrollTop + headerTopMargin}px)`;
 
         image.style.transform = styleString;
         fakecv.classList.remove('clip');
