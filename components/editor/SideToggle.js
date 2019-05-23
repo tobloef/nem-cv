@@ -77,14 +77,14 @@ export default class SideToggle extends BaseComponent {
                 background-color: #F3F3F3;
             }
             
-            @media(min-width: 500px) {
+            @media(min-width: 550px) {
                 button {
                     border-top-right-radius: 5px;
                     border-bottom-right-radius: 5px;
                 }
             }
             
-            @media(max-width: 500px) {
+            @media(max-width: 550px) {
                 :host([open])>button {
                     border-top-right-radius: 5px;
                     border-bottom-right-radius: 5px;

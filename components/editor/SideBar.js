@@ -32,11 +32,17 @@ export default class SideBar extends BaseComponent {
     // language=CSS
     get css() {
         return `
+            :host {
+                display: block;
+                height: 100%;
+                max-width: 500px;
+                position: relative;
+            }
+            
             #container {
                 display: flex;
                 flex-direction: column;
                 background-color: #F6F6F6;
-                max-width: 500px;
                 height: 100%;
                 box-shadow: 0 0 5px #888;
             }
@@ -49,11 +55,21 @@ export default class SideBar extends BaseComponent {
                 overflow-y: auto;
             }
             
-            /*@media(max-width: 500px) {*/
+            @media(max-width: 550px) {
                 side-toggle {
-                    
+                    position: absolute;
+                    right: 0;
+                    top: 50px;
                 }
-            /*}*/
+            }
+            
+            @media(min-width: 550px) {
+                side-toggle {
+                    position: absolute;
+                    right: -50px;
+                    top: 50px;
+                }
+            }
             
             @media(max-width: 425px) {
                 layout-list {
