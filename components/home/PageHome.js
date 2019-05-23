@@ -29,32 +29,34 @@ export default class PageHome extends BaseComponent {
     `;
 
     // language=CSS
-    style = `
-        :host {
-            font-family: 'Open Sans', sans-serif;
-        }
-
-        .topbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 10;
-            padding: 20px;
-        }
-
-        .topbar .logo {
-            max-width: 120px;
-        }
-
-        .testcontent {
-            padding: 15px;
-        }
-
-        custom-button {
-            width: 200px;
-        }
-    `;
+    get css() {
+        return `
+            :host {
+                font-family: 'Open Sans', sans-serif;
+            }
+    
+            .topbar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 10;
+                padding: 20px;
+            }
+    
+            .topbar .logo {
+                max-width: 120px;
+            }
+    
+            .testcontent {
+                padding: 15px;
+            }
+    
+            custom-button {
+                width: 200px;
+            }
+        `;
+    }
 
     script = () => {
         const button1 = this.shadowRoot.getElementById("button1");

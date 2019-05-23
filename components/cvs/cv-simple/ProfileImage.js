@@ -42,7 +42,7 @@ export default class ProfileImage extends BaseComponent {
     externalStyles = [];
 
     // language=CSS
-    get style() {
+    get css() {
         return `
             :host {
                 display: block;

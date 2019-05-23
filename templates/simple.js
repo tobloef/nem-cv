@@ -1,5 +1,8 @@
 // language=CSS
-const style = `
+
+const css = `
+    @import url('https://fonts.googleapis.com/css?family=Exo:800|Oswald:500|Raleway&display=swap');
+
     :host{
         --h1: 'exo', sans-serif;
         --h2: 'oswald', sans-serif;
@@ -8,4 +11,4 @@ const style = `
     }
 `;
 
-export default style;
+export default css;

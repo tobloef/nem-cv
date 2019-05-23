@@ -23,7 +23,7 @@ export default class ${NAME} extends BaseComponent {
     ];
 
     // language=CSS
-    get style() {
+    get css() {
         return `
             
         `

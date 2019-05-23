@@ -8,7 +8,7 @@ export default class CustomButton extends BaseComponent {
         return `<button><slot></slot></button>`;
     }
 
-    get style() {
+    get css() {
         // language=CSS
         return `
             :host {

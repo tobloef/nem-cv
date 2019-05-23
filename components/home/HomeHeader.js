@@ -85,312 +85,314 @@ export default class HomeHeader extends BaseComponent {
     `;
 
     // language=CSS
-    style = `
-        :host {
-            display: block;
-            position: relative;
-            font-family: 'Open Sans', sans-serif;
-
-            --image-extra-top-offset: 45px;
-        }
-
-        .background-container {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: flex-end;
-            overflow: hidden;
-            justify-content: center;
-        }
-
-        .background {
-            height: 100%;
-            transform: translateY(var(--image-extra-top-offset));
-        }
-
-        .background.stuff {
-            transform: translateY(0px);
-        }
-
-        header {
-            padding-top: 60px;
-            height: 100vh;
-            background: hsl(12, 5%, 80%);
-            background: radial-gradient(circle, hsl(12, 5%, 80%) 0%, hsl(12, 5%, 30%) 100%);
-
-            display: flex;
-            justify-content: center;
-
-            margin-bottom: 300px;
-
-            position: relative;
-        }
-
-        .fakecv {
-            background-color: #2B2B2B;
-            padding: var(--content-padding);
-            clip-path: none;
-            margin: 10px 0;
-
-            min-height: 40em;
-
-            position: absolute;
-            width: calc(100% - 20px);
-            max-width: 500px;
-            z-index: 1;
-
-            transform: translateY(30%) scale(0.8);
-            opacity: 0;
-            transition: 1s cubic-bezier(0.77, 0, 0.175, 1) transform, 1s cubic-bezier(0.77, 0, 0.175, 1) clip-path, 1s cubic-bezier(0.77, 0, 0.175, 1) opacity;
-
-            --content-padding: 30px;
-            --image-height: 300px;
-        }
-
-
-        .fakecv.clip {
-            clip-path: polygon(0px 0px,
-                               0px calc(var(--image-height) + var(--content-padding)),
-                               var(--content-padding) calc(var(--image-height) + var(--content-padding)),
-                               var(--content-padding) var(--content-padding),
-                               calc(100% - var(--content-padding)) var(--content-padding),
-                               calc(100% - var(--content-padding)) calc(var(--image-height) + var(--content-padding)),
-                               0px calc(var(--image-height) + var(--content-padding)),
-                               0% 100%,
-                               100% 100%,
-                               100% 0%);
-        }
-
-        .fakecv.visible {
-            transform: translateY(0px) scale(1);
-            opacity: 1;
-        }
-
-        .image-row {
-            display: flex;
-        }
-
-        .image-container {
-            overflow: hidden;
-            width: 100%;
-            height: 300px;
-
-            display: flex;
-            justify-content: center;
-
-            position: relative;
-
-            transition: 1s cubic-bezier(0.77, 0, 0.175, 1) width, 1s cubic-bezier(0.77, 0, 0.175, 1) height;
-        }
-
-
-        .image-container img {
-            height: calc(100vh - 60px);
-        }
-
-        .image-container img.animatable {
-            transition: 1s cubic-bezier(0.77, 0, 0.175, 1) transform;
-        }
-
-        .image-container.small {
-            width: 50%;
-            height: 110px;
-        }
-
-        .image-container.small img {
-            transform: scale(0.5) translateY(-50%);
-        }
-
-        .image-container .image-bg {
-            background: hsl(12, 5%, 80%);
-            background: radial-gradient(circle, hsl(12, 5%, 80%) 0%, hsl(12, 5%, 30%) 100%);
-            position: absolute;
-            z-index: -1;
-            width: 100vw;
-            height: 100vh;
-            top: -100px;
-        }
-
-        .fake-content-title,
-        .fake-content-body,
-        .fake-content-extra {
-            opacity: 0;
-            transition: 1s cubic-bezier(0.77, 0, 0.175, 1) opacity;
-        }
-
-        .fake-content-title.visible,
-        .fake-content-body.visible,
-        .fake-content-extra.visible {
-            opacity: 1;
-        }
-
-        .fake-content-title {
-            flex: 1;
-
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-        }
-
-        .fake-content-title.visible {
-            padding-left: 20px;
-            padding-top: 0px;
-        }
-
-        .fake-content-body {
-            margin-top: 30px;
-        }
-
-        .fake-content-extra {
-            display: none;
-        }
-
-        .fake-content-extra-col {
-            flex: 1;
-            margin-top: 10px;
-        }
-
-        .fake-content-extra-col:not(:last-child) {
-            padding-right: 20px;
-        }
-
-        .fake-text {
-            background: #5D5D5D;
-            width: 100%;
-            height: 12px;
-            margin: 12px 0;
-        }
-
-        .fake-text.lighter {
-            background: #929292;
-        }
-
-        .fake-text.large {
-            height: 25px;
-        }
-
-        .fake-text.tight {
-            margin: 4px 0;
-        }
-
-        .light {
-            font-weight: 100;
-        }
-
-        .infobox {
-            position: absolute;
-            z-index: 3;
-            width: 100%;
-            max-width: 550px;
-            background: rgba(0,0,0,0.6);
-            padding: 30px 40px;
-            top: 60vh;
-
-            transform: translateY(100px);
-            opacity: 0;
-            transition: 1s cubic-bezier(0.77, 0, 0.175, 1) transform, 1s cubic-bezier(0.77, 0, 0.175, 1) opacity;
-        }
-
-        .infobox.visible {
-            transform: translateY(0px);
-            opacity: 1;
-        }
-
-        .infobox h1 {
-            font-size: 2.5em;
-            font-weight: 400;
-            color: white;
-            line-height: 1.2;
-        }
-
-        .cta-link {
-            display: inline-block;
-            margin: 10px 0;
-            text-decoration: none;
-        }
-
-        .cta {
-            --border-color: white;
-            --text-color: white;
-            --hover-background-color: var(--border-color);
-            --hover-text-color: black;
-
-            font-size: 1.2em;
-        }
-
-        @media(min-width: 300px) {
-            .image-container.small {
-                height: 150px;
+    get css() {
+        return `
+            :host {
+                display: block;
+                position: relative;
+                font-family: 'Open Sans', sans-serif;
+    
+                --image-extra-top-offset: 45px;
             }
-        }
-
-        @media(min-width: 500px) {
-            .image-container.small {
-                height: 200px;
-            }
-        }
-
-
-        @media(min-width: 1024px) {
-            header {
-                margin-bottom: 500px;
-            }
-
-            .fakecv {
-                max-width: 750px;
-            }
-
-            .infobox {
-                max-width: 800px;
-            }
-
-            .image-row {
-                flex-direction: column;
-            }
-
-            .fake-content-title.visible {
-                padding-left: 0px;
-                padding-top: 40px;
-            }
-
-            .image-container.small {
-                height: 300px;
-            }
-
-            .image-container.small img {
-                transform: scale(0.65) translateY(-25%);
-            }
-
-            .infobox {
-                --infobox-large-left-margin: 20px;
-                top: 100px;
-                left: calc(50% + var(--infobox-large-left-margin));
+    
+            .background-container {
+                width: 100%;
                 height: 100%;
-                max-height: 300px;
-                max-width: 430px;
-                margin: 0 10px;
+                display: flex;
+                align-items: flex-end;
+                overflow: hidden;
+                justify-content: center;
             }
-
-            .infobox h1 {
-                font-size: 3.5em;
+    
+            .background {
+                height: 100%;
+                transform: translateY(var(--image-extra-top-offset));
             }
-
-            .fake-content-extra {
+    
+            .background.stuff {
+                transform: translateY(0px);
+            }
+    
+            header {
+                padding-top: 60px;
+                height: 100vh;
+                background: hsl(12, 5%, 80%);
+                background: radial-gradient(circle, hsl(12, 5%, 80%) 0%, hsl(12, 5%, 30%) 100%);
+    
+                display: flex;
+                justify-content: center;
+    
+                margin-bottom: 300px;
+    
+                position: relative;
+            }
+    
+            .fakecv {
+                background-color: #2B2B2B;
+                padding: var(--content-padding);
+                clip-path: none;
+                margin: 10px 0 0 0;
+    
+                min-height: 40em;
+    
+                position: absolute;
+                width: calc(100% - 20px);
+                max-width: 500px;
+                z-index: 1;
+    
+                transform: translateY(30%) scale(0.8);
+                opacity: 0;
+                transition: 1s cubic-bezier(0.77, 0, 0.175, 1) transform, 1s cubic-bezier(0.77, 0, 0.175, 1) clip-path, 1s cubic-bezier(0.77, 0, 0.175, 1) opacity;
+    
+                --content-padding: 30px;
+                --image-height: 300px;
+            }
+    
+    
+            .fakecv.clip {
+                clip-path: polygon(0px 0px,
+                                   0px calc(var(--image-height) + var(--content-padding)),
+                                   var(--content-padding) calc(var(--image-height) + var(--content-padding)),
+                                   var(--content-padding) var(--content-padding),
+                                   calc(100% - var(--content-padding)) var(--content-padding),
+                                   calc(100% - var(--content-padding)) calc(var(--image-height) + var(--content-padding)),
+                                   0px calc(var(--image-height) + var(--content-padding)),
+                                   0% 100%,
+                                   100% 100%,
+                                   100% 0%);
+            }
+    
+            .fakecv.visible {
+                transform: translateY(0px) scale(1);
+                opacity: 1;
+            }
+    
+            .image-row {
                 display: flex;
             }
-
-            .cta {
-                font-size: 1.5em;
+    
+            .image-container {
+                overflow: hidden;
+                width: 100%;
+                height: 300px;
+    
+                display: flex;
+                justify-content: center;
+    
+                position: relative;
+    
+                transition: 1s cubic-bezier(0.77, 0, 0.175, 1) width, 1s cubic-bezier(0.77, 0, 0.175, 1) height;
             }
-        }
-
-        @media(min-width: 1200px) {
+    
+    
+            .image-container img {
+                height: calc(100vh - 60px);
+            }
+    
+            .image-container img.animatable {
+                transition: 1s cubic-bezier(0.77, 0, 0.175, 1) transform;
+            }
+    
+            .image-container.small {
+                width: 50%;
+                height: 110px;
+            }
+    
+            .image-container.small img {
+                transform: scale(0.5) translateY(-50%);
+            }
+    
+            .image-container .image-bg {
+                background: hsl(12, 5%, 80%);
+                background: radial-gradient(circle, hsl(12, 5%, 80%) 0%, hsl(12, 5%, 30%) 100%);
+                position: absolute;
+                z-index: -1;
+                width: 100vw;
+                height: 100vh;
+                top: -100px;
+            }
+    
+            .fake-content-title,
+            .fake-content-body,
+            .fake-content-extra {
+                opacity: 0;
+                transition: 1s cubic-bezier(0.77, 0, 0.175, 1) opacity;
+            }
+    
+            .fake-content-title.visible,
+            .fake-content-body.visible,
+            .fake-content-extra.visible {
+                opacity: 1;
+            }
+    
+            .fake-content-title {
+                flex: 1;
+    
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+            }
+    
+            .fake-content-title.visible {
+                padding-left: 20px;
+                padding-top: 0px;
+            }
+    
+            .fake-content-body {
+                margin-top: 30px;
+            }
+    
+            .fake-content-extra {
+                display: none;
+            }
+    
+            .fake-content-extra-col {
+                flex: 1;
+                margin-top: 10px;
+            }
+    
+            .fake-content-extra-col:not(:last-child) {
+                padding-right: 20px;
+            }
+    
+            .fake-text {
+                background: #5D5D5D;
+                width: 100%;
+                height: 12px;
+                margin: 12px 0;
+            }
+    
+            .fake-text.lighter {
+                background: #929292;
+            }
+    
+            .fake-text.large {
+                height: 25px;
+            }
+    
+            .fake-text.tight {
+                margin: 4px 0;
+            }
+    
+            .light {
+                font-weight: 100;
+            }
+    
             .infobox {
-                --infobox-large-left-margin: 75px;
-                max-width: 500px;
+                position: absolute;
+                z-index: 3;
+                width: 100%;
+                max-width: 550px;
+                background: rgba(0,0,0,0.6);
+                padding: 30px 40px;
+                top: 60vh;
+    
+                transform: translateY(100px);
+                opacity: 0;
+                transition: 1s cubic-bezier(0.77, 0, 0.175, 1) transform, 1s cubic-bezier(0.77, 0, 0.175, 1) opacity;
             }
-        }
-    `;
+    
+            .infobox.visible {
+                transform: translateY(0px);
+                opacity: 1;
+            }
+    
+            .infobox h1 {
+                font-size: 2.5em;
+                font-weight: 400;
+                color: white;
+                line-height: 1.2;
+            }
+    
+            .cta-link {
+                display: inline-block;
+                margin: 10px 0;
+                text-decoration: none;
+            }
+    
+            .cta {
+                --border-color: white;
+                --text-color: white;
+                --hover-background-color: var(--border-color);
+                --hover-text-color: black;
+    
+                font-size: 1.2em;
+            }
+    
+            @media(min-width: 300px) {
+                .image-container.small {
+                    height: 150px;
+                }
+            }
+    
+            @media(min-width: 500px) {
+                .image-container.small {
+                    height: 200px;
+                }
+            }
+    
+    
+            @media(min-width: 1024px) {
+                header {
+                    margin-bottom: 500px;
+                }
+    
+                .fakecv {
+                    max-width: 750px;
+                }
+    
+                .infobox {
+                    max-width: 800px;
+                }
+    
+                .image-row {
+                    flex-direction: column;
+                }
+    
+                .fake-content-title.visible {
+                    padding-left: 0px;
+                    padding-top: 40px;
+                }
+    
+                .image-container.small {
+                    height: 300px;
+                }
+    
+                .image-container.small img {
+                    transform: scale(0.65) translateY(-25%);
+                }
+    
+                .infobox {
+                    --infobox-large-left-margin: 20px;
+                    top: 100px;
+                    left: calc(50% + var(--infobox-large-left-margin));
+                    height: 100%;
+                    max-height: 300px;
+                    max-width: 430px;
+                    margin: 0 10px;
+                }
+    
+                .infobox h1 {
+                    font-size: 3.5em;
+                }
+    
+                .fake-content-extra {
+                    display: flex;
+                }
+    
+                .cta {
+                    font-size: 1.5em;
+                }
+            }
+    
+            @media(min-width: 1200px) {
+                .infobox {
+                    --infobox-large-left-margin: 75px;
+                    max-width: 500px;
+                }
+            }
+        `;
+    }
 
     async script() {
         const header = this.shadowRoot.querySelector("header");

@@ -20,7 +20,7 @@ export default class RouterLink extends BaseComponent {
         });
     }
 
-    get style() {
+    get css() {
         // language=CSS
         return `
             :host {

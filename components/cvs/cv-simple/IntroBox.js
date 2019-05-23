@@ -43,7 +43,7 @@ export default class IntroBox extends BaseComponent {
     externalStyles = [];
 
     // language=CSS
-    get style() {
+    get css() {
         return `
             :host {
                 min-width: 400px;

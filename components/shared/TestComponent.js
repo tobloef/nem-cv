@@ -10,7 +10,7 @@ export default class TestComponent extends BaseComponent {
         return `<p style="color: ${this.color || "unset"}" contenteditable="true">${this.cool ? "Cool Test" : "Test"}</p>`;
     }
 
-    get style() {
+    get css() {
         // language=CSS
         return `
             p {
