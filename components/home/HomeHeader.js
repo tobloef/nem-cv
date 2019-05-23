@@ -81,11 +81,10 @@ export default class HomeHeader extends BaseComponent {
 
     // language=CSS
     style = `
-        @import url('/css/reset.css');
-
         :host {
             display: block;
             position: relative;
+            font-family: 'Open Sans', sans-serif;
         }
 
         .background-container {

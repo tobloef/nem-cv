@@ -30,6 +30,10 @@ export default class PageHome extends BaseComponent {
 
     // language=CSS
     style = `
+        :host {
+            font-family: 'Open Sans', sans-serif;
+        }
+
         .topbar {
             position: fixed;
             top: 0;
