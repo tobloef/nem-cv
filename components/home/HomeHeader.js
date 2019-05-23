@@ -90,6 +90,8 @@ export default class HomeHeader extends BaseComponent {
             display: block;
             position: relative;
             font-family: 'Open Sans', sans-serif;
+
+            --image-extra-top-offset: 45px;
         }
 
         .background-container {
@@ -103,6 +105,11 @@ export default class HomeHeader extends BaseComponent {
 
         .background {
             height: 100%;
+            transform: translateY(var(--image-extra-top-offset));
+        }
+
+        .background.stuff {
+            transform: translateY(0px);
         }
 
         header {
@@ -114,7 +121,7 @@ export default class HomeHeader extends BaseComponent {
             display: flex;
             justify-content: center;
 
-            margin-bottom: 0px;
+            margin-bottom: 300px;
 
             position: relative;
         }
@@ -187,7 +194,7 @@ export default class HomeHeader extends BaseComponent {
 
         .image-container.small {
             width: 50%;
-            height: 200px;
+            height: 110px;
         }
 
         .image-container.small img {
@@ -311,10 +318,22 @@ export default class HomeHeader extends BaseComponent {
             font-size: 1.2em;
         }
 
+        @media(min-width: 300px) {
+            .image-container.small {
+                height: 150px;
+            }
+        }
+
+        @media(min-width: 500px) {
+            .image-container.small {
+                height: 200px;
+            }
+        }
+
 
         @media(min-width: 1024px) {
             header {
-                margin-bottom: 230px;
+                margin-bottom: 500px;
             }
 
             .fakecv {
@@ -392,8 +411,9 @@ export default class HomeHeader extends BaseComponent {
         const scrollTop = document.documentElement.scrollTop;
 
         const headerTopMargin = parseInt(getComputedStyle(header).getPropertyValue('padding-top'), 10);
+        const imageExtraOffset = parseInt(getComputedStyle(this).getPropertyValue('--image-extra-top-offset'), 10);
         const xCenterOffset = (document.documentElement.clientWidth / 2) - (image.offsetWidth / 2);
-        const styleString = `translate(${-rect.left + xCenterOffset}px, ${-rect.top - scrollTop + headerTopMargin}px)`;
+        const styleString = `translate(${-rect.left + xCenterOffset}px, ${-rect.top - scrollTop + headerTopMargin + imageExtraOffset}px)`;
 
         image.style.transform = styleString;
         fakecv.classList.remove('clip');
