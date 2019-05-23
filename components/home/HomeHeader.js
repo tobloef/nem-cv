@@ -1,12 +1,12 @@
 import BaseComponent from "../BaseComponent.js";
-import Router from "../../lib/Router.js"
 import RouterLink from "../shared/RouterLink.js";
+import CustomButton from "../shared/CustomButton.js";
 import wait from "../../lib/wait.js";
 
 
 export default class HomeHeader extends BaseComponent {
     usedComponents = [
-        RouterLink
+        RouterLink, CustomButton
     ];
 
     html = `
@@ -68,8 +68,13 @@ export default class HomeHeader extends BaseComponent {
 
             <div class="infobox">
                 <h1>Lad <span class="light">NemCV</span> hjælpe dig med dit CV</h1>
-                <router-link class="cta" href="${Router.prefix}/templates">
+                <!--<router-link class="cta" href="/templates">
                     <div class="actual-cta">Start nu</div>
+                </router-link>-->
+                <router-link class="cta-link" href="/templates">
+                    <custom-button class="cta">
+                        Start nu
+                    </custom-button>
                 </router-link>
             </div>
 
@@ -291,17 +296,21 @@ export default class HomeHeader extends BaseComponent {
             line-height: 1.2;
         }
 
-        .cta {
+        .cta-link {
             display: inline-block;
-            margin: 5px 0;
+            margin: 10px 0;
+            text-decoration: none;
         }
 
-        .actual-cta {
-            color: white;
-            text-decoration: none;
-            border: 2px solid white;
-            padding: 10px;
+        .cta {
+            --border-color: white;
+            --text-color: white;
+            --hover-background-color: var(--border-color);
+            --hover-text-color: black;
+
+            font-size: 1.2em;
         }
+
 
         @media(min-width: 1024px) {
             header {
@@ -349,6 +358,10 @@ export default class HomeHeader extends BaseComponent {
 
             .fake-content-extra {
                 display: flex;
+            }
+
+            .cta {
+                font-size: 1.5em;
             }
         }
 
