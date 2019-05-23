@@ -370,7 +370,7 @@ export default class HomeHeader extends BaseComponent {
 
                 .infobox {
                     --infobox-large-left-margin: 20px;
-                    top: 100px;
+                    top: 90px;
                     left: calc(50% + var(--infobox-large-left-margin));
                     height: 100%;
                     max-height: 300px;
