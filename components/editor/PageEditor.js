@@ -20,12 +20,27 @@ export default class PageEditor extends BaseComponent {
     script = () => {
         // Use the storage-helper
         this.addEventListener("select-click", (evt) => {
+            this.toggleSidebarIfNecessary();
             setItem("template", evt.detail);
         });
+
         this.addEventListener("example-click", (evt) => {
             console.log("Example selected:", evt.detail);
         });
+
+        this.addEventListener("color-picked", (evt) => {
+            this.toggleSidebarIfNecessary();
+            setItem("colors", evt.detail.colors);
+        });
     };
+
+    toggleSidebarIfNecessary() {
+        const width = document.documentElement.clientWidth;
+        if (width <= 550) { // Is mobile-sized
+            const sidebar = this.shadowRoot.querySelector("side-bar");
+            sidebar.toggle();
+        }
+    }
 
     // language=CSS
     get css() {

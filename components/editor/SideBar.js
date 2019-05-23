@@ -27,16 +27,22 @@ export default class SideBar extends BaseComponent {
 
     script = () => {
         const toggle = this.shadowRoot.querySelector("side-toggle");
-        toggle.addEventListener("click", () => {
-            // Get valueless attribute "open" and toggle it based on if it is there
-            const open = this.getAttribute("open");
-            if (open != null) {
-                this.removeAttribute("open");
-            } else {
-                this.setAttribute("open", "");
-            }
-        });
+        toggle.addEventListener("click", () => this.toggle());
     };
+
+    toggle() {
+        const toggle = this.shadowRoot.querySelector("side-toggle");
+
+        // Get valueless attribute "open" and toggle it based on if it is there
+        const open = this.getAttribute("open");
+        if (open != null) {
+            this.removeAttribute("open");
+        } else {
+            this.setAttribute("open", "");
+        }
+
+        toggle.toggle();
+    }
 
     externalStyles = [];
 

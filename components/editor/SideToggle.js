@@ -18,6 +18,9 @@ export default class SideToggle extends BaseComponent {
     }
 
     script = () => {
+    };
+
+    toggle() {
         const attr = [
             "open",
             "close"
@@ -27,25 +30,22 @@ export default class SideToggle extends BaseComponent {
             this.shadowRoot.getElementById("close-image")
         ];
 
-        const button = this.shadowRoot.querySelector("button");
-        button.addEventListener("click", () => {
-            // theOne decides which entry is to be displayed and which attribute is on
-            let theOne = 0;
+        // theOne decides which entry is to be displayed and which attribute is on
+        let theOne = 0;
 
-            const open = this.getAttribute(attr[0]);
-            if (open != null) {
-                theOne = 1; // Toggle theOne so it corresponds to "open" and "open-image"
-            }
+        const open = this.getAttribute(attr[0]);
+        if (open != null) {
+            theOne = 1; // Toggle theOne so it corresponds to "open" and "open-image"
+        }
 
-            // theOther is the one to remove, found in the array as the other one (hence the name)
-            let theOther = (theOne+1)%2;
+        // theOther is the one to remove, found in the array as the other one (hence the name)
+        let theOther = (theOne+1)%2;
 
-            this.removeAttribute(attr[theOther]);
-            images[theOther].style.display = "none";
-            this.setAttribute(attr[theOne], "");
-            images[theOne].style.display = "inline-block";
-        });
-    };
+        this.removeAttribute(attr[theOther]);
+        images[theOther].style.display = "none";
+        this.setAttribute(attr[theOne], "");
+        images[theOne].style.display = "inline-block";
+    }
 
     // language=CSS
     get css() {

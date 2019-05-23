@@ -25,12 +25,17 @@ export default class ColorHolder extends BaseComponent {
         const div = this.shadowRoot.querySelector("#outer");
         div.addEventListener("click", evt => {
             evt.preventDefault();
-            const colors = {
-                fontColor: this.fontColor,
-                backgroundColor: this.backgroundColor,
-                accentColor: this.accentColor,
-            };
-            setItem("colors", colors);
+            this.dispatchEvent(new CustomEvent("color-picked", {
+                bubbles: true,
+                composed:true,
+                detail: {
+                    colors: {
+                        fontColor: this.fontColor,
+                        backgroundColor: this.backgroundColor,
+                        accentColor: this.accentColor
+                    }
+                }
+            }));
         });
     };
 
