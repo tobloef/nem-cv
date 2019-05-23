@@ -1,6 +1,6 @@
 import BaseComponent from "../BaseComponent.js";
 
-export default class AppendButton extends BaseComponent {
+export default class TestAppendButton extends BaseComponent {
     get html() {
         return `<div>
           <button id="button">Add</button>
