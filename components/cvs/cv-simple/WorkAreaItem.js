@@ -10,19 +10,4 @@ export default class WorkAreaItem extends BaseComponent {
             <span>Some item</span>
         `;
     }
-
-    script = () => {
-
-    };
-
-    externalStyles = [];
-
-    // language=CSS
-    get style() {
-        return `
-            :host {
-            
-            }
-        `
-    };
 }

@@ -9,24 +9,24 @@ export default class PageTest extends BaseComponent {
     get html() {
         return `
             <div>
-                <content-get-test content-key="name" content-type="custom">Tobias Løfgren</content-get-test>
+                <content-get-test content-key="name" content-type="component">Tobias Løfgren</content-get-test>
                 <div content-key="experiences" content-type="array">
                     <div>
-                        <div content-type="object">
-                            <content-get-test content-key="title" content-type="custom">Apple picker</content-get-test>
-                            <content-get-test content-key="company" content-type="custom">Apple</content-get-test>
+                        <div content-type="component">
+                            <content-get-test content-key="title" content-type="component">Apple picker</content-get-test>
+                            <content-get-test content-key="company" content-type="component">Apple</content-get-test>
                         </div>
-                        <div content-type="object">
-                            <content-get-test content-key="title" content-type="custom">Janitor</content-get-test>
-                            <content-get-test content-key="company" content-type="custom">Google</content-get-test>
+                        <div content-type="component">
+                            <content-get-test content-key="title" content-type="component">Janitor</content-get-test>
+                            <content-get-test content-key="company" content-type="component">Google</content-get-test>
                         </div>
-                        <div content-type="object">
-                            <content-get-test content-key="title" content-type="custom">CEO</content-get-test>
-                            <content-get-test content-key="company" content-type="custom">Tobias Løfgren</content-get-test>
+                        <div content-type="component">
+                            <content-get-test content-key="title" content-type="component">CEO</content-get-test>
+                            <content-get-test content-key="company" content-type="component">Tobias Løfgren</content-get-test>
                         </div>
                     </div>
                 </div>
-                <content-get-test content-key="test" content-type="custom">Cool!</content-get-test>
+                <content-get-test content-key="test" content-type="component">Cool!</content-get-test>
             </div> 
             <button id="get-content">Get the content</button>           
         `;

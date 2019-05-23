@@ -75,13 +75,21 @@ export default class BaseComponent extends HTMLElement {
                 switch (contentType) {
                     case "object":
                         newContent = {};
-                        this._recurseContent(newContent, child);
+                        if (child.getContent != null) {
+                            child.getContent(newContent);
+                        } else {
+                            this._recurseContent(newContent, child);
+                        }
                         break;
                     case "array":
                         newContent = [];
-                        this._recurseContent(newContent, child);
+                        if (child.getContent != null) {
+                            child.getContent(newContent);
+                        } else {
+                            this._recurseContent(newContent, child);
+                        }
                         break;
-                    case "custom":
+                    case "component":
                         newContent = child.getContent();
                         break;
                     default:
@@ -89,12 +97,17 @@ export default class BaseComponent extends HTMLElement {
                 }
                 const contentKey = child.getAttribute("content-key");
                 if (contentKey != null) {
+                    //console.log(this.constructor.name, "Setting", contentKey, "to", newContent, "on", content);
                     content[contentKey] = newContent;
                 } else if (content.push != null) {
+                    //console.log(this.constructor.name, "Pushing", newContent, "into", content);
                     content.push(newContent);
                 }
+            } else if (child.getContent != null) {
+                child.getContent(content);
+            } else {
+                this._recurseContent(content, child);
             }
-            this._recurseContent(content, child);
         }
     }
 

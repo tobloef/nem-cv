@@ -13,7 +13,7 @@ export default class CVModern extends BaseComponent {
         return `
             <header>
                 <div class="left">
-                    <profile-image class="image" aspect_ratio="1.5"></profile-image>
+                    <profile-image class="image" aspect-ratio="1.5"></profile-image>
                 </div>
                 <div class = "right">
                     <h1>JENS HANSEN</h1>

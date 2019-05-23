@@ -2,7 +2,8 @@ import BaseComponent from "../BaseComponent.js";
 
 export default class EditableComponent extends BaseComponent {
     empty = true;
-    node = null
+    node = null;
+
     static observedAttributes = [
         "placeholder",
         "element"
@@ -50,6 +51,7 @@ export default class EditableComponent extends BaseComponent {
         }
         this.selectTextInNode();
     };
+
     focusOut = () => {
         this.node.style.minWidth = "0";
         if (this.node.innerHTML === "") {
@@ -60,17 +62,20 @@ export default class EditableComponent extends BaseComponent {
     };
 
     keyPress = () => {
-        console.log("hola")
         if (!this.empty) {
             this.node.style.minWidth = "0";
         }
-    }
+    };
 
     script = () => {
         this.node = this.shadowRoot.querySelector("#content");
         this.node.addEventListener("focus", this.onFocus);
         this.node.addEventListener("focusout", this.focusOut);
         this.node.addEventListener("keypress", this.keyPress);
+    };
+
+    getContent = () => {
+        return this.shadowRoot.getElementById("content").innerText;
     };
 
     // language=CSS

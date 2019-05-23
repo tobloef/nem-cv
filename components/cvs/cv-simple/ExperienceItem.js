@@ -2,7 +2,10 @@ import EditableComponent from "../../shared/EditableComponent.js";
 import BaseComponent from "../../BaseComponent.js";
 
 export default class ExperienceItem extends BaseComponent {
-    static observedAttributes = [];
+    static observedAttributes = [
+        "experience-type"
+    ];
+
     usedComponents = [
         EditableComponent
     ];
@@ -10,22 +13,38 @@ export default class ExperienceItem extends BaseComponent {
     // language=HTML
     get html() {
         return `
-            <span class="divider">
-                <editable-component placeholder="Firma" element="div"></editable-component> -
-                <editable-component placeholder="Titel" element="div"></editable-component>
-            </span>
-            <span class="divider">
-                <editable-component placeholder="Startår" element="div"></editable-component> -
-                <editable-component placeholder="Slutår" element="div"></editable-component>
-            </span>
+            <div content-type="object">
+                <span class="divider">
+                    <editable-component
+                            placeholder="${this.experienceType}"
+                            element="div"
+                            content-key="name"
+                            content-type="component"
+                    ></editable-component> -
+                    <editable-component
+                            placeholder="Titel"
+                            element="div"
+                            content-key="title"
+                            content-type="component"
+                    ></editable-component>
+                </span>
+                <span class="divider">
+                    <editable-component
+                            placeholder="Startår"
+                            element="div"
+                            content-key="from"
+                            content-type="component"
+                    ></editable-component> -
+                    <editable-component
+                            placeholder="Slutår"
+                            element="div"
+                            content-key="to"
+                            content-type="component"
+                    ></editable-component>
+                </span>
+            </div>
         `;
     }
-
-    script = () => {
-
-    };
-
-    externalStyles = [];
 
     // language=CSS
     get css() {
@@ -38,6 +57,10 @@ export default class ExperienceItem extends BaseComponent {
             .divider {
                 display: flex;
                 flex-direction: row;
+            }
+
+            button {
+                display: inline;
             }
         `
     };
