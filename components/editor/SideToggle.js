@@ -12,8 +12,8 @@ export default class SideToggle extends BaseComponent {
     get html() {
         return `
             <button>
-                <img id="close-image" src="/img/arrow.png" alt="Luk indstillinger">
-                <img id="open-image" src="/img/sliders.png" alt="Åbn indstillinger">
+                <img id="open-image" src="/img/arrow.png" alt="Luk indstillinger">
+                <img id="close-image" src="/img/sliders.png" alt="Åbn indstillinger">
             </button>
         `;
     }
@@ -85,12 +85,12 @@ export default class SideToggle extends BaseComponent {
             }
             
             @media(max-width: 550px) {
-                :host([open])>button {
+                :host([close])>button {
                     border-top-right-radius: 5px;
                     border-bottom-right-radius: 5px;
                 }
 
-                :host([close])>button {
+                :host([open])>button {
                     border-top-left-radius: 5px;
                     border-bottom-left-radius: 5px;
                 }

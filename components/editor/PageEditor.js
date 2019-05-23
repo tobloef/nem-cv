@@ -12,7 +12,7 @@ export default class PageEditor extends BaseComponent {
     get html() {
         return `
             <h1>PageEditor</h1>
-            <side-bar></side-bar>
+            <side-bar open></side-bar>
         `;
     };
 

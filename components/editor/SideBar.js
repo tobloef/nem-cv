@@ -3,7 +3,9 @@ import ColorList from "./ColorList.js";
 import BaseComponent from "../BaseComponent.js";
 
 export default class SideBar extends BaseComponent {
-    static observedAttributes = [];
+    static observedAttributes = [
+        "open"
+    ];
 
     usedComponents = [
         LayoutList,
@@ -24,7 +26,15 @@ export default class SideBar extends BaseComponent {
     }
 
     script = () => {
-
+        const toggle = this.shadowRoot.querySelector("side-toggle");
+        toggle.addEventListener("click", () => {
+            const open = this.getAttribute("open");
+            if (open != null) {
+                this.removeAttribute("open");
+            } else {
+                this.setAttribute("open", "");
+            }
+        });
     };
 
     externalStyles = [];
@@ -33,10 +43,16 @@ export default class SideBar extends BaseComponent {
     get css() {
         return `
             :host {
+                transform: translateX(-100%);
+                transition: 750ms cubic-bezier(0.77, 0, 0.175, 1) transform;
                 display: block;
                 height: 100%;
                 max-width: 500px;
                 position: relative;
+            }
+            
+            :host([open]) {
+                transform: translateX(0);
             }
             
             #container {
@@ -55,19 +71,22 @@ export default class SideBar extends BaseComponent {
                 overflow-y: auto;
             }
             
+            side-toggle {
+                position: absolute;
+                right: 0;
+                transition: 750ms cubic-bezier(0.77, 0, 0.175, 1) right;
+                top: 50px;
+            }
+            
             @media(max-width: 550px) {
-                side-toggle {
-                    position: absolute;
-                    right: 0;
-                    top: 50px;
+                side-toggle[close] {
+                    right: -50px;
                 }
             }
             
             @media(min-width: 550px) {
                 side-toggle {
-                    position: absolute;
                     right: -50px;
-                    top: 50px;
                 }
             }
             
