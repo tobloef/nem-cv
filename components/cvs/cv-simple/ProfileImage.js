@@ -1,7 +1,9 @@
 import BaseComponent from "../../BaseComponent.js";
 
 export default class ProfileImage extends BaseComponent {
-    static observedAttributes = [];
+    static observedAttributes = [
+        "aspect_ratio"
+    ];
     usedComponents = [];
 
     // language=HTML
@@ -48,7 +50,7 @@ export default class ProfileImage extends BaseComponent {
             .square:after {
                 content: "";
                 display: block;
-                padding-bottom: 100%;
+                padding-bottom: ${this.aspect_ratio * 100}%;
             }
             .profile-picture {
                 position: absolute;
