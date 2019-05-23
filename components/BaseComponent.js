@@ -1,10 +1,14 @@
 "use strict";
 
 import {classNameToElementName, kebabToCamelCase} from "../lib/string-utils.js";
+import {resetCSSString, resetCSSStyleSheet} from "../lib/reset-css.js";
+import {stringToStyleSheet} from "../lib/stylesheet-utils.js";
 
 export default class BaseComponent extends HTMLElement {
-    _externalStyles = null;
-    enableResetCSS = false;
+    static _template = null;
+    static _colors = null;
+
+    enableResetCSS = true;
 
     constructor() {
         super();
@@ -20,45 +24,77 @@ export default class BaseComponent extends HTMLElement {
     attributeChangedCallback(attrName, oldValue, newValue) {
         if (oldValue !== newValue) {
             const propName = kebabToCamelCase(attrName);
-            this[propName] = this.getAttribute(attrName);
+            if (this.getAttribute(attrName) === "") {
+                this[propName] = true;
+            } else {
+                this[propName] = this.getAttribute(attrName);
+            }
             this.connectedCallback();
         }
     }
 
     empty() {
-        this.shadowRoot.innerHTML = this._getStylingHTML();
+        this.shadowRoot.innerHTML = "";
     }
-
-    //////////
 
     render() {
         console.debug(`Updating DOM of ${this.constructor.name}`);
-        let newHTML = "";
-        newHTML += this._getStylingHTML();
-        newHTML += this.html;
-        if(this.constructor.name == "LayoutList") {
-            console.log(newHTML);
-        }
-        this.shadowRoot.innerHTML = newHTML;
+        this.shadowRoot.innerHTML = this.html;
+        this._addAdoptedStyleSheets();
         if (this.script != null) {
             this.script();
         }
     }
 
-    _getStylingHTML() {
-        let newHTML = "";
-        if (this.externalStyles != null) {
-            for (const externalStyle of this.externalStyles) {
-                newHTML += `<link rel="stylesheet" href="${externalStyle}">`;
+    getContent() {
+        let obj = {};
+        for (const child of this.shadowRoot.children) {
+            const contentKey = child.getAttribute("content-key");
+            if (contentKey != null) {
+
             }
         }
-        if (this.enableResetCSS) {
-            newHTML += `<link rel="stylesheet" href="/css/reset.css">`;
+    }
+
+    static get template() {
+        return BaseComponent._template;
+    }
+
+    static set template(value) {
+        if ((typeof value) === "string") {
+            BaseComponent._template = stringToStyleSheet(value);
+        } else {
+            BaseComponent._template = value;
+        }
+    }
+
+    static get colors() {
+        return BaseComponent._colors;
+    }
+
+    static set colors(value) {
+        if ((typeof value) === "string") {
+            BaseComponent._colors = stringToStyleSheet(value);
+        } else {
+            BaseComponent._colors = value;
+        }
+    }
+
+    _addAdoptedStyleSheets() {
+        const adoptedStyleSheets = [];
+        if (this.enableResetCSS != null) {
+            adoptedStyleSheets.push(resetCSSStyleSheet);
+        }
+        if (BaseComponent.colors != null) {
+            adoptedStyleSheets.push(BaseComponent.colors);
+        }
+        if (BaseComponent.template != null) {
+            adoptedStyleSheets.push(BaseComponent.template);
         }
         if (this.style != null) {
-            newHTML += `<style>${this.style}</style>`;
+            adoptedStyleSheets.push(stringToStyleSheet(this.style));
         }
-        return newHTML;
+        this.shadowRoot.adoptedStyleSheets = adoptedStyleSheets;
     }
 
     _defineUsedComponents() {

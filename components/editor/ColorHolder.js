@@ -34,8 +34,6 @@ export default class ColorHolder extends BaseComponent {
         });
     };
 
-    externalStyles = [];
-
     // language=CSS
     get style() {
         return `

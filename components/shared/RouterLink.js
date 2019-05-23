@@ -7,14 +7,15 @@ export default class RouterLink extends BaseComponent {
     ];
 
     get html() {
-        return `<a href="${Router.prefix + this.href}"><slot></slot></a>`;
+        const url = Router.prefix + this.href;
+        return `<a href="${url}"><slot></slot></a>`;
     };
 
     script = () => {
         const a = this.shadowRoot.querySelector("a");
         a.addEventListener("click", evt => {
             evt.preventDefault();
-            Router.navigate(this.href);
+            Router.navigate(Router.prefix + this.href);
             return false;
         });
     }
