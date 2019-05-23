@@ -14,7 +14,7 @@ export default class IntroBox extends BaseComponent {
     get html() {
         return `
             <section class="introbox">
-                <profile-image></profile-image>
+                <profile-image aspect_ratio="2"></profile-image>
                 <editable-component class="name" placeholder="Dit fulde navn" element="h1"></editable-component>
                 <ul class="facts">
                     <li class="age">
@@ -27,8 +27,8 @@ export default class IntroBox extends BaseComponent {
                         <editable-component placeholder="Din email" element="div"></editable-component>
                     </li>
                 </ul>
-                <h1>Om mig</h1>
-                <editable-component element="p" placeholder="Her kan du skrive en kort beskrivelse af dig selv."/>
+                <h1 class="s-h1">Om mig</h1>
+                <editable-component class="description" element="p" placeholder="Her kan du skrive en kort beskrivelse af dig selv."/>
             </section>
         `;
     }
@@ -46,12 +46,11 @@ export default class IntroBox extends BaseComponent {
     get style() {
         return `
             :host {
-                font-family: inherit;
+                min-width: 400px;
             }
             .introbox {
                 background-color: aquamarine;
-                height: 100vh;
-                max-height: 100vh;
+                min-height: 100vh;
                 padding: 2em;
             }
             
@@ -59,12 +58,10 @@ export default class IntroBox extends BaseComponent {
                 font-size: 2em;
                 margin-bottom: 0.5em;
                 font-family: var(--h1);
-                color: var(--accent);
+                color: var(--font);
             }
             
             profile-image {
-                display: block;
-                max-width: 400px;
                 margin-bottom: 2em;
             }
             
@@ -72,6 +69,10 @@ export default class IntroBox extends BaseComponent {
                 list-style-type: disc;
                 padding-left: 1.6em;
                 margin-bottom: 1.5em;
+            }
+            
+            li editable-component, .description{
+                font-family: var(--p);
             }
         `
     };

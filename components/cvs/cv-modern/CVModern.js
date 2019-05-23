@@ -179,6 +179,10 @@ export default class CVModern extends BaseComponent {
                 display: flex;
                 justify-content: center;
             }
+            profile-image {
+                display: block;
+                max-width: 400px;
+            }
         `
     };
 }
