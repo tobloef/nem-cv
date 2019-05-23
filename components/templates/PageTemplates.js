@@ -12,14 +12,27 @@ export default class PageTemplates extends BaseComponent {
         //language=CSS
         return `
             :host {
-                display: block;
+                display: flex;
+                justify-content: center;
                 font-family: 'Open Sans', sans-serif;
                 padding: 15px;
             }
 
             h1 {
-                font-size: 2em;
-                font-weight: bold;
+                font-size: 3em;
+                font-weight: 100;
+                line-height: 3;
+                margin-bottom: 15px;
+            }
+
+            .content {
+                max-width: 900px;
+            }
+
+            @media(min-width: 680px) {
+                h1 {
+                    font-size: 5em;
+                }
             }
         `;
     }
@@ -36,9 +49,11 @@ export default class PageTemplates extends BaseComponent {
 
     get html() {
         return `
-            <h1>Vælg en skabelon</h1>
 
-            <layout-list class="resizing"></layout-list>
+            <div class="content">
+                <h1>Vælg en skabelon</h1>
+                <layout-list class="resizing"></layout-list>
+            </div>
         `;
     };
 }
