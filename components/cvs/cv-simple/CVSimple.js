@@ -3,6 +3,7 @@ import EditableComponent from "../../shared/EditableComponent.js";
 import IntroBox from "./IntroBox.js";
 import simple from "../../../templates/simple.js";
 import {stringToStyleSheet} from "../../../lib/stylesheet-utils.js";
+import theme1 from "../../../templates/theme1.js";
 
 export default class CVSimple extends BaseComponent {
     static observedAttributes = [];
@@ -59,9 +60,7 @@ export default class CVSimple extends BaseComponent {
 
     script = () => {
         BaseComponent.template = stringToStyleSheet(simple);
-        BaseComponent.color = `
-            
-        `;
+        BaseComponent.color = stringToStyleSheet(theme1);
     };
 
     externalStyles = [];
@@ -69,14 +68,14 @@ export default class CVSimple extends BaseComponent {
     // language=CSS
     get style() {
         return `
-            :root {
-                --some-color: red;
+            h1 {
+                font-family: var(--h1);
             }
-            editable-component:empty {
+            h2 {
+                font-family: var(--h2);
             }
-
-            editable-component *:before:empty{
-                content: attr(placeholder);
+            p {
+                font-family: var(--p);
             }
             body {
                 margin: 0;

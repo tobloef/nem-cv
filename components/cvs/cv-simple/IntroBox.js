@@ -46,6 +46,7 @@ export default class IntroBox extends BaseComponent {
     get style() {
         return `
             :host {
+                font-family: inherit;
             }
             .introbox {
                 background-color: aquamarine;
@@ -57,6 +58,8 @@ export default class IntroBox extends BaseComponent {
             h1, .name {
                 font-size: 2em;
                 margin-bottom: 0.5em;
+                font-family: var(--h1);
+                color: var(--accent);
             }
             
             profile-image {
