@@ -1,9 +1,9 @@
 // language=CSS
 const style = `    
-    :root{
+    :host{
         --font: black;
         --background: white;
-        --accent: gray;
+        --accent: purple;
     }
 `;
 

@@ -61,6 +61,7 @@ export default class CVSimple extends BaseComponent {
     script = () => {
         BaseComponent.template = stringToStyleSheet(simple);
         BaseComponent.color = stringToStyleSheet(theme1);
+
     };
 
     externalStyles = [];
@@ -68,15 +69,6 @@ export default class CVSimple extends BaseComponent {
     // language=CSS
     get style() {
         return `
-            h1 {
-                font-family: var(--h1);
-            }
-            h2 {
-                font-family: var(--h2);
-            }
-            p {
-                font-family: var(--p);
-            }
             body {
                 margin: 0;
             }

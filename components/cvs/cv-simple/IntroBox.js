@@ -27,7 +27,7 @@ export default class IntroBox extends BaseComponent {
                         <editable-component placeholder="Din email" element="div"></editable-component>
                     </li>
                 </ul>
-                <h1>Om mig</h1>
+                <h1 class="s-h1">Om mig</h1>
                 <editable-component element="p" placeholder="Her kan du skrive en kort beskrivelse af dig selv."/>
             </section>
         `;
@@ -46,12 +46,11 @@ export default class IntroBox extends BaseComponent {
     get style() {
         return `
             :host {
-                font-family: inherit;
+                min-width: 400px;
             }
             .introbox {
                 background-color: aquamarine;
-                height: 100vh;
-                max-height: 100vh;
+                min-height: 100vh;
                 padding: 2em;
             }
             
@@ -64,7 +63,6 @@ export default class IntroBox extends BaseComponent {
             
             profile-image {
                 display: block;
-                max-width: 400px;
                 margin-bottom: 2em;
             }
             
