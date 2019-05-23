@@ -95,7 +95,7 @@ export default class CVModern extends BaseComponent {
 
             h2 {
             }
-
+            
             .about {
                 display: flex;
                 flex-direction: column;
@@ -178,10 +178,6 @@ export default class CVModern extends BaseComponent {
             .oneexperience {
                 display: flex;
                 justify-content: center;
-            }
-            profile-image {
-                display: block;
-                max-width: 400px;
             }
         `
     };
