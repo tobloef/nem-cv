@@ -1,8 +1,15 @@
 "use strict";
 
-import {classNameToElementName} from "../lib/string-utils.js";
+import {classNameToElementName, kebabToCamelCase} from "../lib/string-utils.js";
+import {resetCSSString, resetCSSStyleSheet} from "../lib/reset-css.js";
+import {stringToStyleSheet} from "../lib/stylesheet-utils.js";
 
 export default class BaseComponent extends HTMLElement {
+    static _template = null;
+    static _colors = null;
+
+    enableResetCSS = true;
+
     constructor() {
         super();
         this.attachShadow({mode: "open"});
@@ -10,12 +17,18 @@ export default class BaseComponent extends HTMLElement {
 
     connectedCallback() {
         this._defineUsedComponents();
-        this._updateDOM();
+        this._checkForUndefinedComponents();
+        this.render();
     }
 
     attributeChangedCallback(attrName, oldValue, newValue) {
         if (oldValue !== newValue) {
-            this[attrName] = this.getAttribute(attrName);
+            const propName = kebabToCamelCase(attrName);
+            if (this.getAttribute(attrName) === "") {
+                this[propName] = true;
+            } else {
+                this[propName] = this.getAttribute(attrName);
+            }
             this.connectedCallback();
         }
     }
@@ -24,16 +37,67 @@ export default class BaseComponent extends HTMLElement {
         this.shadowRoot.innerHTML = "";
     }
 
-    _updateDOM() {
-        this.shadowRoot.innerHTML = "";
+    render() {
+        //console.debug(`Updating DOM of ${this.constructor.name}`);
+        let newHTML = "";
+        if (this.externalStyles != null) {
+            for (const externalStyle of this.externalStyles) {
+                newHTML += `<link rel="stylesheet" href="${externalStyle}">`;
+            }
+        }
+        const adoptedStyleSheets = [];
+        if (this.enableResetCSS != null) {
+            adoptedStyleSheets.push(resetCSSStyleSheet);
+        }
+        if (BaseComponent.colors != null) {
+            adoptedStyleSheets.push(BaseComponent.colors);
+        }
+        if (BaseComponent.template != null) {
+            adoptedStyleSheets.push(BaseComponent.template);
+        }
         if (this.style != null) {
-            this.shadowRoot.innerHTML = `<style>${this.style}</style>`;
+            adoptedStyleSheets.push(stringToStyleSheet(this.style));
         }
-        if (this.html) {
-            this.shadowRoot.innerHTML += this.html;
-        }
+        this.shadowRoot.adoptedStyleSheets = adoptedStyleSheets;
+        newHTML += this.html;
+
+        this.shadowRoot.innerHTML = newHTML;
         if (this.script != null) {
             this.script();
+        }
+    }
+
+    getContent() {
+        let obj = {};
+        for (const child of this.shadowRoot.children) {
+            const contentKey = child.getAttribute("content-key");
+            if (contentKey != null) {
+
+            }
+        }
+    }
+
+    static get template() {
+        return BaseComponent._template;
+    }
+
+    static set template(value) {
+        if ((typeof value) === "string") {
+            BaseComponent._template = stringToStyleSheet(value);
+        } else {
+            BaseComponent._template = value;
+        }
+    }
+
+    static get colors() {
+        return BaseComponent._colors;
+    }
+
+    static set colors(value) {
+        if ((typeof value) === "string") {
+            BaseComponent._colors = stringToStyleSheet(value);
+        } else {
+            BaseComponent._colors = value;
         }
     }
 
@@ -43,6 +107,22 @@ export default class BaseComponent extends HTMLElement {
         }
         for (const component of this.usedComponents) {
             component.define();
+        }
+    }
+
+    _checkForUndefinedComponents() {
+        if (this.html == null) {
+            return;
+        }
+        const matches = this.html.matchAll(/<([a-z]+-[a-z]*)[ \/].*>/g);
+        if (matches == null) {
+            return;
+        }
+        const tags = Array.from(matches).map(m => m[1]);
+        for (const tag of tags) {
+            if (customElements.get(tag) == null) {
+                console.error(`${this.constructor.name} tried to use tag ${tag}, but it has not been defined yet.`);
+            }
         }
     }
 

@@ -1,10 +1,12 @@
 'use strict';
-import BaseComponent from "../../lib/BaseComponent.js";
+import BaseComponent from "../BaseComponent.js";
 
 export default class AddButton extends BaseComponent {
-    html = `
+    get html() {
+        return `
         <span id="root">+</span>
-    `;
+    `
+    };
 
     script = () => {
         this.addEventListener("click", () => console.log("Cool"))

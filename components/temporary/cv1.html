@@ -1,46 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>CV1</title>
+	<meta charset="UTF-8">
+	<title>CV1</title>
 </head>
 <body>
 <script type="module" src="minimain.js"></script>
 <script type="module" src="edit-toggle.js"></script>
-    <main>
-        <button onclick="toggleAllEditors()">Toggle editing</button>
-        <section class="introbox">
-            <div class="introbox-inner">
-                <img src="placeholder-person.png" alt="image of you">
-                <h1 class="editable" contenteditable="true">Full name</h1>
-                <ul class="facts">
-                    <li class="age editable" contenteditable="true">Din alder</li>
-                    <li class="city editable" contenteditable="true">Din by</li>
-                    <li class="email editable" contenteditable="true">Din email</li>
-                </ul>
-            </div>
-        </section>
-        <section class="description">
-            <h1>Om mig</h1>
-            <p class="editable" contenteditable="true">Her kan du skrive en kort beskrivelse af dig selv.</p>
-        </section>
-        <section class="education">
-            <h1>Uddannelse</h1>
-            <ul class="education-list">
-                <li class="education-item editable" contenteditable="true">Skriv din uddannelse her</li>
-            </ul>
-            <add-button class="add-button">+</add-button>
-        </section>
-        <section class="experience">
-            <h1>Erfaring</h1>
-            <ul class="experience-list">
-                <li class="experience-item editable" contenteditable="true">Skriv din erfaring her</li>
-            </ul>
-            <add-button class="add-button">+</add-button>
-            <ul class="work-areas">
-                <add-button class="add-button">+</add-button>
-            </ul>
-        </section>
-    </main>
+<link rel="stylesheet" href="temp.css">
+<main>
+	<section class="introbox">
+		<div class="introbox-inner">
+			<img src="placeholder-person.png" alt="image of you">
+			<editable-component placeholder="Dit fulde navn" element="h1"></editable-component>
+			<ul class="facts">
+				<li class="age"><editable-component placeholder="Din alder" element="div"></editable-component></li>
+				<li class="city"><editable-component placeholder="Din by" element="div"></editable-component></li>
+				<li class="email"><editable-component placeholder="Din email" element="div"></editable-component></li>
+			</ul>
+		</div>
+		<h1>Om mig</h1>
+		<editable-component element="p" placeholder="Her kan du skrive en kort beskrivelse af dig selv."></editable-component>
+	</section>
+	<div class="other">
+		<section class="education">
+			<h1>Uddannelse</h1>
+			<ul class="education-list">
+				<li class="education-item" style="display: flex; justify-content: space-between">
+					<span class="divider">
+						<editable-component placeholder="Uddannelsessted" element="div"></editable-component> -
+						<editable-component placeholder="Titel" element="div"></editable-component>
+					</span>
+					<span class="divider">
+						<editable-component placeholder="Startår" element="div"></editable-component> -
+						<editable-component placeholder="Slutår" element="div"></editable-component>
+					</span>
+				</li>
+			</ul>
+		</section>
+		<section class="experience">
+			<h1>Erfaring</h1>
+			<ul class="experience-list">
+				<li class="experience-item" style="display: flex; justify-content: space-between">
+					<div class="divider">
+						<editable-component placeholder="Firma" element="div"></editable-component>
+						<div> - </div>
+						<editable-component placeholder="Titel" element="div"></editable-component>
+					</div>
+					<div class="divider">
+						<editable-component placeholder="Startår" element="div"></editable-component>
+						<div> - </div>
+						<editable-component placeholder="Slutår" element="div"></editable-component>
+					</div>
+				</li>
+			</ul>
+			<ul class="work-areas">
+			</ul>
+		</section>
+	</div>
+</main>
 </body>
 </html>

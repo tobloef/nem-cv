@@ -2,19 +2,20 @@ import BaseComponent from "../BaseComponent.js";
 import Router from "../../lib/Router.js";
 
 export default class RouterLink extends BaseComponent {
-    static get observedAttributes() {
-        return [
-            "href"
-        ];
-    }
+    static observedAttributes = [
+        "href"
+    ];
 
-    html = `<a href="${this.href}"><slot></slot></a>`;
+    get html() {
+        const url = Router.prefix + this.href;
+        return `<a href="${url}"><slot></slot></a>`;
+    };
 
     script = () => {
         const a = this.shadowRoot.querySelector("a");
         a.addEventListener("click", evt => {
             evt.preventDefault();
-            Router.navigate(this.href);
+            Router.navigate(Router.prefix + this.href);
             return false;
         });
     }

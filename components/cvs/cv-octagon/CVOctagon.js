@@ -1,11 +1,9 @@
-export default class ${NAME} extends BaseComponent {
-    static observedAttributes = [
+import BaseComponent from "../../BaseComponent.js";
 
-    ];
+export default class CVOctagon extends BaseComponent {
+    static observedAttributes = [];
 
-    usedComponents = [
-
-    ];
+    usedComponents = [];
 
     // language=HTML
     get html() {
@@ -18,9 +16,7 @@ export default class ${NAME} extends BaseComponent {
 
     };
 
-    externalStyles = [
-
-    ];
+    externalStyles = [];
 
     // language=CSS
     get style() {

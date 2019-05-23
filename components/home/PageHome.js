@@ -1,14 +1,12 @@
 import BaseComponent from "../BaseComponent.js";
-import Router from "../../lib/Router.js"
 import RouterLink from "../shared/RouterLink.js";
+import CustomButton from "../shared/CustomButton.js";
 import wait from "../../lib/wait.js";
-
 import HomeHeader from './HomeHeader.js';
-
 
 export default class PageHome extends BaseComponent {
     usedComponents = [
-        RouterLink, HomeHeader
+        RouterLink, HomeHeader, CustomButton
     ];
 
     html = `
@@ -16,11 +14,18 @@ export default class PageHome extends BaseComponent {
             <img class="logo" src="/img/logo_white.svg"></img>
         </div>
         <home-header></home-header>
-        <h2>Stuff</h2>
-        <h3>Stuff</h3>
-        <router-link href="${Router.prefix}/templates">Templates</router-link>
-        <router-link href="${Router.prefix}/editor">Editor</router-link>
-        <router-link href="${Router.prefix}/blabla">Blabla (Not found)</router-link>
+        <div>
+            <router-link href="/testing">Testing</router-link>
+            <router-link href="/templates">Templates</router-link>
+            <router-link href="/editor">Editor</router-link>
+            <router-link href="/blabla">Blabla (Not found)</router-link>
+
+            <router-link href="/cv-simple">CV Simple</router-link>
+            <router-link href="/cv-octagon">CV Octagon</router-link>
+            <router-link href="/cv-modern">CV Modern</router-link>
+        </div>
+        <custom-button id="button1">Primary</custom-button>
+        <custom-button id="button2" secondary>Secondary</custom-button>
     `;
 
     // language=CSS
@@ -37,9 +42,20 @@ export default class PageHome extends BaseComponent {
         .topbar .logo {
             max-width: 120px;
         }
+
+        custom-button {
+            width: 200px;
+        }
     `;
 
-    script() {
-
+    script = () => {
+        const button1 = this.shadowRoot.getElementById("button1");
+        const button2 = this.shadowRoot.getElementById("button2");
+        button1.addEventListener("click", () => {
+            console.log("Primary");
+        });
+        button2.addEventListener("click", () => {
+            console.log("Secondary");
+        });
     }
 }
