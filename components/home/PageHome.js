@@ -147,7 +147,7 @@ export default class PageHome extends BaseComponent {
             transition: 1s cubic-bezier(0.77, 0, 0.175, 1) transform, 1s cubic-bezier(0.77, 0, 0.175, 1) clip-path, 1s cubic-bezier(0.77, 0, 0.175, 1) opacity;
 
             --content-padding: 30px;
-            --image-height: 200px;
+            --image-height: 300px;
         }
 
 
@@ -176,7 +176,7 @@ export default class PageHome extends BaseComponent {
         header .image-container {
             overflow: hidden;
             width: 100%;
-            height: 200px;
+            height: 300px;
 
             display: flex;
             justify-content: center;
@@ -330,9 +330,9 @@ export default class PageHome extends BaseComponent {
             .infobox {
                 max-width: 800px;
             }
-        }
+        /*}
 
-        @media(min-width: 1400px) {
+        @media(min-width: 1200px) {*/
             .image-row {
                 flex-direction: column;
             }
@@ -350,17 +350,25 @@ export default class PageHome extends BaseComponent {
             }
 
             .infobox {
+                --infobox-large-left-margin: 20px;
                 top: 100px;
-                left: calc(50% + 75px);
+                left: calc(50% + var(--infobox-large-left-margin));
                 /*right: 0;*/
                 height: 100%;
                 max-height: 300px;
-                max-width: 500px;
+                max-width: 430px;
                 margin: 0 10px;
             }
 
             .infobox h1 {
                 font-size: 3.5em;
+            }
+        }
+
+        @media(min-width: 1200px) {
+            .infobox {
+                --infobox-large-left-margin: 75px;
+                max-width: 500px;
             }
         }
     `;
