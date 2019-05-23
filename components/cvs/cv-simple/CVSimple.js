@@ -5,6 +5,7 @@ import simple from "../../../templates/simple.js";
 import theme1 from "../../../templates/theme1.js";
 import EducationItem from "./EducationItem.js";
 import AppendButton from "./AppendButton.js";
+import AppendableComponentList from "../../shared/AppendableComponentList.js";
 
 export default class CVSimple extends BaseComponent {
     static observedAttributes = [];
@@ -13,7 +14,8 @@ export default class CVSimple extends BaseComponent {
         EditableComponent,
         IntroBox,
         EducationItem,
-        AppendButton
+        AppendButton,
+        AppendableComponentList
     ];
 
     // language=HTML
@@ -24,13 +26,8 @@ export default class CVSimple extends BaseComponent {
                 <div class="other">
                     <section class="education">
                         <h1>Uddannelse</h1>
-                        <ul class="education-list">
-                            <li class="education-item" style="display: flex; justify-content: space-between">
-                                <education-item></education-item>
-                            </li>
-                        </ul>
                         <appendable-component-list item-component="${EducationItem.elementName}">
-                            <append-button slot="append-button">    </append-button>
+                            <append-button slot="append-button"></append-button>
                         </appendable-component-list>
                     </section>
                     <section class="experience">
@@ -113,7 +110,8 @@ export default class CVSimple extends BaseComponent {
                 padding: 2em;
             }
             
-            education-item {
+            appendable-component-list {
+                display: block;
                 padding-left: 1em;
             }
 

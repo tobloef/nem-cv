@@ -89,6 +89,7 @@ export default class CVModern extends BaseComponent {
     get css() {
         return `
             header {
+                display: flex;
                 margin-bottom: 50px;
             }
             
@@ -123,6 +124,7 @@ export default class CVModern extends BaseComponent {
                 margin: 100px;
                 justify-content: flex-start;
                 max-width: 400px;
+                flex: 1 1 0px;
             }
 
             .right {
