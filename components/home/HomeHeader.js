@@ -116,13 +116,12 @@ export default class HomeHeader extends BaseComponent {
             header {
                 padding-top: 60px;
                 height: 100vh;
+                max-height: 825px;
                 background: hsl(12, 5%, 80%);
                 background: radial-gradient(circle, hsl(12, 5%, 80%) 0%, hsl(12, 5%, 30%) 100%);
     
                 display: flex;
                 justify-content: center;
-    
-                margin-bottom: 300px;
     
                 position: relative;
             }
@@ -133,7 +132,9 @@ export default class HomeHeader extends BaseComponent {
                 clip-path: none;
                 margin: 10px 0 0 0;
     
-                min-height: 40em;
+                height: calc(100vh - 71px);
+                max-height: calc(825px - 71px);
+                overflow: hidden;
     
                 position: absolute;
                 width: calc(100% - 20px);
@@ -243,7 +244,8 @@ export default class HomeHeader extends BaseComponent {
             }
     
             .fake-content-extra {
-                display: none;
+                margin-top: 10px;
+                display: flex;
             }
     
             .fake-content-extra-col {
@@ -285,7 +287,7 @@ export default class HomeHeader extends BaseComponent {
                 max-width: 550px;
                 background: rgba(0,0,0,0.6);
                 padding: 30px 40px;
-                top: 60vh;
+                top: 50%;
     
                 transform: translateY(100px);
                 opacity: 0;
@@ -334,11 +336,13 @@ export default class HomeHeader extends BaseComponent {
     
             @media(min-width: 1024px) {
                 header {
-                    margin-bottom: 500px;
+                    max-height: unset;
                 }
+                
     
                 .fakecv {
                     max-width: 750px;
+                    max-height: unset;
                 }
     
                 .infobox {
