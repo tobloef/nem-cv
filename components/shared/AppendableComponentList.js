@@ -5,8 +5,6 @@ export default class AppendableComponentList extends BaseComponent {
         "item-component"
     ];
 
-    items = [];
-
     get html() {
         return `
             <div style="display: flex; flex-direction: column;">
@@ -20,17 +18,12 @@ export default class AppendableComponentList extends BaseComponent {
         const slot = this.shadowRoot.querySelector(`slot[name="append-button"]`);
         const appendButton = (slot.assignedNodes() || [])[0];
         appendButton.onAppend = (attributes) => {
+            const list = this.shadowRoot.getElementById("list");
             const newChild = document.createElement(this.itemComponent);
             for (const attribute in attributes) {
                 newChild.setAttribute(attribute, attributes[attribute]);
             }
-            this.items.push(newChild);
-            this.render();
+            list.appendChild(newChild);
         };
-
-        for (const item of this.items) {
-            const list = this.shadowRoot.getElementById("list");
-            list.appendChild(item);
-        }
     }
 }
