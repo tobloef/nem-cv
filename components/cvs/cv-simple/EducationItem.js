@@ -1,6 +1,7 @@
 import EditableComponent from "../../shared/EditableComponent.js";
 import BaseComponent from "../../BaseComponent.js";
 
+
 export default class EducationItem extends BaseComponent {
     static observedAttributes = [];
     usedComponents = [
@@ -21,8 +22,9 @@ export default class EducationItem extends BaseComponent {
         `;
     }
 
-    script = () => {
 
+
+    script = () => {
     };
 
     externalStyles = [];
@@ -38,6 +40,9 @@ export default class EducationItem extends BaseComponent {
             .divider {
                 display: flex;
                 flex-direction: row;
+            }
+            button {
+                display: inline;
             }
         `
     };

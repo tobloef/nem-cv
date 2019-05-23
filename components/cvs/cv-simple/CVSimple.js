@@ -7,6 +7,8 @@ import EducationItem from "./EducationItem.js";
 import AppendButton from "./AppendButton.js";
 import AppendableComponentList from "../../shared/AppendableComponentList.js";
 import ExperienceItem from "./ExperienceItem.js";
+import WorkAreaItem from "./WorkAreaItem.js";
+import RemoveButton from "./RemoveButton.js";
 
 export default class CVSimple extends BaseComponent {
     static observedAttributes = [];
@@ -15,7 +17,9 @@ export default class CVSimple extends BaseComponent {
         IntroBox,
         EducationItem,
         ExperienceItem,
+        WorkAreaItem,
         AppendButton,
+        RemoveButton,
         AppendableComponentList
     ];
 
@@ -29,14 +33,18 @@ export default class CVSimple extends BaseComponent {
                         <h1>Erfaring</h1>
                         <appendable-component-list item-component="${ExperienceItem.elementName}" starting-amount="1">
                             <append-button slot="append-button"></append-button>
+                            <remove-button slot="remove-button"></remove-button>
                         </appendable-component-list>
-                        <ul class="work-areas">
-                        </ul>
+                        <appendable-component-list class="work-areas" item-component="${WorkAreaItem.elementName}" separator=", ">
+                            <append-button slot="append-button"></append-button>
+                            <remove-button slot="remove-button"></remove-button>
+                        </appendable-component-list>
                     </section>
                     <section class="education">
                         <h1>Uddannelse</h1>
                         <appendable-component-list item-component="${EducationItem.elementName}" starting-amount="1">
                             <append-button slot="append-button"></append-button>
+                            <remove-button slot="remove-button"></remove-button>
                         </appendable-component-list>
                     </section>
                 </div>
@@ -112,7 +120,10 @@ export default class CVSimple extends BaseComponent {
             appendable-component-list::part(list-item) {
                 margin-bottom: 0.8em;
             }
-
+            .work-areas::part(container) {
+                display: flex;
+                flex-direction: row;
+            }
         `
     };
 }
