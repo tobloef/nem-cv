@@ -24,6 +24,6 @@ export default class AppendableComponentList extends BaseComponent {
                 newChild.setAttribute(attribute, attributes[attribute]);
             }
             list.appendChild(newChild);
-        }
+        };
     }
 }

@@ -10,33 +10,56 @@ export default class PageTest extends BaseComponent {
         TestComponent
     ];
 
-    externalStyles = [
-        "css/theme1.css"
-    ];
+    currentTheme = "red";
 
     get html() {
         return `
             <h1>PageTest</h1>
+            
             <appendable-component-list item-component="${TestComponent.elementName}">
               <append-button slot="append-button"></append-button>
             </appendable-component-list>
-            <button id="theme-switch">Switch to blue</button>
+            
+            <button id="theme-switch">${this.getButtonText()}</button>
+            <button id="use-theme-size">Use the cool size!</button>
         `;
     };
 
+    getButtonText() {
+        return `Switch theme to ${this.currentTheme === "blue" ? "red" : "blue"}`;
+    }
+
     script = () => {
-        const button = this.shadowRoot.getElementById("theme-switch");
-        button.addEventListener("click", () => {
-            let newStyles = this.externalStyles;
-            if (newStyles.some(s => s.includes("theme1.css"))) {
-                newStyles = newStyles.filter(s => !s.includes("theme1.css"));
-                newStyles.push("css/theme2.css");
-            } else if (newStyles.some(s => s.includes("theme2.css"))) {
-                newStyles = newStyles.filter(s => !s.includes("theme2.css"));
-                newStyles.push("css/theme1.css");
+        const button1 = this.shadowRoot.getElementById("theme-switch");
+        button1.addEventListener("click", () => {
+            if (this.currentTheme === "red") {
+                this.currentTheme = "blue";
+                BaseComponent.colors = `
+                    * {
+                        color: blue;
+                    }
+                `;
+            } else {
+                this.currentTheme = "red";
+                BaseComponent.colors = `
+                    * {
+                        color: red;
+                    }
+                `;
             }
-            this.externalStyles = newStyles;
-            this.render();
+            button1.innerText = this.getButtonText();
+            this.updateStyles();
+        });
+
+        const button2 = this.shadowRoot.getElementById("use-theme-size");
+        button2.addEventListener("click", () => {
+            // language=CSS
+            BaseComponent.template = `
+                :host {
+                    --test-size: 2em;
+                }
+            `;
+            this.updateStyles();
         });
     }
 }

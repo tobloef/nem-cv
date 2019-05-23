@@ -18,6 +18,7 @@ export default class BaseComponent extends HTMLElement {
     connectedCallback() {
         this._defineUsedComponents();
         this._checkForUndefinedComponents();
+        this.updateStyles();
         this.render();
     }
 
@@ -29,7 +30,6 @@ export default class BaseComponent extends HTMLElement {
             } else {
                 this[propName] = this.getAttribute(attrName);
             }
-            this.connectedCallback();
         }
     }
 
@@ -38,13 +38,15 @@ export default class BaseComponent extends HTMLElement {
     }
 
     render() {
-        //console.debug(`Updating DOM of ${this.constructor.name}`);
-        let newHTML = "";
-        if (this.externalStyles != null) {
-            for (const externalStyle of this.externalStyles) {
-                newHTML += `<link rel="stylesheet" href="${externalStyle}">`;
-            }
+        console.debug(`Rendering DOM of ${this.constructor.name}`);
+        this.shadowRoot.innerHTML = this.html;
+        if (this.script != null) {
+            this.script();
         }
+    }
+
+    updateStyles() {
+        console.debug(`Updating styles of ${this.constructor.name}`);
         const adoptedStyleSheets = [];
         if (this.enableResetCSS != null) {
             adoptedStyleSheets.push(resetCSSStyleSheet);
@@ -59,12 +61,6 @@ export default class BaseComponent extends HTMLElement {
             adoptedStyleSheets.push(stringToStyleSheet(this.style));
         }
         this.shadowRoot.adoptedStyleSheets = adoptedStyleSheets;
-        newHTML += this.html;
-
-        this.shadowRoot.innerHTML = newHTML;
-        if (this.script != null) {
-            this.script();
-        }
     }
 
     getContent() {

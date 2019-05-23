@@ -1,13 +1,19 @@
 import BaseComponent from "../../BaseComponent.js";
 
 export default class ProfileImage extends BaseComponent {
-    static observedAttributes = [];
+    static observedAttributes = [
+        "aspect_ratio"
+    ];
     usedComponents = [];
 
     // language=HTML
     get html() {
         return `
-            <img class="profile-picture" src="../../../img/placeholder-person.png" alt="image of you">
+            <div class="square">
+                <img class="profile-picture"
+                     src="../../../img/placeholder-person.png"
+                     alt="image of you">
+            </div>
         `;
     }
 
@@ -36,13 +42,20 @@ export default class ProfileImage extends BaseComponent {
     // language=CSS
     get style() {
         return `
-            :host {
-                padding-top: 100%;
+            .square {
+                width: 100%;
+                position: relative;
+            }
+            .square:after {
+                content: "";
+                display: block;
+                padding-bottom: ${(this.aspect_ratio ? this.aspect_ratio : 1) * 100}%;
             }
             .profile-picture {
+                position: absolute;
+                width: 100%;
+                height: 100%;
                 object-fit: cover;
-                max-width: 100%;
-                height: auto;
             }
         `
     };

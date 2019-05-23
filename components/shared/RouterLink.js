@@ -19,4 +19,17 @@ export default class RouterLink extends BaseComponent {
             return false;
         });
     }
+
+    get style() {
+        // language=CSS
+        return `
+            :host {
+                text-decoration: underline;
+            }
+
+            a {
+                text-decoration: none;
+            }
+        `
+    }
 }
