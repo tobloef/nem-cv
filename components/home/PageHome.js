@@ -16,43 +16,46 @@ export default class PageHome extends BaseComponent {
         <home-header></home-header>
 
         <section class="features">
-            <div class="slide card templates">
-                <div class="split">
-                    <div class="left">
-                        <h2>Vælg mellem <b class="underline">tre</b> <i>forskellige</i> templates</h2>
-                        <div class="seperator"></div>
+            <h2>Derfor skal du vælge os</h2>
+            <div class="cards">
+                <div class="card templates">
+                    <div class="split">
+                        <div class="left">
+                            <h3>Vælg mellem <b class="underline">tre</b> <i>forskellige</i> templates</h3>
+                            <div class="seperator"></div>
+                        </div>
+                        <div class="right">
+                            <img src="/img/template1.png"></img>
+                        </div>
                     </div>
-                    <div class="right">
-                        <img src="/img/template1.png"></img>
-                    </div>
+                    <router-link href="/templates">
+                        <custom-button >
+                            Start nu
+                        </custom-button>
+                    </router-link>
                 </div>
-                <router-link href="/templates">
-                    <custom-button >
-                        Start nu
-                    </custom-button>
-                </router-link>
-            </div>
-            <div class="slide card colors">
-                <div class="split">
-                    <div class="left">
-                        <h2>Vælg farver efter din personlighed</h2>
-                        <div class="seperator"></div>
+                <div class="card colors">
+                    <div class="split">
+                        <div class="left">
+                            <h3>Vælg farver efter din personlighed</h3>
+                            <div class="seperator"></div>
+                        </div>
+                        <div class="right">
+                            <p class="line"><span class="green">GRØN</span><span class="red">RØD</span></p>
+                            <p class="line"><span class="blue">BLÅ</span><span class="yellow">GUL</span></p>
+                            <p class="line"><span class="brown">BRUN</span></p>
+                            <p class="line"><span class="purple">LILLA</span><span class="gray">GRÅ</span></p>
+                            <p class="line"><span class="pink">LYSERØD</span></p>
+                            <p class="line"><span class="bordeaux">BORDEAUX</span></p>
+                            <p class="line"><span class="dark-green">MØRKEGRØN</span></p>
+                        </div>
                     </div>
-                    <div class="right">
-                        <p class="line"><span class="green">GRØN</span><span class="red">RØD</span></p>
-                        <p class="line"><span class="blue">BLÅ</span><span class="yellow">GUL</span></p>
-                        <p class="line"><span class="brown">BRUN</span></p>
-                        <p class="line"><span class="purple">LILLA</span><span class="gray">GRÅ</span></p>
-                        <p class="line"><span class="pink">LYSERØD</span></p>
-                        <p class="line"><span class="bordeaux">BORDEAUX</span></p>
-                        <p class="line"><span class="dark-green">MØRKEGRØN</span></p>
-                    </div>
+                    <router-link href="/templates">
+                        <custom-button >
+                            Start nu
+                        </custom-button>
+                    </router-link>
                 </div>
-                <router-link href="/templates">
-                    <custom-button >
-                        Start nu
-                    </custom-button>
-                </router-link>
             </div>
         </section>
         <footer>
@@ -89,117 +92,195 @@ export default class PageHome extends BaseComponent {
            }
 
            h2 {
+               font-size: 2.5em;
+               line-height: 1.5;
+           }
+
+           h3 {
                font-size: 2em;
                line-height: 1.3;
            }
+
            b {
                font-weight: bold;
            }
+
            i {
                font-style: italic;
            }
+
            .underline {
                text-decoration: underline;
            }
+
            section.features {
+               display: flex;
+               flex-direction: column;
+               align-items: center;
                padding: 15px 50px;
-               padding-top: 100px;
                background-color: hsl(77, 30%, 92%);
            }
+
+           section.features h2 {
+               text-align: center;
+               margin-bottom: 20px;
+           }
+
            section.features router-link {
                text-decoration: none;
            }
+
            section.features router-link custom-button {
                display: inline-block;
                --padding-x: 30px;
                margin-top: 10px;
            }
+
+           .cards {
+               display: flex;
+               flex-direction: column;
+               max-width: 750px;
+           }
+
            .card {
                background: white;
                padding: 10px 30px;
                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
            }
-           .slide h2 {
+
+           .card h3 {
                margin-bottom: 20px;
            }
-           .slide .split {
+
+           .card .split {
                display: flex;
                flex-direction: column;
            }
-           .slide .left,
-           .slide .right {
+
+           .card .left,
+           .card .right {
                width: 100%;
            }
-           .slide.templates img {
+
+           .card.templates img {
                width: 100%;
            }
+
            .seperator {
                width: 100%;
                height: 3px;
                background: black;
            }
-           /* temp*/
-           .slide.colors {
+
+           .card.colors {
                margin-top: 30px;
            }
-           .slide.colors .line {
+
+           .card.colors .line {
                display: flex;
                justify-content: space-between;
                font-size: 10vw;
            }
-           .slide.colors .green {
+
+           .card.colors .green {
                color: #69b168;
            }
-           .slide.colors .red {
+
+           .card.colors .red {
                color: #F86868;
            }
-           .slide.colors .blue {
+
+           .card.colors .blue {
                color: #7aacb3;
            }
-           .slide.colors .yellow {
+
+           .card.colors .yellow {
                color: #FDF883;
            }
-           .slide.colors .brown {
+
+           .card.colors .brown {
                color: #875820;
            }
-           .slide.colors .purple {
+
+           .card.colors .purple {
                color: #AB80A7;
            }
-           .slide.colors .gray {
+
+           .card.colors .gray {
                color: #a1a1a1;
            }
-           .slide.colors .pink {
+
+           .card.colors .pink {
                color: #ff50a3;
            }
-           .slide.colors .bordeaux {
+
+           .card.colors .bordeaux {
                color: #8B0817;
            }
-           .slide.colors .dark-green {
+
+           .card.colors .dark-green {
                color: #066515;
            }
+
            footer {
                background-color: black;
                color: white;
                padding: 60px;
            }
-           @media(min-width: 600px) {
-               .slide.templates {
+
+           @media(min-width: 650px and max-width:750px) {
+               .card.templates {
                    padding: 50px;
                }
-               .slide.templates .split {
+
+               .card .split {
                    flex-direction: row;
                }
-               .slide.templates .left {
+
+               .card .left {
                    width: 50%;
                }
-               .slide.templates .right {
+
+               .card .right {
                    padding-left: 50px;
                }
+
                section.features router-link custom-button {
                    --padding-x: 50px;
                }
-               .slide.colors .line {
+
+               .card.colors .line {
                    font-size: 4em;
+               }
+           }
+
+           @media(min-width: 750px) {
+               .cards {
+                   flex-direction: row;
+               }
+
+               .card {
+                   width: 50%;
+               }
+
+               .card.templates {
+                   margin-right: 20px;
+               }
+
+               .card.colors {
+                   margin-top: 0px;
+               }
+
+               .card.colors .line {
+                   font-size: 3em;
+               }
+           }
+
+           @media(min-width: 1200px) {
+               .cards {
+                   display: flex;
+                   flex-direction: column;
+                   max-width: 1000px;
                }
            }
         `;

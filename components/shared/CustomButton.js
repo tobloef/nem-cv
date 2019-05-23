@@ -18,6 +18,9 @@ export default class CustomButton extends BaseComponent {
                 --hover-background-color: var(--border-color);
                 --hover-text-color: white;
                 --border-thickness: 2px;
+
+                --padding-y: 14px;
+                --padding-x: 28px;
             }
 
             button {
@@ -25,7 +28,7 @@ export default class CustomButton extends BaseComponent {
                 border: var(--border-thickness) solid var(--border-color);
                 background-color: transparent;
                 color: var(--text-color);
-                padding: 14px 28px;
+                padding: var(--padding-y) var(--padding-x);
                 cursor: pointer;
                 font-size: 0.8em;
             }
