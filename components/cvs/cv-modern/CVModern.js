@@ -8,6 +8,12 @@ export default class CVModern extends BaseComponent {
     // language=HTML
     get html() {
         return `
+            <h1><slot></slot></h1>
+            <ul>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+            </ul>
             
         `;
     }
