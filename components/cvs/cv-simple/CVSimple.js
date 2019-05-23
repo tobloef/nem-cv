@@ -64,6 +64,9 @@ export default class CVSimple extends BaseComponent {
     // language=CSS
     get style() {
         return `
+            :root {
+                --some-color: red;
+            }
             editable-component:empty {
             }
 
