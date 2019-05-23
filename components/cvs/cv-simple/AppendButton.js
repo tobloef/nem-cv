@@ -32,6 +32,7 @@ export default class AppendButton extends BaseComponent {
     get style() {
         return `
             button {
+                
                 --dia: 1.4em;
                 border: 2px solid black;
                 border-radius: 50%;
