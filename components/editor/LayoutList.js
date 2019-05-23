@@ -25,8 +25,6 @@ export default class LayoutList extends BaseComponent {
             element.setAttribute("name", item.name);
             element.setAttribute("image", item.image);
             element.setAttribute("description", item.description);
-            element.onSelect = this.handleSelect;
-            element.onExample = this.handleExample;
             this.shadowRoot.appendChild(element);
         }
     };

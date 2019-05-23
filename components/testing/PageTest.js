@@ -1,65 +1,47 @@
 import BaseComponent from "../BaseComponent.js";
-import AppendableComponentList from "../shared/AppendableComponentList.js";
-import TestAppendButton from "../shared/TestAppendButton.js";
-import TestComponent from "../shared/TestComponent.js";
+import ContentGetTest from "./ContentGetTest.js";
 
 export default class PageTest extends BaseComponent {
     usedComponents = [
-        AppendableComponentList,
-        TestAppendButton,
-        TestComponent
+        ContentGetTest
     ];
-
-    currentTheme = "red";
 
     get html() {
         return `
-            <h1>PageTest</h1>
-            
-            <appendable-component-list item-component="${TestComponent.elementName}">
-              <test-append-button slot="append-button"></test-append-button>
-            </appendable-component-list>
-            
-            <button id="theme-switch">${this.getButtonText()}</button>
-            <button id="use-theme-size">Use the cool size!</button>
+            <div>
+                <content-get-test content-key="name" content-type="custom">Tobias Løfgren</content-get-test>
+                <div content-key="experiences" content-type="array">
+                    <div>
+                        <div content-type="object">
+                            <content-get-test content-key="title" content-type="custom">Apple picker</content-get-test>
+                            <content-get-test content-key="company" content-type="custom">Apple</content-get-test>
+                        </div>
+                        <div content-type="object">
+                            <content-get-test content-key="title" content-type="custom">Janitor</content-get-test>
+                            <content-get-test content-key="company" content-type="custom">Google</content-get-test>
+                        </div>
+                        <div content-type="object">
+                            <content-get-test content-key="title" content-type="custom">CEO</content-get-test>
+                            <content-get-test content-key="company" content-type="custom">Tobias Løfgren</content-get-test>
+                        </div>
+                    </div>
+                </div>
+                <content-get-test content-key="test" content-type="custom">Cool!</content-get-test>
+            </div> 
+            <button id="get-content">Get the content</button>           
         `;
     };
 
-    getButtonText() {
-        return `Switch theme to ${this.currentTheme === "blue" ? "red" : "blue"}`;
-    }
+    getContent = () => {
+        const obj = {};
+        super.getContent(obj);
+        return obj;
+    };
 
     script = () => {
-        const button1 = this.shadowRoot.getElementById("theme-switch");
-        button1.addEventListener("click", () => {
-            if (this.currentTheme === "red") {
-                this.currentTheme = "blue";
-                BaseComponent.colors = `
-                    * {
-                        color: blue;
-                    }
-                `;
-            } else {
-                this.currentTheme = "red";
-                BaseComponent.colors = `
-                    * {
-                        color: red;
-                    }
-                `;
-            }
-            button1.innerText = this.getButtonText();
-            this.updateStyles();
-        });
-
-        const button2 = this.shadowRoot.getElementById("use-theme-size");
-        button2.addEventListener("click", () => {
-            // language=CSS
-            BaseComponent.template = `
-                :host {
-                    --test-size: 2em;
-                }
-            `;
-            this.updateStyles();
+        const button = this.shadowRoot.getElementById("get-content");
+        button.addEventListener("click", () => {
+            console.log(this.getContent({}));
         });
     }
 }

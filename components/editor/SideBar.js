@@ -21,13 +21,14 @@ export default class SideBar extends BaseComponent {
                     <color-list></color-list>
                 </div>
             </div>
-            <side-toggle open></side-toggle>
+            <side-toggle close></side-toggle>
         `;
     }
 
     script = () => {
         const toggle = this.shadowRoot.querySelector("side-toggle");
         toggle.addEventListener("click", () => {
+            // Get valueless attribute "open" and toggle it based on if it is there
             const open = this.getAttribute("open");
             if (open != null) {
                 this.removeAttribute("open");

@@ -63,15 +63,41 @@ export default class BaseComponent extends HTMLElement {
         this.shadowRoot.adoptedStyleSheets = styleSheets;
     }
 
-    getContent() {
-        let obj = {};
-        for (const child of this.shadowRoot.children) {
-            const contentKey = child.getAttribute("content-key");
-            if (contentKey != null) {
+    getContent(content) {
+        this._recurseContent(content, this.shadowRoot);
+    }
 
+    _recurseContent(content, element) {
+        for (const child of element.children) {
+            let newContent = null;
+            const contentType = child.getAttribute("content-type");
+            if (contentType != null) {
+                switch (contentType) {
+                    case "object":
+                        newContent = {};
+                        this._recurseContent(newContent, child);
+                        break;
+                    case "array":
+                        newContent = [];
+                        this._recurseContent(newContent, child);
+                        break;
+                    case "custom":
+                        newContent = child.getContent();
+                        break;
+                    default:
+                        throw new Error(`Unsupported content-type ${contentType}`);
+                }
+                const contentKey = child.getAttribute("content-key");
+                if (contentKey != null) {
+                    content[contentKey] = newContent;
+                } else if (content.push != null) {
+                    content.push(newContent);
+                }
             }
+            this._recurseContent(content, child);
         }
     }
+
 
     static get template() {
         return BaseComponent._template;

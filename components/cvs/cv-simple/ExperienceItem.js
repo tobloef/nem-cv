@@ -1,8 +1,7 @@
 import EditableComponent from "../../shared/EditableComponent.js";
 import BaseComponent from "../../BaseComponent.js";
 
-
-export default class EducationItem extends BaseComponent {
+export default class ExperienceItem extends BaseComponent {
     static observedAttributes = [];
     usedComponents = [
         EditableComponent
@@ -12,7 +11,7 @@ export default class EducationItem extends BaseComponent {
     get html() {
         return `
             <span class="divider">
-                <editable-component placeholder="Uddannelsessted" element="div"></editable-component> -
+                <editable-component placeholder="Firma" element="div"></editable-component> -
                 <editable-component placeholder="Titel" element="div"></editable-component>
             </span>
             <span class="divider">
@@ -22,9 +21,8 @@ export default class EducationItem extends BaseComponent {
         `;
     }
 
-
-
     script = () => {
+
     };
 
     externalStyles = [];
@@ -40,9 +38,6 @@ export default class EducationItem extends BaseComponent {
             .divider {
                 display: flex;
                 flex-direction: row;
-            }
-            button {
-                display: inline;
             }
         `
     };

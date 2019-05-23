@@ -28,18 +28,20 @@ export default class CVModern extends BaseComponent {
             </header>
             
             <section class="about">
-                <div class = "color2"></div>
-                <div class="aboutfront">
-                    <h2>OM MIG</h2>
-                    <p class="text">Tekst om mig</p>
-            
-                    <h2>BRANCHER</h2>
-                    <ul class = "listindustry">
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
-                    </ul>
-                    </div>
+                <div class="content">
+                    <div class="aboutfront">
+                        <h2>OM MIG</h2>
+                        <p class="text">Tekst om mig</p>
+
+                        <h2>BRANCHER</h2>
+                        <ul class = "listindustry">
+                            <li>1</li>
+                            <li>2</li>
+                            <li>3</li>
+                        </ul>
+                    </div>    
+                </div>
+                
             </section>
             
             <section class="education">
@@ -58,7 +60,7 @@ export default class CVModern extends BaseComponent {
             </section>
             
             <section class="experience">
-                <div class="color2"></div>
+                <div class="color3"></div>
                 <div class="experiencefront">
                     <h2>ERFARING</h2>
                     <div class="experiences">
@@ -87,6 +89,7 @@ export default class CVModern extends BaseComponent {
     get css() {
         return `
             header {
+                display: flex;
                 margin-bottom: 50px;
             }
             
@@ -95,10 +98,10 @@ export default class CVModern extends BaseComponent {
 
             h2 {
             }
-
+            
             .about {
                 display: flex;
-                flex-direction: column;
+                justify-content: flex-end;
                 margin-bottom: 50px;
             }
 
@@ -121,6 +124,7 @@ export default class CVModern extends BaseComponent {
                 margin: 100px;
                 justify-content: flex-start;
                 max-width: 400px;
+                flex: 1 1 0px;
             }
 
             .right {
@@ -140,7 +144,11 @@ export default class CVModern extends BaseComponent {
                 position: relative;
             }
 
-            .color2 {
+            .about .content {
+                background-color: #E4E3D9;
+            }
+            
+            .color3{
                 height: 200px;
                 width: 300px;
                 background-color: #E4E3D9;
@@ -148,7 +156,7 @@ export default class CVModern extends BaseComponent {
             }
 
             .aboutfront {
-                position: absolute;
+                /*position: absolute;*/
             }
 
             .experiencefront {
@@ -178,10 +186,6 @@ export default class CVModern extends BaseComponent {
             .oneexperience {
                 display: flex;
                 justify-content: center;
-            }
-            profile-image {
-                display: block;
-                max-width: 400px;
             }
         `
     };

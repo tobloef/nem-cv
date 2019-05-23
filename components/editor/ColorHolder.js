@@ -14,10 +14,10 @@ export default class ColorHolder extends BaseComponent {
     // language=HTML
     get html() {
         return `
-            <div id="outer" role="button">
-                <p>T</p>
-                <div id="accent"/>
-            </div>
+	        <div id="outer" role="button">
+		        <p>T</p>
+		        <div id="accent"></div>
+	        </div>
         `;
     }
 

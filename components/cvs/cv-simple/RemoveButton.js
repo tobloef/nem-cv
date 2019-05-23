@@ -1,25 +1,23 @@
 import BaseComponent from "../../BaseComponent.js";
 
-export default class AppendButton extends BaseComponent {
+export default class RemoveButton extends BaseComponent {
     static observedAttributes = [];
     usedComponents = [];
 
     // language=HTML
     get html() {
         return `
-            <button id="button">+</button>
+            <button id="button">-</button>
         `;
     }
 
     script = () => {
         const button = this.shadowRoot.getElementById("button");
         button.addEventListener("click", () => {
-            if (this.onAppend == null) {
+            if (this.onRemove == null) {
                 return;
             }
-
-            const attributes = {};
-            this.onAppend(attributes);
+            this.onRemove();
         });
     }
 
@@ -29,7 +27,6 @@ export default class AppendButton extends BaseComponent {
     get css() {
         return `
             button {
-                
                 --dia: 2em;
                 border: 5px solid black;
                 border-radius: 50%;

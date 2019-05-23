@@ -30,10 +30,14 @@ export default class LayoutDescriptor extends BaseComponent {
 
     script = () => {
         const selectButton = this.shadowRoot.getElementById("select");
-        selectButton.addEventListener("click", () => this.onSelect(this.themeId));
+        selectButton.addEventListener("click", () => {
+            this.dispatchEvent(new CustomEvent("select-click", {bubbles: true, composed:true, detail: this.themeId}));
+        });
 
         const exampleButton = this.shadowRoot.getElementById("example");
-        exampleButton.addEventListener("click", () => this.onExample(this.themeId));
+        exampleButton.addEventListener("click", () => {
+            this.dispatchEvent(new CustomEvent("example-click", {bubbles: true, composed:true, detail: this.themeId}));
+        });
     };
 
     externalStyles = [];

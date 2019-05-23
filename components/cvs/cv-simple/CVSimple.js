@@ -5,15 +5,22 @@ import simple from "../../../templates/simple.js";
 import theme1 from "../../../templates/theme1.js";
 import EducationItem from "./EducationItem.js";
 import AppendButton from "./AppendButton.js";
+import AppendableComponentList from "../../shared/AppendableComponentList.js";
+import ExperienceItem from "./ExperienceItem.js";
+import WorkAreaItem from "./WorkAreaItem.js";
+import RemoveButton from "./RemoveButton.js";
 
 export default class CVSimple extends BaseComponent {
     static observedAttributes = [];
 
     usedComponents = [
-        EditableComponent,
         IntroBox,
         EducationItem,
-        AppendButton
+        ExperienceItem,
+        WorkAreaItem,
+        AppendButton,
+        RemoveButton,
+        AppendableComponentList
     ];
 
     // language=HTML
@@ -22,35 +29,23 @@ export default class CVSimple extends BaseComponent {
             <main>
                 <intro-box></intro-box>
                 <div class="other">
-                    <section class="education">
-                        <h1>Uddannelse</h1>
-                        <ul class="education-list">
-                            <li class="education-item" style="display: flex; justify-content: space-between">
-                                <education-item></education-item>
-                            </li>
-                        </ul>
-                        <appendable-component-list item-component="${EducationItem.elementName}">
-                            <append-button slot="append-button">    </append-button>
-                        </appendable-component-list>
-                    </section>
                     <section class="experience">
                         <h1>Erfaring</h1>
-                        <ul class="experience-list">
-                            <li class="experience-item" style="display: flex; justify-content: space-between">
-                                <div class="divider">
-                                    <editable-component placeholder="Firma" element="div"></editable-component>
-                                    <div> -</div>
-                                    <editable-component placeholder="Titel" element="div"></editable-component>
-                                </div>
-                                <div class="divider">
-                                    <editable-component placeholder="Startår" element="div"></editable-component>
-                                    <div> -</div>
-                                    <editable-component placeholder="Slutår" element="div"></editable-component>
-                                </div>
-                            </li>
-                        </ul>
-                        <ul class="work-areas">
-                        </ul>
+                        <appendable-component-list item-component="${ExperienceItem.elementName}" starting-amount="1">
+                            <append-button slot="append-button"></append-button>
+                            <remove-button slot="remove-button"></remove-button>
+                        </appendable-component-list>
+                        <appendable-component-list class="work-areas" item-component="${WorkAreaItem.elementName}" separator=", ">
+                            <append-button slot="append-button"></append-button>
+                            <remove-button slot="remove-button"></remove-button>
+                        </appendable-component-list>
+                    </section>
+                    <section class="education">
+                        <h1>Uddannelse</h1>
+                        <appendable-component-list item-component="${EducationItem.elementName}" starting-amount="1">
+                            <append-button slot="append-button"></append-button>
+                            <remove-button slot="remove-button"></remove-button>
+                        </appendable-component-list>
                     </section>
                 </div>
             </main>
@@ -101,6 +96,7 @@ export default class CVSimple extends BaseComponent {
                 font-family: var(--h1);
                 font-size: var(--h1-size);
                 color: var(--font);
+                margin-bottom: 0.5em;
             }
             .education {
                 background-color: darkgreen;
@@ -113,10 +109,21 @@ export default class CVSimple extends BaseComponent {
                 padding: 2em;
             }
             
-            education-item {
+            appendable-component-list {
+                display: block;
                 padding-left: 1em;
             }
-
+            
+            appendable-component-list::part(list) {
+                margin-bottom: 0.8em;
+            }
+            appendable-component-list::part(list-item) {
+                margin-bottom: 0.8em;
+            }
+            .work-areas::part(container) {
+                display: flex;
+                flex-direction: row;
+            }
         `
     };
 }
