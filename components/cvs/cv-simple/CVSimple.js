@@ -59,8 +59,8 @@ export default class CVSimple extends BaseComponent {
     }
 
     script = () => {
-        BaseComponent.template = stringToStyleSheet(simple);
-        BaseComponent.color = stringToStyleSheet(theme1);
+        BaseComponent.template = simple;
+        BaseComponent.colors = theme1;
 
     };
 

@@ -28,7 +28,7 @@ export default class IntroBox extends BaseComponent {
                     </li>
                 </ul>
                 <h1 class="s-h1">Om mig</h1>
-                <editable-component element="p" placeholder="Her kan du skrive en kort beskrivelse af dig selv."/>
+                <editable-component class="description" element="p" placeholder="Her kan du skrive en kort beskrivelse af dig selv."/>
             </section>
         `;
     }
@@ -58,7 +58,7 @@ export default class IntroBox extends BaseComponent {
                 font-size: 2em;
                 margin-bottom: 0.5em;
                 font-family: var(--h1);
-                color: var(--accent);
+                color: var(--font);
             }
             
             profile-image {
@@ -70,6 +70,10 @@ export default class IntroBox extends BaseComponent {
                 list-style-type: disc;
                 padding-left: 1.6em;
                 margin-bottom: 1.5em;
+            }
+            
+            li editable-component, .description{
+                font-family: var(--p);
             }
         `
     };

@@ -14,29 +14,42 @@ export default class PageTest extends BaseComponent {
         "css/theme1.css"
     ];
 
+    currentTheme = "red";
+
     get html() {
         return `
             <h1>PageTest</h1>
             <appendable-component-list item-component="${TestComponent.elementName}">
               <append-button slot="append-button"></append-button>
             </appendable-component-list>
-            <button id="theme-switch">Switch to blue</button>
+            <button id="theme-switch">${this.getButtonText()}</button>
         `;
     };
+
+    getButtonText() {
+        return `Switch theme to ${this.currentTheme === "blue" ? "red" : "blue"}`;
+    }
 
     script = () => {
         const button = this.shadowRoot.getElementById("theme-switch");
         button.addEventListener("click", () => {
-            let newStyles = this.externalStyles;
-            if (newStyles.some(s => s.includes("theme1.css"))) {
-                newStyles = newStyles.filter(s => !s.includes("theme1.css"));
-                newStyles.push("css/theme2.css");
-            } else if (newStyles.some(s => s.includes("theme2.css"))) {
-                newStyles = newStyles.filter(s => !s.includes("theme2.css"));
-                newStyles.push("css/theme1.css");
+            if (this.currentTheme === "red") {
+                this.currentTheme = "blue";
+                BaseComponent.colors = `
+                    * {
+                        color: blue;
+                    }
+                `;
+            } else {
+                this.currentTheme = "red";
+                BaseComponent.colors = `
+                    * {
+                        color: red;
+                    }
+                `;
             }
-            this.externalStyles = newStyles;
-            this.render();
+            button.innerText = this.getButtonText();
+            this.updateStyles();
         });
     }
 }

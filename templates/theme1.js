@@ -3,7 +3,7 @@ const style = `
     :host{
         --font: black;
         --background: white;
-        --accent: purple;
+        --accent: gray;
     }
 `;
 
