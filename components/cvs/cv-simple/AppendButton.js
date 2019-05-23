@@ -14,10 +14,12 @@ export default class AppendButton extends BaseComponent {
     script = () => {
         const button = this.shadowRoot.getElementById("button");
         button.addEventListener("click", () => {
-            console.log()
             if (this.onAppend == null) {
                 return;
             }
+
+            const attributes = {};
+            this.onAppend(attributes);
         });
     }
 

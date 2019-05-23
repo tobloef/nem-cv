@@ -2,7 +2,8 @@ import BaseComponent from "../BaseComponent.js";
 
 export default class AppendableComponentList extends BaseComponent {
     static observedAttributes = [
-        "item-component"
+        "item-component",
+        "starting-amount"
     ];
 
     get html() {
