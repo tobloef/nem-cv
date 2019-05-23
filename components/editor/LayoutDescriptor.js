@@ -1,4 +1,5 @@
 import BaseComponent from "../BaseComponent.js";
+import CustomButton from "../shared/CustomButton.js";
 
 export default class LayoutDescriptor extends BaseComponent {
     static observedAttributes = [
@@ -8,7 +9,9 @@ export default class LayoutDescriptor extends BaseComponent {
         "description"
     ];
 
-    usedComponents = [];
+    usedComponents = [
+        CustomButton
+    ];
 
     // language=HTML
     get html() {
@@ -19,52 +22,45 @@ export default class LayoutDescriptor extends BaseComponent {
             <h1>${this.name}</h1>
             <p>${this.description}</p>
             <div id="buttons">
-                <button id="select">Vælg tema</button>
-                <button id="example">Se eksempel</button>
+                <custom-button id="select">Vælg tema</custom-button>
+                <custom-button secondary id="example">Se eksempel</custom-button>
             </div>
         `;
     }
 
     script = () => {
         const selectButton = this.shadowRoot.getElementById("select");
-        selectButton.addEventListener("click", () => this.onSelect(this.themeId));
+        selectButton.addEventListener("click", () => {
+            this.dispatchEvent(new CustomEvent("select-click", {bubbles: true, composed:true, detail: this.themeId}));
+        });
 
         const exampleButton = this.shadowRoot.getElementById("example");
-        exampleButton.addEventListener("click", () => this.onExample(this.themeId));
+        exampleButton.addEventListener("click", () => {
+            this.dispatchEvent(new CustomEvent("example-click", {bubbles: true, composed:true, detail: this.themeId}));
+        });
     };
 
     externalStyles = [];
 
     // language=CSS
     get css() {
-        return `
-            @media(max-width: 700px) {
-                :host {
-                    padding: 3em 0 2em 0;
-                    margin: 0 0.5em;
-                }
-            }
-            
-            @media(min-width: 700px) {
-                :host {
-                    margin: 2em;
-                }
-            }
-            
+        return `            
             :host {
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-start;
+                font-family: 'Open Sans', sans-serif;
             }
             
             #buttons {
                 display: flex;
                 justify-content: space-between;
+                font-size: 1.5rem;
             }
             
             #image {
                 padding: 2px;
-                margin: 0 0 0.5rem 0;
+                margin: 0 0 1rem 0;
                 border: 1px solid #aaa;
             }
             
@@ -74,8 +70,12 @@ export default class LayoutDescriptor extends BaseComponent {
             }
             
             h1, p {
-                margin: 0 0 0.5rem 0;
+                margin: 0 0 1rem 0;
                 padding: 0;
+            }
+            
+            h1 {
+                font-size: 2rem;
             }
         `
     };
