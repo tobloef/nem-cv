@@ -28,7 +28,7 @@ export default class ColorList extends BaseComponent {
     externalStyles = [];
 
     // language=CSS
-    get style() {
+    get css() {
         return `
             :host {
                 display: flex;

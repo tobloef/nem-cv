@@ -63,7 +63,7 @@ export default class CVSimple extends BaseComponent {
     externalStyles = [];
 
     // language=CSS
-    get style() {
+    get css() {
         return `
             body {
                 margin: 0;

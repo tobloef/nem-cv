@@ -26,7 +26,7 @@ export default class AppendButton extends BaseComponent {
     externalStyles = [];
 
     // language=CSS
-    get style() {
+    get css() {
         return `
             button {
                 

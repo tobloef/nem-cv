@@ -74,7 +74,7 @@ export default class EditableComponent extends BaseComponent {
     };
 
     // language=CSS
-    get style() {
+    get css() {
         return `
             .empty-text {
                 color: #aaa;
