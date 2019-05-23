@@ -1,12 +1,12 @@
 import BaseComponent from "../BaseComponent.js";
 import AppendableComponentList from "../shared/AppendableComponentList.js";
-import AppendButton from "../shared/AppendButton.js";
+import TestAppendButton from "../shared/TestAppendButton.js";
 import TestComponent from "../shared/TestComponent.js";
 
 export default class PageTest extends BaseComponent {
     usedComponents = [
         AppendableComponentList,
-        AppendButton,
+        TestAppendButton,
         TestComponent
     ];
 
@@ -17,7 +17,7 @@ export default class PageTest extends BaseComponent {
             <h1>PageTest</h1>
             
             <appendable-component-list item-component="${TestComponent.elementName}">
-              <append-button slot="append-button"></append-button>
+              <test-append-button slot="append-button"></test-append-button>
             </appendable-component-list>
             
             <button id="theme-switch">${this.getButtonText()}</button>

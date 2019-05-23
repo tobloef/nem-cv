@@ -2,15 +2,18 @@ import BaseComponent from "../../BaseComponent.js";
 import EditableComponent from "../../shared/EditableComponent.js";
 import IntroBox from "./IntroBox.js";
 import simple from "../../../templates/simple.js";
-import {stringToStyleSheet} from "../../../lib/stylesheet-utils.js";
 import theme1 from "../../../templates/theme1.js";
+import EducationItem from "./EducationItem.js";
+import AppendButton from "./AppendButton.js";
 
 export default class CVSimple extends BaseComponent {
     static observedAttributes = [];
 
     usedComponents = [
         EditableComponent,
-        IntroBox
+        IntroBox,
+        EducationItem,
+        AppendButton
     ];
 
     // language=HTML
@@ -23,16 +26,12 @@ export default class CVSimple extends BaseComponent {
                         <h1>Uddannelse</h1>
                         <ul class="education-list">
                             <li class="education-item" style="display: flex; justify-content: space-between">
-					<span class="divider">
-						<editable-component placeholder="Uddannelsessted" element="div"></editable-component> -
-						<editable-component placeholder="Titel" element="div"></editable-component>
-					</span>
-                                <span class="divider">
-						<editable-component placeholder="Startår" element="div"></editable-component> -
-						<editable-component placeholder="Slutår" element="div"></editable-component>
-					</span>
+                                <education-item></education-item>
                             </li>
                         </ul>
+                        <appendable-component-list item-component="${EducationItem.elementName}">
+                            <append-button slot="append-button">    </append-button>
+                        </appendable-component-list>
                     </section>
                     <section class="experience">
                         <h1>Erfaring</h1>
@@ -59,8 +58,9 @@ export default class CVSimple extends BaseComponent {
     }
 
     script = () => {
-        BaseComponent.template = stringToStyleSheet(simple);
-        BaseComponent.color = stringToStyleSheet(theme1);
+        BaseComponent.template = simple;
+        BaseComponent.colors = theme1;
+
     };
 
     externalStyles = [];
@@ -68,15 +68,6 @@ export default class CVSimple extends BaseComponent {
     // language=CSS
     get css() {
         return `
-            h1 {
-                font-family: var(--h1);
-            }
-            h2 {
-                font-family: var(--h2);
-            }
-            p {
-                font-family: var(--p);
-            }
             body {
                 margin: 0;
             }
@@ -107,12 +98,23 @@ export default class CVSimple extends BaseComponent {
                 max-height: 50vh;
             }
             .other section h1 {
+                font-family: var(--h1);
+                font-size: var(--h1-size);
+                color: var(--font);
             }
             .education {
                 background-color: darkgreen;
             }
             .experience {
                 background-color: rebeccapurple;
+            }
+            
+            .education, .experience {
+                padding: 2em;
+            }
+            
+            education-item {
+                padding-left: 1em;
             }
 
         `
