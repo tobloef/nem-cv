@@ -1,37 +1,56 @@
 import BaseComponent from "../BaseComponent.js";
 import RouterLink from "../shared/RouterLink.js";
 import CustomButton from "../shared/CustomButton.js";
+import wait from "../../lib/wait.js";
+import HomeHeader from './HomeHeader.js';
 
 export default class PageHome extends BaseComponent {
     usedComponents = [
-        RouterLink,
-        CustomButton
+        RouterLink, HomeHeader, CustomButton
     ];
+
+    html = `
+        <div class="topbar">
+            <img class="logo" src="/img/logo_white.svg"></img>
+        </div>
+        <home-header></home-header>
+        <div>
+            <router-link href="/testing">Testing</router-link>
+            <router-link href="/templates">Templates</router-link>
+            <router-link href="/editor">Editor</router-link>
+            <router-link href="/blabla">Blabla (Not found)</router-link>
+
+            <router-link href="/cv-simple">CV Simple</router-link>
+            <router-link href="/cv-octagon">CV Octagon</router-link>
+            <router-link href="/cv-modern">CV Modern</router-link>
+        </div>
+        <custom-button id="button1">Primary</custom-button>
+        <custom-button id="button2" secondary>Secondary</custom-button>
+    `;
 
     // language=CSS
     style = `
+        :host {
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .topbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 10;
+            padding: 20px;
+        }
+
+        .topbar .logo {
+            max-width: 120px;
+        }
+
         custom-button {
             width: 200px;
         }
     `;
-
-    get html() {
-        return `
-            <h1>PageHome</h1>
-            <div>
-              <router-link href="/testing">Testing</router-link>
-              <router-link href="/templates">Templates</router-link>
-              <router-link href="/editor">Editor</router-link>
-              <router-link href="/blabla">Blabla (Not found)</router-link>
-
-              <router-link href="/cv-simple">CV Simple</router-link>
-              <router-link href="/cv-octagon">CV Octagon</router-link>
-              <router-link href="/cv-modern">CV Modern</router-link>
-            </div>
-            <custom-button id="button1">Primary</custom-button>
-            <custom-button id="button2" secondary>Secondary</custom-button>
-        `;
-    };
 
     script = () => {
         const button1 = this.shadowRoot.getElementById("button1");
@@ -41,6 +60,6 @@ export default class PageHome extends BaseComponent {
         });
         button2.addEventListener("click", () => {
             console.log("Secondary");
-        })
+        });
     }
 }
