@@ -70,9 +70,10 @@ export default class CVSimple extends BaseComponent {
     script = () => {
         BaseComponent.template = simple;
         BaseComponent.colors = theme1;
-        setTimeout(() => {
-            console.log(this.getContent());
-        }, 2000);
+        setInterval(() => {
+            const content = this.getContent();
+            localStorage.setItem("cv-data", content);
+        }, 5000);
     };
 
     getContent = () => {
