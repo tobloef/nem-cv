@@ -26,5 +26,8 @@ export default class AppendableComponentList extends BaseComponent {
             }
             list.appendChild(newChild);
         };
+        for (let i = 0; i < (this.startingAmount || 0); i++) {
+            appendButton.onAppend([])
+        }
     }
 }

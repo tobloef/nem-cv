@@ -26,7 +26,7 @@ export default class CVSimple extends BaseComponent {
                 <div class="other">
                     <section class="education">
                         <h1>Uddannelse</h1>
-                        <appendable-component-list item-component="${EducationItem.elementName}">
+                        <appendable-component-list item-component="${EducationItem.elementName}" starting-amount="1">
                             <append-button slot="append-button"></append-button>
                         </appendable-component-list>
                     </section>
