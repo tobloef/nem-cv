@@ -7,7 +7,7 @@ export default class RemoveButton extends BaseComponent {
     // language=HTML
     get html() {
         return `
-            <button id="button" >-</button>
+            <img src="../../../img/minus-outline.svg" id="button"/> 
         `;
     }
 
@@ -26,16 +26,17 @@ export default class RemoveButton extends BaseComponent {
     // language=CSS
     get css() {
         return `
-            button {
-                --dia: 2em;
-                border: 5px solid black;
-                border-radius: 50%;
-                text-align: center;
-                vertical-align: center;
-                font-size: 1.5em;
-                font-weight: bolder;
+            #button{
+                --dia: 1.5em;
                 height: var(--dia);
                 width: var(--dia);
+                border: none;
+                background: none;
+            }
+            #button:hover {
+
+            }
+            #button:active {
             }
         `
     };

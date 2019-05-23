@@ -9,6 +9,7 @@ import AppendableComponentList from "../../shared/AppendableComponentList.js";
 import ExperienceItem from "./ExperienceItem.js";
 import WorkAreaItem from "./WorkAreaItem.js";
 import RemoveButton from "./RemoveButton.js";
+import ListButton from "./ListButton.js";
 
 export default class CVSimple extends BaseComponent {
     static observedAttributes = [];
@@ -18,8 +19,7 @@ export default class CVSimple extends BaseComponent {
         EducationItem,
         ExperienceItem,
         WorkAreaItem,
-        AppendButton,
-        RemoveButton,
+        ListButton,
         AppendableComponentList
     ];
 
@@ -32,19 +32,19 @@ export default class CVSimple extends BaseComponent {
                     <section class="experience">
                         <h1>Erfaring</h1>
                         <appendable-component-list item-component="${ExperienceItem.elementName}" starting-amount="1">
-                            <append-button slot="append-button"></append-button>
-                            <remove-button slot="remove-button"></remove-button>
+                            <list-button icon="add" slot="append-button"></list-button>
+                            <list-button icon="remove" slot="remove-button"></list-button>
                         </appendable-component-list>
-                        <appendable-component-list class="work-areas" item-component="${WorkAreaItem.elementName}" separator=", ">
-                            <append-button slot="append-button"></append-button>
-                            <remove-button slot="remove-button"></remove-button>
+                        <appendable-component-list class="work-areas" item-component="${WorkAreaItem.elementName}" separator=", " starting-amount="1">
+                            <list-button icon="add" slot="append-button"></list-button>
+                            <list-button icon="remove" slot="remove-button"></list-button>
                         </appendable-component-list>
                     </section>
                     <section class="education">
                         <h1>Uddannelse</h1>
                         <appendable-component-list item-component="${EducationItem.elementName}" starting-amount="1">
-                            <append-button slot="append-button"></append-button>
-                            <remove-button slot="remove-button"></remove-button>
+                            <list-button icon="add" slot="append-button"></list-button>
+                            <list-button icon="remove" slot="remove-button"></list-button>
                         </appendable-component-list>
                     </section>
                 </div>
@@ -123,6 +123,9 @@ export default class CVSimple extends BaseComponent {
             .work-areas::part(container) {
                 display: flex;
                 flex-direction: row;
+            }
+            .work-areas::part(list-item) {
+                font-family: var(--p);
             }
         `
     };

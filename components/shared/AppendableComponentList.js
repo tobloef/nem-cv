@@ -20,7 +20,7 @@ export default class AppendableComponentList extends BaseComponent {
     script = () => {
         const slot = this.shadowRoot.querySelector(`slot[name="append-button"]`);
         const appendButton = (slot.assignedNodes() || [])[0];
-        appendButton.onAppend = (attributes) => {
+        appendButton.onClick = (attributes) => {
             const list = this.shadowRoot.getElementById("list");
             if (this.separator && list.childNodes.length > 0) {
                 list.appendChild(document.createTextNode(this.separator));
@@ -29,12 +29,12 @@ export default class AppendableComponentList extends BaseComponent {
             for (const attribute in attributes) {
                 newChild.setAttribute(attribute, attributes[attribute]);
             }
-            newChild.setAttribute("part", "list-item")
+            newChild.setAttribute("part", "list-item");
             list.appendChild(newChild);
         };
         const slot2 = this.shadowRoot.querySelector(`slot[name="remove-button"`);
         const removeButton = (slot2.assignedNodes() || [])[0];
-        removeButton.onRemove = () => {
+        removeButton.onClick = () => {
             const list = this.shadowRoot.getElementById("list");
             if (list.childNodes.length === 0) {
                 return;
@@ -45,7 +45,7 @@ export default class AppendableComponentList extends BaseComponent {
             }
         };
         for (let i = 0; i < (this.startingAmount || 0); i++) {
-            appendButton.onAppend([])
+            appendButton.onClick()
         }
     }
 
@@ -59,7 +59,7 @@ export default class AppendableComponentList extends BaseComponent {
             .container {
                 display: flex;
                 flex-direction: column;
-            }
+            }            
         `
     }
 }
