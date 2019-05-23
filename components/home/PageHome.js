@@ -215,28 +215,8 @@ export default class PageHome extends BaseComponent {
            }
 
            @media(min-width: 650px) {
-               .card.templates {
+               .card {
                    padding: 50px;
-               }
-
-               .card .split {
-                   flex-direction: row;
-               }
-
-               .card .left {
-                   width: 50%;
-               }
-
-               .card .right {
-                   padding-left: 50px;
-               }
-
-               section.features router-link custom-button {
-                   --padding-x: 50px;
-               }
-
-               .card.colors .line {
-                   font-size: 4em;
                }
            }
 
@@ -265,7 +245,6 @@ export default class PageHome extends BaseComponent {
            @media(min-width: 1200px) {
                .cards {
                    display: flex;
-                   flex-direction: column;
                    max-width: 1000px;
                }
            }
@@ -276,6 +255,7 @@ export default class PageHome extends BaseComponent {
         super.connectedCallback();
 
         const navBar = this.shadowRoot.querySelector("nav-bar");
+        const header = this.shadowRoot.querySelector("home-header");
 
         this.intersectionObserver = new IntersectionObserver(entries => {
             if (entries[0].intersectionRatio <= 0.5) {
@@ -287,5 +267,9 @@ export default class PageHome extends BaseComponent {
 
         // start observing
         this.intersectionObserver.observe(this.shadowRoot.querySelector("home-header"));
+
+        window.addEventListener('load', ()=> {
+            header.play();
+        })
     }
 }
