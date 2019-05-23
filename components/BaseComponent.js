@@ -38,7 +38,7 @@ export default class BaseComponent extends HTMLElement {
     }
 
     render() {
-        console.debug(`Updating DOM of ${this.constructor.name}`);
+        console.debug(`Rendering DOM of ${this.constructor.name}`);
         this.shadowRoot.innerHTML = this.html;
         if (this.script != null) {
             this.script();

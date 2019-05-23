@@ -1,12 +1,12 @@
 import BaseComponent from "../BaseComponent.js";
-import Router from "../../lib/Router.js"
 import RouterLink from "../shared/RouterLink.js";
+import CustomButton from "../shared/CustomButton.js";
 import wait from "../../lib/wait.js";
 
 
 export default class HomeHeader extends BaseComponent {
     usedComponents = [
-        RouterLink
+        RouterLink, CustomButton
     ];
 
     html = `
@@ -68,8 +68,13 @@ export default class HomeHeader extends BaseComponent {
 
             <div class="infobox">
                 <h1>Lad <span class="light">NemCV</span> hjælpe dig med dit CV</h1>
-                <router-link class="cta" href="${Router.prefix}/templates">
+                <!--<router-link class="cta" href="/templates">
                     <div class="actual-cta">Start nu</div>
+                </router-link>-->
+                <router-link class="cta-link" href="/templates">
+                    <custom-button class="cta">
+                        Start nu
+                    </custom-button>
                 </router-link>
             </div>
 
@@ -85,6 +90,8 @@ export default class HomeHeader extends BaseComponent {
             display: block;
             position: relative;
             font-family: 'Open Sans', sans-serif;
+
+            --image-extra-top-offset: 45px;
         }
 
         .background-container {
@@ -98,6 +105,11 @@ export default class HomeHeader extends BaseComponent {
 
         .background {
             height: 100%;
+            transform: translateY(var(--image-extra-top-offset));
+        }
+
+        .background.stuff {
+            transform: translateY(0px);
         }
 
         header {
@@ -109,7 +121,7 @@ export default class HomeHeader extends BaseComponent {
             display: flex;
             justify-content: center;
 
-            margin-bottom: 0px;
+            margin-bottom: 300px;
 
             position: relative;
         }
@@ -182,7 +194,7 @@ export default class HomeHeader extends BaseComponent {
 
         .image-container.small {
             width: 50%;
-            height: 200px;
+            height: 110px;
         }
 
         .image-container.small img {
@@ -291,21 +303,37 @@ export default class HomeHeader extends BaseComponent {
             line-height: 1.2;
         }
 
-        .cta {
+        .cta-link {
             display: inline-block;
-            margin: 5px 0;
+            margin: 10px 0;
+            text-decoration: none;
         }
 
-        .actual-cta {
-            color: white;
-            text-decoration: none;
-            border: 2px solid white;
-            padding: 10px;
+        .cta {
+            --border-color: white;
+            --text-color: white;
+            --hover-background-color: var(--border-color);
+            --hover-text-color: black;
+
+            font-size: 1.2em;
         }
+
+        @media(min-width: 300px) {
+            .image-container.small {
+                height: 150px;
+            }
+        }
+
+        @media(min-width: 500px) {
+            .image-container.small {
+                height: 200px;
+            }
+        }
+
 
         @media(min-width: 1024px) {
             header {
-                margin-bottom: 230px;
+                margin-bottom: 500px;
             }
 
             .fakecv {
@@ -350,6 +378,10 @@ export default class HomeHeader extends BaseComponent {
             .fake-content-extra {
                 display: flex;
             }
+
+            .cta {
+                font-size: 1.5em;
+            }
         }
 
         @media(min-width: 1200px) {
@@ -379,8 +411,9 @@ export default class HomeHeader extends BaseComponent {
         const scrollTop = document.documentElement.scrollTop;
 
         const headerTopMargin = parseInt(getComputedStyle(header).getPropertyValue('padding-top'), 10);
+        const imageExtraOffset = parseInt(getComputedStyle(this).getPropertyValue('--image-extra-top-offset'), 10);
         const xCenterOffset = (document.documentElement.clientWidth / 2) - (image.offsetWidth / 2);
-        const styleString = `translate(${-rect.left + xCenterOffset}px, ${-rect.top - scrollTop + headerTopMargin}px)`;
+        const styleString = `translate(${-rect.left + xCenterOffset}px, ${-rect.top - scrollTop + headerTopMargin + imageExtraOffset}px)`;
 
         image.style.transform = styleString;
         fakecv.classList.remove('clip');

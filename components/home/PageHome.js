@@ -14,7 +14,7 @@ export default class PageHome extends BaseComponent {
             <img class="logo" src="/img/logo_white.svg"></img>
         </div>
         <home-header></home-header>
-        <div>
+        <div class="testcontent">
             <router-link href="/testing">Testing</router-link>
             <router-link href="/templates">Templates</router-link>
             <router-link href="/editor">Editor</router-link>
@@ -23,9 +23,9 @@ export default class PageHome extends BaseComponent {
             <router-link href="/cv-simple">CV Simple</router-link>
             <router-link href="/cv-octagon">CV Octagon</router-link>
             <router-link href="/cv-modern">CV Modern</router-link>
+            <custom-button id="button1">Primary</custom-button>
+            <custom-button id="button2" secondary>Secondary</custom-button>
         </div>
-        <custom-button id="button1">Primary</custom-button>
-        <custom-button id="button2" secondary>Secondary</custom-button>
     `;
 
     // language=CSS
@@ -45,6 +45,10 @@ export default class PageHome extends BaseComponent {
 
         .topbar .logo {
             max-width: 120px;
+        }
+
+        .testcontent {
+            padding: 15px;
         }
 
         custom-button {
