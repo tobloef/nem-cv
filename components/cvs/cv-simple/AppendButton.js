@@ -14,15 +14,10 @@ export default class AppendButton extends BaseComponent {
     script = () => {
         const button = this.shadowRoot.getElementById("button");
         button.addEventListener("click", () => {
+            console.log()
             if (this.onAppend == null) {
                 return;
             }
-            const redCheckbox = this.shadowRoot.getElementById("red-checkbox");
-            const attributes = {};
-            if (redCheckbox.checked) {
-                attributes.color = "red";
-            }
-            this.onAppend(attributes);
         });
     }
 
@@ -33,8 +28,8 @@ export default class AppendButton extends BaseComponent {
         return `
             button {
                 
-                --dia: 1.4em;
-                border: 2px solid black;
+                --dia: 2em;
+                border: 5px solid black;
                 border-radius: 50%;
                 text-align: center;
                 vertical-align: center;
