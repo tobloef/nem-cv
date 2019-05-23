@@ -19,6 +19,7 @@ export default class SideBar extends BaseComponent {
                     <color-list></color-list>
                 </div>
             </div>
+            <side-toggle open></side-toggle>
         `;
     }
 
@@ -47,6 +48,12 @@ export default class SideBar extends BaseComponent {
                 margin: 0;
                 overflow-y: auto;
             }
+            
+            /*@media(max-width: 500px) {*/
+                side-toggle {
+                    
+                }
+            /*}*/
             
             @media(max-width: 425px) {
                 layout-list {

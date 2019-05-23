@@ -1,15 +1,18 @@
 import BaseComponent from "../BaseComponent.js";
 import SideBar from "./SideBar.js";
+import SideToggle from "./SideToggle.js";
 
 export default class PageEditor extends BaseComponent {
     usedComponents = [
-        SideBar
+        SideBar,
+        SideToggle
     ];
 
+    // language=HTML
     get html() {
         return `
             <h1>PageEditor</h1>
-            <side-bar/>
+            <side-bar></side-bar>
         `;
     };
 
@@ -17,5 +20,12 @@ export default class PageEditor extends BaseComponent {
 
     };
 
-
+    // language=CSS
+    get css() {
+        return `
+            :host {
+                
+            }
+        `;
+    };
 }
