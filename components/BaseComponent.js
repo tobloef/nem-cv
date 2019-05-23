@@ -18,6 +18,7 @@ export default class BaseComponent extends HTMLElement {
     connectedCallback() {
         this._defineUsedComponents();
         this._checkForUndefinedComponents();
+        this.updateStyles();
         this.render();
     }
 
@@ -29,7 +30,6 @@ export default class BaseComponent extends HTMLElement {
             } else {
                 this[propName] = this.getAttribute(attrName);
             }
-            this.connectedCallback();
         }
     }
 
@@ -40,10 +40,27 @@ export default class BaseComponent extends HTMLElement {
     render() {
         console.debug(`Updating DOM of ${this.constructor.name}`);
         this.shadowRoot.innerHTML = this.html;
-        this._addAdoptedStyleSheets();
         if (this.script != null) {
             this.script();
         }
+    }
+
+    updateStyles() {
+        console.debug(`Updating styles of ${this.constructor.name}`);
+        const adoptedStyleSheets = [];
+        if (this.enableResetCSS != null) {
+            adoptedStyleSheets.push(resetCSSStyleSheet);
+        }
+        if (BaseComponent.colors != null) {
+            adoptedStyleSheets.push(BaseComponent.colors);
+        }
+        if (BaseComponent.template != null) {
+            adoptedStyleSheets.push(BaseComponent.template);
+        }
+        if (this.style != null) {
+            adoptedStyleSheets.push(stringToStyleSheet(this.style));
+        }
+        this.shadowRoot.adoptedStyleSheets = adoptedStyleSheets;
     }
 
     getContent() {
@@ -78,23 +95,6 @@ export default class BaseComponent extends HTMLElement {
         } else {
             BaseComponent._colors = value;
         }
-    }
-
-    _addAdoptedStyleSheets() {
-        const adoptedStyleSheets = [];
-        if (this.enableResetCSS != null) {
-            adoptedStyleSheets.push(resetCSSStyleSheet);
-        }
-        if (BaseComponent.colors != null) {
-            adoptedStyleSheets.push(BaseComponent.colors);
-        }
-        if (BaseComponent.template != null) {
-            adoptedStyleSheets.push(BaseComponent.template);
-        }
-        if (this.style != null) {
-            adoptedStyleSheets.push(stringToStyleSheet(this.style));
-        }
-        this.shadowRoot.adoptedStyleSheets = adoptedStyleSheets;
     }
 
     _defineUsedComponents() {
