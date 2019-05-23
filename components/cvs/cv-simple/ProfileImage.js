@@ -11,7 +11,7 @@ export default class ProfileImage extends BaseComponent {
         return `
             <div class="square">
                 <img class="profile-picture"
-                     src="../../../img/landing-bg.jpeg"
+                     src="../../../img/placeholder-person.png"
                      alt="image of you">
             </div>
         `;
@@ -44,13 +44,12 @@ export default class ProfileImage extends BaseComponent {
         return `
             .square {
                 width: 100%;
-                max-width: 400px;
                 position: relative;
             }
             .square:after {
                 content: "";
                 display: block;
-                padding-bottom: ${this.aspect_ratio * 100}%;
+                padding-bottom: ${(this.aspect_ratio ? this.aspect_ratio : 1) * 100}%;
             }
             .profile-picture {
                 position: absolute;
