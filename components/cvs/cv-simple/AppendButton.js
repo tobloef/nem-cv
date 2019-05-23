@@ -7,7 +7,7 @@ export default class AppendButton extends BaseComponent {
     // language=HTML
     get html() {
         return `
-            <button id="button">+</button>
+            <button id="button"></button>
         `;
     }
 
@@ -29,16 +29,10 @@ export default class AppendButton extends BaseComponent {
     get css() {
         return `
             button {
-                
                 --dia: 2em;
-                border: 5px solid black;
-                border-radius: 50%;
-                text-align: center;
-                vertical-align: center;
-                font-size: 1.5em;
-                font-weight: bolder;
                 height: var(--dia);
                 width: var(--dia);
+                background: url("../../../img/add-outline.svg");
             }
         `
     };

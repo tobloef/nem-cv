@@ -7,7 +7,7 @@ export default class RemoveButton extends BaseComponent {
     // language=HTML
     get html() {
         return `
-            <button id="button">-</button>
+            <button id="button" >-</button>
         `;
     }
 
