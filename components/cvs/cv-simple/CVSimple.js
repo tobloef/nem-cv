@@ -23,16 +23,19 @@ export default class CVSimple extends BaseComponent {
                         <h1>Uddannelse</h1>
                         <ul class="education-list">
                             <li class="education-item" style="display: flex; justify-content: space-between">
-					<span class="divider">
-						<editable-component placeholder="Uddannelsessted" element="div"></editable-component> -
-						<editable-component placeholder="Titel" element="div"></editable-component>
-					</span>
                                 <span class="divider">
-						<editable-component placeholder="Startår" element="div"></editable-component> -
-						<editable-component placeholder="Slutår" element="div"></editable-component>
-					</span>
+                                    <editable-component placeholder="Uddannelsessted" element="div"></editable-component> -
+                                    <editable-component placeholder="Titel" element="div"></editable-component>
+                                </span>
+                                <span class="divider">
+                                    <editable-component placeholder="Startår" element="div"></editable-component> -
+                                    <editable-component placeholder="Slutår" element="div"></editable-component>
+                                </span>
                             </li>
                         </ul>
+                        <appendable-component-list>
+                            
+                        </appendable-component-list>
                     </section>
                     <section class="experience">
                         <h1>Erfaring</h1>
