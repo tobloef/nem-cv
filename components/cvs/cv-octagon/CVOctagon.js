@@ -3,7 +3,8 @@ import BaseComponent from "../../BaseComponent.js";
 export default class CVOctagon extends BaseComponent {
     static observedAttributes = [];
 
-    usedComponents = [];
+    usedComponents = [
+    ];
 
     // language=HTML
     get html() {

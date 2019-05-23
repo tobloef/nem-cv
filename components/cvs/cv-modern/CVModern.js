@@ -87,7 +87,6 @@ export default class CVModern extends BaseComponent {
     get style() {
         return `
             header {
-                display: flex;
                 margin-bottom: 50px;
             }
 
@@ -177,6 +176,10 @@ export default class CVModern extends BaseComponent {
             .oneexperience {
                 display: flex;
                 justify-content: center;
+            }
+            profile-image {
+                display: block;
+                max-width: 400px;
             }
         `
     };

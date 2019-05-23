@@ -14,7 +14,7 @@ export default class IntroBox extends BaseComponent {
     get html() {
         return `
             <section class="introbox">
-                <profile-image></profile-image>
+                <profile-image aspect_ratio="2"></profile-image>
                 <editable-component class="name" placeholder="Dit fulde navn" element="h1"></editable-component>
                 <ul class="facts">
                     <li class="age">
@@ -62,7 +62,6 @@ export default class IntroBox extends BaseComponent {
             }
             
             profile-image {
-                display: block;
                 margin-bottom: 2em;
             }
             

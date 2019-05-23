@@ -43,9 +43,13 @@ export default class ProfileImage extends BaseComponent {
     // language=CSS
     get style() {
         return `
+            :host {
+                display: block;
+            }
             .square {
                 width: 100%;
                 position: relative;
+                display: block;
             }
             .square:after {
                 content: "";
