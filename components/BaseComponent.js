@@ -38,30 +38,9 @@ export default class BaseComponent extends HTMLElement {
     }
 
     render() {
-        //console.debug(`Updating DOM of ${this.constructor.name}`);
-        let newHTML = "";
-        if (this.externalStyles != null) {
-            for (const externalStyle of this.externalStyles) {
-                newHTML += `<link rel="stylesheet" href="${externalStyle}">`;
-            }
-        }
-        const adoptedStyleSheets = [];
-        if (this.enableResetCSS != null) {
-            adoptedStyleSheets.push(resetCSSStyleSheet);
-        }
-        if (BaseComponent.colors != null) {
-            adoptedStyleSheets.push(BaseComponent.colors);
-        }
-        if (BaseComponent.template != null) {
-            adoptedStyleSheets.push(BaseComponent.template);
-        }
-        if (this.style != null) {
-            adoptedStyleSheets.push(stringToStyleSheet(this.style));
-        }
-        this.shadowRoot.adoptedStyleSheets = adoptedStyleSheets;
-        newHTML += this.html;
-
-        this.shadowRoot.innerHTML = newHTML;
+        console.debug(`Updating DOM of ${this.constructor.name}`);
+        this.shadowRoot.innerHTML = this.html;
+        this._addAdoptedStyleSheets();
         if (this.script != null) {
             this.script();
         }
@@ -99,6 +78,23 @@ export default class BaseComponent extends HTMLElement {
         } else {
             BaseComponent._colors = value;
         }
+    }
+
+    _addAdoptedStyleSheets() {
+        const adoptedStyleSheets = [];
+        if (this.enableResetCSS != null) {
+            adoptedStyleSheets.push(resetCSSStyleSheet);
+        }
+        if (BaseComponent.colors != null) {
+            adoptedStyleSheets.push(BaseComponent.colors);
+        }
+        if (BaseComponent.template != null) {
+            adoptedStyleSheets.push(BaseComponent.template);
+        }
+        if (this.style != null) {
+            adoptedStyleSheets.push(stringToStyleSheet(this.style));
+        }
+        this.shadowRoot.adoptedStyleSheets = adoptedStyleSheets;
     }
 
     _defineUsedComponents() {

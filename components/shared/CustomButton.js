@@ -16,8 +16,6 @@ export default class CustomButton extends BaseComponent {
 
     };
 
-    externalStyles = [];
-
     get style() {
         if (this.secondary){
             // language=CSS
