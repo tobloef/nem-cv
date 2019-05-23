@@ -44,6 +44,8 @@ export default class LayoutList extends BaseComponent {
                 
                 :host(.resizing)>layout-descriptor:not(:last-child) {
                     border-bottom: 1px solid #aaa;
+                    padding: 3em 0 2em 0;
+                    margin: 0 0.5em;
                 }
             }
 
@@ -53,12 +55,18 @@ export default class LayoutList extends BaseComponent {
                     grid-template-columns: repeat(2, 1fr);
                 }
 
+                :host(.resizing)>layout-descriptor:nth-child(n-2) {
+                    margin-bottom: 4em;
+                }
+
                 :host(.resizing)>layout-descriptor:nth-child(2n-1) {
-                    grid-column: 0 / 1;
+                    grid-column: 1 / 2;
+                    margin-right: 2em;
                 }
 
                 :host(.resizing)>layout-descriptor:nth-child(2n) {
-                    grid-column: 1 / 2;
+                    grid-column: 0 / 1;
+                    margin-left: 2em;
                 }
             }
             
@@ -72,9 +80,14 @@ export default class LayoutList extends BaseComponent {
                 display: flex;
                 flex-direction: column;
             }
+            
+            :host(.flex-list)>layout-descriptor:not(:first-child) {
+                padding-top: 3em;
+            }
 
             :host(.flex-list)>layout-descriptor:not(:last-child) {
                 border-bottom: 1px solid #aaa;
+                padding-bottom: 2em;
             }
         `
     };

@@ -32,18 +32,40 @@ export default class SideBar extends BaseComponent {
     get css() {
         return `
             #container {
+                display: flex;
+                flex-direction: column;
                 background-color: #F6F6F6;
                 max-width: 500px;
+                height: 100%;
+                box-shadow: 0 0 5px #888;
+            }
+            
+            layout-list {
+                flex: 1 1 0;
+                height: 100%;
+                padding: 10px;
+                margin: 0;
+                overflow-y: auto;
+            }
+            
+            @media(max-width: 425px) {
+                layout-list {
+                    padding-bottom: 120px;
+                }
+            }
+            
+            @media(max-width: 320px) {
+                layout-list {
+                    padding-bottom: 100px;
+                }
             }
             
             #color-list {
                 background-color: inherit;
-                position: fixed;
-                bottom: 0;
                 padding: 0.5em;
-                max-width: inherit;
+                max-width: 500px;
                 width: 100%;
-                box-shadow: 0 0 5px #888;
+                box-shadow: -5px 0 5px #888;
             }
             
             /*color-list {*/
