@@ -21,6 +21,18 @@ export default class ColorList extends BaseComponent {
             element.setAttribute("font-color", item.fontColor);
             element.setAttribute("background-color", item.backgroundColor);
             element.setAttribute("accent-color", item.accentColor);
+            // element.addEventListener("resize", evt => {
+            //     const elm = evt.target;
+            //     const width = elm.style.width;
+            //     // noinspection JSSuspiciousNameCombination
+            //     elm.style.height = width;
+            //     console.log(width);
+            // });
+            new ResizeObserver(() => {
+                // noinspection JSSuspiciousNameCombination
+                element.style.height = element.clientWidth + "px";
+                element.resizeFont();
+            }).observe(element);
             this.shadowRoot.appendChild(element);
         }
     };
@@ -36,20 +48,25 @@ export default class ColorList extends BaseComponent {
                 justify-content: space-around;
             }
             
+            color-holder {
+                flex: 1 1 0;
+                padding: 10px;
+            }
+            
             :host(.vertical) {
                 flex-direction: column;
             }
             
-            @media(max-width: 340px) {
-                color-holder p {
-                    font-size: 2em;
-                }
-                
-                color-holder #outer {
-                    width: 3em;
-                    height: 3em;
-                }
-            }
+            /*@media(max-width: 340px) {*/
+            /*    color-holder>p {*/
+            /*        font-size: 2em;*/
+            /*    }*/
+            /*    */
+            /*    color-holder>#outer {*/
+            /*        width: 3em;*/
+            /*        height: 3em;*/
+            /*    }*/
+            /*}*/
         `
     };
 }

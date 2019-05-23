@@ -37,35 +37,44 @@ export default class LayoutList extends BaseComponent {
     get css() {
         return `
             @media(max-width: 700px) {
-                :host {
+                :host(.resizing) {
                     display: flex;
                     flex-direction: column;
                 }
-
-                layout-descriptor:not(:last-child) {
+                
+                :host(.resizing)>layout-descriptor:not(:last-child) {
                     border-bottom: 1px solid #aaa;
                 }
             }
 
             @media(min-width: 700px) {
-                :host {
+                :host(.resizing) {
                     display: grid;
                     grid-template-columns: repeat(2, 1fr);
                 }
 
-                layout-descriptor:nth-child(2n-1) {
+                :host(.resizing)>layout-descriptor:nth-child(2n-1) {
                     grid-column: 0 / 1;
                 }
 
-                layout-descriptor:nth-child(2n) {
+                :host(.resizing)>layout-descriptor:nth-child(2n) {
                     grid-column: 1 / 2;
                 }
             }
             
             @media(min-width: 1200px) {
-                :host {
+                :host(.resizing) {
                     max-width: 1200px;
                 }
+            }
+
+            :host(.flex-list) {
+                display: flex;
+                flex-direction: column;
+            }
+
+            :host(.flex-list)>layout-descriptor:not(:last-child) {
+                border-bottom: 1px solid #aaa;
             }
         `
     };
