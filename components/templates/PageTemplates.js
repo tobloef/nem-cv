@@ -7,7 +7,7 @@ export default class PageTemplates extends BaseComponent {
         LayoutList
     ];
 
-    get style() {
+    get css() {
         //language=CSS
         return `
             :host {

@@ -28,7 +28,7 @@ export default class EducationItem extends BaseComponent {
     externalStyles = [];
 
     // language=CSS
-    get style() {
+    get css() {
         return `
             :host {
                 display: flex;
