@@ -84,7 +84,7 @@ export default class CVModern extends BaseComponent {
     externalStyles = [];
 
     // language=CSS
-    get style() {
+    get css() {
         return `
             header {
                 display: flex;

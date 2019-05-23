@@ -1,5 +1,5 @@
 // language=CSS
-const style = `
+const css = `
     @import url('https://fonts.googleapis.com/css?family=Exo:800|Oswald:500|Raleway&display=swap');
 
     :root{
@@ -9,4 +9,4 @@ const style = `
     }
 `;
 
-export default style;
+export default css;

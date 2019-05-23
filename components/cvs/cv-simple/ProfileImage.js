@@ -40,7 +40,7 @@ export default class ProfileImage extends BaseComponent {
     externalStyles = [];
 
     // language=CSS
-    get style() {
+    get css() {
         return `
             .square {
                 width: 100%;

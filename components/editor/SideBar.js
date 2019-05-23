@@ -27,7 +27,7 @@ export default class SideBar extends BaseComponent {
     externalStyles = [];
 
     // language=CSS
-    get style() {
+    get css() {
         return `
             div {
                 padding: 0.5em;

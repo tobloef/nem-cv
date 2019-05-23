@@ -19,7 +19,7 @@ export default class CVOctagon extends BaseComponent {
     externalStyles = [];
 
     // language=CSS
-    get style() {
+    get css() {
         return `
             
         `

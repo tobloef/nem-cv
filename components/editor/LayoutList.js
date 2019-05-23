@@ -34,7 +34,7 @@ export default class LayoutList extends BaseComponent {
     externalStyles = [];
 
     // language=CSS
-    get style() {
+    get css() {
         return `
             @media(max-width: 700px) {
                 :host {

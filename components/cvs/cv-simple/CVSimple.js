@@ -66,7 +66,7 @@ export default class CVSimple extends BaseComponent {
     externalStyles = [];
 
     // language=CSS
-    get style() {
+    get css() {
         return `
             h1 {
                 font-family: var(--h1);

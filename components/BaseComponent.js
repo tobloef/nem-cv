@@ -18,8 +18,8 @@ export default class BaseComponent extends HTMLElement {
     connectedCallback() {
         this._defineUsedComponents();
         this._checkForUndefinedComponents();
-        this.updateStyles();
         this.render();
+        this.updateStyles();
     }
 
     attributeChangedCallback(attrName, oldValue, newValue) {
@@ -47,20 +47,20 @@ export default class BaseComponent extends HTMLElement {
 
     updateStyles() {
         console.debug(`Updating styles of ${this.constructor.name}`);
-        const adoptedStyleSheets = [];
+        const styleSheets = [];
         if (this.enableResetCSS != null) {
-            adoptedStyleSheets.push(resetCSSStyleSheet);
+            styleSheets.push(resetCSSStyleSheet);
         }
         if (BaseComponent.colors != null) {
-            adoptedStyleSheets.push(BaseComponent.colors);
+            styleSheets.push(BaseComponent.colors);
         }
         if (BaseComponent.template != null) {
-            adoptedStyleSheets.push(BaseComponent.template);
+            styleSheets.push(BaseComponent.template);
         }
-        if (this.style != null) {
-            adoptedStyleSheets.push(stringToStyleSheet(this.style));
+        if (this.css != null) {
+            styleSheets.push(stringToStyleSheet(this.css));
         }
-        this.shadowRoot.adoptedStyleSheets = adoptedStyleSheets;
+        this.shadowRoot.adoptedStyleSheets = styleSheets;
     }
 
     getContent() {

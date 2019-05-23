@@ -35,7 +35,7 @@ export default class ColorHolder extends BaseComponent {
     };
 
     // language=CSS
-    get style() {
+    get css() {
         return `
             p {
                 font-family: "Times New Roman", "serif";
