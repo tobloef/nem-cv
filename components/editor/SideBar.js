@@ -29,16 +29,6 @@ export default class SideBar extends BaseComponent {
     // language=CSS
     get style() {
         return `
-            @media(min-width: 400px) {
-                :host {
-                    width: 400px;
-                }
-            }
-            
-            :host {
-                
-            }
-            
             div {
                 padding: 0.5em;
                 max-width: 100%;

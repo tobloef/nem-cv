@@ -36,6 +36,10 @@ export default class ColorList extends BaseComponent {
                 justify-content: space-around;
             }
             
+            :host(.vertical) {
+                flex-direction: column;
+            }
+            
             @media(max-width: 340px) {
                 color-holder p {
                     font-size: 2em;
