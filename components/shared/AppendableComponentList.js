@@ -1,10 +1,14 @@
 import BaseComponent from "../BaseComponent.js";
+import {pascalToKebabCase} from "../../lib/string-utils.js";
 
 export default class AppendableComponentList extends BaseComponent {
+    itemAttributePrefix = "itemAttribute";
+
     static observedAttributes = [
         "item-component",
         "starting-amount",
-        "separator"
+        "separator",
+        "item-attribute-experience-type"
     ];
 
     get html() {
@@ -18,23 +22,39 @@ export default class AppendableComponentList extends BaseComponent {
     };
 
     script = () => {
+        // Append item button
         const slot = this.shadowRoot.querySelector(`slot[name="append-button"]`);
         const appendButton = (slot.assignedNodes() || [])[0];
-        appendButton.onAppend = (attributes) => {
+        appendButton.onClick = (attributes) => {
             const list = this.shadowRoot.getElementById("list");
+            // Append separator
             if (this.separator && list.childNodes.length > 0) {
                 list.appendChild(document.createTextNode(this.separator));
             }
             const newChild = document.createElement(this.itemComponent);
-            for (const attribute in attributes) {
+            // Add attributes based on the this component's item attributes.
+            for (let prop in this) {
+                if (
+                    typeof prop === "string" &&
+                    prop !== "itemAttributePrefix" &&
+                    prop.startsWith(this.itemAttributePrefix)
+                ) {
+                    const attribute = pascalToKebabCase(prop.replace(this.itemAttributePrefix, ""));
+                    newChild.setAttribute(attribute, this[prop]);
+                }
+            }
+            // Set attributes based on the append button.
+            for (const attribute in (attributes || {})) {
                 newChild.setAttribute(attribute, attributes[attribute]);
             }
-            newChild.setAttribute("part", "list-item")
+            newChild.setAttribute("part", "list-item");
             list.appendChild(newChild);
         };
+
+        // Remove item button
         const slot2 = this.shadowRoot.querySelector(`slot[name="remove-button"`);
         const removeButton = (slot2.assignedNodes() || [])[0];
-        removeButton.onRemove = () => {
+        removeButton.onClick = () => {
             const list = this.shadowRoot.getElementById("list");
             if (list.childNodes.length === 0) {
                 return;
@@ -45,9 +65,9 @@ export default class AppendableComponentList extends BaseComponent {
             }
         };
         for (let i = 0; i < (this.startingAmount || 0); i++) {
-            appendButton.onAppend([])
+            appendButton.onClick()
         }
-    }
+    };
 
     removeLast(list) {
         list.removeChild(list.childNodes[list.childNodes.length - 1]);
@@ -59,7 +79,7 @@ export default class AppendableComponentList extends BaseComponent {
             .container {
                 display: flex;
                 flex-direction: column;
-            }
+            }            
         `
     }
 }

@@ -1,25 +1,22 @@
 import BaseComponent from "../../BaseComponent.js";
-import EditableComponent from "../../shared/EditableComponent.js";
 import IntroBox from "./IntroBox.js";
 import simple from "../../../templates/simple.js";
 import theme1 from "../../../templates/theme1.js";
-import EducationItem from "./EducationItem.js";
 import AppendButton from "./AppendButton.js";
 import AppendableComponentList from "../../shared/AppendableComponentList.js";
 import ExperienceItem from "./ExperienceItem.js";
 import WorkAreaItem from "./WorkAreaItem.js";
 import RemoveButton from "./RemoveButton.js";
+import ListButton from "./ListButton.js";
 
 export default class CVSimple extends BaseComponent {
     static observedAttributes = [];
 
     usedComponents = [
         IntroBox,
-        EducationItem,
         ExperienceItem,
         WorkAreaItem,
-        AppendButton,
-        RemoveButton,
+        ListButton,
         AppendableComponentList
     ];
 
@@ -31,20 +28,34 @@ export default class CVSimple extends BaseComponent {
                 <div class="other">
                     <section class="experience">
                         <h1>Erfaring</h1>
-                        <appendable-component-list item-component="${ExperienceItem.elementName}" starting-amount="1">
-                            <append-button slot="append-button"></append-button>
-                            <remove-button slot="remove-button"></remove-button>
+                        <appendable-component-list
+                            content-key="employers"
+                            content-type="array"
+                            item-component="${ExperienceItem.elementName}" 
+                            item-attribute-experience-type="Firma"
+                            starting-amount="1"
+                        >
+                            <list-button icon="add" slot="append-button"></list-button>
+                            <list-button icon="remove" slot="remove-button"></list-button>
                         </appendable-component-list>
-                        <appendable-component-list class="work-areas" item-component="${WorkAreaItem.elementName}" separator=", ">
-                            <append-button slot="append-button"></append-button>
-                            <remove-button slot="remove-button"></remove-button>
+                        <appendable-component-list
+                            content-key="sectors"
+                            content-type="array" class="work-areas" item-component="${WorkAreaItem.elementName}" separator=", " starting-amount="1">
+                            <list-button icon="add" slot="append-button"></list-button>
+                            <list-button icon="remove" slot="remove-button"></list-button>
                         </appendable-component-list>
                     </section>
                     <section class="education">
                         <h1>Uddannelse</h1>
-                        <appendable-component-list item-component="${EducationItem.elementName}" starting-amount="1">
-                            <append-button slot="append-button"></append-button>
-                            <remove-button slot="remove-button"></remove-button>
+                        <appendable-component-list
+                            content-key="education"
+                            content-type="array"
+                            item-component="${ExperienceItem.elementName}" 
+                            item-attribute-experience-type="Uddannelsessted"
+                            starting-amount="1"
+                        >
+                            <list-button icon="add" slot="append-button"></list-button>
+                            <list-button icon="remove" slot="remove-button"></list-button>
                         </appendable-component-list>
                     </section>
                 </div>
@@ -55,10 +66,17 @@ export default class CVSimple extends BaseComponent {
     script = () => {
         BaseComponent.template = simple;
         BaseComponent.colors = theme1;
-
+        setInterval(() => {
+            const content = this.getContent();
+            localStorage.setItem("cv-data", content);
+        }, 5000);
     };
 
-    externalStyles = [];
+    getContent = () => {
+        const obj = {};
+        super.getContent(obj);
+        return obj;
+    };
 
     // language=CSS
     get css() {
@@ -123,6 +141,9 @@ export default class CVSimple extends BaseComponent {
             .work-areas::part(container) {
                 display: flex;
                 flex-direction: row;
+            }
+            .work-areas::part(list-item) {
+                font-family: var(--p);
             }
         `
     };

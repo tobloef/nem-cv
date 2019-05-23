@@ -370,7 +370,7 @@ export default class HomeHeader extends BaseComponent {
 
                 .infobox {
                     --infobox-large-left-margin: 20px;
-                    top: 100px;
+                    top: 90px;
                     left: calc(50% + var(--infobox-large-left-margin));
                     height: 100%;
                     max-height: 300px;
@@ -400,49 +400,51 @@ export default class HomeHeader extends BaseComponent {
         `;
     }
 
-    async script() {
-        const header = this.shadowRoot.querySelector("header");
-        const fakecv = this.shadowRoot.querySelector(".fakecv");
-        const fakeContentTitle = this.shadowRoot.querySelector(".fake-content-title");
-        const fakeContentBody = this.shadowRoot.querySelector(".fake-content-body");
-        const fakeContentExtra = this.shadowRoot.querySelector(".fake-content-extra");
-        const imageContainer = this.shadowRoot.querySelector(".image-container");
-        const image = this.shadowRoot.querySelector(".image-container img");
-        const infobox = this.shadowRoot.querySelector(".infobox");
-
+    async play() {
         await wait(750);
-        fakecv.classList.add('visible');
+        this.fakecv.classList.add('visible');
 
         await wait(1300);
 
-        const rect = image.getBoundingClientRect();
+        const rect = this.image.getBoundingClientRect();
         const scrollTop = document.documentElement.scrollTop;
 
-        const headerTopMargin = parseInt(getComputedStyle(header).getPropertyValue('padding-top'), 10);
+        const headerTopMargin = parseInt(getComputedStyle(this.header).getPropertyValue('padding-top'), 10);
         const imageExtraOffset = parseInt(getComputedStyle(this).getPropertyValue('--image-extra-top-offset'), 10);
-        const xCenterOffset = (document.documentElement.clientWidth / 2) - (image.offsetWidth / 2);
+        const xCenterOffset = (document.documentElement.clientWidth / 2) - (this.image.offsetWidth / 2);
         const styleString = `translate(${-rect.left + xCenterOffset}px, ${-rect.top - scrollTop + headerTopMargin + imageExtraOffset}px)`;
 
-        image.style.transform = styleString;
-        fakecv.classList.remove('clip');
+        this.image.style.transform = styleString;
+        this.fakecv.classList.remove('clip');
 
         await wait(50);
-        imageContainer.classList.add('small');
-        image.classList.add('animatable');
-        image.style.transform = ``;
+        this.imageContainer.classList.add('small');
+        this.image.classList.add('animatable');
+        this.image.style.transform = ``;
 
-        infobox.classList.add('visible');
+        this.infobox.classList.add('visible');
 
         await wait(300);
 
-        fakeContentTitle.classList.add('visible');
+        this.fakeContentTitle.classList.add('visible');
 
         await wait(100);
 
-        fakeContentBody.classList.add('visible');
+        this.fakeContentBody.classList.add('visible');
 
         await wait(100);
 
-        fakeContentExtra.classList.add('visible');
+        this.fakeContentExtra.classList.add('visible');
+    }
+
+    script() {
+        this.header = this.shadowRoot.querySelector("header");
+        this.fakecv = this.shadowRoot.querySelector(".fakecv");
+        this.fakeContentTitle = this.shadowRoot.querySelector(".fake-content-title");
+        this.fakeContentBody = this.shadowRoot.querySelector(".fake-content-body");
+        this.fakeContentExtra = this.shadowRoot.querySelector(".fake-content-extra");
+        this.imageContainer = this.shadowRoot.querySelector(".image-container");
+        this.image = this.shadowRoot.querySelector(".image-container img");
+        this.infobox = this.shadowRoot.querySelector(".infobox");
     }
 }
