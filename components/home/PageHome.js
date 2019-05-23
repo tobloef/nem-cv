@@ -1,18 +1,17 @@
 import BaseComponent from "../BaseComponent.js";
 import RouterLink from "../shared/RouterLink.js";
 import CustomButton from "../shared/CustomButton.js";
+import NavBar from "../shared/NavBar.js";
 import wait from "../../lib/wait.js";
 import HomeHeader from './HomeHeader.js';
 
 export default class PageHome extends BaseComponent {
     usedComponents = [
-        RouterLink, HomeHeader, CustomButton
+        RouterLink, HomeHeader, CustomButton, NavBar
     ];
 
     html = `
-        <div class="topbar">
-            <img class="logo" src="/img/logo_white.svg"></img>
-        </div>
+        <nav-bar transparent></nav-bar>
         <home-header></home-header>
 
         <section class="features">
@@ -70,26 +69,13 @@ export default class PageHome extends BaseComponent {
                 font-family: 'Open Sans', sans-serif;
             }
 
-            .topbar {
+            nav-bar {
                 position: fixed;
                 top: 0;
                 left: 0;
                 right: 0;
                 z-index: 10;
-                padding: 20px;
-                z-index: 10px;
-                background-color: transparent;
-                transition: 400ms ease-in-out background-color;
             }
-
-            .topbar .logo {
-                max-width: 120px;
-            }
-
-            .topbar.scrolling {
-                background-color: #252525;
-                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-           }
 
            h2 {
                font-size: 2.5em;
@@ -228,7 +214,7 @@ export default class PageHome extends BaseComponent {
                padding: 60px;
            }
 
-           @media(min-width: 650px and max-width:750px) {
+           @media(min-width: 650px) {
                .card.templates {
                    padding: 50px;
                }
@@ -289,13 +275,13 @@ export default class PageHome extends BaseComponent {
     connectedCallback() {
         super.connectedCallback();
 
-        const topbar = this.shadowRoot.querySelector(".topbar");
+        const navBar = this.shadowRoot.querySelector("nav-bar");
 
         this.intersectionObserver = new IntersectionObserver(entries => {
             if (entries[0].intersectionRatio <= 0.5) {
-                topbar.classList.add("scrolling");
+                navBar.removeAttribute("transparent");
             } else {
-                topbar.classList.remove("scrolling");
+                navBar.setAttribute("transparent", "");
             }
         }, { threshold: [0, 0.25, 0.5, 1] });
 
