@@ -1,15 +1,15 @@
 "use strict";
 
-import BaseComponent from "./BaseComponent.js";
-import PageHome from "./home/PageHome.js";
-import PageEditor from "./editor/PageEditor.js";
+import BaseComponent from "../BaseComponent.js";
+import PageHome from "../home/PageHome.js";
+import PageEditor from "../editor/PageEditor.js";
 import PageTesting from "./testing/PageTest.js";
-import PageTemplates from "./templates/PageTemplates.js";
-import PageNotFound from "./not-found/PageNotFound.js";
-import Router from "../lib/Router.js";
-import CVModern from "./cvs/cv-modern/CVModern.js";
-import CVSimple from "./cvs/cv-simple/CVSimple.js";
-import CVOctagon from "./cvs/cv-octagon/CVOctagon.js";
+import PageTemplates from "../templates/PageTemplates.js";
+import PageNotFound from "../not-found/PageNotFound.js";
+import Router from "../../lib/Router.js";
+import CVModern from "../cvs/CVModern.js";
+import CVSimple from "../cvs/CVSimple.js";
+import CVOctagon from "../cvs/CVOctagon.js";
 
 export default class RootRoutes extends BaseComponent {
     usedComponents = [

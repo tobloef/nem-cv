@@ -1,5 +1,5 @@
-import BaseComponent from "../../BaseComponent.js";
-import ProfileImage from "../cv-simple/ProfileImage.js";
+import BaseComponent from "../BaseComponent.js";
+import ProfileImage from "./shared/ProfileImage.js";
 
 export default class CVModern extends BaseComponent {
     static observedAttributes = [];
