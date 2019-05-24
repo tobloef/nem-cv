@@ -124,8 +124,8 @@ export default class CVModern extends BaseComponent {
                 margin-bottom: 5px;
             }
 
-            .image {
-                width: 400px;
+           .image {
+                max-width: 400px;
             }
 
             .about {
