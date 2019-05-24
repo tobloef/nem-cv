@@ -69,7 +69,7 @@ export default class HomeHeader extends BaseComponent {
             <div class="infobox">
                 <h1>Lad <span class="light">NemCV</span> hjælpe dig med dit CV</h1>
                 <router-link class="cta-link" href="/templates">
-                    <custom-button class="cta">
+                    <custom-button class="cta" inverted>
                         Start nu
                     </custom-button>
                 </router-link>

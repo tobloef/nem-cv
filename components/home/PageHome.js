@@ -12,7 +12,13 @@ export default class PageHome extends BaseComponent {
     ];
 
     html = `
-        <nav-bar transparent></nav-bar>
+        <nav-bar transparent>
+            <router-link href="/templates">
+                <custom-button inverted>
+                    Start nu
+                </custom-button>
+            </router-link>
+        </nav-bar>
         <home-header></home-header>
 
         <section class="features">

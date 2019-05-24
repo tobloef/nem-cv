@@ -3,10 +3,11 @@ import Router from "../../lib/Router.js";
 import RouterLink from "../shared/RouterLink.js";
 import LayoutList from "../editor/LayoutList.js";
 import {setItem} from "../../lib/storage-helper.js";
+import NavBar from "../shared/NavBar.js";
 
 export default class PageTemplates extends BaseComponent {
     usedComponents = [
-        LayoutList, RouterLink
+        LayoutList, RouterLink, NavBar
     ];
 
     get css() {
@@ -16,15 +17,26 @@ export default class PageTemplates extends BaseComponent {
                 display: flex;
                 justify-content: center;
                 font-family: 'Open Sans', sans-serif;
-                padding: 15px;
+                padding: 85px 15px 15px;
             }
 
             h1 {
+                font-size: 4em;
+                font-weight: bold;
+                line-height: 1.2;
+                margin-bottom: 15px;
+                max-width: 60%;
+            }
+
+            nav-bar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 10;
                 font-size: 3em;
                 font-weight: 100;
                 line-height: 1.3;
-                margin-top: 0.8em;
-                margin-bottom: 0.4em;
             }
 
             .back {
@@ -32,7 +44,7 @@ export default class PageTemplates extends BaseComponent {
                 font-size: 2em;
                 color: black;
                 line-height: 1.1;
-                margin-bottom: 0.3em;
+                margin-bottom: 30px;
             }
 
             .content {
@@ -71,6 +83,7 @@ export default class PageTemplates extends BaseComponent {
 
     get html() {
         return `
+            <nav-bar></nav-bar>
 
             <div class="content">
                 <h1>Vælg en skabelon</h1>

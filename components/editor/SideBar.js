@@ -1,6 +1,7 @@
 import LayoutList from "./LayoutList.js";
 import ColorList from "./ColorList.js";
 import BaseComponent from "../BaseComponent.js";
+import SideToggle from "./SideToggle.js";
 
 export default class SideBar extends BaseComponent {
     static observedAttributes = [
@@ -9,7 +10,8 @@ export default class SideBar extends BaseComponent {
 
     usedComponents = [
         LayoutList,
-        ColorList
+        ColorList,
+        SideToggle
     ];
 
     // language=HTML
@@ -27,16 +29,22 @@ export default class SideBar extends BaseComponent {
 
     script = () => {
         const toggle = this.shadowRoot.querySelector("side-toggle");
-        toggle.addEventListener("click", () => {
-            // Get valueless attribute "open" and toggle it based on if it is there
-            const open = this.getAttribute("open");
-            if (open != null) {
-                this.removeAttribute("open");
-            } else {
-                this.setAttribute("open", "");
-            }
-        });
+        toggle.addEventListener("click", () => this.toggle());
     };
+
+    toggle() {
+        const toggle = this.shadowRoot.querySelector("side-toggle");
+
+        // Get valueless attribute "open" and toggle it based on if it is there
+        const open = this.getAttribute("open");
+        if (open != null) {
+            this.removeAttribute("open");
+        } else {
+            this.setAttribute("open", "");
+        }
+
+        toggle.toggle();
+    }
 
     externalStyles = [];
 
