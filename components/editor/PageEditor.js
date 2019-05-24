@@ -3,7 +3,6 @@ import Router from "../../lib/Router.js";
 import SideBar from "./SideBar.js";
 import {getItem, setItem} from "../../lib/storage-helper.js";
 import NavBar from "../shared/NavBar.js";
-import {getPath} from "../../lib/paths.js";
 import CustomButton from "../shared/CustomButton.js";
 import Logo from "../shared/Logo.js";
 
@@ -26,9 +25,7 @@ export default class PageEditor extends BaseComponent {
                 </div>
             </nav-bar>
             <side-bar></side-bar>
-            <div class="cv-container">
-                
-            </div>
+            <div class="cv-container"></div>
             
         `;
     };
@@ -51,6 +48,13 @@ export default class PageEditor extends BaseComponent {
             this.toggleSidebarIfNecessary();
             setItem("colors", e.detail.colors);
         });
+
+        const sidebar = this.shadowRoot.querySelector("side-bar");
+        if (sidebar != null) {
+            this.shadowRoot.getElementById("settings-button").addEventListener("click", () => {
+                sidebar.toggle();
+            });
+        }
     };
 
     toggleSidebarIfNecessary() {

@@ -23,7 +23,7 @@ export default class SideBar extends BaseComponent {
                     <color-list></color-list>
                 </div>
             </div>
-            <side-toggle close></side-toggle>
+            <side-toggle closed></side-toggle>
         `;
     }
 
@@ -33,7 +33,8 @@ export default class SideBar extends BaseComponent {
     };
 
     toggle() {
-        const toggle = this.shadowRoot.querySelector("side-toggle");
+        //const toggle = this.shadowRoot.querySelector("side-toggle");
+        //toggle.toggle();
 
         // Get valueless attribute "open" and toggle it based on if it is there
         const open = this.getAttribute("open");
@@ -43,7 +44,7 @@ export default class SideBar extends BaseComponent {
             this.setAttribute("open", "");
         }
 
-        toggle.toggle();
+
     }
 
     externalStyles = [];
@@ -52,7 +53,7 @@ export default class SideBar extends BaseComponent {
     get css() {
         return `
             :host {
-                transform: translateX(-100%);
+                transform: translateX(calc(-100% - 50px));
                 transition: 750ms cubic-bezier(0.77, 0, 0.175, 1) transform;
                 display: block;
                 height: 100%;
@@ -88,7 +89,7 @@ export default class SideBar extends BaseComponent {
             }
             
             @media(max-width: 550px) {
-                side-toggle[close] {
+                side-toggle[closed] {
                     right: -50px;
                 }
             }
@@ -117,11 +118,8 @@ export default class SideBar extends BaseComponent {
                 max-width: 500px;
                 width: 100%;
                 box-shadow: -5px 0 5px #888;
+                z-index: 1;
             }
-            
-            /*color-list {*/
-            /*    position: relative;*/
-            /*}*/
         `
     };
 }

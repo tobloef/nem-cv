@@ -12,7 +12,8 @@ export default class PageTemplates extends BaseComponent {
         LayoutList,
         NavBar,
         CustomButton,
-        Logo
+        Logo,
+        RouterLink
     ];
 
     get css() {
@@ -26,11 +27,11 @@ export default class PageTemplates extends BaseComponent {
             }
 
             h1 {
-                font-size: 4em;
-                font-weight: bold;
-                line-height: 1.2;
-                margin-bottom: 15px;
-                max-width: 60%;
+                font-size: 3.5em;
+                margin: 0.7em 0;
+                max-width: unset;
+                font-weight: normal;
+                text-decoration: underline;
             }
 
             nav-bar {
@@ -44,34 +45,8 @@ export default class PageTemplates extends BaseComponent {
                 line-height: 1.3;
             }
 
-            .back {
-                display: block;
-                font-size: 2em;
-                color: black;
-                line-height: 1.1;
-                margin-bottom: 30px;
-            }
-
             .content {
                 max-width: 900px;
-            }
-
-            @media(min-width: 680px) {
-                h1 {
-                    font-size: 4.5em;
-                }
-
-                .back {
-                    font-size: 2.2em;
-                    margin-bottom: 1em;
-                }
-            }
-
-            @media(min-width: 1100px) {
-                h1 {
-                    font-size: 5.5em;
-                    margin-bottom: 0.3em;
-                }
             }
         `;
     }
@@ -100,7 +75,6 @@ export default class PageTemplates extends BaseComponent {
             </nav-bar>
             <div class="content">
                 <h1>Vælg en skabelon</h1>
-                <router-link class="back" href="/">Tilbage</router-link>
                 <layout-list class="resizing"></layout-list>
             </div>
         `;

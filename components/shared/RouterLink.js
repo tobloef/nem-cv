@@ -7,7 +7,10 @@ export default class RouterLink extends BaseComponent {
     ];
 
     get html() {
-        const url = Router.prefix + this.href;
+        let url = this.href;
+        if (this.href !== "/") {
+            url = Router.prefix + url;
+        }
         return `<a href="${url}"><slot></slot></a>`;
     };
 
@@ -18,7 +21,7 @@ export default class RouterLink extends BaseComponent {
             Router.navigate(Router.prefix + this.href);
             return false;
         });
-    }
+    };
 
     get css() {
         // language=CSS
