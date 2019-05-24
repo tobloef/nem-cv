@@ -9,12 +9,168 @@ import {
     getPath
 } from "../../lib/paths.js";
 import TestimonialSlider from './TestimonialSlider.js';
+import TemplateSlider from './TemplateSlider.js';
 import Logo from "../shared/Logo.js";
 
 export default class PageHome extends BaseComponent {
     usedComponents = [
-        RouterLink, HomeHeader, CustomButton, NavBar, Logo, TestimonialSlider
+        RouterLink, HomeHeader, CustomButton, NavBar, Logo, TestimonialSlider, TemplateSlider
     ];
+
+    // section.features {
+    //     display: flex;
+    //     flex-direction: column;
+    //     align-items: center;
+    //     padding: 15px 50px;
+    //     background-color: hsl(77, 30%, 92%);
+    // }
+    //
+    // section.features h2 {
+    //     text-align: center;
+    //     margin-bottom: 20px;
+    // }
+    //
+    // section.features router-link {
+    //     text-decoration: none;
+    // }
+    //
+    // section.features router-link custom-button {
+    //     display: inline-block;
+    //     --padding-x: 30px;
+    //     margin-top: 10px;
+    //     --hover-background-color: #ebece9;
+    // }
+    //
+    // .cards {
+    //     display: flex;
+    //     flex-direction: column;
+    //     max-width: 750px;
+    // }
+    //
+    // .card {
+    //     background: white;
+    //     padding: 10px 30px;
+    //     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    // }
+    //
+    // .card h3 {
+    //     margin-bottom: 20px;
+    // }
+    //
+    // .card .split {
+    //     display: flex;
+    //     flex-direction: column;
+    // }
+    //
+    // .card .left,
+    // .card .right {
+    //     width: 100%;
+    // }
+    //
+    // .card.templates img {
+    //     width: 100%;
+    // }
+    //
+    // .seperator {
+    //     width: 100%;
+    //     height: 3px;
+    //     background: black;
+    // }
+    //
+    // .card.colors {
+    //     margin-top: 30px;
+    // }
+    //
+    // .card.colors .line {
+    //     display: flex;
+    //     justify-content: space-between;
+    //     font-size: 10vw;
+    // }
+    //
+    // .card.colors .green {
+    //     color: #69b168;
+    // }
+    //
+    // .card.colors .red {
+    //     color: #F86868;
+    // }
+    //
+    // .card.colors .blue {
+    //     color: #7aacb3;
+    // }
+    //
+    // .card.colors .yellow {
+    //     color: #FDF883;
+    // }
+    //
+    // .card.colors .brown {
+    //     color: #875820;
+    // }
+    //
+    // .card.colors .purple {
+    //     color: #AB80A7;
+    // }
+    //
+    // .card.colors .gray {
+    //     color: #a1a1a1;
+    // }
+    //
+    // .card.colors .pink {
+    //     color: #ff50a3;
+    // }
+    //
+    // .card.colors .bordeaux {
+    //     color: #8B0817;
+    // }
+    //
+    // .card.colors .dark-green {
+    //     color: #066515;
+    // }
+
+//     <section class="features">
+//         <h2>Derfor skal du vælge os</h2>
+//         <div class="cards">
+//             <div class="card templates">
+//                 <div class="split">
+//                     <div class="left">
+//                         <h3>Vælg mellem <b class="underline">tre</b> <i>forskellige</i> templates</h3>
+//                         <div class="seperator"></div>
+//                     </div>
+//                     <div class="right">
+//                         <img alt="Skabelonen simplicitet" src="${getPath("template-modern")}"/>
+//                     </div>
+//                 </div>
+//                 <router-link href="/templates">
+//                     <custom-button label="Start Nu">
+//                         Start nu
+//                     </custom-button>
+//                 </router-link>
+//             </div>
+//             <div class="card colors">
+//                 <div class="split">
+//                     <div class="left">
+//                         <h3>Vælg farver efter din personlighed</h3>
+//                         <div class="seperator"></div>
+//                     </div>
+//                     <div class="right">
+//                         <p class="line"><span class="green">GRØN</span><span class="red">RØD</span></p>
+//                         <p class="line"><span class="blue">BLÅ</span><span class="yellow">GUL</span></p>
+//                         <p class="line"><span class="brown">BRUN</span></p>
+//                         <p class="line"><span class="purple">LILLA</span><span class="gray">GRÅ</span></p>
+//                         <p class="line"><span class="pink">LYSERØD</span></p>
+//                         <p class="line"><span class="bordeaux">BORDEAUX</span></p>
+//                         <p class="line"><span class="dark-green">MØRKEGRØN</span></p>
+//                     </div>
+//                 </div>
+//                 <router-link href="/templates">
+//                     <custom-button label="Start nu">
+//                         Start nu
+//                     </custom-button>
+//                 </router-link>
+//             </div>
+//         </div>
+//     </div>
+// </section>
 
     get html() {
         return `
@@ -28,67 +184,32 @@ export default class PageHome extends BaseComponent {
             </nav-bar>
             <home-header></home-header>
 
-            <section class="features">
-                <h2>Derfor skal du vælge os</h2>
-                <div class="cards">
-                    <div class="card templates">
-                        <div class="split">
-                            <div class="left">
-                                <h3>Vælg mellem <b class="underline">tre</b> <i>forskellige</i> templates</h3>
-                                <div class="seperator"></div>
-                            </div>
-                            <div class="right">
-                                <img alt="Skabelonen simplicitet" src="${getPath("template-modern")}"/>
-                            </div>
-                        </div>
-                        <router-link href="/templates">
-                            <custom-button label="Start Nu">
-                                Start nu
-                            </custom-button>
-                        </router-link>
-                    </div>
-                    <div class="card colors">
-                        <div class="split">
-                            <div class="left">
-                                <h3>Vælg farver efter din personlighed</h3>
-                                <div class="seperator"></div>
-                            </div>
-                            <div class="right">
-                                <p class="line"><span class="green">GRØN</span><span class="red">RØD</span></p>
-                                <p class="line"><span class="blue">BLÅ</span><span class="yellow">GUL</span></p>
-                                <p class="line"><span class="brown">BRUN</span></p>
-                                <p class="line"><span class="purple">LILLA</span><span class="gray">GRÅ</span></p>
-                                <p class="line"><span class="pink">LYSERØD</span></p>
-                                <p class="line"><span class="bordeaux">BORDEAUX</span></p>
-                                <p class="line"><span class="dark-green">MØRKEGRØN</span></p>
-                            </div>
-                        </div>
-                        <router-link href="/templates">
-                            <custom-button label="Start nu">
-                                Start nu
-                            </custom-button>
-                        </router-link>
-                    </div>
+            <section class="templates">
+                <h2>Vælg mellem <b class="underline">tre</b> <i>forskellige</i> templates</h3>
+                <template-slider></template-slider>
+            </section>
+
+            <section class="colors" style="text-align: center; display: flex; justify-content: center; align-items: center; font-size: 2em; color: white; background-color: red; padding: 70px;height: 700px;font-weight: bold;">
+                <h2>TODO: Section om colors</h2>
+            </section>
+
+            <section class="testimonials">
+                <testimonial-slider></testimonial-slider>
+            </section>
+            <section class="cta">
+                <div class="wrapper">
+                    <p class="cta-text">Kom i gang med at lave dit eget professionelle CV nu</p>
+                    <router-link href="/templates">
+                        <custom-button solid label="Kom i gang">
+                            Kom i gang
+                        </custom-button>
+                    </router-link>
                 </div>
-            </div>
-        </section>
-        <section class="testimonials">
-            <testimonial-slider></testimonial-slider>
-        </section>
-        <section class="cta">
-            <div class="wrapper">
-                <p class="cta-text">Kom i gang med at lave dit eget professionelle CV nu</p>
-                <router-link href="/templates">
-                    <custom-button solid label="Kom i gang">
-                        Kom i gang
-                    </custom-button>
-                </router-link>
-            </div>
-        </section>
-        <footer>
-            <p>This is a footer</p>
-        </footer>
-    `;
+            </section>
+            <footer>
+                <p>This is a footer</p>
+            </footer>
+        `;
     }
 
     get css() {
@@ -128,114 +249,22 @@ export default class PageHome extends BaseComponent {
                text-decoration: underline;
            }
 
-           section.features {
+           section.templates {
                display: flex;
                flex-direction: column;
+               padding: 50px;
                align-items: center;
-               padding: 15px 50px;
-               background-color: hsl(77, 30%, 92%);
+               background: hsl(47, 50%, 85%);
            }
 
-           section.features h2 {
+           section.templates h2 {
                text-align: center;
-               margin-bottom: 20px;
+               margin-bottom: 40px;
+               max-width: 600px;
            }
 
-           section.features router-link {
-               text-decoration: none;
-           }
-
-           section.features router-link custom-button {
-               display: inline-block;
-               --padding-x: 30px;
-               margin-top: 10px;
-               --hover-background-color: #ebece9;
-           }
-
-           .cards {
-               display: flex;
-               flex-direction: column;
-               max-width: 750px;
-           }
-
-           .card {
-               background: white;
-               padding: 10px 30px;
-               box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-           }
-
-           .card h3 {
-               margin-bottom: 20px;
-           }
-
-           .card .split {
-               display: flex;
-               flex-direction: column;
-           }
-
-           .card .left,
-           .card .right {
+           section.templates template-slider {
                width: 100%;
-           }
-
-           .card.templates img {
-               width: 100%;
-           }
-
-           .seperator {
-               width: 100%;
-               height: 3px;
-               background: black;
-           }
-
-           .card.colors {
-               margin-top: 30px;
-           }
-
-           .card.colors .line {
-               display: flex;
-               justify-content: space-between;
-               font-size: 10vw;
-           }
-
-           .card.colors .green {
-               color: #69b168;
-           }
-
-           .card.colors .red {
-               color: #F86868;
-           }
-
-           .card.colors .blue {
-               color: #7aacb3;
-           }
-
-           .card.colors .yellow {
-               color: #FDF883;
-           }
-
-           .card.colors .brown {
-               color: #875820;
-           }
-
-           .card.colors .purple {
-               color: #AB80A7;
-           }
-
-           .card.colors .gray {
-               color: #a1a1a1;
-           }
-
-           .card.colors .pink {
-               color: #ff50a3;
-           }
-
-           .card.colors .bordeaux {
-               color: #8B0817;
-           }
-
-           .card.colors .dark-green {
-               color: #066515;
            }
 
            section.testimonials {
@@ -326,6 +355,11 @@ export default class PageHome extends BaseComponent {
                .card {
                    padding: 50px;
                }
+
+               h2 {
+                   font-size: 3em;
+                   line-height: 1.5;
+               }
            }
 
            @media(min-width: 700px) {
@@ -363,6 +397,7 @@ export default class PageHome extends BaseComponent {
         super.connectedCallback();
 
         this._observeHeader();
+        this._observeTemplates();
         this._observeTestimonials();
     }
 
@@ -394,6 +429,21 @@ export default class PageHome extends BaseComponent {
 
         // start observing
         this.headerObserver.observe(this.shadowRoot.querySelector("section.testimonials"));
+    }
+
+    _observeTemplates() {
+        const templateSlider = this.shadowRoot.querySelector("template-slider");
+
+        this.templateObserver = new IntersectionObserver(entries => {
+            if (entries[0].intersectionRatio <= 0.1) {
+                templateSlider.stop();
+            } else {
+                templateSlider.resume();
+            }
+        }, { threshold: [0, 0.1]});
+
+        // start observing
+        this.templateObserver.observe(this.shadowRoot.querySelector("section.templates"));
     }
 
     script = () => {
