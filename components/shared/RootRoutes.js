@@ -16,6 +16,10 @@ export default class RootRoutes extends BaseComponent {
         PageTemplates,
         PageEditor,
         PageNotFound,
+
+        CVSimple,
+        CVOctagon,
+        CVModern,
     ];
 
     routes = [
