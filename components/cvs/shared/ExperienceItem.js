@@ -4,8 +4,7 @@ import BaseComponent from "../../BaseComponent.js";
 export default class ExperienceItem extends BaseComponent {
     static observedAttributes = [
         "experience-type",
-        "where-separator",
-        ""
+        "where-separator"
     ];
 
     usedComponents = [
@@ -15,17 +14,17 @@ export default class ExperienceItem extends BaseComponent {
     // language=HTML
     get html() {
         return `
-            <div content-type="object">
+            <div content-type="object" part="experience-item">
                 <span class="divider where">
                     <editable-component
                             placeholder="${this.experienceType}"
-                            element="div"
+                            element="p"
                             content-key="name"
                             content-type="component"
                     ></editable-component>${this.whereSeparator || ""}
                     <editable-component
                             placeholder="Titel"
-                            element="div"
+                            element="p"
                             content-key="title"
                             content-type="component"
                     ></editable-component>
@@ -33,13 +32,13 @@ export default class ExperienceItem extends BaseComponent {
                 <span class="divider when">
                     <editable-component
                             placeholder="Startår"
-                            element="div"
+                            element="p"
                             content-key="from"
                             content-type="component"
-                    ></editable-component> -
+                    ></editable-component><p> - </p>
                     <editable-component
                             placeholder="Slutår"
-                            element="div"
+                            element="p"
                             content-key="to"
                             content-type="component"
                     ></editable-component>

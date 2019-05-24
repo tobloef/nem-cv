@@ -1,12 +1,12 @@
 // language=CSS
 
 const css = `
-    @import url('https://fonts.googleapis.com/css?family=Exo:800|Oswald:500|Raleway&display=swap');
+    @import url('https://fonts.googleapis.com/css?family=Palanquin:400,700&display=swap');
 
     :host{
-        --h1: 'exo', sans-serif;
-        --h2: 'oswald', sans-serif;
-        --p: 'raleway', sans-serif;
+        --h1: 'palanquin', sans-serif;
+        --h2: 'palanquin', sans-serif;
+        --p: 'palanquin', sans-serif;
         --h1-size: 2em;
         --editable-empty-text-color: #555;
     }

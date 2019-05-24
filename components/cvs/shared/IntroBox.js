@@ -3,7 +3,7 @@ import BaseComponent from "../../BaseComponent.js";
 import ProfileImage from "./ProfileImage.js";
 
 export default class IntroBox extends BaseComponent {
-    image = null
+    image = null;
     static observedAttributes = [];
     usedComponents = [
         EditableComponent,

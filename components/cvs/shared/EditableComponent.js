@@ -96,6 +96,18 @@ export default class EditableComponent extends BaseComponent {
             :host {
                 display: flex;
             }
+            
+            h1 {
+                font-family: var(--h1);
+            }
+
+            h2 {
+                font-family: var(--h2);
+            }
+            
+            p {
+                font-family: var(--p);
+            }
         `
     };
 }
