@@ -34,18 +34,7 @@ export default class WorkAreaItem extends BaseComponent {
     };
 
     setContent = (content) => {
-        console.log(this.constructor.name, "setContent", content);
         this.span.innerText = content;
-    };
-
-    // language=CSS
-    get style() {
-        return `
-            :host, :root, option, select, :host::part(dropdown), ::part(dropdown), :host::theme(dropdown) {
-                background-color: red;
-                font-family: Calibri,sans-serif;
-            }
-        `
     };
 
     addOptions = () => {

@@ -112,7 +112,6 @@ export default class BaseComponent extends HTMLElement {
     }
 
     setContent(content) {
-        console.log(this.constructor.name, "setContent", content);
         this._recurseSetContent(content, this.shadowRoot);
     }
 
