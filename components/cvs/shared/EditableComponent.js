@@ -14,7 +14,7 @@ export default class EditableComponent extends BaseComponent {
         return `
             <${this.element} 
                 id="content" 
-                class="empty-text" 
+                class="empty-text"
                 part="inner" 
                 contenteditable="true" 
                 role="textbox" 
@@ -44,25 +44,25 @@ export default class EditableComponent extends BaseComponent {
 
     onFocus = () => {
         this.node.style.minWidth = this.node.getBoundingClientRect().width + "px";
-        if (this.empty) {
+        if (this.node.innerHTML === "") {
             this.node.innerHTML = "";
-            this.empty = false;
             this.node.classList.remove("empty-text");
         }
-        this.selectTextInNode();
+        if (this.node.innerText === this.placeholder) {
+            this.selectTextInNode();
+        }
     };
 
     focusOut = () => {
         this.node.style.minWidth = "0";
         if (this.node.innerHTML === "") {
-            this.empty = true;
             this.node.innerHTML = this.placeholder;
             this.node.classList.add("empty-text");
         }
     };
 
     keyPress = () => {
-        if (!this.empty) {
+        if (this.node.innerHTML !== "") {
             this.node.style.minWidth = "0";
         }
     };
@@ -75,7 +75,7 @@ export default class EditableComponent extends BaseComponent {
     };
 
     getContent = () => {
-        const content = this.shadowRoot.getElementById("content").innerText;
+        const content = this.node.innerText;
         if (content === "") {
             return null;
         }
@@ -83,8 +83,10 @@ export default class EditableComponent extends BaseComponent {
     };
 
     setContent = (content) => {
-        console.log(this.constructor.name, "setContent", content);
-        this.shadowRoot.getElementById("content").innerText = (content || "");
+        this.node.innerText = (content || "");
+        if (this.node.innerText !== "") {
+            this.node.classList.remove("empty-text");
+        }
     };
 
     // language=CSS

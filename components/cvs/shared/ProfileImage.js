@@ -44,7 +44,6 @@ export default class ProfileImage extends BaseComponent {
     };
 
     setContent = (content) => {
-        console.log(this.constructor.name, "setContent", content);
         this.setAttribute("src", content);
         this.render();
     };
