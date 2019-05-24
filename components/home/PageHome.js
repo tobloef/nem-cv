@@ -2,7 +2,6 @@ import BaseComponent from "../BaseComponent.js";
 import RouterLink from "../shared/RouterLink.js";
 import CustomButton from "../shared/CustomButton.js";
 import NavBar from "../shared/NavBar.js";
-import wait from "../../lib/wait.js";
 import HomeHeader from './HomeHeader.js';
 
 export default class PageHome extends BaseComponent {
@@ -11,7 +10,13 @@ export default class PageHome extends BaseComponent {
     ];
 
     html = `
-        <nav-bar transparent></nav-bar>
+        <nav-bar transparent>
+            <router-link href="/templates">
+                <custom-button inverted>
+                    Start nu
+                </custom-button>
+            </router-link>
+        </nav-bar>
         <home-header></home-header>
 
         <section class="features">

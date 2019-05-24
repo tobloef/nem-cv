@@ -72,7 +72,7 @@ export default class HomeHeader extends BaseComponent {
                     <div class="actual-cta">Start nu</div>
                 </router-link>-->
                 <router-link class="cta-link" href="/templates">
-                    <custom-button class="cta">
+                    <custom-button class="cta" inverted>
                         Start nu
                     </custom-button>
                 </router-link>
@@ -315,11 +315,6 @@ export default class HomeHeader extends BaseComponent {
             }
 
             .cta {
-                --border-color: white;
-                --text-color: white;
-                --hover-background-color: var(--border-color);
-                --hover-text-color: black;
-
                 font-size: 1.2em;
             }
 

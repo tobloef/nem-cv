@@ -1,6 +1,7 @@
 import LayoutList from "./LayoutList.js";
 import ColorList from "./ColorList.js";
 import BaseComponent from "../BaseComponent.js";
+import SideToggle from "./SideToggle.js";
 
 export default class SideBar extends BaseComponent {
     static observedAttributes = [
@@ -9,7 +10,8 @@ export default class SideBar extends BaseComponent {
 
     usedComponents = [
         LayoutList,
-        ColorList
+        ColorList,
+        SideToggle
     ];
 
     // language=HTML

@@ -35,15 +35,13 @@ export default class LayoutList extends BaseComponent {
     get css() {
         return `
             @media(max-width: 700px) {
-                :host(.resizing) {
-                    display: flex;
-                    flex-direction: column;
-                }
-                
                 :host(.resizing)>layout-descriptor:not(:last-child) {
                     border-bottom: 1px solid #aaa;
-                    padding: 3em 0 2em 0;
-                    margin: 0 0.5em;
+                    padding-bottom: 2em;
+                }
+
+                :host(.resizing)>layout-descriptor:not(:first-child) {
+                    padding-top: 3em;
                 }
             }
 
@@ -74,7 +72,7 @@ export default class LayoutList extends BaseComponent {
                 }
             }
 
-            :host(.flex-list) {
+            :host {
                 display: flex;
                 flex-direction: column;
             }
@@ -88,13 +86,5 @@ export default class LayoutList extends BaseComponent {
                 padding-bottom: 2em;
             }
         `
-    };
-
-    handleExample(themeId) {
-        console.log("Showing example for:", themeId);
-    };
-
-    handleSelect(themeId) {
-        console.log("Selecting:", themeId);
     };
 }

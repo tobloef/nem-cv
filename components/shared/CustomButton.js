@@ -1,7 +1,7 @@
 import BaseComponent from "../BaseComponent.js";
 
 export default class CustomButton extends BaseComponent {
-    static observedAttributes = ["secondary"];
+    static observedAttributes = ["secondary", "inverted"];
 
     // language=HTML
     get html() {
@@ -21,6 +21,13 @@ export default class CustomButton extends BaseComponent {
 
                 --padding-y: 14px;
                 --padding-x: 28px;
+            }
+            
+            :host([inverted]) {
+                --border-color: white;
+                --text-color: white;
+                --hover-background-color: var(--border-color);
+                --hover-text-color: black;
             }
 
             button {
