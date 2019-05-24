@@ -8,12 +8,6 @@ export default class AbstractCV extends BaseComponent {
     usedComponents = [];
 
     commonScript = () => {
-        whenReady(() => {
-            const content = getStorageItem("cv-content");
-            this.setContent(content);
-            addStorageItemListener("cv-content", this.setContent);
-        });
-
         const experienceList = this.shadowRoot.getElementById("experience-list");
         experienceList.itemAttributes = {
             "experience-type": "Firma"
@@ -35,6 +29,12 @@ export default class AbstractCV extends BaseComponent {
         const sectorList = this.shadowRoot.getElementById("sector-list");
         sectorList.itemAttributes = {"content-type": "component"};
         sectorList.render();
+
+        whenReady(() => {
+            const content = getStorageItem("cv-content");
+            this.setContent(content);
+            addStorageItemListener("cv-content", this.setContent);
+        });
     };
 
     educationWhereSeparator = null;

@@ -49,10 +49,19 @@ export default class PageEditor extends BaseComponent {
             this.changeCVType();
         }
 
+        const sidebar = this.shadowRoot.querySelector("side-bar");
+        if (sidebar != null) {
+            const settingsButton = this.shadowRoot.getElementById("settings-button");
+            settingsButton.addEventListener("click", () => {
+                sidebar.toggle();
+            });
+        }
+
         this.addEventListener("select-click", (e) => {
             this.toggleSidebarIfNecessary();
             setStorageItem("template", e.detail);
             this.changeCVType();
+            sidebar.toggle();
         });
 
         this.addEventListener("example-click", (e) => {
@@ -64,14 +73,6 @@ export default class PageEditor extends BaseComponent {
             setStorageItem("colors", e.detail.colors);
             this.changeColors();
         });
-
-        const sidebar = this.shadowRoot.querySelector("side-bar");
-        if (sidebar != null) {
-            const settingsButton = this.shadowRoot.getElementById("settings-button");
-            settingsButton.addEventListener("click", () => {
-                sidebar.toggle();
-            });
-        }
 
         const finishButton = this.shadowRoot.getElementById("finish-button");
         finishButton.addEventListener("click", async () => {
@@ -120,7 +121,6 @@ export default class PageEditor extends BaseComponent {
         const colorScheme = getStorageItem("colors");
         if (this.colorScheme !== colorScheme) {
             // TODO: Update styles from the color scheme
-
             this.colorScheme = colorScheme;
         }
     };

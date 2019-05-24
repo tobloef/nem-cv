@@ -116,6 +116,7 @@ export default class BaseComponent extends HTMLElement {
     };
 
     _recurseSetContent(content, element) {
+        console.debug("Setting content", content, "on children of", element);
         for (const child of element.children) {
             const key = child.getAttribute("content-key");
             const type = child.getAttribute("content-type");
