@@ -7,6 +7,7 @@ import ExperienceItem from "./shared/ExperienceItem.js";
 import WorkAreaItem from "./shared/WorkAreaItem.js";
 import ListButton from "./shared/ListButton.js";
 import AbstractCV from "./AbstractCV.js";
+import {getStorageItem} from "../../lib/storage-helper.js";
 
 export default class CVSimple extends AbstractCV {
     usedComponents = [
@@ -16,6 +17,8 @@ export default class CVSimple extends AbstractCV {
         ListButton,
         AppendableComponentList
     ];
+
+    colors = null;
 
     // language=HTML
     get html() {
@@ -69,6 +72,7 @@ export default class CVSimple extends AbstractCV {
     script = () => {
         BaseComponent.template = simple;
         BaseComponent.colors = colors;
+        this.colors = JSON.parse(getStorageItem("grp2_colors"));
     };
 
     educationWhereSeparator = ", ";
@@ -79,6 +83,7 @@ export default class CVSimple extends AbstractCV {
         return `
             body {
                 margin: 0;
+                color: ${"black" || this.colors.fontColor};
             }
             li {
                 user-select: none;
@@ -101,7 +106,7 @@ export default class CVSimple extends AbstractCV {
                 width: 100%;
             }
             .other section {
-                height: 100%;
+                min-height: 50vh;
             }
             .other section h1 {
                 font-family: var(--h1);
@@ -110,7 +115,7 @@ export default class CVSimple extends AbstractCV {
                 margin-bottom: 0.5em;
             }
             .education {
-                background-color: darkgreen;
+                background-color: ${"gray" || this.colors.accentColor};
             }
             .experience {
                 background-color: rebeccapurple;
@@ -151,15 +156,22 @@ export default class CVSimple extends AbstractCV {
                 height: 1em;
             }
             
+            #experience-list {
+                margin-bottom: 3em;
+            }
 
-            @media (min-width: 1024px) {
+            @media screen and   (min-width: 1024px) {
                 main {
                     flex-direction: row;
                     min-height: 100vh;
                 }
-            }
-            #experience-list {
-                margin-bottom: 3em;
+                
+                intro-box {
+                min-width: 500px;
+                }
+                
+                .other section {
+                }
             }
         `
     };

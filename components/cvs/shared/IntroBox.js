@@ -1,9 +1,11 @@
 import EditableComponent from "./EditableComponent.js";
 import BaseComponent from "../../BaseComponent.js";
 import ProfileImage from "./ProfileImage.js";
+import {getStorageItem} from "../../../lib/storage-helper.js";
 
 export default class IntroBox extends BaseComponent {
-    image = null
+    image = null;
+    colors = null;
     static observedAttributes = [];
     usedComponents = [
         EditableComponent,
@@ -63,6 +65,7 @@ export default class IntroBox extends BaseComponent {
 
 
     script = () => {
+        this.colors = JSON.parse(getStorageItem("grp2_colors"));
     };
 
 
@@ -73,7 +76,8 @@ export default class IntroBox extends BaseComponent {
         return `
 
             .introbox {
-                background-color: aquamarine;
+                background-color: ${"white" || this.colors.backgroundColor};
+                
                 padding: 4em;
             }
 
