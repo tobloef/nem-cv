@@ -17,7 +17,7 @@ export default class TestimonialSlider extends BaseComponent {
             image: "/img/testimonials/testimonial1.jpg",
         },
         {
-            text : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea.",
+            text : "xD.",
             person: "Yeet",
             image: "/img/testimonials/testimonial2.jpg",
         },
@@ -52,11 +52,13 @@ export default class TestimonialSlider extends BaseComponent {
                 --padding-y: 60px;
                 --padding-left: 60px;
                 --padding-right: 60px;
+                overflow: hidden;
             }
 
             .testimonial-images {
                 position: relative;
                 height: var(--image-height);
+
             }
 
             .testimonial-image {
@@ -70,6 +72,13 @@ export default class TestimonialSlider extends BaseComponent {
 
             .testimonial-image.visible {
                 opacity: 1;
+            }
+
+            .testimonial-texts {
+                overflow: hidden;
+                transition: 300ms ease-in-out height;
+                height: 0px;
+                min-height: 25em;
             }
 
             .testimonial-text {
@@ -100,10 +109,6 @@ export default class TestimonialSlider extends BaseComponent {
 
                 .testimonial-texts {
                     position: relative;
-                    height: 0px;
-                    transition: 300ms ease-in-out height;
-                    min-height: 25em;
-                    overflow: hidden;
                 }
             }
 
@@ -152,6 +157,14 @@ export default class TestimonialSlider extends BaseComponent {
                     --padding-y: 120px;
                     --padding-left: 120px;
                     --padding-right: 120px;
+                }
+
+                .testimonial-text {
+                    font-size: 2em;
+                }
+
+                .person {
+                    font-size: 1em;
                 }
             }
 

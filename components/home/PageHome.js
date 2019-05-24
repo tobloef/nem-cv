@@ -237,7 +237,7 @@ export default class PageHome extends BaseComponent {
                }
            }
 
-           @media(min-width: 750px) {
+           @media(min-width: 700px) {
                .cards {
                    flex-direction: row;
                }
