@@ -14,7 +14,7 @@ export default class IntroBox extends BaseComponent {
     get html() {
         return `
             <section class="introbox">
-                <profile-image aspect-ratio="2" content-key="picture" content-type="component"></profile-image>
+                <profile-image aspect-ratio="1" content-key="picture" content-type="component"></profile-image>
                 <editable-component
                                 content-key="name"
                                 content-type="component"
@@ -70,14 +70,10 @@ export default class IntroBox extends BaseComponent {
     // language=CSS
     get css() {
         return `
-            :host {
-                min-width: 400px;
-            }
 
             .introbox {
                 background-color: aquamarine;
-                min-height: 100vh;
-                padding: 2em;
+                padding: 4em;
             }
 
             h1, .name {

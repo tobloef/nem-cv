@@ -5,15 +5,18 @@ export default class AppendableComponentList extends BaseComponent {
         "item-component",
         "starting-amount",
         "separator",
-        "item-attributes"
+        "item-attributes",
+        "button-diameter"
     ];
 
     get html() {
         return `
             <div class="container" part="container">
                 <ul id="list" part="list"></ul>
-                <slot name="append-button" part="button"></slot>
-                <slot name="remove-button" part="button"></slot>
+                <div class="button-holder" part="buttons">
+                    <slot name="append-button" part="button"></slot>
+                    <slot name="remove-button" part="button"></slot>
+                </div>
             </div>
         `;
     };

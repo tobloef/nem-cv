@@ -3,14 +3,15 @@ import {getPath} from "../../../lib/paths.js";
 
 export default class ListButton extends BaseComponent {
     static observedAttributes = [
-        "icon"
+        "icon",
+        "diameter"
     ];
     usedComponents = [];
 
     // language=HTML
     get html() {
         return `
-            <img id="button" src="${getPath(this.icon)}"></button>
+            <img id="button" part="button" src="${getPath(this.icon)}"></button>
         `;
     }
 
@@ -30,7 +31,7 @@ export default class ListButton extends BaseComponent {
     get css() {
         return `
             #button{
-                --dia: 2em;
+                --dia: ${this.diameter || "2em"};
                 height: var(--dia);
                 width: var(--dia);
                 border: none;

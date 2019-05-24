@@ -4,8 +4,7 @@ import BaseComponent from "../../BaseComponent.js";
 export default class ExperienceItem extends BaseComponent {
     static observedAttributes = [
         "experience-type",
-        "where-separator",
-        ""
+        "where-separator"
     ];
 
     usedComponents = [
@@ -15,14 +14,14 @@ export default class ExperienceItem extends BaseComponent {
     // language=HTML
     get html() {
         return `
-            <div content-type="object">
+            <div content-type="object" class="container">
                 <span class="divider where">
                     <editable-component
                             placeholder="${this.experienceType}"
                             element="div"
                             content-key="name"
                             content-type="component"
-                    ></editable-component>${this.whereSeparator || ""}
+                    ></editable-component><span class="separator">${this.whereSeparator || ""}</span>
                     <editable-component
                             placeholder="Titel"
                             element="div"
@@ -51,7 +50,7 @@ export default class ExperienceItem extends BaseComponent {
     // language=CSS
     get css() {
         return `
-            :host {
+            .container {
                 display: flex;
                 justify-content: space-between;
                 width: 100%;
@@ -59,8 +58,12 @@ export default class ExperienceItem extends BaseComponent {
             .divider {
                 display: flex;
                 flex-direction: row;
+                justify-content: space-between;
             }
-
+            
+            .separator {
+                white-space: pre-wrap;
+            }
             button {
                 display: inline;
             }

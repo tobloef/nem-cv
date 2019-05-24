@@ -94,7 +94,6 @@ export default class CVSimple extends AbstractCV {
 
             .divider {
                 display: flex;
-                flex-direction: row;
             }
             .facts li {
                 display: flex;
@@ -102,8 +101,7 @@ export default class CVSimple extends AbstractCV {
 
             main {
                 display: flex;
-                flex-direction: row;
-                min-height: 100vh;
+                flex-direction: column;
             }
 
             .other {
@@ -112,7 +110,6 @@ export default class CVSimple extends AbstractCV {
             }
             .other section {
                 height: 100%;
-                max-height: 50vh;
             }
             .other section h1 {
                 font-family: var(--h1);
@@ -142,12 +139,33 @@ export default class CVSimple extends AbstractCV {
             appendable-component-list::part(list-item) {
                 margin-bottom: 0.8em;
             }
+
+            .work-areas::part(list) {
+                margin-bottom: 0;
+            }
+            
             .work-areas::part(container) {
                 display: flex;
                 flex-direction: row;
+                align-items: center;
             }
             .work-areas::part(list-item) {
                 font-family: var(--p);
+                font-size: 1.2em;
+            }
+            .work-areas::part(button) {
+                height: 1em;
+            }
+            
+
+            @media (min-width: 1024px) {
+                main {
+                    flex-direction: row;
+                    min-height: 100vh;
+                }
+            }
+            #experience-list {
+                margin-bottom: 3em;
             }
         `
     };
