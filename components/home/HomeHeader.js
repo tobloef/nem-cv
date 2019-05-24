@@ -50,7 +50,7 @@ export default class HomeHeader extends BaseComponent {
                             <div class="fake-text" style="width: 30%;"></div>
                             <div class="fake-text" style="width: 45%;"></div>
                         </div>
-    
+
                         <div class="fake-content-extra-col">
                             <div class="fake-text large" style="width: 40%;"></div>
                             <div class="fake-text" style="width: 70%;"></div>
@@ -68,7 +68,7 @@ export default class HomeHeader extends BaseComponent {
                     </div>
                     <div class="filler"></div>
                 </div>
-    
+
                 <div class="infobox">
                     <h1>Lad <span class="light">NemCV</span> hjælpe dig med dit CV</h1>
                     <router-link class="cta-link" href="/templates">
@@ -77,7 +77,7 @@ export default class HomeHeader extends BaseComponent {
                         </custom-button>
                     </router-link>
                 </div>
-    
+
                 <div class="background-container">
                     <img class="background" src="${getPath("landing-page-person")}"/>
                 </div>
@@ -337,11 +337,10 @@ export default class HomeHeader extends BaseComponent {
             }
 
 
-            @media(min-width: 1024px) {
+            @media(min-width: 950px) {
                 header {
                     max-height: unset;
                 }
-
 
                 .fakecv {
                     max-width: 750px;
