@@ -1,4 +1,5 @@
 import BaseComponent from "../../BaseComponent.js";
+import {addStorageItemListener, getStorageItem} from "../../../lib/storage-helper.js";
 
 export default class WorkAreaItem extends BaseComponent {
     span = null;
@@ -13,7 +14,6 @@ export default class WorkAreaItem extends BaseComponent {
 
     onClick = () => {
         this.swapToDropdown();
-        this.addOptions();
         this.dropdown.focus();
     };
 
@@ -28,6 +28,7 @@ export default class WorkAreaItem extends BaseComponent {
         this.span.addEventListener("click", this.onClick);
         this.dropdown.addEventListener("focusout", this.onFocusOut);
         this.updateStyles();
+        addStorageItemListener("sectors", this.addOptions);
     };
 
     getContent = () => {
@@ -49,7 +50,7 @@ export default class WorkAreaItem extends BaseComponent {
         choose.appendChild(document.createTextNode("Vælg en branche"));
         this.dropdown.appendChild(choose);
         // Add the sector options
-        const sectors = JSON.parse(localStorage.getItem("sectors"));
+        const sectors = getStorageItem("sectors");
         if (sectors != null) {
             for (const sector of sectors) {
                 const option = document.createElement("option");

@@ -1,7 +1,7 @@
 import BaseComponent from "../BaseComponent.js";
 import Router from "../../lib/Router.js";
 import SideBar from "./SideBar.js";
-import {getItem, setItem} from "../../lib/storage-helper.js";
+import {getStorageItem, setStorageItem} from "../../lib/storage-helper.js";
 import NavBar from "../shared/NavBar.js";
 import CVSimple from "../cvs/CVSimple.js";
 import CVModern from "../cvs/CVModern.js";
@@ -42,7 +42,7 @@ export default class PageEditor extends BaseComponent {
     };
 
     script = () => {
-        if (getItem("template") == null) {
+        if (getStorageItem("template") == null) {
             return Router.navigate(Router.prefix + "/templates");
         } else {
             this.changeCVType();
@@ -50,7 +50,7 @@ export default class PageEditor extends BaseComponent {
 
         this.addEventListener("select-click", (e) => {
             this.toggleSidebarIfNecessary();
-            setItem("template", e.detail);
+            setStorageItem("template", e.detail);
             this.changeCVType();
         });
 
@@ -60,7 +60,7 @@ export default class PageEditor extends BaseComponent {
 
         this.addEventListener("color-picked", (e) => {
             this.toggleSidebarIfNecessary();
-            setItem("colors", e.detail.colors);
+            setStorageItem("colors", e.detail.colors);
             this.changeColors();
         });
 
@@ -79,7 +79,7 @@ export default class PageEditor extends BaseComponent {
             }
             // TODO: Validate
             const content = this.cv.getContent();
-            localStorage.setItem("cv-content", JSON.stringify(content));
+            setStorageItem("cv-content", content);
             // TODO: Navigate to preview page
             alert("TEMPORARY: Your CV has been saved!");
         });
@@ -94,7 +94,7 @@ export default class PageEditor extends BaseComponent {
     };
 
     changeCVType = () => {
-        const cvType = getItem("template");
+        const cvType = getStorageItem("template");
         if (this.cvType !== cvType) { // If the gotten type is different from the current one
             const cvContainer = this.shadowRoot.getElementById("cv-container");
             cvContainer.innerHTML = ""; // Get content div and reset contents
@@ -107,7 +107,7 @@ export default class PageEditor extends BaseComponent {
 
 
     changeColors = () => {
-        const colorScheme = getItem("colors");
+        const colorScheme = getStorageItem("colors");
         if (this.colorScheme !== colorScheme) {
             // TODO: Update styles from the color scheme
 

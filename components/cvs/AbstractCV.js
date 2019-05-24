@@ -1,5 +1,6 @@
 import BaseComponent from "../BaseComponent.js";
 import whenReady from "../../lib/whenReady.js";
+import {getStorageItem} from "../../lib/storage-helper.js";
 
 export default class AbstractCV extends BaseComponent {
     static observedAttributes = [];
@@ -8,9 +9,9 @@ export default class AbstractCV extends BaseComponent {
 
     commonScript = () => {
         whenReady(() => {
-            const contentStr = localStorage.getItem("cv-content");
+            const contentStr = getStorageItem("cv-content");
             if (contentStr != null) {
-                this.setContent(JSON.parse(contentStr));
+                this.setContent(contentStr);
             }
         });
 

@@ -2,7 +2,7 @@ import BaseComponent from "../BaseComponent.js";
 import Router from "../../lib/Router.js";
 import RouterLink from "../shared/RouterLink.js";
 import LayoutList from "../editor/LayoutList.js";
-import {setItem} from "../../lib/storage-helper.js";
+import {setStorageItem} from "../../lib/storage-helper.js";
 import NavBar from "../shared/NavBar.js";
 import CustomButton from "../shared/CustomButton.js";
 import Logo from "../shared/Logo.js";
@@ -53,7 +53,7 @@ export default class PageTemplates extends BaseComponent {
 
     script = () => {
         this.addEventListener("select-click", (evt) => {
-            setItem("template", evt.detail);
+            setStorageItem("template", evt.detail);
             Router.navigate(Router.prefix + "/editor");
         });
         this.addEventListener("example-click", (evt) => {

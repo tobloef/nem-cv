@@ -1,28 +1,40 @@
 import RootRoutes from "./components/shared/RootRoutes.js"
-import {addStorageHook, addListener} from "./lib/storage-helper.js";
+import {addStorageHook, addStorageItemListener, getStorageItem, setStorageItem} from "./lib/storage-helper.js";
 import {resetCSSString} from "./lib/reset-css.js";
 import {getSectors} from "./lib/api.js";
 import WorkAreaItem from "./components/cvs/shared/WorkAreaItem.js";
 
 RootRoutes.define();
 addStorageHook();
-addListener("colors", console.log);
-
-const style = document.createElement("style");
-style.innerText = resetCSSString;
-document.body.appendChild(style);
+addResetCSS();
+checkForExistingCV();
 // noinspection JSIgnoredPromiseFromCall
 fetchSectors();
+
+
+function addResetCSS() {
+    const style = document.createElement("style");
+    style.innerText = resetCSSString;
+    document.body.appendChild(style);
+}
+
+function checkForExistingCV() {
+    if (getStorageItem("cv-content") != null || getStorageItem("template") != null) {
+        if (!confirm("Der blev fundet et eksisterende CV fra tidligere brug. Ønsker du at bruge denne?")) {
+            localStorage.clear();
+        }
+    }
+}
 
 async function fetchSectors() {
     try {
         const sectors = await getSectors();
-        localStorage.setItem("sectors", JSON.stringify(sectors));
+        setStorageItem("sectors", sectors);
     } catch (error) {
-        if (localStorage.getItem("sectors") != null) {
-            alert("Couldn't get the list of sectors from the server, but we can use a cached one.");
+        if (getStorageItem("sectors") != null) {
+            alert("Kunne ikke hente listen af brancher fra serveren, så der bruges en cached udgave.");
         } else {
-            alert("Couldn't get the list of sectors from the server and we don't have a one cached. Sorry!");
+            alert("Kunne ikke hente listen af brancher fra serveren, og ingen cached udgave blev fundet.");
         }
     }
 }

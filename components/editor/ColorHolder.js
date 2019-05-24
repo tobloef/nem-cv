@@ -1,5 +1,5 @@
 import BaseComponent from "../BaseComponent.js";
-import {setItem} from "../../lib/storage-helper.js";
+import {setStorageItem} from "../../lib/storage-helper.js";
 
 export default class ColorHolder extends BaseComponent {
     static observedAttributes = [
