@@ -2,11 +2,9 @@ import BaseComponent from "../../BaseComponent.js";
 import IntroBox from "./IntroBox.js";
 import simple from "../../../templates/simple.js";
 import theme1 from "../../../templates/theme1.js";
-import AppendButton from "./AppendButton.js";
 import AppendableComponentList from "../../shared/AppendableComponentList.js";
 import ExperienceItem from "./ExperienceItem.js";
 import WorkAreaItem from "./WorkAreaItem.js";
-import RemoveButton from "./RemoveButton.js";
 import ListButton from "./ListButton.js";
 
 export default class CVSimple extends BaseComponent {

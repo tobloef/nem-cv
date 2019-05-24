@@ -1,3 +1,7 @@
+import CVOctagon from "../components/cvs/cv-octagon/CVOctagon.js";
+import CVModern from "../components/cvs/cv-modern/CVModern.js";
+import CVSimple from "../components/cvs/cv-simple/CVSimple.js";
+
 export const templates = [
     {fontColor:"#373737", backgroundColor:"#F6F5EE", accentColor:"#E4E3D9"},
     {fontColor:"#222222", backgroundColor:"#E9E9E9", accentColor:"#595959"},
@@ -10,16 +14,19 @@ export const layouts = {
     edges: {
         name: "Kanter",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        image: "/img/cv-placeholder.png"
+        image: "/img/cv-placeholder.png",
+        class: CVOctagon
     },
     simplicity: {
         name: "Simplicitet",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        image: "/img/cv-placeholder.png"
+        image: "/img/cv-placeholder.png",
+        class: CVModern
     },
     basic: {
         name: "Basal",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        image: "/img/cv-placeholder.png"
+        image: "/img/cv-placeholder.png",
+        class: CVSimple
     }
 };
