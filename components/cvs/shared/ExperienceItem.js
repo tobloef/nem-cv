@@ -1,9 +1,11 @@
-import EditableComponent from "../../shared/EditableComponent.js";
+import EditableComponent from "./EditableComponent.js";
 import BaseComponent from "../../BaseComponent.js";
 
 export default class ExperienceItem extends BaseComponent {
     static observedAttributes = [
-        "experience-type"
+        "experience-type",
+        "where-separator",
+        ""
     ];
 
     usedComponents = [
@@ -14,13 +16,13 @@ export default class ExperienceItem extends BaseComponent {
     get html() {
         return `
             <div content-type="object">
-                <span class="divider">
+                <span class="divider where">
                     <editable-component
                             placeholder="${this.experienceType}"
                             element="div"
                             content-key="name"
                             content-type="component"
-                    ></editable-component> -
+                    ></editable-component>${this.whereSeparator || ""}
                     <editable-component
                             placeholder="Titel"
                             element="div"
@@ -28,7 +30,7 @@ export default class ExperienceItem extends BaseComponent {
                             content-type="component"
                     ></editable-component>
                 </span>
-                <span class="divider">
+                <span class="divider when">
                     <editable-component
                             placeholder="Startår"
                             element="div"

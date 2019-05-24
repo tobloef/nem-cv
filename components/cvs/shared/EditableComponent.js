@@ -1,4 +1,4 @@
-import BaseComponent from "../BaseComponent.js";
+import BaseComponent from "../../BaseComponent.js";
 
 export default class EditableComponent extends BaseComponent {
     empty = true;
@@ -75,14 +75,23 @@ export default class EditableComponent extends BaseComponent {
     };
 
     getContent = () => {
-        return this.shadowRoot.getElementById("content").innerText;
+        const content = this.shadowRoot.getElementById("content").innerText;
+        if (content === "") {
+            return null;
+        }
+        return content;
+    };
+
+    setContent = (content) => {
+        console.log(this.constructor.name, "setContent", content);
+        this.shadowRoot.getElementById("content").innerText = (content || "");
     };
 
     // language=CSS
     get css() {
         return `
             .empty-text {
-                color: #aaa;
+                color: var(--editable-empty-text-color);
             }
             :host {
                 display: flex;

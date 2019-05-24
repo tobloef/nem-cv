@@ -2,6 +2,7 @@ import BaseComponent from "../BaseComponent.js";
 import RouterLink from "../shared/RouterLink.js";
 import CustomButton from "../shared/CustomButton.js";
 import wait from "../../lib/wait.js";
+import {getPath} from "../../lib/paths.js";
 
 
 export default class HomeHeader extends BaseComponent {
@@ -9,77 +10,80 @@ export default class HomeHeader extends BaseComponent {
         RouterLink, CustomButton
     ];
 
-    html = `
-        <header>
-            <div class="fakecv clip">
-                <div class="image-row">
-                    <div class="image-container">
-                        <img src="/img/landing-bg.webp"/>
-                        <div class="image-bg"></div>
+    get html() {
+        // language=HTML
+        return `
+            <header>
+                <div class="fakecv clip">
+                    <div class="image-row">
+                        <div class="image-container">
+                            <img src="${getPath("landing-page-person")}"/>
+                            <div class="image-bg"></div>
+                        </div>
+                        <div class="fake-content-title">
+                            <div class="fake-text lighter large" style="width: 100%; margin-bottom: 10px; max-width: 300px;"></div>
+                            <div class="fake-text lighter tight" style="width: 80%;"></div>
+                            <div class="fake-text lighter tight" style="width: 40%;"></div>
+                            <div class="fake-text lighter tight" style="width: 100%;"></div>
+                        </div>
                     </div>
-                    <div class="fake-content-title">
-                        <div class="fake-text lighter large" style="width: 100%; margin-bottom: 10px; max-width: 300px;"></div>
-                        <div class="fake-text lighter tight" style="width: 80%;"></div>
-                        <div class="fake-text lighter tight" style="width: 40%;"></div>
-                        <div class="fake-text lighter tight" style="width: 100%;"></div>
+                    <div class="fake-content-body">
+                        <div class="fake-text" style="width: 100%;"></div>
+                        <div class="fake-text" style="width: 100%;"></div>
+                        <div class="fake-text" style="width: 100%;"></div>
+                        <div class="fake-text" style="width: 100%;"></div>
+                        <div class="fake-text" style="width: 100%;"></div>
+                        <div class="fake-text" style="width: 60%;"></div>
                     </div>
+                    <div class="fake-content-extra">
+                        <div class="fake-content-extra-col">
+                            <div class="fake-text large" style="width: 40%;"></div>
+                            <div class="fake-text" style="width: 70%;"></div>
+                            <div class="fake-text" style="width: 30%;"></div>
+                            <div class="fake-text" style="width: 45%;"></div>
+                            <br>
+                            <div class="fake-text" style="width: 70%;"></div>
+                            <div class="fake-text" style="width: 30%;"></div>
+                            <div class="fake-text" style="width: 45%;"></div>
+                            <br>
+                            <div class="fake-text" style="width: 70%;"></div>
+                            <div class="fake-text" style="width: 30%;"></div>
+                            <div class="fake-text" style="width: 45%;"></div>
+                        </div>
+    
+                        <div class="fake-content-extra-col">
+                            <div class="fake-text large" style="width: 40%;"></div>
+                            <div class="fake-text" style="width: 70%;"></div>
+                            <div class="fake-text" style="width: 30%;"></div>
+                            <div class="fake-text" style="width: 45%;"></div>
+                            <br>
+                            <div class="fake-text" style="width: 70%;"></div>
+                            <div class="fake-text" style="width: 30%;"></div>
+                            <div class="fake-text" style="width: 45%;"></div>
+                            <br>
+                            <div class="fake-text" style="width: 70%;"></div>
+                            <div class="fake-text" style="width: 30%;"></div>
+                            <div class="fake-text" style="width: 45%;"></div>
+                        </div>
+                    </div>
+                    <div class="filler"></div>
                 </div>
-                <div class="fake-content-body">
-                    <div class="fake-text" style="width: 100%;"></div>
-                    <div class="fake-text" style="width: 100%;"></div>
-                    <div class="fake-text" style="width: 100%;"></div>
-                    <div class="fake-text" style="width: 100%;"></div>
-                    <div class="fake-text" style="width: 100%;"></div>
-                    <div class="fake-text" style="width: 60%;"></div>
+    
+                <div class="infobox">
+                    <h1>Lad <span class="light">NemCV</span> hjælpe dig med dit CV</h1>
+                    <router-link class="cta-link" href="/templates">
+                        <custom-button class="cta" inverted>
+                            Start nu
+                        </custom-button>
+                    </router-link>
                 </div>
-                <div class="fake-content-extra">
-                    <div class="fake-content-extra-col">
-                        <div class="fake-text large" style="width: 40%;"></div>
-                        <div class="fake-text" style="width: 70%;"></div>
-                        <div class="fake-text" style="width: 30%;"></div>
-                        <div class="fake-text" style="width: 45%;"></div>
-                        <br>
-                        <div class="fake-text" style="width: 70%;"></div>
-                        <div class="fake-text" style="width: 30%;"></div>
-                        <div class="fake-text" style="width: 45%;"></div>
-                        <br>
-                        <div class="fake-text" style="width: 70%;"></div>
-                        <div class="fake-text" style="width: 30%;"></div>
-                        <div class="fake-text" style="width: 45%;"></div>
-                    </div>
-
-                    <div class="fake-content-extra-col">
-                        <div class="fake-text large" style="width: 40%;"></div>
-                        <div class="fake-text" style="width: 70%;"></div>
-                        <div class="fake-text" style="width: 30%;"></div>
-                        <div class="fake-text" style="width: 45%;"></div>
-                        <br>
-                        <div class="fake-text" style="width: 70%;"></div>
-                        <div class="fake-text" style="width: 30%;"></div>
-                        <div class="fake-text" style="width: 45%;"></div>
-                        <br>
-                        <div class="fake-text" style="width: 70%;"></div>
-                        <div class="fake-text" style="width: 30%;"></div>
-                        <div class="fake-text" style="width: 45%;"></div>
-                    </div>
+    
+                <div class="background-container">
+                    <img class="background" src="${getPath("landing-page-person")}"/>
                 </div>
-                <div class="filler"></div>
-            </div>
-
-            <div class="infobox">
-                <h1>Lad <span class="light">NemCV</span> hjælpe dig med dit CV</h1>
-                <router-link class="cta-link" href="/templates">
-                    <custom-button class="cta" inverted>
-                        Start nu
-                    </custom-button>
-                </router-link>
-            </div>
-
-            <div class="background-container">
-                <img class="background" src="/img/landing-bg.webp"/>
-            </div>
-        </header>
-    `;
+            </header>
+        `;
+    }
 
     // language=CSS
     get css() {

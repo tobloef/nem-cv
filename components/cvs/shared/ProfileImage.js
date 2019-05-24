@@ -1,4 +1,5 @@
 import BaseComponent from "../../BaseComponent.js";
+import {getPath} from "../../../lib/paths.js";
 
 export default class ProfileImage extends BaseComponent {
     static observedAttributes = [
@@ -12,8 +13,8 @@ export default class ProfileImage extends BaseComponent {
         return `
             <div class="square">
                 <img class="profile-picture"
-                     src=${this.src || "../../../img/placeholder-person.png"}
-                     alt="image of you">
+                     src=${this.src || getPath("placeholder-person")}
+                     alt="Image of you">
             </div>
         `;
     }
@@ -36,11 +37,16 @@ export default class ProfileImage extends BaseComponent {
     script = () => {
         this.image = this.shadowRoot.querySelector(".profile-picture");
         this.image.addEventListener("click", this.onClick);
-
     };
 
     getContent = () => {
         return this.image.src;
+    };
+
+    setContent = (content) => {
+        console.log(this.constructor.name, "setContent", content);
+        this.setAttribute("src", content);
+        this.render();
     };
 
     // language=CSS
@@ -51,6 +57,7 @@ export default class ProfileImage extends BaseComponent {
             }
             .square {
                 width: 100%;
+                height: 100%;
                 position: relative;
                 display: block;
             }

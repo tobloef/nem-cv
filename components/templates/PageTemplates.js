@@ -4,10 +4,16 @@ import RouterLink from "../shared/RouterLink.js";
 import LayoutList from "../editor/LayoutList.js";
 import {setItem} from "../../lib/storage-helper.js";
 import NavBar from "../shared/NavBar.js";
+import CustomButton from "../shared/CustomButton.js";
+import Logo from "../shared/Logo.js";
 
 export default class PageTemplates extends BaseComponent {
     usedComponents = [
-        LayoutList, RouterLink, NavBar
+        LayoutList,
+        NavBar,
+        CustomButton,
+        Logo,
+        RouterLink
     ];
 
     get css() {
@@ -21,11 +27,11 @@ export default class PageTemplates extends BaseComponent {
             }
 
             h1 {
-                font-size: 4em;
-                font-weight: bold;
-                line-height: 1.2;
-                margin-bottom: 15px;
-                max-width: 60%;
+                font-size: 3.5em;
+                margin: 0.7em 0;
+                max-width: unset;
+                font-weight: normal;
+                text-decoration: underline;
             }
 
             nav-bar {
@@ -39,34 +45,8 @@ export default class PageTemplates extends BaseComponent {
                 line-height: 1.3;
             }
 
-            .back {
-                display: block;
-                font-size: 2em;
-                color: black;
-                line-height: 1.1;
-                margin-bottom: 30px;
-            }
-
             .content {
                 max-width: 900px;
-            }
-
-            @media(min-width: 620px) {
-                h1 {
-                    font-size: 4.5em;
-                }
-
-                .back {
-                    font-size: 2.2em;
-                    margin-bottom: 1em;
-                }
-            }
-
-            @media(min-width: 1100px) {
-                h1 {
-                    font-size: 5.5em;
-                    margin-bottom: 0.3em;
-                }
             }
         `;
     }
@@ -82,12 +62,19 @@ export default class PageTemplates extends BaseComponent {
     };
 
     get html() {
+        // language=HTML
         return `
-            <nav-bar></nav-bar>
-
+            <nav-bar>
+                <div>
+                  <router-link href="/">
+                    <custom-button inverted style="font-size: 0.4em">Tilbage</custom-button>
+                  </router-link>
+                  <logo-></logo->
+                  <div class="filler"></div>
+                </div>
+            </nav-bar>
             <div class="content">
                 <h1>Vælg en skabelon</h1>
-                <router-link class="back" href="/">Tilbage</router-link>
                 <layout-list class="resizing"></layout-list>
             </div>
         `;

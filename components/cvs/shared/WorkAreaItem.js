@@ -1,8 +1,6 @@
 import BaseComponent from "../../BaseComponent.js";
 
 export default class WorkAreaItem extends BaseComponent {
-    static observedAttributes = [];
-    usedComponents = [];
     span = null;
     dropdown = document.createElement("select");
 
@@ -35,7 +33,10 @@ export default class WorkAreaItem extends BaseComponent {
         return this.span.innerText;
     };
 
-    externalStyles = [];
+    setContent = (content) => {
+        console.log(this.constructor.name, "setContent", content);
+        this.span.innerText = content;
+    };
 
     // language=CSS
     get style() {
