@@ -46,19 +46,17 @@ export default class TestimonialSlider extends BaseComponent {
                 display: flex;
                 flex-direction: column;
                 font-family: 'Open Sans', sans-serif;
-                background: #2C2C2C;
                 color: white;
                 --image-height: 300px;
-                --padding-y: 60px;
-                --padding-left: 60px;
-                --padding-right: 60px;
                 overflow: hidden;
+                position: relative;
+
+                --text-padding: 30px 30px 0 0;
             }
 
             .testimonial-images {
                 position: relative;
                 height: var(--image-height);
-
             }
 
             .testimonial-image {
@@ -79,12 +77,13 @@ export default class TestimonialSlider extends BaseComponent {
                 transition: 300ms ease-in-out height;
                 height: 0px;
                 min-height: 25em;
+                align-items: center;
             }
 
             .testimonial-text {
                 position: absolute;
                 opacity: 0;
-                padding: 30px;
+                padding: var(--text-padding);
                 line-height: 1.4;
                 font-size: 1.5em;
                 font-style: italic;
@@ -129,34 +128,24 @@ export default class TestimonialSlider extends BaseComponent {
                 }
 
                 .testimonial-text {
-                    padding-top: var(--padding-y);
-                    padding-bottom: var(--padding-y);
-                    padding-left: var(--padding-left);
                     max-width: 50%;
+                    padding-top: 0px;
                 }
 
                 .testimonial-image {
-                    padding-top: var(--padding-y);
-                    padding-bottom: var(--padding-y);
-                    padding-right: var(--padding-right);
+                    padding-left: 60px;
                 }
             }
 
             @media(min-width: 800px) {
                 :host {
                     --image-height: 400px;
-                    --padding-y: 60px;
-                    --padding-left: 80px;
-                    --padding-right: 80px;
                 }
             }
 
             @media(min-width: 1100px) {
                 :host {
                     --image-height: 600px;
-                    --padding-y: 120px;
-                    --padding-left: 120px;
-                    --padding-right: 120px;
                 }
 
                 .testimonial-text {
@@ -165,12 +154,6 @@ export default class TestimonialSlider extends BaseComponent {
 
                 .person {
                     font-size: 1em;
-                }
-            }
-
-            @media(min-width: 1300px) {
-                :host {
-                    --image-height: 800px;
                 }
             }
         `;
