@@ -1,8 +1,9 @@
 import BaseComponent from "../BaseComponent.js";
+import wait from "../../lib/wait.js";
+import whenReady from '../../lib/whenReady.js';
 import RouterLink from "../shared/RouterLink.js";
 import CustomButton from "../shared/CustomButton.js";
 import NavBar from "../shared/NavBar.js";
-import wait from "../../lib/wait.js";
 import HomeHeader from './HomeHeader.js';
 
 export default class PageHome extends BaseComponent {
@@ -24,7 +25,7 @@ export default class PageHome extends BaseComponent {
                             <div class="seperator"></div>
                         </div>
                         <div class="right">
-                            <img src="/img/template1.png"></img>
+                            <img src="/img/ModernCV.svg"></img>
                         </div>
                     </div>
                     <router-link href="/templates">
@@ -255,7 +256,6 @@ export default class PageHome extends BaseComponent {
         super.connectedCallback();
 
         const navBar = this.shadowRoot.querySelector("nav-bar");
-        const header = this.shadowRoot.querySelector("home-header");
 
         this.intersectionObserver = new IntersectionObserver(entries => {
             if (entries[0].intersectionRatio <= 0.5) {
@@ -267,8 +267,13 @@ export default class PageHome extends BaseComponent {
 
         // start observing
         this.intersectionObserver.observe(this.shadowRoot.querySelector("home-header"));
+    }
 
-        window.addEventListener('load', ()=> {
+    script() {
+        const header = this.shadowRoot.querySelector("home-header");
+
+        //Wait for the window to be ready before playing header animation
+        whenReady(_=> {
             header.play();
         })
     }
