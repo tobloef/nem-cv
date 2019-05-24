@@ -18,7 +18,7 @@ export default class HomeHeader extends BaseComponent {
                         <div class="image-bg"></div>
                     </div>
                     <div class="fake-content-title">
-                        <div class="fake-text lighter large" style="width: 100%; margin-bottom: 10px;"></div>
+                        <div class="fake-text lighter large" style="width: 100%; margin-bottom: 10px; max-width: 300px;"></div>
                         <div class="fake-text lighter tight" style="width: 80%;"></div>
                         <div class="fake-text lighter tight" style="width: 40%;"></div>
                         <div class="fake-text lighter tight" style="width: 100%;"></div>
@@ -68,9 +68,6 @@ export default class HomeHeader extends BaseComponent {
 
             <div class="infobox">
                 <h1>Lad <span class="light">NemCV</span> hjælpe dig med dit CV</h1>
-                <!--<router-link class="cta" href="/templates">
-                    <div class="actual-cta">Start nu</div>
-                </router-link>-->
                 <router-link class="cta-link" href="/templates">
                     <custom-button class="cta">
                         Start nu
@@ -288,7 +285,7 @@ export default class HomeHeader extends BaseComponent {
                 width: 100%;
                 max-width: 550px;
                 background: rgba(0,0,0,0.6);
-                padding: 30px 40px;
+                padding: 20px 40px 30px;
                 top: 50%;
 
                 transform: translateY(100px);
@@ -320,7 +317,7 @@ export default class HomeHeader extends BaseComponent {
                 --hover-background-color: var(--border-color);
                 --hover-text-color: black;
 
-                font-size: 1.2em;
+                font-size: 1.1em;
             }
 
             @media(min-width: 300px) {
