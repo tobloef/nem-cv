@@ -1,25 +1,24 @@
 import BaseComponent from "../../BaseComponent.js";
+import {getPath} from "../../../lib/paths.js";
 
-export default class AppendButton extends BaseComponent {
+export default class RemoveButton extends BaseComponent {
     static observedAttributes = [];
     usedComponents = [];
 
     // language=HTML
     get html() {
         return `
-            <button id="button">+</button>
+            <img src="${getPath("remove")}" id="button"/> 
         `;
     }
 
     script = () => {
         const button = this.shadowRoot.getElementById("button");
         button.addEventListener("click", () => {
-            if (this.onAppend == null) {
+            if (this.onRemove == null) {
                 return;
             }
-
-            const attributes = {};
-            this.onAppend(attributes);
+            this.onRemove();
         });
     }
 
@@ -28,17 +27,17 @@ export default class AppendButton extends BaseComponent {
     // language=CSS
     get css() {
         return `
-            button {
-                
-                --dia: 2em;
-                border: 5px solid black;
-                border-radius: 50%;
-                text-align: center;
-                vertical-align: center;
-                font-size: 1.5em;
-                font-weight: bolder;
+            #button{
+                --dia: 1.5em;
                 height: var(--dia);
                 width: var(--dia);
+                border: none;
+                background: none;
+            }
+            #button:hover {
+
+            }
+            #button:active {
             }
         `
     };

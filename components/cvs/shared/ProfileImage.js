@@ -1,8 +1,9 @@
 import BaseComponent from "../../BaseComponent.js";
+import {getPath} from "../../../lib/paths.js";
 
 export default class ProfileImage extends BaseComponent {
     static observedAttributes = [
-        "aspect_ratio",
+        "aspect-ratio",
         "src"
     ];
     usedComponents = [];
@@ -12,8 +13,8 @@ export default class ProfileImage extends BaseComponent {
         return `
             <div class="square">
                 <img class="profile-picture"
-                     src=${this.src || "../../../img/placeholder-person.png"}
-                     alt="image of you">
+                     src=${this.src || getPath("placeholder-person")}
+                     alt="Image of you">
             </div>
         `;
     }
@@ -39,7 +40,9 @@ export default class ProfileImage extends BaseComponent {
 
     };
 
-    externalStyles = [];
+    getContent = () => {
+        return this.image.src;
+    };
 
     // language=CSS
     get css() {
@@ -56,7 +59,7 @@ export default class ProfileImage extends BaseComponent {
             .square:after {
                 content: "";
                 display: block;
-                padding-bottom: ${(this.aspect_ratio || 1) * 100}%;
+                padding-bottom: ${(this.aspectRatio || 1) * 100}%;
             }
             .profile-picture {
                 position: absolute;

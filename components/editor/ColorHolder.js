@@ -14,10 +14,10 @@ export default class ColorHolder extends BaseComponent {
     // language=HTML
     get html() {
         return `
-            <div id="outer" role="button">
-                <p>T</p>
-                <div id="accent"/>
-            </div>
+	        <div id="outer" role="button">
+		        <p>T</p>
+		        <div id="accent"></div>
+	        </div>
         `;
     }
 
@@ -25,21 +25,30 @@ export default class ColorHolder extends BaseComponent {
         const div = this.shadowRoot.querySelector("#outer");
         div.addEventListener("click", evt => {
             evt.preventDefault();
-            const colors = {
-                fontColor: this.fontColor,
-                backgroundColor: this.backgroundColor,
-                accentColor: this.accentColor,
-            };
-            setItem("colors", colors);
+            this.dispatchEvent(new CustomEvent("color-picked", {
+                bubbles: true,
+                composed:true,
+                detail: {
+                    colors: {
+                        fontColor: this.fontColor,
+                        backgroundColor: this.backgroundColor,
+                        accentColor: this.accentColor
+                    }
+                }
+            }));
         });
     };
+
+    resizeFont() {
+        this.shadowRoot.querySelector("p").style.fontSize = (this.offsetWidth*0.6) + "px";
+    }
 
     // language=CSS
     get css() {
         return `
             p {
                 font-family: "Times New Roman", "serif";
-                font-size: 3em;
+                font-size: 2.5em;
                 color: ${this.fontColor};
                 user-select: none;
             }
@@ -50,8 +59,8 @@ export default class ColorHolder extends BaseComponent {
                 position: relative;
                 justify-content: center;
                 align-items: center;
-                width: 4em;
-                height: 4em;
+                width: 100%;
+                height: 100%;
                 background-color: ${this.backgroundColor};
             }
             
