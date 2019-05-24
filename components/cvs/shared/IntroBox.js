@@ -1,4 +1,4 @@
-import EditableComponent from "../../shared/EditableComponent.js";
+import EditableComponent from "./EditableComponent.js";
 import BaseComponent from "../../BaseComponent.js";
 import ProfileImage from "./ProfileImage.js";
 

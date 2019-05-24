@@ -4,10 +4,11 @@ import SideBar from "./SideBar.js";
 import {getItem, setItem} from "../../lib/storage-helper.js";
 import NavBar from "../shared/NavBar.js";
 import CVSimple from "../cvs/cv-simple/CVSimple.js";
-import CustomButton from "../shared/CustomButton.js";
 import CVModern from "../cvs/cv-modern/CVModern.js";
 import CVOctagon from "../cvs/cv-octagon/CVOctagon.js";
 import {layouts} from "../../constants/editor-definitions.js";
+import CustomButton from "../shared/CustomButton.js";
+import Logo from "../shared/Logo.js";
 
 export default class PageEditor extends BaseComponent {
     usedComponents = [
@@ -16,19 +17,23 @@ export default class PageEditor extends BaseComponent {
         CVModern,
         CVOctagon,
         NavBar,
-        SideBar
+        SideBar,
+        CustomButton,
+        Logo
     ];
 
     // language=HTML
     get html() {
         return `
             <nav-bar>
-                <custom-button inverted>Færdig</custom-button>
+                <div>
+                    <custom-button inverted id="settings-button">Indstillinger</custom-button>
+                    <logo-></logo->
+                    <custom-button inverted id="finish-button">Færdig</custom-button>
+                </div>
             </nav-bar>
             <side-bar></side-bar>
-            <div id="cv-container">
-                
-            </div>
+            <div id="cv-container"></div>
             
         `;
     };
@@ -40,21 +45,28 @@ export default class PageEditor extends BaseComponent {
             this.changeCVType();
         }
 
-        this.addEventListener("select-click", (evt) => {
+        this.addEventListener("select-click", (e) => {
             this.toggleSidebarIfNecessary();
-            setItem("template", evt.detail);
+            setItem("template", e.detail);
             this.changeCVType();
         });
 
-        this.addEventListener("example-click", (evt) => {
-            console.log("Example selected:", evt.detail);
+        this.addEventListener("example-click", (e) => {
+            console.log("Example selected:", e.detail);
         });
 
-        this.addEventListener("color-picked", (evt) => {
+        this.addEventListener("color-picked", (e) => {
             this.toggleSidebarIfNecessary();
-            setItem("colors", evt.detail.colors);
+            setItem("colors", e.detail.colors);
             this.changeColors();
         });
+
+        const sidebar = this.shadowRoot.querySelector("side-bar");
+        if (sidebar != null) {
+            this.shadowRoot.getElementById("settings-button").addEventListener("click", () => {
+                sidebar.toggle();
+            });
+        }
     };
 
     toggleSidebarIfNecessary() {

@@ -1,26 +1,26 @@
 import BaseComponent from "../../BaseComponent.js";
-import {getIcon} from "../../../lib/icons.js";
+import {getPath} from "../../../lib/paths.js";
 
-export default class ListButton extends BaseComponent {
-    static observedAttributes = [
-        "icon"
-    ];
+export default class AppendButton extends BaseComponent {
+    static observedAttributes = [];
     usedComponents = [];
 
     // language=HTML
     get html() {
         return `
-            <img id="button" src="${getIcon(this.icon)}"></button>
+            <img id="button" src="${getPath("add")}"></button>
         `;
     }
 
     script = () => {
         const button = this.shadowRoot.getElementById("button");
         button.addEventListener("click", () => {
-            if (this.onClick == null) {
+            if (this.onAppend == null) {
                 return;
             }
-            this.onClick();
+
+            const attributes = {};
+            this.onAppend(attributes);
         });
     }
 
@@ -37,7 +37,7 @@ export default class ListButton extends BaseComponent {
                 background: none;
             }
             #button:hover {
-
+                
             }
             #button:active {
             }

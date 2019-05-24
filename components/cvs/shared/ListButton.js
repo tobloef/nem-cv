@@ -1,23 +1,26 @@
 import BaseComponent from "../../BaseComponent.js";
+import {getPath} from "../../../lib/paths.js";
 
-export default class RemoveButton extends BaseComponent {
-    static observedAttributes = [];
+export default class ListButton extends BaseComponent {
+    static observedAttributes = [
+        "icon"
+    ];
     usedComponents = [];
 
     // language=HTML
     get html() {
         return `
-            <img src="../../../img/minus-outline.svg" id="button"/> 
+            <img id="button" src="${getPath(this.icon)}"></button>
         `;
     }
 
     script = () => {
         const button = this.shadowRoot.getElementById("button");
         button.addEventListener("click", () => {
-            if (this.onRemove == null) {
+            if (this.onClick == null) {
                 return;
             }
-            this.onRemove();
+            this.onClick();
         });
     }
 
@@ -27,7 +30,7 @@ export default class RemoveButton extends BaseComponent {
     get css() {
         return `
             #button{
-                --dia: 1.5em;
+                --dia: 2em;
                 height: var(--dia);
                 width: var(--dia);
                 border: none;

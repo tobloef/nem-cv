@@ -1,11 +1,11 @@
-import BaseComponent from "../../BaseComponent.js";
-import IntroBox from "./IntroBox.js";
-import simple from "../../../templates/simple.js";
-import theme1 from "../../../templates/theme1.js";
-import AppendableComponentList from "../../shared/AppendableComponentList.js";
-import ExperienceItem from "./ExperienceItem.js";
-import WorkAreaItem from "./WorkAreaItem.js";
-import ListButton from "./ListButton.js";
+import BaseComponent from "../BaseComponent.js";
+import IntroBox from "./shared/IntroBox.js";
+import simple from "./templates/simple.js";
+import theme1 from "./templates/theme1.js";
+import AppendableComponentList from "./shared/AppendableComponentList.js";
+import ExperienceItem from "./shared/ExperienceItem.js";
+import WorkAreaItem from "./shared/WorkAreaItem.js";
+import ListButton from "./shared/ListButton.js";
 
 export default class CVSimple extends BaseComponent {
     static observedAttributes = [];

@@ -1,4 +1,4 @@
-import RootRoutes from "./components/RootRoutes.js"
+import RootRoutes from "./components/shared/RootRoutes.js"
 import {addStorageHook, addListener} from "./lib/storage-helper.js";
 import {resetCSSString} from "./lib/reset-css.js";
 

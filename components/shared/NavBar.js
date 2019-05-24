@@ -15,10 +15,7 @@ export default class NavBar extends BaseComponent {
         // language=HTML
         return ` 
             <nav>
-                <img class="logo" src="/img/logo_white.svg" alt="Nem CV">
-                <div>
-                    <slot></slot>
-                </div>
+                <slot></slot>
             </nav>
         `;
     }
@@ -42,6 +39,13 @@ export default class NavBar extends BaseComponent {
         return `
             :host {
                 --padding-y: 5px;
+            }
+
+            ::slotted(div) {
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+                align-items: center;
             }
             
             div {

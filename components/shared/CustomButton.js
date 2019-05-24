@@ -13,12 +13,12 @@ export default class CustomButton extends BaseComponent {
         return `
             :host {
                 display: flex;
+                
                 --border-color: black;
                 --text-color: black;
                 --hover-background-color: var(--border-color);
                 --hover-text-color: white;
                 --border-thickness: 2px;
-
                 --padding-y: 14px;
                 --padding-x: 28px;
             }
