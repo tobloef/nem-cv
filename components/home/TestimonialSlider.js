@@ -10,7 +10,7 @@ export default class TestimonialSlider extends BaseComponent {
     html = `
         <div class="testimonial-images"></div>
         <div class="testimonial-texts">
-            <div class="dots"></div>
+            <div class="dots" role="listbox"></div>
 
             <div class="texts"></div>
         </div>
@@ -21,21 +21,25 @@ export default class TestimonialSlider extends BaseComponent {
             text : "Det tog kun 5 minutter. Nu har jeg et personligt CV, som har skaffet mig tre jobsamtaler alene den sidste uge. Det er vanvttigt fedt, at jeg selv kan vælge farver og layout. Det giver så mange muligheder!",
             person: "Jonas",
             image: "/img/testimonials/testimonial1.jpg",
+            alt: "Testimonial 1",
         },
         {
             text : "xD.",
             person: "Yeet",
             image: "/img/testimonials/testimonial2.jpg",
+            alt: "Testimonial 2",
         },
         {
             text : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea.",
             person: "Ma~",
             image: "/img/testimonials/testimonial3.jpg",
+            alt: "Testimonial 3",
         },
         {
             text : "Max Najs",
             person: "Thore Husfeldt",
             image: "/img/testimonials/testimonial4.jpg",
+            alt: "Testimonial 4",
         },
     ];
 
@@ -212,7 +216,9 @@ export default class TestimonialSlider extends BaseComponent {
 
         requestAnimationFrame(_=> {
             this.start();
-        })
+        });
+
+        console.log("Vi skal lige huske at ændre alt tekst på testimonials :)");
     };
 
     start = () => {
@@ -290,6 +296,7 @@ export default class TestimonialSlider extends BaseComponent {
         const img = document.createElement('img');
         img.classList.add('testimonial-image');
         img.src = testimonial.image;
+        img.setAttribute('alt', testimonial.alt);
 
         return img;
 

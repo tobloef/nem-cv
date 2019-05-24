@@ -17,7 +17,7 @@ export default class HomeHeader extends BaseComponent {
                 <div class="fakecv clip">
                     <div class="image-row">
                         <div class="image-container">
-                            <img src="${getPath("landing-page-person")}"/>
+                            <img alt="Kvinde" src="${getPath("landing-page-person")}"/>
                             <div class="image-bg"></div>
                         </div>
                         <div class="fake-content-title">
@@ -79,7 +79,7 @@ export default class HomeHeader extends BaseComponent {
                 </div>
 
                 <div class="background-container">
-                    <img class="background" src="${getPath("landing-page-person")}"/>
+                    <img alt="Kvinde" class="background" src="${getPath("landing-page-person")}"/>
                 </div>
             </header>
         `;

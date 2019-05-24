@@ -1,11 +1,11 @@
 import BaseComponent from "../BaseComponent.js";
 
 export default class CustomButton extends BaseComponent {
-    static observedAttributes = ["secondary", "inverted", "solid"];
+    static observedAttributes = ["secondary", "inverted", "solid", "label"];
 
     // language=HTML
     get html() {
-        return `<button><slot></slot></button>`;
+        return `<button aria-label="${this.label}"><slot></slot></button>`;
     }
 
     get css() {

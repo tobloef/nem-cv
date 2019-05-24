@@ -22,7 +22,7 @@ export default class PageHome extends BaseComponent {
                 <div>
                     <logo-></logo->
                     <router-link href="/templates">
-                        <custom-button inverted style="font-size: 1.1em">Opret CV</custom-button>
+                        <custom-button label="Opret CV" inverted style="font-size: 1.1em">Opret CV</custom-button>
                     </router-link>
                 </div>
             </nav-bar>
@@ -38,11 +38,11 @@ export default class PageHome extends BaseComponent {
                                 <div class="seperator"></div>
                             </div>
                             <div class="right">
-                                <img src="${getPath("template-modern")}"/>
+                                <img alt="Skabelonen simplicitet" src="${getPath("template-modern")}"/>
                             </div>
                         </div>
                         <router-link href="/templates">
-                            <custom-button>
+                            <custom-button label="Start Nu">
                                 Start nu
                             </custom-button>
                         </router-link>
@@ -64,7 +64,7 @@ export default class PageHome extends BaseComponent {
                             </div>
                         </div>
                         <router-link href="/templates">
-                            <custom-button >
+                            <custom-button label="Start nu">
                                 Start nu
                             </custom-button>
                         </router-link>
@@ -79,7 +79,7 @@ export default class PageHome extends BaseComponent {
             <div class="wrapper">
                 <p class="cta-text">Kom i gang med at lave dit eget professionelle CV nu</p>
                 <router-link href="/templates">
-                    <custom-button solid>
+                    <custom-button solid label="Kom i gang">
                         Kom i gang
                     </custom-button>
                 </router-link>

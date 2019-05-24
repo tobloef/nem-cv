@@ -10,7 +10,7 @@ export default class SliderButton extends BaseComponent {
 
     get html() {
         return `
-            <button></button>
+            <button role="option"  aria-label="Vælg Billede"></button>
         `;
     }
 
