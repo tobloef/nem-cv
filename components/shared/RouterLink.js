@@ -28,7 +28,8 @@ export default class RouterLink extends BaseComponent {
             }
 
             a {
-                text-decoration: none;
+                text-decoration: inherit;
+                color: inherit;
             }
         `
     }
