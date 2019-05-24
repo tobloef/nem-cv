@@ -72,7 +72,9 @@ export default class PageHome extends BaseComponent {
                 </div>
             </div>
         </section>
-        <testimonial-slider></testimonial-slider>
+        <section class="testimonials">
+            <testimonial-slider></testimonial-slider>
+        </section>
         <footer>
             <p>This is a footer</p>
         </footer>
@@ -225,10 +227,33 @@ export default class PageHome extends BaseComponent {
                color: #066515;
            }
 
+           section.testimonials {
+               background: #2C2C2C;
+               display: flex;
+               justify-content: center;
+           }
+
+           testimonial-slider {
+               width: 100%;
+           }
+
            footer {
                background-color: black;
                color: white;
                padding: 60px;
+           }
+
+           @media(max-width: 600px) {
+               testimonial-slider {
+                   --text-padding: 30px;
+               }
+           }
+
+           @media(min-width: 600px) {
+               testimonial-slider {
+                   max-width: 1500px;
+                   padding: 60px;
+               }
            }
 
            @media(min-width: 650px) {
@@ -259,7 +284,7 @@ export default class PageHome extends BaseComponent {
                }
            }
 
-           @media(min-width: 1200px) {
+           @media(min-width: 1100px) {
                .cards {
                    display: flex;
                    max-width: 1000px;
