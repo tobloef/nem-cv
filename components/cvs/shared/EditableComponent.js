@@ -1,12 +1,12 @@
 import BaseComponent from "../../BaseComponent.js";
 
 export default class EditableComponent extends BaseComponent {
-    empty = true;
     node = null;
 
     static observedAttributes = [
         "placeholder",
-        "element"
+        "element",
+        "multiline",
     ];
 
     // language=HTML
@@ -43,27 +43,30 @@ export default class EditableComponent extends BaseComponent {
     };
 
     onFocus = () => {
+        this.node.classList.remove("empty-text");
         this.node.style.minWidth = this.node.getBoundingClientRect().width + "px";
-        if (this.node.innerHTML === "") {
-            this.node.innerHTML = "";
-            this.node.classList.remove("empty-text");
-        }
         if (this.node.innerText === this.placeholder) {
-            this.selectTextInNode();
+            this.node.innerText = "";
+        } else {
+            //this.selectTextInNode();
         }
     };
 
     focusOut = () => {
         this.node.style.minWidth = "0";
-        if (this.node.innerHTML === "") {
-            this.node.innerHTML = this.placeholder;
+        if (this.node.innerText === "") {
+            this.node.innerText = this.placeholder;
             this.node.classList.add("empty-text");
         }
     };
 
-    keyPress = () => {
-        if (this.node.innerHTML !== "") {
+    keyPress = (e) => {
+        if (this.node.innerText !== "") {
             this.node.style.minWidth = "0";
+        }
+        if (e.key === "Enter" && !this.multiline) {
+            e.preventDefault();
+            this.node.blur();
         }
     };
 

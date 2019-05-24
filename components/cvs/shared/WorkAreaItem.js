@@ -1,4 +1,5 @@
 import BaseComponent from "../../BaseComponent.js";
+import {addStorageItemListener, getStorageItem} from "../../../lib/storage-helper.js";
 
 export default class WorkAreaItem extends BaseComponent {
     span = null;
@@ -27,6 +28,7 @@ export default class WorkAreaItem extends BaseComponent {
         this.span.addEventListener("click", this.onClick);
         this.dropdown.addEventListener("focusout", this.onFocusOut);
         this.updateStyles();
+        addStorageItemListener("sectors", this.addOptions);
     };
 
     getContent = () => {
@@ -38,26 +40,37 @@ export default class WorkAreaItem extends BaseComponent {
     };
 
     addOptions = () => {
-        //add options to the dropdown menu
+        // Clear the options list
+        this.dropdown.innerHTML = "";
+        // Create the placeholder
         const choose = document.createElement("option");
-        choose.appendChild(document.createTextNode("Vælg en branche"))
+        choose.setAttribute("disabled", "");
+        choose.setAttribute("selected", "");
+        choose.setAttribute("hidden", "");
+        choose.appendChild(document.createTextNode("Vælg en branche"));
         this.dropdown.appendChild(choose);
-        const gaming = document.createElement("option");
-        gaming.appendChild(document.createTextNode("Gaming"));
-        this.dropdown.appendChild(gaming);
+        // Add the sector options
+        const sectors = getStorageItem("sectors");
+        if (sectors != null) {
+            for (const sector of sectors) {
+                const option = document.createElement("option");
+                option.appendChild(document.createTextNode(sector));
+                this.dropdown.appendChild(option);
+            }
+        }
     };
 
-    swapToDropdown() {
+    swapToDropdown = () => {
         //swaps the span element with the dropdown element so that the user can choose a work area
         this.shadowRoot.removeChild(this.span);
         this.shadowRoot.appendChild(this.dropdown);
-    }
+    };
 
-    swapToSpan() {
+    swapToSpan = () => {
         //swaps the dropdown element with the swap element so that the cv looks static again
         this.shadowRoot.removeChild(this.dropdown);
         this.shadowRoot.appendChild(this.span);
         this.span.innerText = this.dropdown.value;
-    }
+    };
 
 }

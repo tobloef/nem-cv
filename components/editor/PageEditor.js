@@ -1,7 +1,7 @@
 import BaseComponent from "../BaseComponent.js";
 import Router from "../../lib/Router.js";
 import SideBar from "./SideBar.js";
-import {getItem, setItem} from "../../lib/storage-helper.js";
+import {getStorageItem, setStorageItem} from "../../lib/storage-helper.js";
 import NavBar from "../shared/NavBar.js";
 import CVSimple from "../cvs/CVSimple.js";
 import CVModern from "../cvs/CVModern.js";
@@ -11,6 +11,10 @@ import CustomButton from "../shared/CustomButton.js";
 import Logo from "../shared/Logo.js";
 
 export default class PageEditor extends BaseComponent {
+    cvType = null;
+    colorScheme = null;
+    cv = null;
+
     usedComponents = [
         CustomButton,
         CVSimple,
@@ -34,12 +38,11 @@ export default class PageEditor extends BaseComponent {
             </nav-bar>
             <side-bar></side-bar>
             <div id="cv-container"></div>
-            
         `;
     };
 
     script = () => {
-        if (getItem("template") == null) {
+        if (getStorageItem("template") == null) {
             return Router.navigate(Router.prefix + "/templates");
         } else {
             this.changeCVType();
@@ -47,7 +50,7 @@ export default class PageEditor extends BaseComponent {
 
         this.addEventListener("select-click", (e) => {
             this.toggleSidebarIfNecessary();
-            setItem("template", e.detail);
+            setStorageItem("template", e.detail);
             this.changeCVType();
         });
 
@@ -57,51 +60,60 @@ export default class PageEditor extends BaseComponent {
 
         this.addEventListener("color-picked", (e) => {
             this.toggleSidebarIfNecessary();
-            setItem("colors", e.detail.colors);
+            setStorageItem("colors", e.detail.colors);
             this.changeColors();
         });
 
         const sidebar = this.shadowRoot.querySelector("side-bar");
         if (sidebar != null) {
-            this.shadowRoot.getElementById("settings-button").addEventListener("click", () => {
+            const settingsButton = this.shadowRoot.getElementById("settings-button");
+            settingsButton.addEventListener("click", () => {
                 sidebar.toggle();
             });
         }
+
+        const finishButton = this.shadowRoot.getElementById("finish-button");
+        finishButton.addEventListener("click", () => {
+            if (this.cv == null) {
+                return;
+            }
+            // TODO: Validate
+            const content = this.cv.getContent();
+            setStorageItem("cv-content", content);
+            // TODO: Navigate to preview page
+            alert("TEMPORARY: Your CV has been saved!");
+        });
     };
 
-    toggleSidebarIfNecessary() {
+    toggleSidebarIfNecessary = () => {
         const width = document.documentElement.clientWidth;
         if (width <= 550) { // Is mobile-sized
             const sidebar = this.shadowRoot.querySelector("side-bar");
             sidebar.toggle();
         }
-    }
+    };
 
-    changeCVType() {
-        const cvType = getItem("template");
+    changeCVType = () => {
+        const cvType = getStorageItem("template");
         if (this.cvType !== cvType) { // If the gotten type is different from the current one
             const cvContainer = this.shadowRoot.getElementById("cv-container");
             cvContainer.innerHTML = ""; // Get content div and reset contents
-
-            const spawnedCV = document.createElement(layouts[cvType].class.elementName); // Spawn a new CV
-            // TODO: Make newly spawned CV get it's contents
-            cvContainer.appendChild(spawnedCV); // Add new CV to container
+            this.cv = document.createElement(layouts[cvType].class.elementName); // Spawn a new CV
+            cvContainer.appendChild(this.cv); // Add new CV to container
             this.cvType = cvType; // Remember which type is selected
         }
-    }
+    };
 
-    cvType = null;
 
-    changeColors() {
-        const colorScheme = getItem("colors");
+
+    changeColors = () => {
+        const colorScheme = getStorageItem("colors");
         if (this.colorScheme !== colorScheme) {
             // TODO: Update styles from the color scheme
 
             this.colorScheme = colorScheme;
         }
-    }
-
-    colorScheme = null;
+    };
 
     // language=CSS
     get css() {

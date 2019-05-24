@@ -26,7 +26,7 @@ export default class SideToggle extends BaseComponent {
         }
     };
 
-    toggle() {
+    toggle = () => {
         if (this.open) {
             this.removeAttribute("open");
             this.setAttribute("closed", "");

@@ -200,8 +200,9 @@ export default class TestimonialSlider extends BaseComponent {
         `;
     }
 
-    script() {
+    script = () => {
         this.textContainer = this.shadowRoot.querySelector('.testimonial-texts .texts');
+
         this.imageContainer = this.shadowRoot.querySelector('.testimonial-images');
         this.dotContainer = this.shadowRoot.querySelector('.dots');
         this.testimonials.forEach((testimonial, i) => {
@@ -220,18 +221,19 @@ export default class TestimonialSlider extends BaseComponent {
         requestAnimationFrame(_=> {
             this.start();
         })
-    }
+    };
 
-    start() {
+    start = () => {
         this._shouldBeRunning = true;
         this._tick();
-    }
+    };
 
-    stop() {
+    stop = () => {
         this._shouldBeRunning = false;
-    }
+    };
 
     _tick() {
+
         if(!this._shouldBeRunning) return;
 
         if(this._timeout != null) {
@@ -267,8 +269,7 @@ export default class TestimonialSlider extends BaseComponent {
             this._tick();
         }, this.slideSpeed);
     }
-
-    _createDomForTestimonialText(testimonial) {
+    _createDomForTestimonialText = (testimonial) => {
         const p = document.createElement('p');
         p.classList.add('testimonial-text');
         p.innerHTML = `"${testimonial.text}"`;
@@ -280,9 +281,9 @@ export default class TestimonialSlider extends BaseComponent {
         p.appendChild(person);
 
         return p;
-    }
+    };
 
-    _createDomForTestimonialImage (testimonial) {
+    _createDomForTestimonialImage = (testimonial) => {
         const container = document.createElement('div');
         container.classList.add('testimonial-image-container');
         const img = document.createElement('img');
@@ -290,6 +291,7 @@ export default class TestimonialSlider extends BaseComponent {
         img.src = testimonial.image;
 
         return img;
+
     }
 
     _createDot(testimonial, i) {

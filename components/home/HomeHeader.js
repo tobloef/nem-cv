@@ -438,7 +438,7 @@ export default class HomeHeader extends BaseComponent {
         this.fakeContentExtra.classList.add('visible');
     }
 
-    script() {
+    script = () => {
         this.header = this.shadowRoot.querySelector("header");
         this.fakecv = this.shadowRoot.querySelector(".fakecv");
         this.fakeContentTitle = this.shadowRoot.querySelector(".fake-content-title");
