@@ -359,24 +359,42 @@ export default class PageHome extends BaseComponent {
         `;
     }
 
-    connectedCallback = () => {
+    connectedCallback() {
         super.connectedCallback();
 
+        this._observeHeader();
+        this._observeTestimonials();
+    }
+
+    _observeHeader() {
         const navBar = this.shadowRoot.querySelector("nav-bar");
 
-        this.intersectionObserver = new IntersectionObserver(entries => {
+        this.headerObserver = new IntersectionObserver(entries => {
             if (entries[0].intersectionRatio <= 0.5) {
                 navBar.removeAttribute("transparent");
             } else {
                 navBar.setAttribute("transparent", "");
             }
-        }, {
-            threshold: [0, 0.25, 0.5, 1]
-        });
+        }, { threshold: [0, 0.25, 0.5, 1]});
 
         // start observing
-        this.intersectionObserver.observe(this.shadowRoot.querySelector("home-header"));
-    };
+        this.headerObserver.observe(this.shadowRoot.querySelector("home-header"));
+    }
+
+    _observeTestimonials() {
+        const testimonialSlider = this.shadowRoot.querySelector("testimonial-slider");
+
+        this.headerObserver = new IntersectionObserver(entries => {
+            if (entries[0].intersectionRatio <= 0.1) {
+                testimonialSlider.stop();
+            } else {
+                testimonialSlider.resume();
+            }
+        }, { threshold: [0, 0.1]});
+
+        // start observing
+        this.headerObserver.observe(this.shadowRoot.querySelector("section.testimonials"));
+    }
 
     script = () => {
         const header = this.shadowRoot.querySelector("home-header");

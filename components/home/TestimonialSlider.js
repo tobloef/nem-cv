@@ -222,14 +222,13 @@ export default class TestimonialSlider extends BaseComponent {
         this._shouldBeRunning = false;
     };
 
+    resume = () => {
+        this._shouldBeRunning = true;
+        this._next();
+    };
+
     _tick() {
-
         if(!this._shouldBeRunning) return;
-
-        if(this._timeout != null) {
-            clearTimeout(this._timeout);
-            this._timeout = null;
-        }
 
         this.images.forEach(image => {
             image.classList.remove('visible');
@@ -255,10 +254,20 @@ export default class TestimonialSlider extends BaseComponent {
 
         this._current = (this._current + 1) % this.testimonials.length;
 
+        this._next();
+    }
+
+    _next() {
+        if(this._timeout != null) {
+            clearTimeout(this._timeout);
+            this._timeout = null;
+        }
+        
         this._timeout = setTimeout(_=> {
             this._tick();
         }, this.slideSpeed);
     }
+
     _createDomForTestimonialText = (testimonial) => {
         const p = document.createElement('p');
         p.classList.add('testimonial-text');
