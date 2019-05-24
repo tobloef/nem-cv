@@ -1,13 +1,19 @@
 import BaseComponent from "../BaseComponent.js";
 import wait from '../../lib/wait.js';
-
+import SliderButton from './SliderButton.js';
 
 export default class TestimonialSlider extends BaseComponent {
-    usedComponents = [];
+    usedComponents = [
+        SliderButton
+    ];
 
     html = `
         <div class="testimonial-images"></div>
-        <div class="testimonial-texts"></div>
+        <div class="testimonial-texts">
+            <div class="dots"></div>
+
+            <div class="texts"></div>
+        </div>
     `;
 
     testimonials = [
@@ -39,6 +45,8 @@ export default class TestimonialSlider extends BaseComponent {
 
     _current = 0;
 
+    _timeout = null;
+
     // language=CSS
     get css() {
         return `
@@ -52,6 +60,7 @@ export default class TestimonialSlider extends BaseComponent {
                 position: relative;
 
                 --text-padding: 30px 30px 0 0;
+                --button-padding: 30px 30px 0 0;
             }
 
             .testimonial-images {
@@ -73,11 +82,9 @@ export default class TestimonialSlider extends BaseComponent {
             }
 
             .testimonial-texts {
+                display: flex;
                 overflow: hidden;
-                transition: 300ms ease-in-out height;
-                height: 0px;
-                min-height: 25em;
-                align-items: center;
+                flex-direction: column-reverse;
             }
 
             .testimonial-text {
@@ -99,6 +106,22 @@ export default class TestimonialSlider extends BaseComponent {
                 display: block;
                 font-size: 0.8em;
                 line-height: 2;
+            }
+            .dots {
+                display: flex;
+                width: 100%;
+                justify-content: center;
+                padding: var(--button-padding);
+            }
+
+            .texts {
+                height: 0px;
+                min-height: 20em;
+                transition: 300ms ease-in-out height;
+            }
+
+            slider-button {
+                margin: 0px 5px;
             }
 
             @media(max-width: 600px) {
@@ -127,6 +150,10 @@ export default class TestimonialSlider extends BaseComponent {
                     object-fit: cover;
                 }
 
+                .testimonial-texts {
+                    flex-direction: column;
+                }
+
                 .testimonial-text {
                     max-width: 50%;
                     padding-top: 0px;
@@ -134,6 +161,10 @@ export default class TestimonialSlider extends BaseComponent {
 
                 .testimonial-image {
                     padding-left: 60px;
+                }
+
+                .dots {
+                    justify-content: flex-end;
                 }
             }
 
@@ -160,17 +191,22 @@ export default class TestimonialSlider extends BaseComponent {
     }
 
     script = () => {
-        this.textContainer = this.shadowRoot.querySelector('.testimonial-texts');
+        this.textContainer = this.shadowRoot.querySelector('.testimonial-texts .texts');
+
         this.imageContainer = this.shadowRoot.querySelector('.testimonial-images');
+        this.dotContainer = this.shadowRoot.querySelector('.dots');
         this.testimonials.forEach((testimonial, i) => {
             const text = this._createDomForTestimonialText(testimonial);
             const image = this._createDomForTestimonialImage(testimonial);
+            const dot = this._createDot(testimonial, i);
             this.textContainer.appendChild(text);
             this.imageContainer.appendChild(image);
+            this.dotContainer.appendChild(dot);
         });
 
         this.texts = this.shadowRoot.querySelectorAll('.testimonial-text');
         this.images = this.shadowRoot.querySelectorAll('.testimonial-image');
+        this.dots = this.shadowRoot.querySelectorAll('.dots slider-button');
 
         requestAnimationFrame(_=> {
             this.start();
@@ -186,8 +222,14 @@ export default class TestimonialSlider extends BaseComponent {
         this._shouldBeRunning = false;
     };
 
-    _tick = async () => {
+    _tick() {
+
         if(!this._shouldBeRunning) return;
+
+        if(this._timeout != null) {
+            clearTimeout(this._timeout);
+            this._timeout = null;
+        }
 
         this.images.forEach(image => {
             image.classList.remove('visible');
@@ -197,20 +239,26 @@ export default class TestimonialSlider extends BaseComponent {
             text.classList.remove('visible');
         });
 
+        this.dots.forEach(dot=> {
+            dot.removeAttribute('active');
+        });
+
         const image = this.images[this._current];
         const text = this.texts[this._current];
+        const dot = this.dots[this._current];
 
         this.textContainer.style.height = `${text.clientHeight}px`;
 
         image.classList.add('visible');
         text.classList.add('visible');
+        dot.setAttribute('active', '');
 
         this._current = (this._current + 1) % this.testimonials.length;
 
-        await wait(this.slideSpeed);
-        this._tick();
-    };
-
+        this._timeout = setTimeout(_=> {
+            this._tick();
+        }, this.slideSpeed);
+    }
     _createDomForTestimonialText = (testimonial) => {
         const p = document.createElement('p');
         p.classList.add('testimonial-text');
@@ -233,5 +281,17 @@ export default class TestimonialSlider extends BaseComponent {
         img.src = testimonial.image;
 
         return img;
-    };
+
+    }
+
+    _createDot(testimonial, i) {
+        const button = document.createElement(SliderButton.elementName);
+
+        button.addEventListener('click', evt => {
+            this._current = i;
+            this._tick();
+        })
+
+        return button;
+    }
 }

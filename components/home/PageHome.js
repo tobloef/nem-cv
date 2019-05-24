@@ -245,14 +245,18 @@ export default class PageHome extends BaseComponent {
 
            @media(max-width: 600px) {
                testimonial-slider {
-                   --text-padding: 30px;
+                   --button-padding: 0px 0px 30px 0px;
+                   --text-padding: 20px 30px 30px 30px;
                }
            }
 
            @media(min-width: 600px) {
                testimonial-slider {
-                   max-width: 1500px;
-                   padding: 60px;
+                   /*max-width: 1500px;*/
+                   padding: 0px;
+
+                   --text-padding: 20px 50px 30px 10%;
+                   --button-padding: 20px 50px 20px 0px;
                }
            }
 
