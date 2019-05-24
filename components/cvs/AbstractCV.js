@@ -15,8 +15,6 @@ export default class AbstractCV extends BaseComponent {
             }
         });
 
-
-
         const experienceList = this.shadowRoot.getElementById("experience-list");
         experienceList.itemAttributes = {
             "experience-type": "Firma"

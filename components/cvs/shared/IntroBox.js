@@ -54,6 +54,7 @@ export default class IntroBox extends BaseComponent {
                                 element="p"
                                 content-key="description"
                                 content-type="component"
+                                multiline
                                 placeholder="Her kan du skrive en kort beskrivelse af dig selv.">
                 </editable-component>
             </section>
