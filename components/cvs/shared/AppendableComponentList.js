@@ -25,51 +25,70 @@ export default class AppendableComponentList extends BaseComponent {
         // Append item button
         const slot = this.shadowRoot.querySelector(`slot[name="append-button"]`);
         const appendButton = (slot.assignedNodes() || [])[0];
-        appendButton.onClick = (attributes) => {
-            const list = this.shadowRoot.getElementById("list");
-            // Append separator
-            if (this.separator && list.childNodes.length > 0) {
-                list.appendChild(document.createTextNode(this.separator));
-            }
-            const newChild = document.createElement(this.itemComponent);
-            // Add attributes based on the this component's item attributes.
-            if (this.itemAttributes != null) {
-                for (const attribute in this.itemAttributes) {
-                    //const attributeName = camelToKebabCase(attribute);
-                    newChild.setAttribute(attribute, this.itemAttributes[attribute]);
-                }
-            }
-            // Set attributes based on the append button.
-            for (const attribute in (attributes || {})) {
-                newChild.setAttribute(attribute, attributes[attribute]);
-            }
-            newChild.setAttribute("part", "list-item");
-            list.appendChild(newChild);
-        };
+        appendButton.onClick = this.addItem;
 
         // Remove item button
         const slot2 = this.shadowRoot.querySelector(`slot[name="remove-button"`);
         const removeButton = (slot2.assignedNodes() || [])[0];
-        removeButton.onClick = () => {
-            const list = this.shadowRoot.getElementById("list");
-            if (list.childNodes.length === 0) {
-                return;
-            }
-            this.removeLast(list);
-            if (this.separator && list.childNodes.length > 0) {
-                this.removeLast(list);
-            }
-        };
+        removeButton.onClick = this.remove;
         for (let i = 0; i < (this.startingAmount || 0); i++) {
-            appendButton.onClick()
+            this.addItem();
         }
     };
 
-    removeLast(list) {
-        list.removeChild(list.childNodes[list.childNodes.length - 1]);
-    }
+    addItem = (attributes) => {
+        const list = this.shadowRoot.getElementById("list");
+        // Append separator
+        if (this.separator && list.childNodes.length > 0) {
+            list.appendChild(document.createTextNode(this.separator));
+        }
+        const newChild = document.createElement(this.itemComponent);
+        // Add attributes based on the this component's item attributes.
+        if (this.itemAttributes != null) {
+            for (const attribute in this.itemAttributes) {
+                //const attributeName = camelToKebabCase(attribute);
+                newChild.setAttribute(attribute, this.itemAttributes[attribute]);
+            }
+        }
+        // Set attributes based on the append button.
+        for (const attribute in (attributes || {})) {
+            newChild.setAttribute(attribute, attributes[attribute]);
+        }
+        newChild.setAttribute("part", "list-item");
+        list.appendChild(newChild);
+        return newChild;
+    };
 
-// language=CSS
+    remove = () => {
+        const list = this.shadowRoot.getElementById("list");
+        if (list.childNodes.length === 0) {
+            return;
+        }
+        this.removeLast();
+        if (this.separator && list.childNodes.length > 0) {
+            this.removeLast();
+        }
+    };
+
+    removeLast = () => {
+        const list = this.shadowRoot.getElementById("list");
+        list.removeChild(list.childNodes[list.childNodes.length - 1]);
+    };
+
+    removeAll = () => {
+        const list = this.shadowRoot.getElementById("list");
+        list.innerHTML = "";
+    };
+
+    setContent = (content) => {
+        this.removeAll();
+        for (const item of content) {
+            const element = this.addItem();
+            element.setContent(item);
+        }
+    };
+
+    // language=CSS
     get css() {
         return `
             .container {

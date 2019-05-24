@@ -9,8 +9,6 @@ import ListButton from "./shared/ListButton.js";
 import AbstractCV from "./AbstractCV.js";
 
 export default class CVSimple extends AbstractCV {
-    static observedAttributes = [];
-
     usedComponents = [
         IntroBox,
         ExperienceItem,
@@ -75,12 +73,6 @@ export default class CVSimple extends AbstractCV {
 
     educationWhereSeparator = ", ";
     experienceWhereSeparator = ", ";
-
-    getContent = () => {
-        const obj = {};
-        super.getContent(obj);
-        return obj;
-    };
 
     // language=CSS
     get css() {
