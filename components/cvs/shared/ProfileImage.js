@@ -20,7 +20,7 @@ export default class ProfileImage extends BaseComponent {
     }
 
     onClick = () => {
-        let newURL = prompt("Enter the link to your image. You must have this uploaded elsewhere");
+        let newURL = prompt("Indtast URL'en til dit billede.");
 
         function isValid(url) {
             return url != null;
@@ -30,7 +30,7 @@ export default class ProfileImage extends BaseComponent {
             this.image.src = newURL;
         }
         else {
-            alert("Invalid URL. Please try with another")
+            alert("Ugyldig URL for billedet.")
         }
     };
 

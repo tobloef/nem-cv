@@ -9,6 +9,7 @@ import CVOctagon from "../cvs/CVOctagon.js";
 import {layouts} from "../../constants/editor-definitions.js";
 import CustomButton from "../shared/CustomButton.js";
 import Logo from "../shared/Logo.js";
+import {postCV} from "../../lib/api.js";
 
 export default class PageEditor extends BaseComponent {
     cvType = null;
@@ -48,10 +49,19 @@ export default class PageEditor extends BaseComponent {
             this.changeCVType();
         }
 
+        const sidebar = this.shadowRoot.querySelector("side-bar");
+        if (sidebar != null) {
+            const settingsButton = this.shadowRoot.getElementById("settings-button");
+            settingsButton.addEventListener("click", () => {
+                sidebar.toggle();
+            });
+        }
+
         this.addEventListener("select-click", (e) => {
             this.toggleSidebarIfNecessary();
             setStorageItem("template", e.detail);
             this.changeCVType();
+            sidebar.toggle();
         });
 
         this.addEventListener("example-click", (e) => {
@@ -64,24 +74,25 @@ export default class PageEditor extends BaseComponent {
             this.changeColors();
         });
 
-        const sidebar = this.shadowRoot.querySelector("side-bar");
-        if (sidebar != null) {
-            const settingsButton = this.shadowRoot.getElementById("settings-button");
-            settingsButton.addEventListener("click", () => {
-                sidebar.toggle();
-            });
-        }
-
         const finishButton = this.shadowRoot.getElementById("finish-button");
-        finishButton.addEventListener("click", () => {
+        finishButton.addEventListener("click", async () => {
             if (this.cv == null) {
                 return;
             }
             // TODO: Validate
+            // Set cv content in local storage;
             const content = this.cv.getContent();
             setStorageItem("cv-content", content);
+            // Send CV to server
+            try {
+                await postCV(content);
+            } catch (error) {
+                console.error(error);
+                alert("Der opstod en fejl da CV'et skulle sendes til serveren. Dit CV vil blive gemt lokalt.");
+                return;
+            }
             // TODO: Navigate to preview page
-            alert("TEMPORARY: Your CV has been saved!");
+            alert("Dit CV blev gemt");
         });
     };
 
@@ -110,7 +121,6 @@ export default class PageEditor extends BaseComponent {
         const colorScheme = getStorageItem("colors");
         if (this.colorScheme !== colorScheme) {
             // TODO: Update styles from the color scheme
-
             this.colorScheme = colorScheme;
         }
     };

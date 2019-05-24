@@ -83,7 +83,7 @@ export default class SideBar extends BaseComponent {
                 position: absolute;
                 right: 0;
                 transition: 750ms cubic-bezier(0.77, 0, 0.175, 1) right;
-                top: 50px;
+                top: 25px;
             }
             
             @media(max-width: 550px) {

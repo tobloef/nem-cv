@@ -1,6 +1,6 @@
 import BaseComponent from "../BaseComponent.js";
 import whenReady from "../../lib/whenReady.js";
-import {getStorageItem} from "../../lib/storage-helper.js";
+import {addStorageItemListener, getStorageItem} from "../../lib/storage-helper.js";
 
 export default class AbstractCV extends BaseComponent {
     static observedAttributes = [];
@@ -8,13 +8,6 @@ export default class AbstractCV extends BaseComponent {
     usedComponents = [];
 
     commonScript = () => {
-        whenReady(() => {
-            const contentStr = getStorageItem("cv-content");
-            if (contentStr != null) {
-                this.setContent(contentStr);
-            }
-        });
-
         const experienceList = this.shadowRoot.getElementById("experience-list");
         experienceList.itemAttributes = {
             "experience-type": "Firma"
@@ -36,6 +29,12 @@ export default class AbstractCV extends BaseComponent {
         const sectorList = this.shadowRoot.getElementById("sector-list");
         sectorList.itemAttributes = {"content-type": "component"};
         sectorList.render();
+
+        whenReady(() => {
+            const content = getStorageItem("cv-content");
+            this.setContent(content);
+            addStorageItemListener("cv-content", this.setContent);
+        });
     };
 
     educationWhereSeparator = null;
@@ -51,4 +50,10 @@ export default class AbstractCV extends BaseComponent {
         super.getContent(obj);
         return obj;
     };
+
+    setContent = (content) => {
+        if (content != null) {
+            super.setContent(content);
+        }
+    }
 }
