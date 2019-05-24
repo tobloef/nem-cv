@@ -13,6 +13,7 @@ import Logo from "../shared/Logo.js";
 export default class PageEditor extends BaseComponent {
     cvType = null;
     colorScheme = null;
+    cv = null;
 
     usedComponents = [
         CustomButton,
@@ -37,7 +38,6 @@ export default class PageEditor extends BaseComponent {
             </nav-bar>
             <side-bar></side-bar>
             <div id="cv-container"></div>
-            
         `;
     };
 
@@ -66,10 +66,23 @@ export default class PageEditor extends BaseComponent {
 
         const sidebar = this.shadowRoot.querySelector("side-bar");
         if (sidebar != null) {
-            this.shadowRoot.getElementById("settings-button").addEventListener("click", () => {
+            const settingsButton = this.shadowRoot.getElementById("settings-button");
+            settingsButton.addEventListener("click", () => {
                 sidebar.toggle();
             });
         }
+
+        const finishButton = this.shadowRoot.getElementById("finish-button");
+        finishButton.addEventListener("click", () => {
+            if (this.cv == null) {
+                return;
+            }
+            // TODO: Validate
+            const content = this.cv.getContent();
+            localStorage.setItem("cv-content", JSON.stringify(content));
+            // TODO: Navigate to preview page
+            alert("TEMPORARY: Your CV has been saved!");
+        });
     };
 
     toggleSidebarIfNecessary = () => {
@@ -85,10 +98,8 @@ export default class PageEditor extends BaseComponent {
         if (this.cvType !== cvType) { // If the gotten type is different from the current one
             const cvContainer = this.shadowRoot.getElementById("cv-container");
             cvContainer.innerHTML = ""; // Get content div and reset contents
-
-            const spawnedCV = document.createElement(layouts[cvType].class.elementName); // Spawn a new CV
-            // TODO: Make newly spawned CV get it's contents
-            cvContainer.appendChild(spawnedCV); // Add new CV to container
+            this.cv = document.createElement(layouts[cvType].class.elementName); // Spawn a new CV
+            cvContainer.appendChild(this.cv); // Add new CV to container
             this.cvType = cvType; // Remember which type is selected
         }
     };
@@ -103,8 +114,6 @@ export default class PageEditor extends BaseComponent {
             this.colorScheme = colorScheme;
         }
     };
-
-
 
     // language=CSS
     get css() {
