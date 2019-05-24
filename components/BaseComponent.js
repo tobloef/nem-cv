@@ -64,10 +64,10 @@ export default class BaseComponent extends HTMLElement {
     }
 
     getContent(content) {
-        this._recurseContent(content, this.shadowRoot);
+        this._recurseGetContent(content, this.shadowRoot);
     }
 
-    _recurseContent(content, element) {
+    _recurseGetContent(content, element) {
         for (const child of element.children) {
             let newContent = null;
             const contentType = child.getAttribute("content-type");
@@ -78,7 +78,7 @@ export default class BaseComponent extends HTMLElement {
                         if (child.getContent != null) {
                             child.getContent(newContent);
                         } else {
-                            this._recurseContent(newContent, child);
+                            this._recurseGetContent(newContent, child);
                         }
                         break;
                     case "array":
@@ -86,7 +86,7 @@ export default class BaseComponent extends HTMLElement {
                         if (child.getContent != null) {
                             child.getContent(newContent);
                         } else {
-                            this._recurseContent(newContent, child);
+                            this._recurseGetContent(newContent, child);
                         }
                         break;
                     case "component":
@@ -106,11 +106,31 @@ export default class BaseComponent extends HTMLElement {
             } else if (child.getContent != null) {
                 child.getContent(content);
             } else {
-                this._recurseContent(content, child);
+                this._recurseGetContent(content, child);
             }
         }
     }
 
+    setContent(content) {
+        console.log(this.constructor.name, "setContent", content);
+        this._recurseSetContent(content, this.shadowRoot);
+    }
+
+    _recurseSetContent(content, element) {
+        for (const child of element.children) {
+            const key = child.getAttribute("content-key");
+            const type = child.getAttribute("content-type");
+            if (key != null) {
+                child.setContent(content[key]);
+            } else {
+                if (child.setContent != null) {
+                    child.setContent(content);
+                } else {
+                    this._recurseSetContent(content, child);
+                }
+            }
+        }
+    }
 
     static get template() {
         return BaseComponent._template;

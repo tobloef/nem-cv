@@ -37,11 +37,16 @@ export default class ProfileImage extends BaseComponent {
     script = () => {
         this.image = this.shadowRoot.querySelector(".profile-picture");
         this.image.addEventListener("click", this.onClick);
-
     };
 
     getContent = () => {
         return this.image.src;
+    };
+
+    setContent = (content) => {
+        console.log(this.constructor.name, "setContent", content);
+        this.setAttribute("src", content);
+        this.render();
     };
 
     // language=CSS

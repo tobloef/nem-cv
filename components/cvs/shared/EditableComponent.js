@@ -75,7 +75,16 @@ export default class EditableComponent extends BaseComponent {
     };
 
     getContent = () => {
-        return this.shadowRoot.getElementById("content").innerText;
+        const content = this.shadowRoot.getElementById("content").innerText;
+        if (content === "") {
+            return null;
+        }
+        return content;
+    };
+
+    setContent = (content) => {
+        console.log(this.constructor.name, "setContent", content);
+        this.shadowRoot.getElementById("content").innerText = (content || "");
     };
 
     // language=CSS
