@@ -1,6 +1,6 @@
 import BaseComponent from "../BaseComponent.js";
 import whenReady from "../../lib/whenReady.js";
-import {getStorageItem} from "../../lib/storage-helper.js";
+import {addStorageItemListener, getStorageItem} from "../../lib/storage-helper.js";
 
 export default class AbstractCV extends BaseComponent {
     static observedAttributes = [];
@@ -9,10 +9,9 @@ export default class AbstractCV extends BaseComponent {
 
     commonScript = () => {
         whenReady(() => {
-            const contentStr = getStorageItem("cv-content");
-            if (contentStr != null) {
-                this.setContent(contentStr);
-            }
+            const content = getStorageItem("cv-content");
+            this.setContent(content);
+            addStorageItemListener("cv-content", this.setContent);
         });
 
         const experienceList = this.shadowRoot.getElementById("experience-list");
@@ -51,4 +50,10 @@ export default class AbstractCV extends BaseComponent {
         super.getContent(obj);
         return obj;
     };
+
+    setContent = (content) => {
+        if (content != null) {
+            super.setContent(content);
+        }
+    }
 }
