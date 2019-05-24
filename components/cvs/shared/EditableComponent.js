@@ -82,7 +82,7 @@ export default class EditableComponent extends BaseComponent {
     get css() {
         return `
             .empty-text {
-                color: #aaa;
+                color: var(--editable-empty-text-color);
             }
             :host {
                 display: flex;

@@ -1,13 +1,14 @@
 import BaseComponent from "../BaseComponent.js";
 import IntroBox from "./shared/IntroBox.js";
 import simple from "./templates/simple.js";
-import theme1 from "./templates/theme1.js";
+import colors from "./templates/colors.js";
 import AppendableComponentList from "./shared/AppendableComponentList.js";
 import ExperienceItem from "./shared/ExperienceItem.js";
 import WorkAreaItem from "./shared/WorkAreaItem.js";
 import ListButton from "./shared/ListButton.js";
+import AbstractCV from "./AbstractCV.js";
 
-export default class CVSimple extends BaseComponent {
+export default class CVSimple extends AbstractCV {
     static observedAttributes = [];
 
     usedComponents = [
@@ -69,23 +70,11 @@ export default class CVSimple extends BaseComponent {
 
     script = () => {
         BaseComponent.template = simple;
-        BaseComponent.colors = theme1;
-        setInterval(() => {
-            const content = this.getContent();
-            localStorage.setItem("cv-data", JSON.stringify(content));
-            console.log(content);
-        }, 5000);
-
-        const experienceList = this.shadowRoot.getElementById("experience-list");
-        experienceList.itemAttributes = {"experience-type": "Firma"};
-        experienceList.render();
-        const educationList = this.shadowRoot.getElementById("education-list");
-        educationList.itemAttributes = {"experience-type": "Uddannelsessted"};
-        educationList.render();
-        const sectorList = this.shadowRoot.getElementById("sector-list");
-        sectorList.itemAttributes = {"content-type": "component"};
-        sectorList.render();
+        BaseComponent.colors = colors;
     };
+
+    educationWhereSeparator = ", ";
+    experienceWhereSeparator = ", ";
 
     getContent = () => {
         const obj = {};

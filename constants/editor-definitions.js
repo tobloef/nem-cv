@@ -1,7 +1,7 @@
 import {getPath} from "../lib/paths.js";
-import CVOctagon from "../components/cvs/cv-octagon/CVOctagon.js";
-import CVModern from "../components/cvs/cv-modern/CVModern.js";
-import CVSimple from "../components/cvs/cv-simple/CVSimple.js";
+import CVOctagon from "../components/cvs/CVOctagon.js";
+import CVModern from "../components/cvs/CVModern.js";
+import CVSimple from "../components/cvs/CVSimple.js";
 
 export const templates = [
     {fontColor:"#373737", backgroundColor:"#F6F5EE", accentColor:"#E4E3D9"},
