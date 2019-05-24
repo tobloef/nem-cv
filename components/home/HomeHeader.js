@@ -18,7 +18,7 @@ export default class HomeHeader extends BaseComponent {
                         <div class="image-bg"></div>
                     </div>
                     <div class="fake-content-title">
-                        <div class="fake-text lighter large" style="width: 100%; margin-bottom: 10px;"></div>
+                        <div class="fake-text lighter large" style="width: 100%; margin-bottom: 10px; max-width: 300px;"></div>
                         <div class="fake-text lighter tight" style="width: 80%;"></div>
                         <div class="fake-text lighter tight" style="width: 40%;"></div>
                         <div class="fake-text lighter tight" style="width: 100%;"></div>
@@ -68,9 +68,6 @@ export default class HomeHeader extends BaseComponent {
 
             <div class="infobox">
                 <h1>Lad <span class="light">NemCV</span> hjælpe dig med dit CV</h1>
-                <!--<router-link class="cta" href="/templates">
-                    <div class="actual-cta">Start nu</div>
-                </router-link>-->
                 <router-link class="cta-link" href="/templates">
                     <custom-button class="cta" inverted>
                         Start nu
@@ -94,7 +91,8 @@ export default class HomeHeader extends BaseComponent {
 
                 --image-extra-top-offset: 60px;
                 --top-padding: 60px;
-                --mobile-header-max-height: 825px;
+
+                --height: 100vh;
             }
 
             .background-container {
@@ -117,8 +115,7 @@ export default class HomeHeader extends BaseComponent {
 
             header {
                 padding-top: var(--top-padding);
-                height: 100vh;
-                max-height: var(--mobile-header-max-height);
+                height: var(--height);
                 background: hsl(12, 5%, 80%);
                 background: radial-gradient(circle, hsl(12, 5%, 80%) 0%, hsl(12, 5%, 30%) 100%);
 
@@ -134,8 +131,8 @@ export default class HomeHeader extends BaseComponent {
                 clip-path: none;
                 margin: 0px 0 0 0;
 
-                height: calc(100vh - var(--top-padding));
-                max-height: calc(var(--mobile-header-max-height) - var(--top-padding));
+                height: calc(var(--height) - var(--top-padding));
+                max-height: calc(var(--height) - var(--top-padding));
                 overflow: hidden;
 
                 position: absolute;
@@ -189,7 +186,7 @@ export default class HomeHeader extends BaseComponent {
 
 
             .image-container img {
-                height: calc(100vh - var(--top-padding));
+                height: calc(var(--height) - var(--top-padding));
             }
 
             .image-container img.animatable {
@@ -211,7 +208,7 @@ export default class HomeHeader extends BaseComponent {
                 position: absolute;
                 z-index: -1;
                 width: 100vw;
-                height: 100vh;
+                height: var(--height);
                 top: -100px;
             }
 
@@ -288,7 +285,7 @@ export default class HomeHeader extends BaseComponent {
                 width: 100%;
                 max-width: 550px;
                 background: rgba(0,0,0,0.6);
-                padding: 30px 40px;
+                padding: 20px 40px 30px;
                 top: 50%;
 
                 transform: translateY(100px);
@@ -315,7 +312,12 @@ export default class HomeHeader extends BaseComponent {
             }
 
             .cta {
-                font-size: 1.2em;
+                --border-color: white;
+                --text-color: white;
+                --hover-background-color: var(--border-color);
+                --hover-text-color: black;
+
+                font-size: 1.1em;
             }
 
             @media(min-width: 300px) {
