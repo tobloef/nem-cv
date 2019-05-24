@@ -5,16 +5,15 @@ import RouterLink from "../shared/RouterLink.js";
 import CustomButton from "../shared/CustomButton.js";
 import NavBar from "../shared/NavBar.js";
 import HomeHeader from './HomeHeader.js';
-import {getPath} from "../../lib/paths.js";
+import {
+    getPath
+} from "../../lib/paths.js";
+import TestimonialSlider from './TestimonialSlider.js';
 import Logo from "../shared/Logo.js";
 
 export default class PageHome extends BaseComponent {
     usedComponents = [
-        RouterLink,
-        HomeHeader,
-        CustomButton,
-        NavBar,
-        Logo
+        RouterLink, HomeHeader, CustomButton, NavBar, Logo, TestimonialSlider
     ];
 
     get html() {
@@ -28,7 +27,7 @@ export default class PageHome extends BaseComponent {
                 </div>
             </nav-bar>
             <home-header></home-header>
-    
+
             <section class="features">
                 <h2>Derfor skal du vælge os</h2>
                 <div class="cards">
@@ -71,15 +70,17 @@ export default class PageHome extends BaseComponent {
                         </router-link>
                     </div>
                 </div>
-            </section>
-            <footer>
-                <p>This is a footer</p>
-            </footer>
-        `;
+            </div>
+        </section>
+        <testimonial-slider></testimonial-slider>
+        <footer>
+            <p>This is a footer</p>
+        </footer>
+    `;
     }
 
-    // language=CSS
     get css() {
+        // language=CSS
         return `
             :host {
                 font-family: 'Open Sans', sans-serif;
@@ -236,7 +237,7 @@ export default class PageHome extends BaseComponent {
                }
            }
 
-           @media(min-width: 750px) {
+           @media(min-width: 700px) {
                .cards {
                    flex-direction: row;
                }
@@ -278,7 +279,9 @@ export default class PageHome extends BaseComponent {
             } else {
                 navBar.setAttribute("transparent", "");
             }
-        }, { threshold: [0, 0.25, 0.5, 1] });
+        }, {
+            threshold: [0, 0.25, 0.5, 1]
+        });
 
         // start observing
         this.intersectionObserver.observe(this.shadowRoot.querySelector("home-header"));
@@ -288,7 +291,7 @@ export default class PageHome extends BaseComponent {
         const header = this.shadowRoot.querySelector("home-header");
 
         //Wait for the window to be ready before playing header animation
-        whenReady(_=> {
+        whenReady(_ => {
             header.play();
         })
     }
