@@ -24,7 +24,7 @@ export default class RootRoutes extends BaseComponent {
         {pattern: "^/editor$", component: PageEditor},
 
         {pattern: "^/cv-simple$", component: CVSimple},
-        {pattern: "^/cv-octagon", component: CVOctagon},
+        {pattern: "^/cv-octagon$", component: CVOctagon},
         {pattern: "^/cv-modern$", component: CVModern},
 
         {pattern: "", component: PageNotFound},
