@@ -55,7 +55,7 @@ export default class TestimonialSlider extends BaseComponent {
                 flex-direction: column;
                 font-family: 'Open Sans', sans-serif;
                 color: white;
-                --image-height: 300px;
+                --image-height: 400px;
                 overflow: hidden;
                 position: relative;
 
@@ -96,10 +96,12 @@ export default class TestimonialSlider extends BaseComponent {
                 font-style: italic;
                 transition: 300ms ease-in-out opacity;
                 font-weight: 100;
+                pointer-events: none;
             }
 
             .testimonial-text.visible {
                 opacity: 1;
+                pointer-events: initial;
             }
 
             .person {
@@ -262,7 +264,7 @@ export default class TestimonialSlider extends BaseComponent {
             clearTimeout(this._timeout);
             this._timeout = null;
         }
-        
+
         this._timeout = setTimeout(_=> {
             this._tick();
         }, this.slideSpeed);
