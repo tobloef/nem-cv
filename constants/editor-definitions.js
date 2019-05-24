@@ -1,4 +1,7 @@
 import {getPath} from "../lib/paths.js";
+import CVOctagon from "../components/cvs/CVOctagon.js";
+import CVModern from "../components/cvs/CVModern.js";
+import CVSimple from "../components/cvs/CVSimple.js";
 
 export const templates = [
     {fontColor:"#373737", backgroundColor:"#F6F5EE", accentColor:"#E4E3D9"},
@@ -12,16 +15,19 @@ export const layouts = {
     edges: {
         name: "Kanter",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        image: getPath("cv-placeholder")
+        image: getPath("cv-placeholder"),
+        class: CVOctagon
     },
     simplicity: {
         name: "Simplicitet",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        image: getPath("cv-placeholder")
+        image: getPath("cv-placeholder"),
+        class: CVModern
     },
     basic: {
         name: "Basal",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        image: getPath("cv-placeholder")
+        image: getPath("cv-placeholder"),
+        class: CVSimple
     }
 };

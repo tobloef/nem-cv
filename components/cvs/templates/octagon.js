@@ -8,7 +8,7 @@ const css = `
         --h2: 'oswald', sans-serif;
         --p: 'raleway', sans-serif;
         --h1-size: 2em;
-        --editable-empty-text-color: #aaa;
+        --editable-empty-text-color: #555;
     }
 `;
 

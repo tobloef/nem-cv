@@ -13,50 +13,50 @@ export default class IntroBox extends BaseComponent {
     // language=HTML
     get html() {
         return `
-					<section class="introbox">
-						<profile-image aspect-ratio="2" content-key="picture" content-type="component"></profile-image>
-						<editable-component
-										content-key="name"
-										content-type="component"
-										class="name"
-										placeholder="Dit fulde navn"
-										element="h1">
-						</editable-component>
-						<ul class="facts">
-							<li class="age">
-								<editable-component
-                                    content-key="age"
-                                    content-type="component"
-                                    placeholder="Din alder"
-                                    element="div">
-								</editable-component>
-							</li>
-							<li class="city">
-								<editable-component
-                                        content-key="city"
-                                        content-type="component"        
-                                        placeholder="Din by"
-                                        element="div"
-                                ></editable-component>
-							</li>
-							<li class="email">
-								<editable-component
-                                        placeholder="Din email" 
-                                        element="div"
-                                        content-key="email"
-                                        content-type="component"
-                                ></editable-component>
-							</li>
-						</ul>
-						<h1 class="s-h1">Om mig</h1>
-						<editable-component
-										class="description"
-										element="p"
-                                        content-key="description"
-                                        content-type="component"
-										placeholder="Her kan du skrive en kort beskrivelse af dig selv.">
-						</editable-component>
-					</section>
+            <section class="introbox">
+                <profile-image aspect-ratio="2" content-key="picture" content-type="component"></profile-image>
+                <editable-component
+                                content-key="name"
+                                content-type="component"
+                                class="name"
+                                placeholder="Dit fulde navn"
+                                element="h1">
+                </editable-component>
+                <ul class="facts">
+                    <li class="age">
+                        <editable-component
+                                content-key="age"
+                                content-type="component"
+                                placeholder="Din alder"
+                                element="div">
+                        </editable-component>
+                    </li>
+                    <li class="city">
+                        <editable-component
+                                content-key="city"
+                                content-type="component"        
+                                placeholder="Din by"
+                                element="div"
+                        ></editable-component>
+                    </li>
+                    <li class="email">
+                        <editable-component
+                                placeholder="Din email" 
+                                element="div"
+                                content-key="email"
+                                content-type="component"
+                        ></editable-component>
+                    </li>
+                </ul>
+                <h1 class="s-h1">Om mig</h1>
+                <editable-component
+                                class="description"
+                                element="p"
+                                content-key="description"
+                                content-type="component"
+                                placeholder="Her kan du skrive en kort beskrivelse af dig selv.">
+                </editable-component>
+            </section>
         `;
     }
 
