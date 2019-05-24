@@ -13,6 +13,7 @@ export default class WorkAreaItem extends BaseComponent {
 
     onClick = () => {
         this.swapToDropdown();
+        this.addOptions();
         this.dropdown.focus();
     };
 
@@ -38,13 +39,24 @@ export default class WorkAreaItem extends BaseComponent {
     };
 
     addOptions = () => {
-        //add options to the dropdown menu
+        // Clear the options list
+        this.dropdown.innerHTML = "";
+        // Create the placeholder
         const choose = document.createElement("option");
-        choose.appendChild(document.createTextNode("Vælg en branche"))
+        choose.setAttribute("disabled", "");
+        choose.setAttribute("selected", "");
+        choose.setAttribute("hidden", "");
+        choose.appendChild(document.createTextNode("Vælg en branche"));
         this.dropdown.appendChild(choose);
-        const gaming = document.createElement("option");
-        gaming.appendChild(document.createTextNode("Gaming"));
-        this.dropdown.appendChild(gaming);
+        // Add the sector options
+        const sectors = JSON.parse(localStorage.getItem("sectors"));
+        if (sectors != null) {
+            for (const sector of sectors) {
+                const option = document.createElement("option");
+                option.appendChild(document.createTextNode(sector));
+                this.dropdown.appendChild(option);
+            }
+        }
     };
 
     swapToDropdown() {
