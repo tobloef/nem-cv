@@ -3,69 +3,78 @@ import RouterLink from "../shared/RouterLink.js";
 import CustomButton from "../shared/CustomButton.js";
 import NavBar from "../shared/NavBar.js";
 import HomeHeader from './HomeHeader.js';
+import {getPath} from "../../lib/paths.js";
+import Logo from "../shared/Logo.js";
 
 export default class PageHome extends BaseComponent {
     usedComponents = [
-        RouterLink, HomeHeader, CustomButton, NavBar
+        RouterLink,
+        HomeHeader,
+        CustomButton,
+        NavBar,
+        Logo
     ];
 
-    html = `
-        <nav-bar transparent>
-            <router-link href="/templates">
-                <custom-button inverted>
-                    Start nu
-                </custom-button>
-            </router-link>
-        </nav-bar>
-        <home-header></home-header>
-
-        <section class="features">
-            <h2>Derfor skal du vælge os</h2>
-            <div class="cards">
-                <div class="card templates">
-                    <div class="split">
-                        <div class="left">
-                            <h3>Vælg mellem <b class="underline">tre</b> <i>forskellige</i> templates</h3>
-                            <div class="seperator"></div>
-                        </div>
-                        <div class="right">
-                            <img src="/img/template1.png"></img>
-                        </div>
-                    </div>
+    get html() {
+        return `
+            <nav-bar transparent>
+                <div>
+                    <logo></logo>
                     <router-link href="/templates">
-                        <custom-button >
-                            Start nu
-                        </custom-button>
+                        <custom-button inverted>Start nu</custom-button>
                     </router-link>
                 </div>
-                <div class="card colors">
-                    <div class="split">
-                        <div class="left">
-                            <h3>Vælg farver efter din personlighed</h3>
-                            <div class="seperator"></div>
+            </nav-bar>
+            <home-header></home-header>
+    
+            <section class="features">
+                <h2>Derfor skal du vælge os</h2>
+                <div class="cards">
+                    <div class="card templates">
+                        <div class="split">
+                            <div class="left">
+                                <h3>Vælg mellem <b class="underline">tre</b> <i>forskellige</i> templates</h3>
+                                <div class="seperator"></div>
+                            </div>
+                            <div class="right">
+                                <img src="${getPath("template-modern")}"/>
+                            </div>
                         </div>
-                        <div class="right">
-                            <p class="line"><span class="green">GRØN</span><span class="red">RØD</span></p>
-                            <p class="line"><span class="blue">BLÅ</span><span class="yellow">GUL</span></p>
-                            <p class="line"><span class="brown">BRUN</span></p>
-                            <p class="line"><span class="purple">LILLA</span><span class="gray">GRÅ</span></p>
-                            <p class="line"><span class="pink">LYSERØD</span></p>
-                            <p class="line"><span class="bordeaux">BORDEAUX</span></p>
-                            <p class="line"><span class="dark-green">MØRKEGRØN</span></p>
-                        </div>
+                        <router-link href="/templates">
+                            <custom-button >
+                                Start nu
+                            </custom-button>
+                        </router-link>
                     </div>
-                    <router-link href="/templates">
-                        <custom-button >
-                            Start nu
-                        </custom-button>
-                    </router-link>
+                    <div class="card colors">
+                        <div class="split">
+                            <div class="left">
+                                <h3>Vælg farver efter din personlighed</h3>
+                                <div class="seperator"></div>
+                            </div>
+                            <div class="right">
+                                <p class="line"><span class="green">GRØN</span><span class="red">RØD</span></p>
+                                <p class="line"><span class="blue">BLÅ</span><span class="yellow">GUL</span></p>
+                                <p class="line"><span class="brown">BRUN</span></p>
+                                <p class="line"><span class="purple">LILLA</span><span class="gray">GRÅ</span></p>
+                                <p class="line"><span class="pink">LYSERØD</span></p>
+                                <p class="line"><span class="bordeaux">BORDEAUX</span></p>
+                                <p class="line"><span class="dark-green">MØRKEGRØN</span></p>
+                            </div>
+                        </div>
+                        <router-link href="/templates">
+                            <custom-button >
+                                Start nu
+                            </custom-button>
+                        </router-link>
+                    </div>
                 </div>
-            </div>
-        </section>
-        <footer>
-            <p>This is a footer</p>
-        </footer>
-    `;
+            </section>
+            <footer>
+                <p>This is a footer</p>
+            </footer>
+        `;
+    }
 
     // language=CSS
     get css() {

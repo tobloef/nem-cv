@@ -1,4 +1,5 @@
 import BaseComponent from "../../BaseComponent.js";
+import {getPath} from "../../../lib/paths.js";
 
 export default class RemoveButton extends BaseComponent {
     static observedAttributes = [];
@@ -7,7 +8,7 @@ export default class RemoveButton extends BaseComponent {
     // language=HTML
     get html() {
         return `
-            <img src="../../../img/minus-outline.svg" id="button"/> 
+            <img src="${getPath("remove")}" id="button"/> 
         `;
     }
 

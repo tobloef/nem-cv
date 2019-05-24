@@ -3,18 +3,27 @@ import Router from "../../lib/Router.js";
 import SideBar from "./SideBar.js";
 import {getItem, setItem} from "../../lib/storage-helper.js";
 import NavBar from "../shared/NavBar.js";
+import {getPath} from "../../lib/paths.js";
+import CustomButton from "../shared/CustomButton.js";
+import Logo from "../shared/Logo.js";
 
 export default class PageEditor extends BaseComponent {
     usedComponents = [
         NavBar,
-        SideBar
+        SideBar,
+        CustomButton,
+        Logo
     ];
 
     // language=HTML
     get html() {
         return `
             <nav-bar>
-                <custom-button inverted>Færdig</custom-button>
+                <div>
+                    <custom-button inverted id="settings-button">Indstillinger</custom-button>
+                    <logo-></logo->
+                    <custom-button inverted id="finish-button">Færdig</custom-button>
+                </div>
             </nav-bar>
             <side-bar></side-bar>
             <div class="cv-container">
@@ -29,18 +38,18 @@ export default class PageEditor extends BaseComponent {
             return Router.navigate(Router.prefix + "/templates");
         }
 
-        this.addEventListener("select-click", (evt) => {
+        this.addEventListener("select-click", (e) => {
             this.toggleSidebarIfNecessary();
-            setItem("template", evt.detail);
+            setItem("template", e.detail);
         });
 
-        this.addEventListener("example-click", (evt) => {
-            console.log("Example selected:", evt.detail);
+        this.addEventListener("example-click", (e) => {
+            console.log("Example selected:", e.detail);
         });
 
-        this.addEventListener("color-picked", (evt) => {
+        this.addEventListener("color-picked", (e) => {
             this.toggleSidebarIfNecessary();
-            setItem("colors", evt.detail.colors);
+            setItem("colors", e.detail.colors);
         });
     };
 

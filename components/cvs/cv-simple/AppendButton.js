@@ -1,4 +1,5 @@
 import BaseComponent from "../../BaseComponent.js";
+import {getPath} from "../../../lib/paths.js";
 
 export default class AppendButton extends BaseComponent {
     static observedAttributes = [];
@@ -7,7 +8,7 @@ export default class AppendButton extends BaseComponent {
     // language=HTML
     get html() {
         return `
-            <img id="button" src="/img/add-outline.svg"></button>
+            <img id="button" src="${getPath("add")}"></button>
         `;
     }
 

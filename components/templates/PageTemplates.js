@@ -3,11 +3,15 @@ import Router from "../../lib/Router.js";
 import LayoutList from "../editor/LayoutList.js";
 import {setItem} from "../../lib/storage-helper.js";
 import NavBar from "../shared/NavBar.js";
+import CustomButton from "../shared/CustomButton.js";
+import Logo from "../shared/Logo.js";
 
 export default class PageTemplates extends BaseComponent {
     usedComponents = [
         LayoutList,
-        NavBar
+        NavBar,
+        CustomButton,
+        Logo
     ];
 
     get css() {
@@ -44,7 +48,7 @@ export default class PageTemplates extends BaseComponent {
                 max-width: 900px;
             }
 
-            @media(min-width: 680px) {
+            @media (min-width: 680px) {
                 h1 {
                     font-size: 5em;
                 }
@@ -63,9 +67,17 @@ export default class PageTemplates extends BaseComponent {
     };
 
     get html() {
+        // language=HTML
         return `
-            <nav-bar></nav-bar>
-
+            <nav-bar>
+                <div>
+                  <router-link href="/">
+                    <custom-button inverted style="font-size: 0.4em">Tilbage</custom-button>
+                  </router-link>
+                  <logo-></logo->
+                  <div class="filler"></div>
+                </div>
+            </nav-bar>
             <div class="content">
                 <h1>Vælg en skabelon</h1>
                 <layout-list class="resizing"></layout-list>

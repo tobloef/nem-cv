@@ -1,4 +1,5 @@
 import BaseComponent from "../BaseComponent.js";
+import {getPath} from "../../lib/paths.js";
 
 export default class SideToggle extends BaseComponent {
     // Observe "open" and "close" attributes s.t. both can be used
@@ -11,8 +12,8 @@ export default class SideToggle extends BaseComponent {
     get html() {
         return `
             <button>
-                <img id="open-image" src="/img/arrow.png" alt="Luk indstillinger">
-                <img id="close-image" src="/img/sliders.png" alt="Åbn indstillinger">
+                <img id="open-image" src="${getPath("arrow")}" alt="Luk indstillinger">
+                <img id="close-image" src="${getPath("settings")}" alt="Åbn indstillinger">
             </button>
         `;
     }

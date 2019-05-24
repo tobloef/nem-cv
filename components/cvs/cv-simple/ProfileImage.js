@@ -1,4 +1,5 @@
 import BaseComponent from "../../BaseComponent.js";
+import {getPath} from "../../../lib/paths.js";
 
 export default class ProfileImage extends BaseComponent {
     static observedAttributes = [
@@ -12,8 +13,8 @@ export default class ProfileImage extends BaseComponent {
         return `
             <div class="square">
                 <img class="profile-picture"
-                     src=${this.src || "../../../img/placeholder-person.png"}
-                     alt="image of you">
+                     src=${this.src || getPath("placeholder-person")}
+                     alt="Image of you">
             </div>
         `;
     }
