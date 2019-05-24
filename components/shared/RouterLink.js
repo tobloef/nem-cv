@@ -26,13 +26,8 @@ export default class RouterLink extends BaseComponent {
     get css() {
         // language=CSS
         return `
-            :host {
-                text-decoration: underline;
-            }
-
             a {
-                text-decoration: inherit;
-                color: inherit;
+                text-decoration: none;
             }
         `
     }

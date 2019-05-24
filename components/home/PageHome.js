@@ -21,9 +21,9 @@ export default class PageHome extends BaseComponent {
         return `
             <nav-bar transparent>
                 <div>
-                    <logo></logo>
+                    <logo-></logo->
                     <router-link href="/templates">
-                        <custom-button inverted>Start nu</custom-button>
+                        <custom-button inverted style="font-size: 1.1em">Start nu</custom-button>
                     </router-link>
                 </div>
             </nav-bar>
