@@ -5,10 +5,11 @@ import RouterLink from "../shared/RouterLink.js";
 import CustomButton from "../shared/CustomButton.js";
 import NavBar from "../shared/NavBar.js";
 import HomeHeader from './HomeHeader.js';
+import TestimonialSlider from './TestimonialSlider.js';
 
 export default class PageHome extends BaseComponent {
     usedComponents = [
-        RouterLink, HomeHeader, CustomButton, NavBar
+        RouterLink, HomeHeader, CustomButton, NavBar, TestimonialSlider
     ];
 
     html = `
@@ -64,6 +65,7 @@ export default class PageHome extends BaseComponent {
                 </div>
             </div>
         </section>
+        <testimonial-slider></testimonial-slider>
         <footer>
             <p>This is a footer</p>
         </footer>
