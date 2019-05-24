@@ -130,6 +130,7 @@ export default class CVSimple extends AbstractCV {
             }
             appendable-component-list::part(list-item) {
                 margin-bottom: 0.8em;
+                font-family: var(--p);
             }
 
             .work-areas::part(list) {

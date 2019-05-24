@@ -97,6 +97,10 @@ export default class IntroBox extends BaseComponent {
             li editable-component, .description {
                 font-family: var(--p);
             }
+
+            li editable-component {
+                font-size: var(--p-size);
+            }
         `
     };
 }
