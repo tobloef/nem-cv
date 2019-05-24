@@ -142,6 +142,7 @@ export default class CVSimple extends AbstractCV {
 
             .work-areas::part(list) {
                 margin-bottom: 0;
+                margin-right: 1em;
             }
             
             .work-areas::part(container) {
