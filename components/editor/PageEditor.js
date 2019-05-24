@@ -11,6 +11,9 @@ import CustomButton from "../shared/CustomButton.js";
 import Logo from "../shared/Logo.js";
 
 export default class PageEditor extends BaseComponent {
+    cvType = null;
+    colorScheme = null;
+
     usedComponents = [
         CustomButton,
         CVSimple,
@@ -69,15 +72,15 @@ export default class PageEditor extends BaseComponent {
         }
     };
 
-    toggleSidebarIfNecessary() {
+    toggleSidebarIfNecessary = () => {
         const width = document.documentElement.clientWidth;
         if (width <= 550) { // Is mobile-sized
             const sidebar = this.shadowRoot.querySelector("side-bar");
             sidebar.toggle();
         }
-    }
+    };
 
-    changeCVType() {
+    changeCVType = () => {
         const cvType = getItem("template");
         if (this.cvType !== cvType) { // If the gotten type is different from the current one
             const cvContainer = this.shadowRoot.getElementById("cv-container");
@@ -88,20 +91,20 @@ export default class PageEditor extends BaseComponent {
             cvContainer.appendChild(spawnedCV); // Add new CV to container
             this.cvType = cvType; // Remember which type is selected
         }
-    }
+    };
 
-    cvType = null;
 
-    changeColors() {
+
+    changeColors = () => {
         const colorScheme = getItem("colors");
         if (this.colorScheme !== colorScheme) {
             // TODO: Update styles from the color scheme
 
             this.colorScheme = colorScheme;
         }
-    }
+    };
 
-    colorScheme = null;
+
 
     // language=CSS
     get css() {

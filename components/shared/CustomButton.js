@@ -51,6 +51,4 @@ export default class CustomButton extends BaseComponent {
             }
         `;
     };
-
-    script(){}
 }

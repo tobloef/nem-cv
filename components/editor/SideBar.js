@@ -32,7 +32,7 @@ export default class SideBar extends BaseComponent {
         toggle.addEventListener("click", () => this.toggle());
     };
 
-    toggle() {
+    toggle = () => {
         //const toggle = this.shadowRoot.querySelector("side-toggle");
         //toggle.toggle();
 
@@ -45,9 +45,7 @@ export default class SideBar extends BaseComponent {
         }
 
 
-    }
-
-    externalStyles = [];
+    };
 
     // language=CSS
     get css() {

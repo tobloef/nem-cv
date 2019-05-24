@@ -9,8 +9,6 @@ export default class ColorHolder extends BaseComponent {
         "selected"
     ];
 
-    usedComponents = [];
-
     // language=HTML
     get html() {
         return `
@@ -39,9 +37,9 @@ export default class ColorHolder extends BaseComponent {
         });
     };
 
-    resizeFont() {
+    resizeFont = () => {
         this.shadowRoot.querySelector("p").style.fontSize = (this.offsetWidth*0.6) + "px";
-    }
+    };
 
     // language=CSS
     get css() {

@@ -33,7 +33,7 @@ export default class AppendableComponentList extends BaseComponent {
         }
     };
 
-    addItem(attributes) {
+    addItem = (attributes) => {
         const list = this.shadowRoot.getElementById("list");
         // Append separator
         if (this.separator && list.childNodes.length > 0) {
@@ -54,9 +54,9 @@ export default class AppendableComponentList extends BaseComponent {
         newChild.setAttribute("part", "list-item");
         list.appendChild(newChild);
         return newChild;
-    }
+    };
 
-    remove() {
+    remove = () => {
         const list = this.shadowRoot.getElementById("list");
         if (list.childNodes.length === 0) {
             return;
@@ -65,17 +65,17 @@ export default class AppendableComponentList extends BaseComponent {
         if (this.separator && list.childNodes.length > 0) {
             this.removeLast();
         }
-    }
+    };
 
-    removeLast() {
+    removeLast = () => {
         const list = this.shadowRoot.getElementById("list");
         list.removeChild(list.childNodes[list.childNodes.length - 1]);
-    }
+    };
 
-    removeAll() {
+    removeAll = () => {
         const list = this.shadowRoot.getElementById("list");
         list.innerHTML = "";
-    }
+    };
 
     setContent = (content) => {
         this.removeAll();

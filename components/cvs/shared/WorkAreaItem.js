@@ -59,17 +59,17 @@ export default class WorkAreaItem extends BaseComponent {
         }
     };
 
-    swapToDropdown() {
+    swapToDropdown = () => {
         //swaps the span element with the dropdown element so that the user can choose a work area
         this.shadowRoot.removeChild(this.span);
         this.shadowRoot.appendChild(this.dropdown);
-    }
+    };
 
-    swapToSpan() {
+    swapToSpan = () => {
         //swaps the dropdown element with the swap element so that the cv looks static again
         this.shadowRoot.removeChild(this.dropdown);
         this.shadowRoot.appendChild(this.span);
         this.span.innerText = this.dropdown.value;
-    }
+    };
 
 }

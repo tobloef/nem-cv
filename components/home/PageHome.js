@@ -293,7 +293,7 @@ export default class PageHome extends BaseComponent {
         `;
     }
 
-    connectedCallback() {
+    connectedCallback = () => {
         super.connectedCallback();
 
         const navBar = this.shadowRoot.querySelector("nav-bar");
@@ -310,14 +310,14 @@ export default class PageHome extends BaseComponent {
 
         // start observing
         this.intersectionObserver.observe(this.shadowRoot.querySelector("home-header"));
-    }
+    };
 
-    script() {
+    script = () => {
         const header = this.shadowRoot.querySelector("home-header");
 
         //Wait for the window to be ready before playing header animation
         whenReady(_ => {
             header.play();
         })
-    }
+    };
 }

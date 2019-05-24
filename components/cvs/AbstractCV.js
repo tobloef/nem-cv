@@ -72,12 +72,12 @@ export default class AbstractCV extends BaseComponent {
     educationWhereSeparator = null;
     experienceWhereSeparator = null;
 
-    render() {
+    render = () => {
         super.render();
         this.commonScript();
-    }
+    };
 
-    getContent() {
+    getContent = () => {
         const obj = {};
         super.getContent(obj);
         return obj;
