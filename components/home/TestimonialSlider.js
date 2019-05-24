@@ -1,12 +1,10 @@
 import BaseComponent from "../BaseComponent.js";
 import wait from '../../lib/wait.js';
-import RouterLink from "../shared/RouterLink.js";
-import CustomButton from "../shared/CustomButton.js";
 import SliderButton from './SliderButton.js';
 
 export default class TestimonialSlider extends BaseComponent {
     usedComponents = [
-        SliderButton, CustomButton, RouterLink
+        SliderButton
     ];
 
     html = `
@@ -15,10 +13,6 @@ export default class TestimonialSlider extends BaseComponent {
             <div class="dots"></div>
 
             <div class="texts"></div>
-
-            <router-link href="/templates">
-                <custom-button inverted>Start nu</custom-button>
-            </router-link>
         </div>
     `;
 
@@ -128,10 +122,6 @@ export default class TestimonialSlider extends BaseComponent {
 
             slider-button {
                 margin: 0px 5px;
-            }
-
-            custom-button {
-                display: inline-block;
             }
 
             @media(max-width: 600px) {
@@ -257,7 +247,7 @@ export default class TestimonialSlider extends BaseComponent {
         const text = this.texts[this._current];
         const dot = this.dots[this._current];
 
-        this.textContainer.style.height = `${text.clientHeight + 40}px`;
+        this.textContainer.style.height = `${text.clientHeight}px`;
 
         image.classList.add('visible');
         text.classList.add('visible');
