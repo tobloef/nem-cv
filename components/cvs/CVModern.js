@@ -1,8 +1,8 @@
 import BaseComponent from "../BaseComponent.js";
-import ProfileImage from "./shared/ProfileImage.js";
+import EditableProfileImage from "./shared/EditableProfileImage.js";
 import WorkAreaItem from "./shared/WorkAreaItem.js";
-import AppendableComponentList from "./shared/AppendableComponentList.js";
-import EditableComponent from "./shared/EditableComponent.js";
+import EditableList from "./shared/EditableList.js";
+import EditableText from "./shared/EditableText.js";
 import ListButton from "./shared/ListButton.js";
 import ExperienceItem from "./shared/ExperienceItem.js";
 import AbstractCV from "./AbstractCV.js";
@@ -11,10 +11,10 @@ export default class CVModern extends AbstractCV {
     static observedAttributes = [];
 
     usedComponents = [
-        ProfileImage,
+        EditableProfileImage,
         WorkAreaItem,
-        AppendableComponentList,
-        EditableComponent,
+        EditableList,
+        EditableText,
         ListButton,
         ExperienceItem
     ];
@@ -26,41 +26,41 @@ export default class CVModern extends AbstractCV {
         return `
             <header>
                 <div class="left">
-                    <profile-image class="image" aspect-ratio="1.5"></profile-image>
+                    <${EditableProfileImage.elementName} class="image" aspect-ratio="1.5"></${EditableProfileImage.elementName}>
                 </div>
                 <div class = "right">
-                    <editable-component
+                    <${EditableText.elementName}
                             content-key="name"
                             content-type="component"
                             class="name"
                             placeholder="Dit fulde navn"
                             element="h1">
-                    </editable-component>
+                    </${EditableText.elementName}>
                     <div class="color1"></div>
                     <ul class="listinfo">
                         <li class="age">
-                            <editable-component
+                            <${EditableText.elementName}
                                     content-key="age"
                                     content-type="component"
                                     placeholder="Din alder"
                                     element="div">
-                            </editable-component>
+                            </${EditableText.elementName}>
                         </li>
                         <li class="city">
-                            <editable-component
+                            <${EditableText.elementName}
                                     content-key="city"
                                     content-type="component"
                                     placeholder="Din by"
                                     element="div"
-                            ></editable-component>
+                            ></${EditableText.elementName}>
                         </li>
                         <li class="email">
-                            <editable-component
+                            <${EditableText.elementName}
                                     placeholder="Din email"
                                     element="div"
                                     content-key="email"
                                     content-type="component"
-                            ></editable-component>
+                            ></${EditableText.elementName}>
                         </li>
                     </ul>
                 </div>
@@ -69,16 +69,16 @@ export default class CVModern extends AbstractCV {
             <section class="about">
                 <div class="content">
                         <h2 class="aboutme">OM MIG</h2>
-                        <editable-component
+                        <${EditableText.elementName}
                                 class="description"
                                 element="p"
                                 content-key="description"
                                 content-type="component"
                                 multiline
                                 placeholder="Her kan du skrive en kort beskrivelse af dig selv.">
-                        </editable-component>
+                        </${EditableText.elementName}>
                         <h2 class="workareas">BRANCHER</h2>
-                        <appendable-component-list
+                        <${EditableList.elementName}
                             id="sector-list"
                             content-key="sectors"
                             content-type="array"
@@ -89,14 +89,14 @@ export default class CVModern extends AbstractCV {
                         >
                             <list-button icon="add" slot="append-button"></list-button>
                             <list-button icon="remove" slot="remove-button"></list-button>
-                        </appendable-component-list>
+                        </${EditableList.elementName}>
                 </div>
             </section>
             
             <section class="education">
                 <div class="content">
                     <h2 class="educationtitle">UDDANNELSE</h2>
-                    <appendable-component-list
+                    <${EditableList.elementName}
                             id="education-list"
                             content-key="education"
                             content-type="array"
@@ -105,14 +105,14 @@ export default class CVModern extends AbstractCV {
                         >
                             <list-button icon="add" slot="append-button"></list-button>
                             <list-button icon="remove" slot="remove-button"></list-button>
-                    </appendable-component-list>
+                    </${EditableList.elementName}>
                 </div>
             </section>
             
             <section class="experience">
                 <div class="content">
                     <h2 class="experiencetitle">ERFARING</h2>
-                    <appendable-component-list
+                    <${EditableList.elementName}
                             id="experience-list"
                             content-key="employers"
                             content-type="array"
@@ -121,7 +121,7 @@ export default class CVModern extends AbstractCV {
                         >
                             <list-button icon="add" slot="append-button"></list-button>
                             <list-button icon="remove" slot="remove-button"></list-button>
-                        </appendable-component-list>
+                        </${EditableList.elementName}>
                 </div>
             </section>
         `;

@@ -1,7 +1,7 @@
 import BaseComponent from "../../BaseComponent.js";
 import {getPath} from "../../../lib/paths.js";
 
-export default class ProfileImage extends BaseComponent {
+export default class EditableProfileImage extends BaseComponent {
     static observedAttributes = [
         "aspect-ratio",
         "src"

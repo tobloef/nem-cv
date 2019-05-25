@@ -1,6 +1,6 @@
 import BaseComponent from "../../BaseComponent.js";
 
-export default class EditableComponent extends BaseComponent {
+export default class EditableText extends BaseComponent {
     node = null;
 
     static observedAttributes = [

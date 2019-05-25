@@ -2,7 +2,7 @@ import BaseComponent from "../BaseComponent.js";
 import IntroBox from "./shared/IntroBox.js";
 import simple from "./templates/simple.js";
 import colors from "./templates/colors.js";
-import AppendableComponentList from "./shared/AppendableComponentList.js";
+import EditableList from "./shared/EditableList.js";
 import ExperienceItem from "./shared/ExperienceItem.js";
 import WorkAreaItem from "./shared/WorkAreaItem.js";
 import ListButton from "./shared/ListButton.js";
@@ -15,7 +15,7 @@ export default class CVSimple extends AbstractCV {
         ExperienceItem,
         WorkAreaItem,
         ListButton,
-        AppendableComponentList
+        EditableList
     ];
 
     colors = null;
@@ -28,7 +28,7 @@ export default class CVSimple extends AbstractCV {
                 <div class="other">
                     <section class="experience">
                         <h1>Erfaring</h1>
-                        <appendable-component-list
+                        <${EditableList.elementName}
                             id="experience-list"
                             content-key="employers"
                             content-type="array"
@@ -37,8 +37,8 @@ export default class CVSimple extends AbstractCV {
                         >
                             <list-button icon="add" slot="append-button"></list-button>
                             <list-button icon="remove" slot="remove-button"></list-button>
-                        </appendable-component-list>
-                        <appendable-component-list
+                        </${EditableList.elementName}>
+                        <${EditableList.elementName}
                             id="sector-list"
                             content-key="sectors"
                             content-type="array"
@@ -49,11 +49,11 @@ export default class CVSimple extends AbstractCV {
                         >
                             <list-button icon="add" slot="append-button"></list-button>
                             <list-button icon="remove" slot="remove-button"></list-button>
-                        </appendable-component-list>
+                        </${EditableList.elementName}>
                     </section>
                     <section class="education">
                         <h1>Uddannelse</h1>
-                        <appendable-component-list
+                        <${EditableList.elementName}
                             id="education-list"
                             content-key="education"
                             content-type="array"
@@ -62,7 +62,7 @@ export default class CVSimple extends AbstractCV {
                         >
                             <list-button icon="add" slot="append-button"></list-button>
                             <list-button icon="remove" slot="remove-button"></list-button>
-                        </appendable-component-list>
+                        </${EditableList.elementName}>
                     </section>
                 </div>
             </main>
@@ -125,15 +125,15 @@ export default class CVSimple extends AbstractCV {
                 padding: 2em;
             }
 
-            appendable-component-list {
+            ${EditableList.elementName} {
                 display: block;
                 padding-left: 1em;
             }
 
-            appendable-component-list::part(list) {
+            ${EditableList.elementName}::part(list) {
                 margin-bottom: 0.8em;
             }
-            appendable-component-list::part(list-item) {
+            ${EditableList.elementName}::part(list-item) {
                 margin-bottom: 0.8em;
                 font-family: var(--p);
             }
