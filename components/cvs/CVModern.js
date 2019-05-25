@@ -18,13 +18,39 @@ export default class CVModern extends BaseComponent {
                     <profile-image class="image" aspect-ratio="1.5"></profile-image>
                 </div>
                 <div class = "right">
-                    <h1>JENS</h1>
-                    <h1>HANSEN</h1>
+                    <editable-component
+                            content-key="name"
+                            content-type="component"
+                            class="name"
+                            placeholder="Dit fulde navn"
+                            element="h1">
+                    </editable-component>
                     <div class="color1"></div>
                     <ul class="listinfo">
-                        <li>23 år</li>
-                        <li>København Ø</li>
-                        <li>mail@nemcv.me</li>
+                        <li class="age">
+                            <editable-component
+                                    content-key="age"
+                                    content-type="component"
+                                    placeholder="Din alder"
+                                    element="div">
+                            </editable-component>
+                        </li>
+                        <li class="city">
+                            <editable-component
+                                    content-key="city"
+                                    content-type="component"
+                                    placeholder="Din by"
+                                    element="div"
+                            ></editable-component>
+                        </li>
+                        <li class="email">
+                            <editable-component
+                                    placeholder="Din email"
+                                    element="div"
+                                    content-key="email"
+                                    content-type="component"
+                            ></editable-component>
+                        </li>
                     </ul>
                 </div>
             </header>
@@ -112,7 +138,7 @@ export default class CVModern extends BaseComponent {
                 margin-bottom: 40px;
             }
             
-            h1 {
+            h1, .name {
                 font-size: 2em;
             }
 
