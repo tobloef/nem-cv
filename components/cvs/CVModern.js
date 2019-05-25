@@ -197,19 +197,13 @@ export default class CVModern extends BaseComponent {
             }
 
             .about .content {
-                padding-top: 50px;
-                padding-left: 50px;
-                padding-bottom: 50px;
-                padding-right: 50px;
+                padding: 50px;
                 max-width: 40%;
                 background-color: #E4E3D9;
             }
             
             .experience .content{
-                padding-top: 50px;
-                padding-left: 50px;
-                padding-bottom: 50px;
-                padding-right: 50px;
+                padding: 50px;
                 max-width: 40%;
                 background-color: #E4E3D9;
             }
@@ -255,7 +249,6 @@ export default class CVModern extends BaseComponent {
 
             .experiences {
                 transform: translateX(15%);
-                
             }
 
             .oneexperience {
@@ -265,7 +258,7 @@ export default class CVModern extends BaseComponent {
             
             @media(max-width: 800px) {
                 :host{
-                    background-color: indianred;
+                    background-color: #F6F5EE;
                 }
                 
                 header{
@@ -276,10 +269,89 @@ export default class CVModern extends BaseComponent {
                 
                 .right{
                     justify-content: center;
+                    width: 100%;
+                    max-width: 200px;
                 }
                 
                 .left{
                     justify-content: center;
+                    padding: 50px;
+                    max-height: 550px;
+                }
+                
+                .about .content{
+                    padding: 50px;
+                    max-width: 100%;
+                    background-color: #E4E3D9;
+                }
+
+                .experience .content{
+                    padding: 50px;
+                    max-width: 100%;
+                    background-color: #E4E3D9;
+                }
+
+                .education .content{
+                    padding: 50px;
+                    max-width: 100%;
+                }
+
+                .experiencetitle {
+                    padding-left: 0em;
+                    margin-bottom: 10px;
+                    transform: translateX(20%);
+                    text-align: right;
+                }
+
+                .educationtitle {
+                    text-align: center;
+                    margin-left: 0em;
+                    margin-bottom: 10px;
+                }
+
+                .text{
+                    /*max-width: 500px;*/
+                    transform: translateX(0%);
+                    font-size: 0.9em;
+                    margin-bottom: 30px;
+                }
+
+                .experiencetitle {
+                    padding-left: 0em;
+                    margin-bottom: 10px;
+                    transform: translateX(0%);
+                    text-align: left;
+                }
+
+                .educationtitle {
+                    text-align: left;
+                    margin-left: 0em;
+                    margin-bottom: 10px;
+                }
+
+                .educations {
+                    margin-left: auto;
+                    margin-right: auto;
+                    width: 100%;
+                    max-width: 100%;
+                }
+
+                .experiences {
+                    transform: translateX(0%);
+                }
+
+                .oneeducation {
+                    display: flex;
+                    justify-content: space-between;
+                    border-top: 1px solid black;
+                    padding: 5px;
+                }
+
+                .oneexperience {
+                    display: flex;
+                    justify-content: space-between;
+                    border-top: 1px solid black;
+                    padding: 5px;
                 }
             }
         `
