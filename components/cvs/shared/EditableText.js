@@ -1,5 +1,5 @@
 import BaseComponent from "../../BaseComponent.js";
-import {validate} from "../../../lib/validation.js";
+import {validateObject} from "../../../lib/validation.js";
 
 export default class EditableText extends BaseComponent {
     node = null;
@@ -8,7 +8,8 @@ export default class EditableText extends BaseComponent {
         "placeholder",
         "element",
         "multiline",
-        "validate-type"
+        "validate-type",
+        "name",
     ];
 
     // language=HTML
@@ -52,6 +53,7 @@ export default class EditableText extends BaseComponent {
         } else {
             //this.selectTextInNode();
         }
+        this.node.classList.remove("error");
     };
 
     focusOut = (e) => {
@@ -60,7 +62,7 @@ export default class EditableText extends BaseComponent {
             this.node.innerText = this.placeholder;
             this.node.classList.add("empty-text");
         }
-        this.validate();
+        this.updateValidationStyle();
     };
 
     keyPress = (e) => {
@@ -75,14 +77,20 @@ export default class EditableText extends BaseComponent {
 
     validate = () => {
         if (this.validateType == null || this.validateType === "") {
-            return;
-        }
-        const content = this.node.innerText;
-        if (content === this.placeholder) {
             return null;
         }
-        const isValid = validate(content, this.validateType);
-        if (!isValid) {
+        const content = this.getContent();
+        if (validateObject(content, this.validateType)) {
+            return null;
+        }
+        if (this.name == null || this.name === "") {
+            return "Et felt har en ugyldig værdi.";
+        }
+        return `Feltet "${this.name}" har en ugyldig værdi.`;
+    };
+
+    updateValidationStyle = () => {
+        if (this.validate() != null) {
             this.node.classList.add("error");
         } else {
             this.node.classList.remove("error");
@@ -118,8 +126,8 @@ export default class EditableText extends BaseComponent {
         this.node.innerText = (content || this.placeholder);
         if (this.node.innerText !== this.placeholder) {
             this.node.classList.remove("empty-text");
-
         }
+        this.updateValidationStyle();
     };
 
     // language=CSS
@@ -137,10 +145,6 @@ export default class EditableText extends BaseComponent {
                 background: rgba(255, 0, 0, 0.15);
                 text-decoration: underline;
                 text-decoration-color: red;
-                
-                /*border: 1.5px solid red;
-                border-radius: 3px;
-                padding: 3px 5px;*/
             }
         `
     };

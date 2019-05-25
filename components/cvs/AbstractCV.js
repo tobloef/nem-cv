@@ -10,7 +10,8 @@ export default class AbstractCV extends BaseComponent {
     commonScript = () => {
         const experienceList = this.shadowRoot.getElementById("experience-list");
         experienceList.itemAttributes = {
-            "experience-type": "Firma"
+            "experience-type": "Firma",
+            "end-date-optional": ""
         };
         if (this.experienceWhereSeparator !== null) {
             experienceList.itemAttributes["where-separator"] = this.experienceWhereSeparator;

@@ -4,29 +4,40 @@ import BaseComponent from "../../BaseComponent.js";
 export default class ExperienceItem extends BaseComponent {
     static observedAttributes = [
         "experience-type",
-        "where-separator"
+        "where-separator",
+        "end-date-optional"
     ];
 
     usedComponents = [
         EditableText
     ];
 
-    // language=HTML
     get html() {
+        const experienceType = this.experienceType || "erfaring";
+        let endDateValidation;
+        if (this.endDateOptional) {
+            endDateValidation = `validate-type="nullable-date" content-ignore-if-null`;
+        } else {
+            endDateValidation = `validate-type="date"`;
+        }
+
+        // language=HTML
         return `
             <div content-type="object" class="container">
                 <span class="divider where">
                     <${EditableText.elementName}
                             validate-type="string"
-                            placeholder="${this.experienceType}"
+                            placeholder="${experienceType}"
                             element="div"
                             content-key="name"
+                            name="Navn på ${experienceType.toLowerCase()}"
                             content-type="component"
                     ></${EditableText.elementName}><span class="separator">${this.whereSeparator || ""}</span>
                     <${EditableText.elementName}
                             validate-type="string"
                             placeholder="Titel"
                             element="div"
+                            name="Titel hos ${experienceType.toLowerCase()}"
                             content-key="title"
                             content-type="component"
                     ></${EditableText.elementName}>
@@ -34,18 +45,19 @@ export default class ExperienceItem extends BaseComponent {
                 <span class="divider when">
                     <${EditableText.elementName}
                             validate-type="date"
-                            placeholder="Startår"
+                            placeholder="Startdato"
                             element="div"
+                            name="Startdato"
                             content-key="from"
                             content-type="component"
                     ></${EditableText.elementName}> -
                     <${EditableText.elementName}
-                            validate-type="nullable-date"
-                            validate-type="string"
-                            placeholder="Slutår"
+                            placeholder="Slutdato"
+                            name="Slutdato"
                             element="div"
                             content-key="to"
                             content-type="component"
+                            ${endDateValidation}
                     ></${EditableText.elementName}>
                 </span>
             </div>

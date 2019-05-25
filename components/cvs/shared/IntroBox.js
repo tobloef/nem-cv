@@ -27,6 +27,7 @@ export default class IntroBox extends BaseComponent {
                                 content-type="component"
                                 class="name"
                                 placeholder="Dit fulde navn"
+                                name="Navn"
                                 element="h1">
                 </${EditableText.elementName}>
                 <ul class="facts">
@@ -36,6 +37,7 @@ export default class IntroBox extends BaseComponent {
                                 content-key="age"
                                 content-type="component"
                                 placeholder="Din alder"
+                                name="Alder"
                                 element="div">
                         </${EditableText.elementName}>
                     </li>
@@ -45,6 +47,7 @@ export default class IntroBox extends BaseComponent {
                                 content-key="city"
                                 content-type="component"        
                                 placeholder="Din by"
+                                name="By"
                                 element="div"
                         ></${EditableText.elementName}>
                     </li>
@@ -54,6 +57,7 @@ export default class IntroBox extends BaseComponent {
                                 placeholder="Din email" 
                                 element="div"
                                 content-key="email"
+                                name="Email"
                                 content-type="component"
                         ></${EditableText.elementName}>
                     </li>
@@ -65,6 +69,7 @@ export default class IntroBox extends BaseComponent {
                                 element="p"
                                 content-key="description"
                                 content-type="component"
+                                name="Beskrivelse"
                                 multiline
                                 placeholder="Her kan du skrive en kort beskrivelse af dig selv.">
                 </${EditableText.elementName}>

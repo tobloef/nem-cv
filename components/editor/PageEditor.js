@@ -82,10 +82,15 @@ export default class PageEditor extends BaseComponent {
             if (this.cv == null) {
                 return;
             }
-            // TODO: Validate
-            // Set cv content in local storage;
+            // Set cv content in local storage
             const content = this.cv.getContent();
             setStorageItem("cv-content", content);
+            // Validate before sending to the server
+            const validationResult = this.validate();
+            if (validationResult != null) {
+                alert(`${validationResult} Ret venligst dette inden CV'et kan sendes til serveren.`);
+                return;
+            }
             // Send CV to server
             try {
                 await postCV(content);
@@ -94,20 +99,20 @@ export default class PageEditor extends BaseComponent {
                 alert("Der opstod en fejl da CV'et skulle sendes til serveren. Dit CV vil blive gemt lokalt.");
                 return;
             }
-            // TODO: Navigate to preview page
-            alert("Dit CV blev gemt");
+            // Navigate to the cv page
+            alert("Dit CV blev sendt til serveren.");
+            // TODO: Navigate to cv page
         });
     };
 
     checkForExistingCV = () => {
-        if (getStorageItem("cv-content") == null && getStorageItem("template") == null) {
+        if (getStorageItem("cv-content") == null) {
             return;
         }
         if (!confirm("Der blev fundet et eksisterende CV fra tidligere brug. Ønsker du at bruge dette?")) {
             localStorage.clear();
         }
     };
-
 
     toggleSidebarIfNecessary = () => {
         const width = document.documentElement.clientWidth;

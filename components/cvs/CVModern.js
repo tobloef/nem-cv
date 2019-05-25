@@ -37,6 +37,7 @@ export default class CVModern extends AbstractCV {
                             content-key="name"
                             content-type="component"
                             class="name"
+                            name="Navn"
                             placeholder="Dit fulde navn"
                             element="h1">
                     </${EditableText.elementName}>
@@ -48,6 +49,7 @@ export default class CVModern extends AbstractCV {
                                     content-key="age"
                                     content-type="component"
                                     placeholder="Din alder"
+                                    name="Alder"
                                     element="div">
                             </${EditableText.elementName}>
                         </li>
@@ -57,6 +59,7 @@ export default class CVModern extends AbstractCV {
                                     content-key="city"
                                     content-type="component"
                                     placeholder="Din by"
+                                    name="By"
                                     element="div"
                             ></${EditableText.elementName}>
                         </li>
@@ -65,6 +68,7 @@ export default class CVModern extends AbstractCV {
                                     validate-type="email"
                                     placeholder="Din email"
                                     element="div"
+                                    name="Email"
                                     content-key="email"
                                     content-type="component"
                             ></${EditableText.elementName}>
@@ -79,6 +83,7 @@ export default class CVModern extends AbstractCV {
                         <${EditableText.elementName}
                                 class="description"
                                 validate-type="string"
+                                name="Beskrivelse"
                                 element="p"
                                 content-key="description"
                                 content-type="component"
@@ -94,6 +99,7 @@ export default class CVModern extends AbstractCV {
                             item-component="${WorkAreaItem.elementName}"
                             separator=", "
                             starting-amount="1"
+                            name="Brancher"
                         >
                             <list-button icon="add" slot="append-button"></list-button>
                             <list-button icon="remove" slot="remove-button"></list-button>
@@ -110,6 +116,7 @@ export default class CVModern extends AbstractCV {
                             content-type="array"
                             item-component="${ExperienceItem.elementName}" 
                             starting-amount="1"
+                            name="Uddannelser"
                         >
                             <list-button icon="add" slot="append-button"></list-button>
                             <list-button icon="remove" slot="remove-button"></list-button>  
@@ -126,6 +133,7 @@ export default class CVModern extends AbstractCV {
                             content-type="array"
                             item-component="${ExperienceItem.elementName}" 
                             starting-amount="1"
+                            name="Erfaringer"
                         >
                             <list-button icon="add" slot="append-button"></list-button>
                             <list-button icon="remove" slot="remove-button"></list-button>

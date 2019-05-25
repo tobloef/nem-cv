@@ -1,19 +1,19 @@
 import BaseComponent from "../../BaseComponent.js";
 import {getPath} from "../../../lib/paths.js";
+import {validateObject} from "../../../lib/validation.js";
 
 export default class EditableProfileImage extends BaseComponent {
     static observedAttributes = [
         "aspect-ratio",
         "src"
     ];
-    usedComponents = [];
 
     // language=HTML
     get html() {
         return `
             <div class="square">
                 <img class="profile-picture"
-                     src=${this.src || getPath("placeholder-person")}
+                     src=${this.src || this.getPlaceholder()}
                      alt="Image of you">
             </div>
         `;
@@ -21,17 +21,7 @@ export default class EditableProfileImage extends BaseComponent {
 
     onClick = () => {
         let newURL = prompt("Indtast URL'en til dit billede.");
-
-        function isValid(url) {
-            return url != null;
-        }
-
-        if (isValid(newURL)) {
-            this.image.src = newURL;
-        }
-        else {
-            alert("Ugyldig URL for billedet.")
-        }
+        this.setContent(newURL);
     };
 
     script = () => {
@@ -41,13 +31,40 @@ export default class EditableProfileImage extends BaseComponent {
         }
     };
 
+    getPlaceholder = () => {
+        return getPath("placeholder-person");
+    };
+
     getContent = () => {
         return this.image.src;
     };
 
     setContent = (content) => {
-        this.setAttribute("src", content || getPath("placeholder-person"));
+        if (content == null || this.validate(content) != null) {
+            content = this.getPlaceholder();
+        }
+        this.setAttribute("src", content);
         this.render();
+        this.updateValidationStyle();
+    };
+
+    validate = (url) => {
+        url = url || this.image.src;
+        if (url.includes(this.getPlaceholder())) {
+            return "Du mangler et profilbillede."
+        }
+        if (!validateObject(url, "url") || url.endsWith("/null")) {
+            return "Den indtastede URL for profilbilledet er ugyldigt."
+        }
+        return null;
+    };
+
+    updateValidationStyle = () => {
+        if (this.validate() != null) {
+            this.image.classList.add("error");
+        } else {
+            this.image.classList.remove("error");
+        }
     };
 
     // language=CSS
@@ -74,6 +91,11 @@ export default class EditableProfileImage extends BaseComponent {
                 height: 100%;
                 max-height: 100%;
                 object-fit: cover;
+            }
+            
+            .error {
+                border: 2px solid red;
+                border-radius: 3px; 
             }
         `
     };

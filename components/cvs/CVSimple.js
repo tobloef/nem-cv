@@ -34,6 +34,7 @@ export default class CVSimple extends AbstractCV {
                             content-type="array"
                             item-component="${ExperienceItem.elementName}" 
                             starting-amount="1"
+                            name="Erfaringer"
                         >
                             <list-button icon="add" slot="append-button"></list-button>
                             <list-button icon="remove" slot="remove-button"></list-button>
@@ -46,6 +47,7 @@ export default class CVSimple extends AbstractCV {
                             item-component="${WorkAreaItem.elementName}"
                             separator=", "
                             starting-amount="1"
+                            name="Brancher"
                         >
                             <list-button icon="add" slot="append-button"></list-button>
                             <list-button icon="remove" slot="remove-button"></list-button>
@@ -59,6 +61,7 @@ export default class CVSimple extends AbstractCV {
                             content-type="array"
                             item-component="${ExperienceItem.elementName}" 
                             starting-amount="1"
+                            name="Uddannelser"
                         >
                             <list-button icon="add" slot="append-button"></list-button>
                             <list-button icon="remove" slot="remove-button"></list-button>
