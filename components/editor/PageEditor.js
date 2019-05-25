@@ -3,14 +3,12 @@ import Router from "../../lib/Router.js";
 import SideBar from "./SideBar.js";
 import {getStorageItem, setStorageItem} from "../../lib/storage-helper.js";
 import NavBar from "../shared/NavBar.js";
-import {templates, colors} from "../../constants/themes.js";
 import CustomButton from "../shared/CustomButton.js";
 import Logo from "../shared/Logo.js";
 import {postCV} from "../../lib/api.js";
+import templates from "../../lib/constants/templates.js";
 
 export default class PageEditor extends BaseComponent {
-    cvType = null;
-    colorScheme = null;
     cv = null;
 
     usedComponents = [
@@ -29,7 +27,7 @@ export default class PageEditor extends BaseComponent {
                 <div>
                     <custom-button inverted id="settings-button">Indstillinger</custom-button>
                     <logo-></logo->
-                    <custom-button inverted id="finish-button">Færdig</custom-button>
+                    <custom-button inverted id="finish-button">Gem CV</custom-button>
                 </div>
             </nav-bar>
             <side-bar></side-bar>
@@ -38,55 +36,51 @@ export default class PageEditor extends BaseComponent {
     };
 
     script = () => {
-        this.checkForExistingCV();
-
-        BaseComponent.editMode = true; //since we are in the editor, turn editing on.
-        //if no cv is chosen, redirect to choose a cv
-        if (getStorageItem("template") == null) {
-            return Router.navigate(Router.prefix + "/templates");
-        } else {
-            this.changeCVType();
+        BaseComponent.editMode = true;
+        this._checkForExistingCV();
+        // Try to create CV with template or redirect to choose template
+        const templateId = getStorageItem("template-id");
+        if (templateId == null || templates[templateId] == null) {
+            return Router.navigate("/templates");
         }
-
-        //add the ability to toggle the sidebar
+        this._setCV(templates[templateId]);
+        // Set up sidebar event listeners
         const sidebar = this.shadowRoot.querySelector("side-bar");
-        if (sidebar != null) {
-            const settingsButton = this.shadowRoot.getElementById("settings-button");
-            settingsButton.addEventListener("click", () => {
-                sidebar.toggle();
-            });
-        }
-
-        //add custom event listener for when a template is selected
-        this.addEventListener("select-click", (e) => {
-            this.toggleSidebarIfNecessary();
-            setStorageItem("template", e.detail);
-            this.changeCVType();
-            sidebar.toggle();
-        });
-
-        //todo maybe we should either do something with this or remove the corresponding event
-        this.addEventListener("example-click", (e) => {
-            console.log("Example selected:", e.detail);
-        });
-
-        //add custom event listener for when a color scheme is selected
-        this.addEventListener("color-picked", (e) => {
-            this.toggleSidebarIfNecessary();
-            setStorageItem("colors", e.detail.colors);
-            this.changeColors();
-        });
-
+        this._setSidebarListeners(sidebar);
+        // Set up finish button event
         const finishButton = this.shadowRoot.getElementById("finish-button");
-        finishButton.addEventListener("click", this.handleFinish);
-        this.setDefaultColors();
+        finishButton.addEventListener("click", this._handleFinish);
     };
 
-    handleFinish = async () => {
+    _setSidebarListeners(sidebar) {
+        if (sidebar == null) {
+            return;
+        }
+        const settingsButton = this.shadowRoot.getElementById("settings-button");
+        settingsButton.addEventListener("click", sidebar.toggle);
+        // Add custom event listener for when a template is selected
+        sidebar.addEventListener("select-click", (e) => {
+            const templateId =  e.detail.templateId;
+            setStorageItem("template-id", templateId);
+            BaseComponent.templateId = templateId;
+            this._setCV(templates[templateId]);
+            sidebar.toggle();
+        });
+        // Add custom event listener for when a color scheme is selected
+        sidebar.addEventListener("color-picked", (e) => {
+            const colors = e.detail.colors;
+            setStorageItem("colors", colors);
+            BaseComponent.colors = colors;
+            this.cv.render();
+            sidebar.toggle();
+        });
+    }
+
+    _handleFinish = async () => {
         if (this.cv == null) {
             return;
         }
-        // Set cv content in local storage
+        // Set CV content in local storage
         const content = this.cv.getContent();
         setStorageItem("cv-content", content);
         // Validate before sending to the server
@@ -108,18 +102,7 @@ export default class PageEditor extends BaseComponent {
         Router.navigate("/preview");
     };
 
-    setDefaultColors() {
-        const defaultColor = 0; //should be an index of the list of color schemes found in editorDefinitions
-        setStorageItem("colors", {
-            fontColor: colors[defaultColor].fontColor,
-            backgroundColor: colors[defaultColor].backgroundColor,
-            accentColor: colors[defaultColor].accentColor,
-            extraBackgroundColor: colors[defaultColor].extraBackgroundColor
-        });
-        this.changeColors();
-    }
-
-    checkForExistingCV = () => {
+    _checkForExistingCV = () => {
         if (getStorageItem("cv-content") == null) {
             return;
         }
@@ -128,33 +111,15 @@ export default class PageEditor extends BaseComponent {
         }
     };
 
-    toggleSidebarIfNecessary = () => {
-        const width = document.documentElement.clientWidth;
-        if (width <= 550) { // Is mobile-sized
-            const sidebar = this.shadowRoot.querySelector("side-bar");
-            sidebar.toggle();
+    _setCV = (template) => {
+        if (template == null) {
+            return;
         }
-    };
-
-    changeCVType = () => {
-        const cvType = getStorageItem("template");
-        if (this.cvType !== cvType) { // If the gotten type is different from the current one
-            const cvContainer = this.shadowRoot.getElementById("cv-container");
-            cvContainer.innerHTML = ""; // Get content div and reset contents
-            this.cv = document.createElement(templates[cvType].class.elementName); // Spawn a new CV
-            cvContainer.appendChild(this.cv); // Add new CV to container
-            this.cvType = cvType; // Remember which type is selected
-        }
-    };
-
-
-
-    changeColors = () => {
-        const colorScheme = getStorageItem("colors");
-        if (this.colorScheme !== colorScheme) {
-            // TODO: Update styles from the color scheme
-            this.colorScheme = colorScheme;
-        }
+        const cvContainer = this.shadowRoot.getElementById("cv-container");
+        cvContainer.innerHTML = "";
+        const cvElement = document.createElement(template.class.elementName);
+        this.cv = cvElement;
+        cvContainer.appendChild(cvElement);
     };
 
     // language=CSS

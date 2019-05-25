@@ -1,4 +1,3 @@
-import BaseComponent from "../BaseComponent.js";
 import EditableProfileImage from "./shared/EditableProfileImage.js";
 import WorkAreaItem from "./shared/WorkAreaItem.js";
 import EditableList from "./shared/EditableList.js";
@@ -6,7 +5,6 @@ import EditableText from "./shared/EditableText.js";
 import ListButton from "./shared/ListButton.js";
 import ExperienceItem from "./shared/ExperienceItem.js";
 import AbstractCV from "./AbstractCV.js";
-import modern from "./templates/modern.js";
 
 export default class CVModern extends AbstractCV {
     static observedAttributes = [];
@@ -146,10 +144,6 @@ export default class CVModern extends AbstractCV {
 
     educationWhereSeparator = ", ";
     experienceWhereSeparator = ", ";
-
-    script = () => {
-        BaseComponent.template = modern;
-    };
 
     // language=CSS
     get css() {

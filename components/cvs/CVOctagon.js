@@ -4,8 +4,6 @@ import WorkAreaItem from "./shared/WorkAreaItem.js";
 import ListButton from "./shared/ListButton.js";
 import EditableList from "./shared/EditableList.js";
 import AbstractCV from "./AbstractCV.js";
-import BaseComponent from "../BaseComponent.js";
-import octagon from "./templates/octagon.js";
 
 export default class CVOctagon extends AbstractCV {
     static observedAttributes = [];
@@ -69,10 +67,6 @@ export default class CVOctagon extends AbstractCV {
             </main>
         `;
     }
-
-    script = () => {
-        BaseComponent.template = octagon;
-    };
 
     // language=CSS
     get css() {

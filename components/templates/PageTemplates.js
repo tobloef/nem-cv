@@ -16,6 +16,32 @@ export default class PageTemplates extends BaseComponent {
         RouterLink
     ];
 
+    get html() {
+        // language=HTML
+        return `
+            <nav-bar>
+                <div>
+                  <router-link href="/">
+                    <custom-button inverted style="font-size: 0.4em">Tilbage</custom-button>
+                  </router-link>
+                  <logo-></logo->
+                  <div class="filler"></div>
+                </div>
+            </nav-bar>
+            <div class="content">
+                <h1>Vælg en skabelon</h1>
+                <layout-list class="resizing"></layout-list>
+            </div>
+        `;
+    };
+
+    script = () => {
+        this.addEventListener("select-click", (e) => {
+            setStorageItem("template-id", e.detail.templateId);
+            Router.navigate("/editor");
+        });
+    };
+
     get css() {
         //language=CSS
         return `
@@ -50,33 +76,4 @@ export default class PageTemplates extends BaseComponent {
             }
         `;
     }
-
-    script = () => {
-        this.addEventListener("select-click", (evt) => {
-            setStorageItem("template", evt.detail);
-            Router.navigate(Router.prefix + "/editor");
-        });
-        this.addEventListener("example-click", (evt) => {
-            console.log("Example selected:", evt.detail);
-        });
-    };
-
-    get html() {
-        // language=HTML
-        return `
-            <nav-bar>
-                <div>
-                  <router-link href="/">
-                    <custom-button inverted style="font-size: 0.4em">Tilbage</custom-button>
-                  </router-link>
-                  <logo-></logo->
-                  <div class="filler"></div>
-                </div>
-            </nav-bar>
-            <div class="content">
-                <h1>Vælg en skabelon</h1>
-                <layout-list class="resizing"></layout-list>
-            </div>
-        `;
-    };
 }

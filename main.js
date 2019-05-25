@@ -1,6 +1,6 @@
 import RootRoutes from "./components/shared/RootRoutes.js"
 import {addStorageHook, addStorageItemListener, getStorageItem, setStorageItem} from "./lib/storage-helper.js";
-import {resetCSSString} from "./lib/reset-css.js";
+import {resetCSSString} from "./lib/constants/reset-css.js";
 import {getSectors} from "./lib/api.js";
 import WorkAreaItem from "./components/cvs/shared/WorkAreaItem.js";
 

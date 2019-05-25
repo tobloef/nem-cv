@@ -17,9 +17,9 @@ export default class RouterLink extends BaseComponent {
     script = () => {
         //use the router rather than an actual link for internal links
         const a = this.shadowRoot.querySelector("a");
-        a.addEventListener("click", evt => {
-            evt.preventDefault();
-            Router.navigate(Router.prefix + this.href);
+        a.addEventListener("click", e => {
+            e.preventDefault();
+            Router.navigate(this.href);
             return false;
         });
     };

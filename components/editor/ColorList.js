@@ -1,46 +1,37 @@
 import BaseComponent from "../BaseComponent.js";
 import ColorHolder from "./ColorHolder.js";
-import {colors} from "../../constants/themes.js";
+import colors from "../../lib/constants/colors.js";
 
 export default class ColorList extends BaseComponent {
-    static observedAttributes = [];
-
     usedComponents = [
         ColorHolder
     ];
 
-    // language=HTML
-    get html() {
-        return ``;
-    }
-
     script = () => {
         this.empty();
-        for (const item of colors) { //create color picker buttons based on available templates
+        // Add all the color options to the list to choose from
+        for (const colorScheme of colors) {
             const element = document.createElement(ColorHolder.elementName);
-            element.setAttribute("font-color", item.fontColor);
-            element.setAttribute("background-color", item.backgroundColor);
-            element.setAttribute("accent-color", item.accentColor);
-            element.setAttribute("extra-background-color", item.extraBackgroundColor);
-            //todo find out of the following should be deleted
-
-            // element.addEventListener("resize", evt => {
-            //     const elm = evt.target;
-            //     const width = elm.style.width;
-            //     // noinspection JSSuspiciousNameCombination
-            //     elm.style.height = width;
-            //     console.log(width);
-            // });
+            element.addEventListener("click", (e) => {
+                this.dispatchEvent(new CustomEvent("color-picked", {
+                    bubbles: true,
+                    composed: true,
+                    detail: {
+                        colors: colorScheme
+                    }
+                }));
+            });
+            element.setAttribute("font-color", colorScheme.fontColor);
+            element.setAttribute("background-color", colorScheme.backgroundColor);
+            element.setAttribute("accent-color", colorScheme.accentColor);
+            element.setAttribute("extra-background-color", colorScheme.extraBackgroundColor);
             new ResizeObserver(() => {
-                // noinspection JSSuspiciousNameCombination //todo maybe remove this comment, since it looks weird
                 element.style.height = element.clientWidth + "px";
                 element.resizeFont();
             }).observe(element);
             this.shadowRoot.appendChild(element);
         }
     };
-
-    externalStyles = [];
 
     // language=CSS
     get css() {
@@ -63,17 +54,6 @@ export default class ColorList extends BaseComponent {
             :host(.vertical) {
                 flex-direction: column;
             }
-
-            /*@media(max-width: 340px) {*/
-            /*    color-holder>p {*/
-            /*        font-size: 2em;*/
-            /*    }*/
-            /*    */
-            /*    color-holder>#outer {*/
-            /*        width: 3em;*/
-            /*        height: 3em;*/
-            /*    }*/
-            /*}*/
         `
     };
 }

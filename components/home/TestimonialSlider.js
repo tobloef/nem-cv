@@ -220,8 +220,6 @@ export default class TestimonialSlider extends BaseComponent {
         requestAnimationFrame(_=> {
             this.start();
         });
-
-        console.log("Vi skal lige huske at ændre alt tekst på testimonials :)");
     };
 
     start = () => {
@@ -303,15 +301,15 @@ export default class TestimonialSlider extends BaseComponent {
 
         return img;
 
-    }
+    };
 
     _createDot(testimonial, i) {
         const button = document.createElement(SliderButton.elementName);
 
-        button.addEventListener('click', evt => {
+        button.addEventListener('click', e => {
             this._current = i;
             this._tick();
-        })
+        });
 
         return button;
     }
