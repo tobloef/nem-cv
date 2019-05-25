@@ -75,8 +75,8 @@ export default class CVSimple extends AbstractCV {
         this.colors = JSON.parse(getStorageItem("grp2_colors"));
     };
 
-    educationWhereSeparator = ", ";
-    experienceWhereSeparator = ", ";
+        educationWhereSeparator = ", ";
+        experienceWhereSeparator = ", ";
 
     // language=CSS
     get css() {
