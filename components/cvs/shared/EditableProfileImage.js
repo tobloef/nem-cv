@@ -74,7 +74,8 @@ export default class EditableProfileImage extends BaseComponent {
             :host {
                 display: block;
                 max-height: 100%;
-                ${this.weirdfix || ""}
+                ${this.weirdfix || ""} /* this is a fix to an unresolved issue with webcomponents that don't act 
+                properly for different pages. Due to time constraints, no better solution has been found so far*/
             }
             .square {
                 width: 100%;
