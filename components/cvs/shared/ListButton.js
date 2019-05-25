@@ -39,7 +39,7 @@ export default class ListButton extends BaseComponent {
                 cursor: pointer;
             }
             #button:hover {
-
+              transform: scale(1.2);
             }
             #button:active {
             }
