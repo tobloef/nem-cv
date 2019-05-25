@@ -28,7 +28,8 @@ export default class CVModern extends AbstractCV {
                 <div class="left">
                     <${EditableProfileImage.elementName}
                         class="image"
-                        aspect-ratio="1.5">
+                        aspect-ratio="1.5"
+                        weirdfix="height: 100%;">
                     </${EditableProfileImage.elementName}>
                 </div>
                 <div class = "right">

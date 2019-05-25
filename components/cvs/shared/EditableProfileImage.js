@@ -5,7 +5,8 @@ import {validateObject} from "../../../lib/validation.js";
 export default class EditableProfileImage extends BaseComponent {
     static observedAttributes = [
         "aspect-ratio",
-        "src"
+        "src",
+        "weirdfix"
     ];
 
     // language=HTML
@@ -72,7 +73,9 @@ export default class EditableProfileImage extends BaseComponent {
         return `
             :host {
                 display: block;
-                max-height: 100%;   
+                max-height: 100%;
+                ${this.weirdfix || ""} /* this is a fix to an unresolved issue with webcomponents that don't act 
+                properly for different pages. Due to time constraints, no better solution has been found so far*/
             }
             .square {
                 width: 100%;

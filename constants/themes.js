@@ -14,19 +14,19 @@ export const colors = [
 export const templates = {
     edges: {
         name: "Kanter",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        description: "Et flot og skarpt CV i hårde kanter, men med god præsentation af indholdet.",
         image: getPath("cv-placeholder"),
         class: CVOctagon
     },
     simplicity: {
         name: "Moderne",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        description: "Et moderne CV til dig som gerne vil være moderne og tænke ud af boksen.",
         image: getPath("cv-placeholder"),
         class: CVModern
     },
     basic: {
         name: "Simpel",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        description: "Et CV som er rent, simpelt og overskueligt. Ikke noget ekstra hurlumhej, bare det klare, enkle CV.",
         image: getPath("cv-placeholder"),
         class: CVSimple
     }
