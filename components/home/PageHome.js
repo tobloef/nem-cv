@@ -5,9 +5,6 @@ import RouterLink from "../shared/RouterLink.js";
 import CustomButton from "../shared/CustomButton.js";
 import NavBar from "../shared/NavBar.js";
 import HomeHeader from './HomeHeader.js';
-import {
-    getPath
-} from "../../lib/paths.js";
 import TestimonialSlider from './TestimonialSlider.js';
 import TemplateSlider from './TemplateSlider.js';
 import Logo from "../shared/Logo.js";
