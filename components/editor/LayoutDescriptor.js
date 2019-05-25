@@ -34,6 +34,11 @@ export default class LayoutDescriptor extends BaseComponent {
             this.dispatchEvent(new CustomEvent("select-click", {bubbles: true, composed:true, detail: this.themeId}));
         });
 
+        const image = this.shadowRoot.getElementById("image");
+        image.addEventListener("click", () => {
+            this.dispatchEvent(new CustomEvent("select-click", {bubbles: true, composed:true, detail: this.themeId}));
+        });
+
         const exampleButton = this.shadowRoot.getElementById("example");
         exampleButton.addEventListener("click", () => {
             this.dispatchEvent(new CustomEvent("example-click", {bubbles: true, composed:true, detail: this.themeId}));
@@ -62,6 +67,10 @@ export default class LayoutDescriptor extends BaseComponent {
                 padding: 2px;
                 margin: 0 0 1rem 0;
                 border: 1px solid #aaa;
+            }
+            #image:hover {
+                cursor: pointer;
+                box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
             }
             
             img {
