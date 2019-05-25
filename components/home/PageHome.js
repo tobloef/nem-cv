@@ -342,7 +342,7 @@ export default class PageHome extends BaseComponent {
            }
 
            footer p {
-               line-height: 1.3;
+               line-height: 1.4;
                margin-bottom: 10px;
            }
 
