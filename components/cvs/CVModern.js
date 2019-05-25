@@ -349,10 +349,18 @@ export default class CVModern extends AbstractCV {
                     max-height: 550px;
                 }
                 
+                .color1 {
+                    height: 0;
+                }
+                
                 .about .content{
                     padding: 50px;
                     max-width: 100%;
                     background-color: #E4E3D9;
+                }
+                
+                .description {
+                    margin-bottom: 1em;
                 }
 
                 .experience .content{
