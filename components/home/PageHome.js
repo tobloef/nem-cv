@@ -34,7 +34,9 @@ export default class PageHome extends BaseComponent {
             <section class="colors">
                 <h2>Vælg farver efter din personlighed</h2>
 
-                <div class="color-wheel"></div>
+                <div class="color-wheel-container">
+                    <div class="color-wheel"></div>
+                </div>
             </section>
 
             <section class="testimonials">
@@ -126,7 +128,7 @@ export default class PageHome extends BaseComponent {
                 padding: 50px;
                 align-items: center;
                 text-align: center;
-                background: hsla(0, 0%, 99%, 1);
+                background: hsla(227, 85%, 95%);
                 overflow: hidden;
             }
 
@@ -136,7 +138,20 @@ export default class PageHome extends BaseComponent {
                 max-width: 600px;
             }
 
+            section.colors .color-wheel-container {
+                --color-wheel-size: calc(100vw - 100px);
+                height: var(--color-wheel-size);
+                width: var(--color-wheel-size);
+                border-radius: 100%;
+                box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+            }
+
             section.colors .color-wheel {
+                display: block;
+                height: 100%;
+                width: 100%;
+                border-radius: 100%;
+                transform: rotate(0deg);
                 background: conic-gradient(
                         #EF3339 0 14.285%,
                         #F47B37 0 28.571%,
@@ -146,12 +161,6 @@ export default class PageHome extends BaseComponent {
                         #7A5EA8 0 85.714%,
                         #BD54A2 0 100.00%
                 );
-                --color-wheel-size: calc(100vw - 100px);
-                height: var(--color-wheel-size);
-                width: var(--color-wheel-size);
-                border-radius: 100%;
-                transform: rotate(0deg);
-                box-shadow: rgb(128, 128, 128) 0 0 25px 0;
             }
 
             section.testimonials {
@@ -245,7 +254,7 @@ export default class PageHome extends BaseComponent {
                     --button-padding: 20px 50px 20px 0px;
                 }
 
-                section.colors .color-wheel {
+                section.colors .color-wheel-container {
                     --color-wheel-size: calc(75vw - 100px);
                 }
 
@@ -282,7 +291,7 @@ export default class PageHome extends BaseComponent {
             }
 
             @media (min-width: 800px) {
-                section.colors .color-wheel {
+                section.colors .color-wheel-container {
                     --color-wheel-size: 500px;
                 }
             }
