@@ -174,39 +174,39 @@ export default class CVModern extends AbstractCV {
                max-height: 100%;
             }
 
-            .about {
-                display: flex;
-                justify-content: flex-end;
-                margin-bottom: 50px;
-            }
-
-            .education {
-                display: flex;
-                flex-direction: column;
-                margin-bottom: 50px;
-            }
-
-            .experience {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-            }
+           .about {
+               display: flex;
+               justify-content: flex-end;
+               margin-bottom: 50px;
+           }
+            
+           .education {
+               display: flex;
+               flex-direction: column;
+               margin-bottom: 50px;
+           }
+            
+           .experience {
+               display: flex;
+               flex-direction: column;
+               justify-content: center;
+           }
             
             .aboutme {
                 margin-bottom: 30px;
             }
-
+            
             .workareas {
                 margin-bottom: 30px;
             }
-
+            
             .left {
                 justify-content: flex-start;
                 width: 100%;
                 padding: 110px;
                 height: 800px;
             }
-
+            
             .right {
                 display: flex;
                 width: 100%;
@@ -221,27 +221,27 @@ export default class CVModern extends AbstractCV {
                 font-size: 0.9em;
                 margin-bottom: 30px;
             }
-
+            
             .experiencetitle {
                 padding-left: -15em;
                 margin-bottom: 10px;
                 transform: translateX(20%);
                 text-align: right;
             }
- 
+            
             .educationtitle {
                 text-align: center;
                 margin-left: -15em;
                 margin-bottom: 10px;
             }
-
+            
             .color1 {
                 height: 80px;
                 background-color: #302f2d;
                 position: relative;
                 margin-bottom: 30px;
             }
-
+            
             .about .content {
                 padding: 50px;
                 max-width: 40%;
@@ -253,54 +253,69 @@ export default class CVModern extends AbstractCV {
                 max-width: 40%;
                 background-color: #E4E3D9;
             }
-
+            
             .color3 {
                 height: 200px;
                 width: 300px;
                 background-color: #E4E3D9;
                 position: relative;
             }
-
+            
             .experiencefront {
                 position: absolute;
             }
-
+            
             .title {
                 font-size: 0.8em;
                 margin-bottom: 15px;
             }
-
+            
             .place {
                 font-size: 1em;
                 margin-bottom: 5px;
             }
-
+            
             .year {
                 font-size: 0.7em;
             }
-
+            
             #education-list {
                 margin-left: auto;
                 margin-right: auto;
                 width: 100%;
                 max-width: 30%;
+                display: flex;
+                justify-content: center;
             }
-
+            #education-list::part(container) {
+                max-width: 30%;
+            }
+            #education-list::part(list-item) {
+            }
+            
             .oneeducation {
                 display: flex;
                 justify-content: space-between;
                 border-top: 1px solid black;
                 padding: 5px;
             }
-
+            
             #experience-list {
                 transform: translateX(15%);
             }
-
+            
             .oneexperience {
                 display: flex;
                 justify-content: space-between;
             }
+            
+            ${EditableList.elementName}::part(list) {
+            margin-bottom: 1em;
+            }
+            
+            
+            
+
             
             @media(max-width: 800px) {
                 :host{
@@ -399,6 +414,7 @@ export default class CVModern extends AbstractCV {
                     border-top: 1px solid black;
                     padding: 5px;
                 }
+                
             }
         `
     };

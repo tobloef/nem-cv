@@ -15,7 +15,7 @@ export default class ExperienceItem extends BaseComponent {
     get html() {
         return `
             <div content-type="object" class="container">
-                <span class="divider where">
+                <span class="divider where" part="left">
                     <${EditableText.elementName}
                             placeholder="${this.experienceType}"
                             element="div"
