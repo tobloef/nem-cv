@@ -18,20 +18,22 @@ export default class TestimonialSlider extends BaseComponent {
 
     testimonials = [
         {
-            text : "Det tog kun 5 minutter. Nu har jeg et personligt CV, som har skaffet mig tre jobsamtaler alene den sidste uge. Det er vanvttigt fedt, at jeg selv kan vælge farver og layout. Det giver så mange muligheder!",
+            text : "Det tog kun 5 minutter. Nu har jeg et personligt CV, som har skaffet mig tre jobsamtaler alene den " +
+                "sidste uge. Det er vanvttigt fedt, at jeg selv kan vælge farver og layout. Det giver så mange muligheder!",
             person: "Jonas",
             image: "/img/testimonials/testimonial1.jpg",
             alt: "Testimonial 1",
         },
         {
-            text : "xD.",
-            person: "Yeet",
+            text : "Jeg skulle søge mit drømmejob, og ledte med lys og lygte efter et godt værktøj til at lave et CV " +
+                "som var flot, moderne og simpelt at sammensætte. Så fik jeg anbefalet NemCV og jeg har sjældent været så tilfreds med et produkt.",
+            person: "Sanne",
             image: "/img/testimonials/testimonial2.jpg",
             alt: "Testimonial 2",
         },
         {
-            text : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea.",
-            person: "Ma~",
+            text : "Før var jeg tit træt og deprimeret, men så prøvede jeg NemCV. Nu har jeg det meget bedre. Tak for hjælpen NemCV!",
+            person: "Anders",
             image: "/img/testimonials/testimonial3.jpg",
             alt: "Testimonial 3",
         },
