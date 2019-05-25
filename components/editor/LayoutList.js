@@ -1,5 +1,5 @@
 import BaseComponent from "../BaseComponent.js";
-import {layouts} from "../../constants/editor-definitions.js";
+import {templates} from "../../constants/themes.js";
 import LayoutDescriptor from "./LayoutDescriptor.js";
 
 export default class LayoutList extends BaseComponent {
@@ -18,8 +18,8 @@ export default class LayoutList extends BaseComponent {
 
     script = () => {
         this.empty();
-        for (const key in layouts) {
-            const item = layouts[key];
+        for (const key in templates) {
+            const item = templates[key];
             const element = document.createElement(LayoutDescriptor.elementName);
             element.setAttribute("theme-id", key);
             element.setAttribute("name", item.name);

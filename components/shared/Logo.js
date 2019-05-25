@@ -1,5 +1,5 @@
 import BaseComponent from "../BaseComponent.js";
-import {getPath} from "../../lib/paths.js";
+import {getPath} from "../../constants/paths.js";
 import RouterLink from "./RouterLink.js";
 
 export default class Logo extends BaseComponent {

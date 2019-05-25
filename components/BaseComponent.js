@@ -5,8 +5,8 @@ import {resetCSSStyleSheet} from "../lib/reset-css.js";
 import {stringToStyleSheet} from "../lib/stylesheet-utils.js";
 
 export default class BaseComponent extends HTMLElement {
-    static _template = null;
-    static _colors = null;
+    static template = null;
+    static colors = null;
     static editMode = false;
 
     enableResetCSS = true;
@@ -184,26 +184,26 @@ export default class BaseComponent extends HTMLElement {
     };
 
     static get template() {
-        return BaseComponent._template;
+        return BaseComponent.template;
     }
 
     static set template(value) {
         if ((typeof value) === "string") {
-            BaseComponent._template = stringToStyleSheet(value);
+            BaseComponent.template = stringToStyleSheet(value);
         } else {
-            BaseComponent._template = value;
+            BaseComponent.template = value;
         }
     }
 
     static get colors() {
-        return BaseComponent._colors;
+        return BaseComponent.colors;
     }
 
     static set colors(value) {
         if ((typeof value) === "string") {
-            BaseComponent._colors = stringToStyleSheet(value);
+            BaseComponent.colors = stringToStyleSheet(value);
         } else {
-            BaseComponent._colors = value;
+            BaseComponent.colors = value;
         }
     }
 

@@ -1,5 +1,5 @@
 import BaseComponent from "../../BaseComponent.js";
-import {getPath} from "../../../lib/paths.js";
+import {getPath} from "../../../constants/paths.js";
 
 export default class ListButton extends BaseComponent {
     static observedAttributes = [

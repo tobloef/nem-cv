@@ -2,7 +2,7 @@ import BaseComponent from "../BaseComponent.js";
 import RouterLink from "../shared/RouterLink.js";
 import CustomButton from "../shared/CustomButton.js";
 import wait from "../../lib/wait.js";
-import {getPath} from "../../lib/paths.js";
+import {getPath} from "../../constants/paths.js";
 
 
 export default class HomeHeader extends BaseComponent {

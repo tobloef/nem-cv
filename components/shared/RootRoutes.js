@@ -9,12 +9,14 @@ import Router from "../../lib/Router.js";
 import CVModern from "../cvs/CVModern.js";
 import CVSimple from "../cvs/CVSimple.js";
 import CVOctagon from "../cvs/CVOctagon.js";
+import CVPReview from "../cv-preview/CVPReview.js";
 
 export default class RootRoutes extends BaseComponent {
     usedComponents = [
         PageHome,
         PageTemplates,
         PageEditor,
+        CVPReview,
         PageNotFound,
 
         CVSimple,
@@ -26,6 +28,7 @@ export default class RootRoutes extends BaseComponent {
         {pattern: "^/?$", component: PageHome},
         {pattern: "^/templates$", component: PageTemplates},
         {pattern: "^/editor$", component: PageEditor},
+        {pattern: "^/preview", component: CVPReview},
 
         {pattern: "^/cv-simple$", component: CVSimple},
         {pattern: "^/cv-octagon$", component: CVOctagon},
