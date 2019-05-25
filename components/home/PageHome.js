@@ -127,6 +127,7 @@ export default class PageHome extends BaseComponent {
                 align-items: center;
                 text-align: center;
                 background: hsla(0, 0%, 99%, 1);
+                overflow: hidden;
             }
 
             section.colors h2 {
