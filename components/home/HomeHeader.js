@@ -17,7 +17,7 @@ export default class HomeHeader extends BaseComponent {
                 <div class="fakecv clip">
                     <div class="image-row">
                         <div class="image-container">
-                            <img src="${getPath("landing-page-person")}"/>
+                            <img alt="Kvinde" src="${getPath("landing-page-person")}"/>
                             <div class="image-bg"></div>
                         </div>
                         <div class="fake-content-title">
@@ -50,7 +50,7 @@ export default class HomeHeader extends BaseComponent {
                             <div class="fake-text" style="width: 30%;"></div>
                             <div class="fake-text" style="width: 45%;"></div>
                         </div>
-    
+
                         <div class="fake-content-extra-col">
                             <div class="fake-text large" style="width: 40%;"></div>
                             <div class="fake-text" style="width: 70%;"></div>
@@ -68,7 +68,7 @@ export default class HomeHeader extends BaseComponent {
                     </div>
                     <div class="filler"></div>
                 </div>
-    
+
                 <div class="infobox">
                     <h1>Lad <span class="light">NemCV</span> hjælpe dig med dit CV</h1>
                     <router-link class="cta-link" href="/templates">
@@ -77,9 +77,9 @@ export default class HomeHeader extends BaseComponent {
                         </custom-button>
                     </router-link>
                 </div>
-    
+
                 <div class="background-container">
-                    <img class="background" src="${getPath("landing-page-person")}"/>
+                    <img alt="Kvinde" class="background" src="${getPath("landing-page-person")}"/>
                 </div>
             </header>
         `;
@@ -95,7 +95,8 @@ export default class HomeHeader extends BaseComponent {
 
                 --image-extra-top-offset: 60px;
                 --top-padding: 60px;
-
+                --background-color: hsl(47, 50%, 85%);
+                --background-gradient: radial-gradient(circle, hsl(47, 50%, 85%) 0%, hsl(12, 5%, 30%) 100%);
                 --height: 100vh;
             }
 
@@ -120,8 +121,8 @@ export default class HomeHeader extends BaseComponent {
             header {
                 padding-top: var(--top-padding);
                 height: var(--height);
-                background: hsl(12, 5%, 80%);
-                background: radial-gradient(circle, hsl(12, 5%, 80%) 0%, hsl(12, 5%, 30%) 100%);
+                background: var(--background-color);
+                background: var(--background-gradient);
 
                 display: flex;
                 justify-content: center;
@@ -178,7 +179,7 @@ export default class HomeHeader extends BaseComponent {
             .image-container {
                 overflow: hidden;
                 width: 100%;
-                height: 300px;
+                height: var(--image-height);
 
                 display: flex;
                 justify-content: center;
@@ -207,8 +208,8 @@ export default class HomeHeader extends BaseComponent {
             }
 
             .image-container .image-bg {
-                background: hsl(12, 5%, 80%);
-                background: radial-gradient(circle, hsl(12, 5%, 80%) 0%, hsl(12, 5%, 30%) 100%);
+                background: var(--background-color);
+                background: var(--background-gradient);
                 position: absolute;
                 z-index: -1;
                 width: 100vw;
@@ -337,11 +338,10 @@ export default class HomeHeader extends BaseComponent {
             }
 
 
-            @media(min-width: 1024px) {
+            @media(min-width: 950px) {
                 header {
                     max-height: unset;
                 }
-
 
                 .fakecv {
                     max-width: 750px;
@@ -398,6 +398,17 @@ export default class HomeHeader extends BaseComponent {
                     max-width: 500px;
                 }
             }
+
+            @media(min-height: 1000px) {
+                :host {
+                    --image-extra-top-offset: 30px;
+                    --top-padding: 30px;
+                }
+
+                .fakecv {
+                    --image-height: 500px;
+                }
+            }
         `;
     }
 
@@ -438,7 +449,7 @@ export default class HomeHeader extends BaseComponent {
         this.fakeContentExtra.classList.add('visible');
     }
 
-    script() {
+    script = () => {
         this.header = this.shadowRoot.querySelector("header");
         this.fakecv = this.shadowRoot.querySelector(".fakecv");
         this.fakeContentTitle = this.shadowRoot.querySelector(".fake-content-title");

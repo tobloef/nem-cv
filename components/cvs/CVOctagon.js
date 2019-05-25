@@ -2,7 +2,7 @@ import IntroBox from "./shared/IntroBox.js";
 import ExperienceItemOctagon from "./octagon/ExperienceItemOctagon.js";
 import WorkAreaItem from "./shared/WorkAreaItem.js";
 import ListButton from "./shared/ListButton.js";
-import AppendableComponentList from "./shared/AppendableComponentList.js";
+import EditableList from "./shared/EditableList.js";
 import AbstractCV from "./AbstractCV.js";
 import BaseComponent from "../BaseComponent.js";
 import octagon from "./templates/octagon.js";
@@ -17,7 +17,7 @@ export default class CVOctagon extends AbstractCV {
         ProfileImage,
         WorkAreaItem,
         ListButton,
-        AppendableComponentList
+        EditableList
     ];
 
     // language=HTML
@@ -66,7 +66,7 @@ export default class CVOctagon extends AbstractCV {
                         </ul>
                     
                         <h2>Brancher</h2>
-                        <appendable-component-list
+                        <${EditableList.elementName}
                             id="sector-list"
                             content-key="sectors"
                             content-type="array"
@@ -77,7 +77,7 @@ export default class CVOctagon extends AbstractCV {
                         >
                             <list-button icon="add" slot="append-button"></list-button>
                             <list-button icon="remove" slot="remove-button"></list-button>
-                        </appendable-component-list>
+                        </${EditableList.elementName}>
                     </div>
                 </section>
                 
@@ -95,7 +95,7 @@ export default class CVOctagon extends AbstractCV {
                 <section id="experiences" class="higher">
                     <div class="experience">
                         <h2>ERFARING</h2>
-                        <appendable-component-list
+                        <${EditableList.elementName}
                             id="experience-list"
                             content-key="employers"
                             content-type="array"
@@ -104,12 +104,12 @@ export default class CVOctagon extends AbstractCV {
                         >
                             <list-button icon="add" slot="append-button"></list-button>
                             <list-button icon="remove" slot="remove-button"></list-button>
-                        </appendable-component-list>
+                        </${EditableList.elementName}>
                     </div>
                     
                     <div class="experience">
                         <h2>UDDANNELSE</h2>
-                        <appendable-component-list
+                        <${EditableList.elementName}
                             id="education-list"
                             content-key="education"
                             content-type="array"
@@ -118,7 +118,7 @@ export default class CVOctagon extends AbstractCV {
                         >
                             <list-button icon="add" slot="append-button"></list-button>
                             <list-button icon="remove" slot="remove-button"></list-button>
-                        </appendable-component-list>
+                        </${EditableList.elementName}>
                     </div>
                 </section>
             </main>

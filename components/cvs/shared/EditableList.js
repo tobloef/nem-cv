@@ -1,19 +1,22 @@
 import BaseComponent from "../../BaseComponent.js";
 
-export default class AppendableComponentList extends BaseComponent {
+export default class EditableList extends BaseComponent {
     static observedAttributes = [
         "item-component",
         "starting-amount",
         "separator",
-        "item-attributes"
+        "item-attributes",
+        "button-diameter"
     ];
 
     get html() {
         return `
             <div class="container" part="container">
                 <ul id="list" part="list"></ul>
-                <slot name="append-button" part="button"></slot>
-                <slot name="remove-button" part="button"></slot>
+                <div class="button-holder" part="buttons">
+                    <slot name="append-button" part="button"></slot>
+                    <slot name="remove-button" part="button"></slot>
+                </div>
             </div>
         `;
     };
@@ -31,9 +34,14 @@ export default class AppendableComponentList extends BaseComponent {
         for (let i = 0; i < (this.startingAmount || 0); i++) {
             this.addItem();
         }
+
+        if (!BaseComponent.editMode) {
+            const buttonHolder = this.shadowRoot.querySelector(".button-holder");
+            buttonHolder.parentNode.removeChild(buttonHolder);
+        }
     };
 
-    addItem(attributes) {
+    addItem = (attributes) => {
         const list = this.shadowRoot.getElementById("list");
         // Append separator
         if (this.separator && list.childNodes.length > 0) {
@@ -54,9 +62,9 @@ export default class AppendableComponentList extends BaseComponent {
         newChild.setAttribute("part", "list-item");
         list.appendChild(newChild);
         return newChild;
-    }
+    };
 
-    remove() {
+    remove = () => {
         const list = this.shadowRoot.getElementById("list");
         if (list.childNodes.length === 0) {
             return;
@@ -65,17 +73,17 @@ export default class AppendableComponentList extends BaseComponent {
         if (this.separator && list.childNodes.length > 0) {
             this.removeLast();
         }
-    }
+    };
 
-    removeLast() {
+    removeLast = () => {
         const list = this.shadowRoot.getElementById("list");
         list.removeChild(list.childNodes[list.childNodes.length - 1]);
-    }
+    };
 
-    removeAll() {
+    removeAll = () => {
         const list = this.shadowRoot.getElementById("list");
         list.innerHTML = "";
-    }
+    };
 
     setContent = (content) => {
         this.removeAll();

@@ -1,12 +1,13 @@
 "use strict";
 
 import {classNameToElementName, kebabToCamelCase} from "../lib/string-utils.js";
-import {resetCSSString, resetCSSStyleSheet} from "../lib/reset-css.js";
+import {resetCSSStyleSheet} from "../lib/reset-css.js";
 import {stringToStyleSheet} from "../lib/stylesheet-utils.js";
 
 export default class BaseComponent extends HTMLElement {
     static _template = null;
     static _colors = null;
+    static editMode = false;
 
     enableResetCSS = true;
 
@@ -20,7 +21,7 @@ export default class BaseComponent extends HTMLElement {
         this._checkForUndefinedComponents();
         this.render();
         this.updateStyles();
-    }
+    };
 
     attributeChangedCallback(attrName, oldValue, newValue) {
         if (oldValue !== newValue) {
@@ -31,11 +32,11 @@ export default class BaseComponent extends HTMLElement {
                 this[propName] = this.getAttribute(attrName);
             }
         }
-    }
+    };
 
     empty() {
         this.shadowRoot.innerHTML = "";
-    }
+    };
 
     render() {
         console.debug(`Rendering DOM of ${this.constructor.name}`);
@@ -43,7 +44,7 @@ export default class BaseComponent extends HTMLElement {
         if (this.script != null) {
             this.script();
         }
-    }
+    };
 
     updateStyles() {
         console.debug(`Updating styles of ${this.constructor.name}`);
@@ -61,11 +62,11 @@ export default class BaseComponent extends HTMLElement {
             styleSheets.push(stringToStyleSheet(this.css));
         }
         this.shadowRoot.adoptedStyleSheets = styleSheets;
-    }
+    };
 
     getContent(content) {
         this._recurseGetContent(content, this.shadowRoot);
-    }
+    };
 
     _recurseGetContent(content, element) {
         for (const child of element.children) {
@@ -109,14 +110,14 @@ export default class BaseComponent extends HTMLElement {
                 this._recurseGetContent(content, child);
             }
         }
-    }
+    };
 
     setContent(content) {
-        console.log(this.constructor.name, "setContent", content);
         this._recurseSetContent(content, this.shadowRoot);
-    }
+    };
 
     _recurseSetContent(content, element) {
+        console.debug("Setting content", content, "on children of", element);
         for (const child of element.children) {
             const key = child.getAttribute("content-key");
             const type = child.getAttribute("content-type");
@@ -130,7 +131,32 @@ export default class BaseComponent extends HTMLElement {
                 }
             }
         }
-    }
+    };
+
+    _defineUsedComponents() {
+        if (this.usedComponents == null) {
+            return;
+        }
+        for (const component of this.usedComponents) {
+            component.define();
+        }
+    };
+
+    _checkForUndefinedComponents() {
+        if (this.html == null) {
+            return;
+        }
+        const matches = this.html.matchAll(/<([a-z]+-[a-z]*)[ \/].*>/g);
+        if (matches == null) {
+            return;
+        }
+        const tags = Array.from(matches).map(m => m[1]);
+        for (const tag of tags) {
+            if (customElements.get(tag) == null) {
+                console.error(`${this.constructor.name} tried to use tag ${tag}, but it has not been defined yet.`);
+            }
+        }
+    };
 
     static get template() {
         return BaseComponent._template;
@@ -153,31 +179,6 @@ export default class BaseComponent extends HTMLElement {
             BaseComponent._colors = stringToStyleSheet(value);
         } else {
             BaseComponent._colors = value;
-        }
-    }
-
-    _defineUsedComponents() {
-        if (this.usedComponents == null) {
-            return;
-        }
-        for (const component of this.usedComponents) {
-            component.define();
-        }
-    }
-
-    _checkForUndefinedComponents() {
-        if (this.html == null) {
-            return;
-        }
-        const matches = this.html.matchAll(/<([a-z]+-[a-z]*)[ \/].*>/g);
-        if (matches == null) {
-            return;
-        }
-        const tags = Array.from(matches).map(m => m[1]);
-        for (const tag of tags) {
-            if (customElements.get(tag) == null) {
-                console.error(`${this.constructor.name} tried to use tag ${tag}, but it has not been defined yet.`);
-            }
         }
     }
 

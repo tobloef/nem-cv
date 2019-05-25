@@ -1,4 +1,4 @@
-import EditableComponent from "./EditableComponent.js";
+import EditableText from "./EditableText.js";
 import BaseComponent from "../../BaseComponent.js";
 
 export default class ExperienceItem extends BaseComponent {
@@ -8,40 +8,40 @@ export default class ExperienceItem extends BaseComponent {
     ];
 
     usedComponents = [
-        EditableComponent
+        EditableText
     ];
 
     // language=HTML
     get html() {
         return `
-            <div content-type="object" part="experience-item">
+            <div content-type="object" class="container" part="experience-item">
                 <span class="divider where">
-                    <editable-component
+                    <${EditableText.elementName}
                             placeholder="${this.experienceType}"
                             element="p"
                             content-key="name"
                             content-type="component"
-                    ></editable-component>${this.whereSeparator || ""}
-                    <editable-component
+                    ></${EditableText.elementName}><span class="separator">${this.whereSeparator || ""}</span>
+                    <${EditableText.elementName}
                             placeholder="Titel"
                             element="p"
                             content-key="title"
                             content-type="component"
-                    ></editable-component>
+                    ></${EditableText.elementName}>
                 </span>
                 <span class="divider when">
-                    <editable-component
+                    <${EditableText.elementName}
                             placeholder="Startår"
                             element="p"
                             content-key="from"
                             content-type="component"
-                    ></editable-component><p> - </p>
-                    <editable-component
+                    ></${EditableText.elementName}><p> - </p>
+                    <${EditableText.elementName}
                             placeholder="Slutår"
                             element="p"
                             content-key="to"
                             content-type="component"
-                    ></editable-component>
+                    ></${EditableText.elementName}>
                 </span>
             </div>
         `;
@@ -50,7 +50,7 @@ export default class ExperienceItem extends BaseComponent {
     // language=CSS
     get css() {
         return `
-            :host {
+            .container {
                 display: flex;
                 justify-content: space-between;
                 width: 100%;
@@ -58,10 +58,17 @@ export default class ExperienceItem extends BaseComponent {
             .divider {
                 display: flex;
                 flex-direction: row;
+                justify-content: space-between;
             }
-
+            
+            .separator {
+                white-space: pre-wrap;
+            }
             button {
                 display: inline;
+            }
+            .where {
+                padding-right: 3em;
             }
         `
     };

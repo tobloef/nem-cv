@@ -19,13 +19,13 @@ export const layouts = {
         class: CVOctagon
     },
     simplicity: {
-        name: "Simplicitet",
+        name: "Moderne",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         image: getPath("cv-placeholder"),
         class: CVModern
     },
     basic: {
-        name: "Basal",
+        name: "Simpel",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         image: getPath("cv-placeholder"),
         class: CVSimple

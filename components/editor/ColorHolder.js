@@ -1,5 +1,5 @@
 import BaseComponent from "../BaseComponent.js";
-import {setItem} from "../../lib/storage-helper.js";
+import {setStorageItem} from "../../lib/storage-helper.js";
 
 export default class ColorHolder extends BaseComponent {
     static observedAttributes = [
@@ -8,8 +8,6 @@ export default class ColorHolder extends BaseComponent {
         "accent-color",
         "selected"
     ];
-
-    usedComponents = [];
 
     // language=HTML
     get html() {
@@ -39,9 +37,9 @@ export default class ColorHolder extends BaseComponent {
         });
     };
 
-    resizeFont() {
+    resizeFont = () => {
         this.shadowRoot.querySelector("p").style.fontSize = (this.offsetWidth*0.6) + "px";
-    }
+    };
 
     // language=CSS
     get css() {
