@@ -72,12 +72,13 @@ export default class CVSimple extends AbstractCV {
     educationWhereSeparator = ", ";
     experienceWhereSeparator = ", ";
 
+    script = () => {
+
+    };
+
     // language=CSS
     get css() {
         return `
-            * {
-                background-color: var(--background-color);
-            }
             
             body {
                 margin: 0;
@@ -106,7 +107,7 @@ export default class CVSimple extends AbstractCV {
                 min-height: 50vh;
             }
             .other section h1 {
-                font-family: var(--h1),sans-serif;
+                font-family: var(--h1);
                 color: var(--font-color);
                 font-size: var(--h1-size);
                 margin-bottom: 0.5em;
@@ -132,7 +133,7 @@ export default class CVSimple extends AbstractCV {
             }
             ${EditableList.elementName}::part(list-item) {
                 margin-bottom: 0.8em;
-                font-family: var(--p),sans-serif;
+                font-family: var(--p);
                 flex-direction: row-reverse;    
             }
 

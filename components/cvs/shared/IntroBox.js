@@ -86,7 +86,7 @@ export default class IntroBox extends BaseComponent {
             h1, .name {
                 font-size: 2em;
                 margin-bottom: 0.5em;
-                font-family: var(--h1),sans-serif;
+                font-family: var(--h1);
                 color: var(--font-color);
             }
 
@@ -101,7 +101,7 @@ export default class IntroBox extends BaseComponent {
             }
 
             li ${EditableText.elementName}, .description {
-                font-family: var(--p),sans-serif;
+                font-family: var(--p);
             }
 
             li ${EditableText.elementName} {
