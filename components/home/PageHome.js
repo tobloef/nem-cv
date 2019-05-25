@@ -5,9 +5,6 @@ import RouterLink from "../shared/RouterLink.js";
 import CustomButton from "../shared/CustomButton.js";
 import NavBar from "../shared/NavBar.js";
 import HomeHeader from './HomeHeader.js';
-import {
-    getPath
-} from "../../lib/paths.js";
 import TestimonialSlider from './TestimonialSlider.js';
 import TemplateSlider from './TemplateSlider.js';
 import Logo from "../shared/Logo.js";
@@ -16,161 +13,6 @@ export default class PageHome extends BaseComponent {
     usedComponents = [
         RouterLink, HomeHeader, CustomButton, NavBar, Logo, TestimonialSlider, TemplateSlider
     ];
-
-    // section.features {
-    //     display: flex;
-    //     flex-direction: column;
-    //     align-items: center;
-    //     padding: 15px 50px;
-    //     background-color: hsl(77, 30%, 92%);
-    // }
-    //
-    // section.features h2 {
-    //     text-align: center;
-    //     margin-bottom: 20px;
-    // }
-    //
-    // section.features router-link {
-    //     text-decoration: none;
-    // }
-    //
-    // section.features router-link custom-button {
-    //     display: inline-block;
-    //     --padding-x: 30px;
-    //     margin-top: 10px;
-    //     --hover-background-color: #ebece9;
-    // }
-    //
-    // .cards {
-    //     display: flex;
-    //     flex-direction: column;
-    //     max-width: 750px;
-    // }
-    //
-    // .card {
-    //     background: white;
-    //     padding: 10px 30px;
-    //     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    // }
-    //
-    // .card h3 {
-    //     margin-bottom: 20px;
-    // }
-    //
-    // .card .split {
-    //     display: flex;
-    //     flex-direction: column;
-    // }
-    //
-    // .card .left,
-    // .card .right {
-    //     width: 100%;
-    // }
-    //
-    // .card.templates img {
-    //     width: 100%;
-    // }
-    //
-    // .seperator {
-    //     width: 100%;
-    //     height: 3px;
-    //     background: black;
-    // }
-    //
-    // .card.colors {
-    //     margin-top: 30px;
-    // }
-    //
-    // .card.colors .line {
-    //     display: flex;
-    //     justify-content: space-between;
-    //     font-size: 10vw;
-    // }
-    //
-    // .card.colors .green {
-    //     color: #69b168;
-    // }
-    //
-    // .card.colors .red {
-    //     color: #F86868;
-    // }
-    //
-    // .card.colors .blue {
-    //     color: #7aacb3;
-    // }
-    //
-    // .card.colors .yellow {
-    //     color: #FDF883;
-    // }
-    //
-    // .card.colors .brown {
-    //     color: #875820;
-    // }
-    //
-    // .card.colors .purple {
-    //     color: #AB80A7;
-    // }
-    //
-    // .card.colors .gray {
-    //     color: #a1a1a1;
-    // }
-    //
-    // .card.colors .pink {
-    //     color: #ff50a3;
-    // }
-    //
-    // .card.colors .bordeaux {
-    //     color: #8B0817;
-    // }
-    //
-    // .card.colors .dark-green {
-    //     color: #066515;
-    // }
-
-//     <section class="features">
-//         <h2>Derfor skal du vælge os</h2>
-//         <div class="cards">
-//             <div class="card templates">
-//                 <div class="split">
-//                     <div class="left">
-//                         <h3>Vælg mellem <b class="underline">tre</b> <i>forskellige</i> templates</h3>
-//                         <div class="seperator"></div>
-//                     </div>
-//                     <div class="right">
-//                         <img alt="Skabelonen simplicitet" src="${getPath("template-modern")}"/>
-//                     </div>
-//                 </div>
-//                 <router-link href="/templates">
-//                     <custom-button label="Start Nu">
-//                         Start nu
-//                     </custom-button>
-//                 </router-link>
-//             </div>
-//             <div class="card colors">
-//                 <div class="split">
-//                     <div class="left">
-//                         <h3>Vælg farver efter din personlighed</h3>
-//                         <div class="seperator"></div>
-//                     </div>
-//                     <div class="right">
-//                         <p class="line"><span class="green">GRØN</span><span class="red">RØD</span></p>
-//                         <p class="line"><span class="blue">BLÅ</span><span class="yellow">GUL</span></p>
-//                         <p class="line"><span class="brown">BRUN</span></p>
-//                         <p class="line"><span class="purple">LILLA</span><span class="gray">GRÅ</span></p>
-//                         <p class="line"><span class="pink">LYSERØD</span></p>
-//                         <p class="line"><span class="bordeaux">BORDEAUX</span></p>
-//                         <p class="line"><span class="dark-green">MØRKEGRØN</span></p>
-//                     </div>
-//                 </div>
-//                 <router-link href="/templates">
-//                     <custom-button label="Start nu">
-//                         Start nu
-//                     </custom-button>
-//                 </router-link>
-//             </div>
-//         </div>
-//     </div>
-// </section>
 
     get html() {
         return `
@@ -189,8 +31,12 @@ export default class PageHome extends BaseComponent {
                 <template-slider></template-slider>
             </section>
 
-            <section>
+            <section class="colors">
+                <h2>Vælg farver efter din personlighed</h2>
 
+                <div class="color-wheel">
+
+                </div>
             </section>
 
             <section class="testimonials">
@@ -274,6 +120,29 @@ export default class PageHome extends BaseComponent {
 
            section.templates template-slider {
                width: 100%;
+           }
+
+           section.colors {
+               display: flex;
+               flex-direction: column;
+               padding: 50px;
+               align-items: center;
+               text-align: center;
+           }
+
+           section.colors h2 {
+               text-align: center;
+               margin-bottom: 40px;
+               max-width: 600px;
+           }
+
+           section.colors .color-wheel {
+               background: conic-gradient(hsl(0, 85%, 58%) 16.66%, yellow 0 33.33%, hsl(107, 60%, 60%) 0 50%, aqua 0 66.66%, hsl(221, 63%, 48%) 0 83.33%, magenta 0 100%);
+               --color-wheel-size: calc(100vw - 100px);
+               height: var(--color-wheel-size);
+               width: var(--color-wheel-size);
+               border-radius: 100%;
+               transform: rotate(0deg);
            }
 
            section.testimonials {
@@ -361,11 +230,14 @@ export default class PageHome extends BaseComponent {
 
            @media(min-width: 600px) {
                testimonial-slider {
-                   /*max-width: 1500px;*/
                    padding: 0px;
 
                    --text-padding: 20px 50px 30px 10%;
                    --button-padding: 20px 50px 20px 0px;
+               }
+
+               section.colors .color-wheel {
+                   --color-wheel-size: calc(75vw - 100px);
                }
 
                section.cta .cta-text {
@@ -394,42 +266,15 @@ export default class PageHome extends BaseComponent {
            }
 
            @media(min-width: 650px) {
-               .card {
-                   padding: 50px;
-               }
-
                h2 {
                    font-size: 3em;
                    line-height: 1.5;
                }
            }
 
-           @media(min-width: 700px) {
-               .cards {
-                   flex-direction: row;
-               }
-
-               .card {
-                   width: 50%;
-               }
-
-               .card.templates {
-                   margin-right: 20px;
-               }
-
-               .card.colors {
-                   margin-top: 0px;
-               }
-
-               .card.colors .line {
-                   font-size: 3em;
-               }
-           }
-
-           @media(min-width: 1100px) {
-               .cards {
-                   display: flex;
-                   max-width: 1000px;
+           @media(min-width: 800px) {
+               section.colors .color-wheel {
+                   --color-wheel-size: 500px;
                }
            }
         `;
@@ -441,6 +286,7 @@ export default class PageHome extends BaseComponent {
         this._observeHeader();
         this._observeTemplates();
         this._observeTestimonials();
+        this._handleRotateColorWheel();
     }
 
     _observeHeader() {
@@ -486,6 +332,14 @@ export default class PageHome extends BaseComponent {
 
         // start observing
         this.templateObserver.observe(this.shadowRoot.querySelector("section.templates"));
+    }
+
+    _handleRotateColorWheel() {
+        document.addEventListener('scroll', evt => {
+            const wheel = this.shadowRoot.querySelector(".color-wheel");
+            const angle = (window.pageYOffset / 8) % 360;
+            wheel.style.transform = `rotate(${angle}deg)`;
+        })
     }
 
     script = () => {
