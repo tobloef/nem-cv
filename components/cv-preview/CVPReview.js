@@ -4,6 +4,10 @@ import Router from "../../lib/Router.js";
 import {templates} from "../../constants/themes.js";
 
 export default class CVPReview extends BaseComponent {
+    usedComponents = [
+        ...(templates.map(t => t.class))
+    ];
+
     script = () => {
         // Load CV data
         const content = getStorageItem("cv-content");
@@ -30,6 +34,5 @@ export default class CVPReview extends BaseComponent {
         // Insert the CV into the page
         this.shadowRoot.innerHTML = "";
         this.shadowRoot.appendChild(cvElement);
-
     };
 }

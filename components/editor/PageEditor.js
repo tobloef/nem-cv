@@ -3,9 +3,6 @@ import Router from "../../lib/Router.js";
 import SideBar from "./SideBar.js";
 import {getStorageItem, setStorageItem} from "../../lib/storage-helper.js";
 import NavBar from "../shared/NavBar.js";
-import CVSimple from "../cvs/CVSimple.js";
-import CVModern from "../cvs/CVModern.js";
-import CVOctagon from "../cvs/CVOctagon.js";
 import {templates, colors} from "../../constants/themes.js";
 import CustomButton from "../shared/CustomButton.js";
 import Logo from "../shared/Logo.js";
@@ -18,13 +15,11 @@ export default class PageEditor extends BaseComponent {
 
     usedComponents = [
         CustomButton,
-        CVSimple,
-        CVModern,
-        CVOctagon,
         NavBar,
         SideBar,
         CustomButton,
-        Logo
+        Logo,
+        ...Object.keys(templates).map(t => templates[t].class)
     ];
 
     // language=HTML
