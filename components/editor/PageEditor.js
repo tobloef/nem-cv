@@ -78,32 +78,34 @@ export default class PageEditor extends BaseComponent {
         });
 
         const finishButton = this.shadowRoot.getElementById("finish-button");
-        finishButton.addEventListener("click", async () => {
-            if (this.cv == null) {
-                return;
-            }
-            // Set cv content in local storage
-            const content = this.cv.getContent();
-            setStorageItem("cv-content", content);
-            // Validate before sending to the server
-            const validationResult = this.validate();
-            if (validationResult != null) {
-                alert(`${validationResult} Ret venligst dette inden CV'et kan sendes til serveren.`);
-                return;
-            }
-            // Send CV to server
-            try {
-                await postCV(content);
-            } catch (error) {
-                console.error(error);
-                alert("Der opstod en fejl da CV'et skulle sendes til serveren. Dit CV vil blive gemt lokalt.");
-                return;
-            }
-            // Navigate to the cv page
-            alert("Dit CV blev sendt til serveren.");
-            // TODO: Navigate to cv page
-        });
+        finishButton.addEventListener("click", this.handleFinish);
         this.setDefaultColors();
+    };
+
+    handleFinish = async () => {
+        if (this.cv == null) {
+            return;
+        }
+        // Set cv content in local storage
+        const content = this.cv.getContent();
+        setStorageItem("cv-content", content);
+        // Validate before sending to the server
+        const validationResult = this.validate();
+        if (validationResult != null) {
+            alert(`${validationResult} Ret venligst dette inden CV'et kan sendes til serveren.`);
+            return;
+        }
+        // Send CV to server
+        try {
+            await postCV(content);
+        } catch (error) {
+            console.error(error);
+            alert("Der opstod en fejl da CV'et skulle sendes til serveren. Dit CV vil blive gemt lokalt.");
+            return;
+        }
+        // Navigate to the cv page
+        alert("Dit CV blev sendt til serveren.");
+        // TODO: Navigate to cv page
     };
 
     setDefaultColors() {
