@@ -23,9 +23,9 @@ export default class TemplateSlider extends BaseComponent {
                     <span class="barbutton green"></span>
                 </div>
                 <div class="content">
-                    <img class="template" src="/img/templates/template-modern.svg"></img>
-                    <img class="template" src="/img/templates/template-octagon.svg"></img>
-                    <img class="template contain" src="/img/templates/template-simple.svg"></img>
+                    <img class="template" alt="Skabelonen Moderne" src="/img/templates/template-modern.svg"></img>
+                    <img class="template" alt="Skabelonen Kanter" src="/img/templates/template-octagon.svg"></img>
+                    <img class="template contain" alt="Skabelonen Simpel" src="/img/templates/template-simple.svg"></img>
                 </div>
             </div>
         `;
