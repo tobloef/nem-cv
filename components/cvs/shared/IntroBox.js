@@ -79,7 +79,7 @@ export default class IntroBox extends BaseComponent {
 
 
     script = () => {
-        this.colors = JSON.parse(getStorageItem("grp2_colors"));
+        this.colors = getStorageItem("colors");
     };
 
 
@@ -90,16 +90,16 @@ export default class IntroBox extends BaseComponent {
         return `
 
             .introbox {
-                background-color: ${"white" || this.colors.backgroundColor};
-                
+                background-color: ${this.colors.backgroundColor};
                 padding: 4em;
+                height: 100%;
             }
 
             h1, .name {
                 font-size: 2em;
                 margin-bottom: 0.5em;
                 font-family: var(--h1);
-                color: var(--font);
+                color: ${this.colors.fontColor};
             }
 
             ${EditableProfileImage.elementName} {

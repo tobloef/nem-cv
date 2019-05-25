@@ -1,6 +1,7 @@
 import BaseComponent from "../BaseComponent.js";
 import ColorHolder from "./ColorHolder.js";
 import {templates} from "../../constants/editor-definitions.js";
+import {kebabToCamelCase} from "../../lib/string-utils.js";
 
 export default class ColorList extends BaseComponent {
     static observedAttributes = [];
@@ -21,6 +22,7 @@ export default class ColorList extends BaseComponent {
             element.setAttribute("font-color", item.fontColor);
             element.setAttribute("background-color", item.backgroundColor);
             element.setAttribute("accent-color", item.accentColor);
+            element.setAttribute("extra-background-color", item.extraBackgroundColor);
             // element.addEventListener("resize", evt => {
             //     const elm = evt.target;
             //     const width = elm.style.width;

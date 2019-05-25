@@ -341,7 +341,8 @@ export default class CVModern extends AbstractCV {
                 }
                 
                 .right{
-                    justify-content: center;
+                    justify-content: flex-end;
+                    align-items: flex-end;
                     width: 100%;
                     max-width: 200px;
                 }

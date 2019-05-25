@@ -28,6 +28,22 @@ export default class CVSimple extends AbstractCV {
                 <div class="other">
                     <section class="experience">
                         <h1>Erfaring</h1>
+                        <div class="work-area-container">
+                            <span>Brancher: </span>    
+                            <${EditableList.elementName}
+                                id="sector-list"
+                                content-key="sectors"
+                                content-type="array"
+                                class="work-areas"
+                                item-component="${WorkAreaItem.elementName}"
+                                separator=", "
+                                starting-amount="1"
+                                name="Brancher"
+                            >
+                                <list-button icon="add" diameter="1em" slot="append-button"></list-button>
+                                <list-button icon="remove" diameter="1em" slot="remove-button"></list-button>
+                            </${EditableList.elementName}>
+                        </div>
                         <${EditableList.elementName}
                             id="experience-list"
                             content-key="employers"
@@ -35,19 +51,6 @@ export default class CVSimple extends AbstractCV {
                             item-component="${ExperienceItem.elementName}" 
                             starting-amount="1"
                             name="Erfaringer"
-                        >
-                            <list-button icon="add" slot="append-button"></list-button>
-                            <list-button icon="remove" slot="remove-button"></list-button>
-                        </${EditableList.elementName}>
-                        <${EditableList.elementName}
-                            id="sector-list"
-                            content-key="sectors"
-                            content-type="array"
-                            class="work-areas"
-                            item-component="${WorkAreaItem.elementName}"
-                            separator=", "
-                            starting-amount="1"
-                            name="Brancher"
                         >
                             <list-button icon="add" slot="append-button"></list-button>
                             <list-button icon="remove" slot="remove-button"></list-button>
@@ -75,7 +78,8 @@ export default class CVSimple extends AbstractCV {
     script = () => {
         BaseComponent.template = simple;
         BaseComponent.colors = colors;
-        this.colors = JSON.parse(getStorageItem("grp2_colors"));
+        this.colors = getStorageItem("colors");
+        console.log(this.colors);
     };
 
         educationWhereSeparator = ", ";
@@ -86,7 +90,7 @@ export default class CVSimple extends AbstractCV {
         return `
             body {
                 margin: 0;
-                color: ${"black" || this.colors.fontColor};
+                color: ${this.colors.fontColor};
             }
             li {
                 user-select: none;
@@ -105,7 +109,6 @@ export default class CVSimple extends AbstractCV {
             }
 
             .other {
-                background-color: lightgray;
                 width: 100%;
             }
             .other section {
@@ -113,24 +116,24 @@ export default class CVSimple extends AbstractCV {
             }
             .other section h1 {
                 font-family: var(--h1);
+                color: ${this.colors.fontColor};
                 font-size: var(--h1-size);
-                color: var(--font);
                 margin-bottom: 0.5em;
+                margin-left: -2px;
             }
             .education {
-                background-color: ${"gray" || this.colors.accentColor};
+                background-color: ${this.colors.extraBackgroundColor};
             }
             .experience {
-                background-color: rebeccapurple;
+                background-color: ${this.colors.accentColor};
             }
 
             .education, .experience {
-                padding: 2em;
+                padding: 3em;
             }
 
             ${EditableList.elementName} {
                 display: block;
-                padding-left: 1em;
             }
 
             ${EditableList.elementName}::part(list) {
@@ -139,6 +142,7 @@ export default class CVSimple extends AbstractCV {
             ${EditableList.elementName}::part(list-item) {
                 margin-bottom: 0.8em;
                 font-family: var(--p);
+                flex-direction: row-reverse;    
             }
 
             .work-areas::part(list) {
@@ -151,9 +155,9 @@ export default class CVSimple extends AbstractCV {
                 flex-direction: row;
                 align-items: center;
             }
-            .work-areas::part(list-item) {
+            .work-area-container span, .work-areas::part(list-item) {
                 font-family: var(--p);
-                font-size: 1.2em;
+                font-size: 1em;
             }
             .work-areas::part(button) {
                 height: 1em;
@@ -161,6 +165,16 @@ export default class CVSimple extends AbstractCV {
             
             #experience-list {
                 margin-bottom: 3em;
+            }
+            
+            .work-area-container {
+                display: flex;
+                align-items: center;
+                margin-bottom: 2em;
+            }
+            
+            #education-list::part(where) {
+                background-color: red;
             }
 
             @media screen and   (min-width: 1024px) {
@@ -170,7 +184,8 @@ export default class CVSimple extends AbstractCV {
                 }
                 
                 intro-box {
-                min-width: 500px;
+                    min-width: 500px;
+                    min-height: 100vh;
                 }
                 
                 .other section {

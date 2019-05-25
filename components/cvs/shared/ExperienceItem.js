@@ -23,7 +23,7 @@ export default class ExperienceItem extends BaseComponent {
 
         // language=HTML
         return `
-            <div content-type="object" class="container">
+            <div content-type="object" class="container" id="experience-container">
                 <span class="divider where">
                     <${EditableText.elementName}
                             validate-type="string"
