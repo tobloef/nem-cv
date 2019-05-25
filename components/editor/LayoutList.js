@@ -8,6 +8,7 @@ export default class LayoutList extends BaseComponent {
     ];
 
     script = () => {
+        // Populate list of templates to choose from.
         this.empty();
         for (const key in templates) {
             const template = templates[key];

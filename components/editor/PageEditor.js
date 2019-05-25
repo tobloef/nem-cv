@@ -38,7 +38,7 @@ export default class PageEditor extends BaseComponent {
     script = () => {
         BaseComponent.editMode = true;
         this._checkForExistingCV();
-        // Try to create the CV based on the chosen template
+        // Try to create CV with template or redirect to choose template
         const templateId = getStorageItem("template-id");
         if (templateId == null || templates[templateId] == null) {
             return Router.navigate("/templates");
@@ -58,6 +58,7 @@ export default class PageEditor extends BaseComponent {
         }
         const settingsButton = this.shadowRoot.getElementById("settings-button");
         settingsButton.addEventListener("click", sidebar.toggle);
+        // Add custom event listener for when a template is selected
         sidebar.addEventListener("select-click", (e) => {
             const templateId =  e.detail.templateId;
             setStorageItem("template-id", templateId);
@@ -65,6 +66,7 @@ export default class PageEditor extends BaseComponent {
             this._setCV(templates[templateId]);
             sidebar.toggle();
         });
+        // Add custom event listener for when a color scheme is selected
         sidebar.addEventListener("color-picked", (e) => {
             const colors = e.detail.colors;
             setStorageItem("colors", colors);

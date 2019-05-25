@@ -16,6 +16,7 @@ export default class ListButton extends BaseComponent {
     }
 
     script = () => {
+        //Add event listener to perform assigned function when clicked
         const button = this.shadowRoot.getElementById("button");
         button.addEventListener("click", () => {
             if (this.onClick == null) {

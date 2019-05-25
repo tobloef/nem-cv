@@ -9,6 +9,7 @@ export default class ColorList extends BaseComponent {
 
     script = () => {
         this.empty();
+        // Add all the color options to the list to choose from
         for (const colorScheme of colors) {
             const element = document.createElement(ColorHolder.elementName);
             element.addEventListener("click", (e) => {

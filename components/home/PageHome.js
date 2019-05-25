@@ -60,7 +60,7 @@ export default class PageHome extends BaseComponent {
                     </div>
 
                     <div class="right">
-                        <p>Denne hjemmeside er udarbejdet i forbindelse med eksamen i Systematisk Design af Brugergrænseflader på IT Universitetet i København, og repræsentere derfor ikke en rigtig virksomhed.</p>
+                        <p>Denne hjemmeside er udarbejdet i forbindelse med eksamen i Systematisk Design af Brugergrænseflader på IT Universitetet i København, og repræsenterer derfor ikke en rigtig virksomhed.</p>
                     </div>
                 </div>
             </footer>

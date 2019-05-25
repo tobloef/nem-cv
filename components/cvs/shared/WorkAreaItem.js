@@ -23,6 +23,7 @@ export default class WorkAreaItem extends BaseComponent {
     };
 
     script = () => {
+        //if we are editing, add event listener for dropdown functionality
         this.span = this.shadowRoot.querySelector(".dropdown");
         if (BaseComponent.editMode) {
             this.dropdown.setAttribute("part", "dropdown");
@@ -107,6 +108,10 @@ export default class WorkAreaItem extends BaseComponent {
                 background: rgba(255, 0, 0, 0.15);
                 text-decoration: underline;
                 text-decoration-color: red;
+            }
+            select, option {
+                font-family: "Open Sans", sans-serif;
+                font-size: 1em;
             }
         `;
     }
