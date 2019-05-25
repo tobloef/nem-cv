@@ -71,14 +71,6 @@ export default class CVOctagon extends AbstractCV {
         BaseComponent.template = octagon;
     };
 
-    externalStyles = [];
-
-    getContent = () => {
-        const obj = {};
-        super.getContent(obj);
-        return obj;
-    };
-
     // language=CSS
     get css() {
         return `

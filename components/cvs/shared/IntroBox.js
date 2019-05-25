@@ -1,9 +1,11 @@
 import EditableComponent from "./EditableComponent.js";
 import BaseComponent from "../../BaseComponent.js";
 import ProfileImage from "./ProfileImage.js";
+import {getStorageItem} from "../../../lib/storage-helper.js";
 
 export default class IntroBox extends BaseComponent {
-    image = null
+    image = null;
+    colors = null;
     static observedAttributes = [];
     usedComponents = [
         EditableComponent,
@@ -14,7 +16,7 @@ export default class IntroBox extends BaseComponent {
     get html() {
         return `
             <section class="introbox">
-                <profile-image aspect-ratio="2" content-key="picture" content-type="component"></profile-image>
+                <profile-image aspect-ratio="1" content-key="picture" content-type="component"></profile-image>
                 <editable-component
                                 content-key="name"
                                 content-type="component"
@@ -54,6 +56,7 @@ export default class IntroBox extends BaseComponent {
                                 element="p"
                                 content-key="description"
                                 content-type="component"
+                                multiline
                                 placeholder="Her kan du skrive en kort beskrivelse af dig selv.">
                 </editable-component>
             </section>
@@ -62,6 +65,7 @@ export default class IntroBox extends BaseComponent {
 
 
     script = () => {
+        this.colors = JSON.parse(getStorageItem("grp2_colors"));
     };
 
 
@@ -70,14 +74,11 @@ export default class IntroBox extends BaseComponent {
     // language=CSS
     get css() {
         return `
-            :host {
-                min-width: 400px;
-            }
 
             .introbox {
-                background-color: aquamarine;
-                min-height: 100vh;
-                padding: 2em;
+                background-color: ${"white" || this.colors.backgroundColor};
+                
+                padding: 4em;
             }
 
             h1, .name {
@@ -99,6 +100,10 @@ export default class IntroBox extends BaseComponent {
 
             li editable-component, .description {
                 font-family: var(--p);
+            }
+
+            li editable-component {
+                font-size: var(--p-size);
             }
         `
     };

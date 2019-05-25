@@ -1,7 +1,7 @@
 "use strict";
 
 import {classNameToElementName, kebabToCamelCase} from "../lib/string-utils.js";
-import {resetCSSString, resetCSSStyleSheet} from "../lib/reset-css.js";
+import {resetCSSStyleSheet} from "../lib/reset-css.js";
 import {stringToStyleSheet} from "../lib/stylesheet-utils.js";
 
 export default class BaseComponent extends HTMLElement {
@@ -20,7 +20,7 @@ export default class BaseComponent extends HTMLElement {
         this._checkForUndefinedComponents();
         this.render();
         this.updateStyles();
-    }
+    };
 
     attributeChangedCallback(attrName, oldValue, newValue) {
         if (oldValue !== newValue) {
@@ -31,11 +31,11 @@ export default class BaseComponent extends HTMLElement {
                 this[propName] = this.getAttribute(attrName);
             }
         }
-    }
+    };
 
     empty() {
         this.shadowRoot.innerHTML = "";
-    }
+    };
 
     render() {
         console.debug(`Rendering DOM of ${this.constructor.name}`);
@@ -43,7 +43,7 @@ export default class BaseComponent extends HTMLElement {
         if (this.script != null) {
             this.script();
         }
-    }
+    };
 
     updateStyles() {
         console.debug(`Updating styles of ${this.constructor.name}`);
@@ -61,13 +61,13 @@ export default class BaseComponent extends HTMLElement {
             styleSheets.push(stringToStyleSheet(this.css));
         }
         this.shadowRoot.adoptedStyleSheets = styleSheets;
-    }
+    };
 
     getContent(content) {
-        this._recurseContent(content, this.shadowRoot);
-    }
+        this._recurseGetContent(content, this.shadowRoot);
+    };
 
-    _recurseContent(content, element) {
+    _recurseGetContent(content, element) {
         for (const child of element.children) {
             let newContent = null;
             const contentType = child.getAttribute("content-type");
@@ -78,7 +78,7 @@ export default class BaseComponent extends HTMLElement {
                         if (child.getContent != null) {
                             child.getContent(newContent);
                         } else {
-                            this._recurseContent(newContent, child);
+                            this._recurseGetContent(newContent, child);
                         }
                         break;
                     case "array":
@@ -86,7 +86,7 @@ export default class BaseComponent extends HTMLElement {
                         if (child.getContent != null) {
                             child.getContent(newContent);
                         } else {
-                            this._recurseContent(newContent, child);
+                            this._recurseGetContent(newContent, child);
                         }
                         break;
                     case "component":
@@ -106,11 +106,56 @@ export default class BaseComponent extends HTMLElement {
             } else if (child.getContent != null) {
                 child.getContent(content);
             } else {
-                this._recurseContent(content, child);
+                this._recurseGetContent(content, child);
             }
         }
-    }
+    };
 
+    setContent(content) {
+        this._recurseSetContent(content, this.shadowRoot);
+    };
+
+    _recurseSetContent(content, element) {
+        console.debug("Setting content", content, "on children of", element);
+        for (const child of element.children) {
+            const key = child.getAttribute("content-key");
+            const type = child.getAttribute("content-type");
+            if (key != null) {
+                child.setContent(content[key]);
+            } else {
+                if (child.setContent != null) {
+                    child.setContent(content);
+                } else {
+                    this._recurseSetContent(content, child);
+                }
+            }
+        }
+    };
+
+    _defineUsedComponents() {
+        if (this.usedComponents == null) {
+            return;
+        }
+        for (const component of this.usedComponents) {
+            component.define();
+        }
+    };
+
+    _checkForUndefinedComponents() {
+        if (this.html == null) {
+            return;
+        }
+        const matches = this.html.matchAll(/<([a-z]+-[a-z]*)[ \/].*>/g);
+        if (matches == null) {
+            return;
+        }
+        const tags = Array.from(matches).map(m => m[1]);
+        for (const tag of tags) {
+            if (customElements.get(tag) == null) {
+                console.error(`${this.constructor.name} tried to use tag ${tag}, but it has not been defined yet.`);
+            }
+        }
+    };
 
     static get template() {
         return BaseComponent._template;
@@ -133,31 +178,6 @@ export default class BaseComponent extends HTMLElement {
             BaseComponent._colors = stringToStyleSheet(value);
         } else {
             BaseComponent._colors = value;
-        }
-    }
-
-    _defineUsedComponents() {
-        if (this.usedComponents == null) {
-            return;
-        }
-        for (const component of this.usedComponents) {
-            component.define();
-        }
-    }
-
-    _checkForUndefinedComponents() {
-        if (this.html == null) {
-            return;
-        }
-        const matches = this.html.matchAll(/<([a-z]+-[a-z]*)[ \/].*>/g);
-        if (matches == null) {
-            return;
-        }
-        const tags = Array.from(matches).map(m => m[1]);
-        for (const tag of tags) {
-            if (customElements.get(tag) == null) {
-                console.error(`${this.constructor.name} tried to use tag ${tag}, but it has not been defined yet.`);
-            }
         }
     }
 
