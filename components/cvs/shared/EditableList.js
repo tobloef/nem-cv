@@ -34,6 +34,11 @@ export default class EditableList extends BaseComponent {
         for (let i = 0; i < (this.startingAmount || 0); i++) {
             this.addItem();
         }
+
+        if (!BaseComponent.editMode) {
+            const buttonHolder = this.shadowRoot.querySelector(".button-holder");
+            buttonHolder.parentNode.removeChild(buttonHolder);
+        }
     };
 
     addItem = (attributes) => {

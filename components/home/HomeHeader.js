@@ -95,10 +95,9 @@ export default class HomeHeader extends BaseComponent {
 
                 --image-extra-top-offset: 60px;
                 --top-padding: 60px;
-
+                --background-color: hsl(47, 50%, 85%);
+                --background-gradient: radial-gradient(circle, hsl(47, 50%, 85%) 0%, hsl(12, 5%, 30%) 100%);
                 --height: 100vh;
-
-                --background-gradient: radial-gradient(circle, hsl(47, 6%, 80%) 0%, hsl(47, 6%, 30%) 100%);
             }
 
             .background-container {
@@ -122,7 +121,7 @@ export default class HomeHeader extends BaseComponent {
             header {
                 padding-top: var(--top-padding);
                 height: var(--height);
-                background: hsl(12, 5%, 80%);
+                background: var(--background-color);
                 background: var(--background-gradient);
 
                 display: flex;
@@ -209,7 +208,7 @@ export default class HomeHeader extends BaseComponent {
             }
 
             .image-container .image-bg {
-                background: hsl(12, 5%, 80%);
+                background: var(--background-color);
                 background: var(--background-gradient);
                 position: absolute;
                 z-index: -1;

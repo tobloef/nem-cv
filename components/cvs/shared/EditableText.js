@@ -16,7 +16,7 @@ export default class EditableText extends BaseComponent {
                 id="content" 
                 class="empty-text"
                 part="inner" 
-                contenteditable="true" 
+                contenteditable=${BaseComponent.editMode}
                 role="textbox" 
                 aria-placeholder=${this.placeholder} 
                 data-placeholder=${this.placeholder}
@@ -72,6 +72,13 @@ export default class EditableText extends BaseComponent {
 
     script = () => {
         this.node = this.shadowRoot.querySelector("#content");
+        if (!BaseComponent.editMode && this.node.innerText === this.placeholder) {
+            this.placeholder = "";
+            this.node.setAttribute("aria-placeholder", "");
+            this.node.setAttribute("data-placeholder", "");
+            this.node.innerText = "";
+
+        }
         this.node.addEventListener("focus", this.onFocus);
         this.node.addEventListener("focusout", this.focusOut);
         this.node.addEventListener("keypress", this.keyPress);

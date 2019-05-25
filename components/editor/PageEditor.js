@@ -43,7 +43,7 @@ export default class PageEditor extends BaseComponent {
     };
 
     script = () => {
-        BaseComponent.editMode = true;
+        BaseComponent.editMode = false;
         if (getStorageItem("template") == null) {
             return Router.navigate(Router.prefix + "/templates");
         } else {
