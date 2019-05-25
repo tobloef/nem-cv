@@ -44,7 +44,7 @@ export default class EditableProfileImage extends BaseComponent {
     };
 
     setContent = (content) => {
-        this.setAttribute("src", content);
+        this.setAttribute("src", content || getPath("placeholder-person"));
         this.render();
     };
 

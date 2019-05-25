@@ -104,7 +104,7 @@ export default class CVModern extends AbstractCV {
                             starting-amount="1"
                         >
                             <list-button icon="add" slot="append-button"></list-button>
-                            <list-button icon="remove" slot="remove-button"></list-button>
+                            <list-button icon="remove" slot="remove-button"></list-button>  
                     </${EditableList.elementName}>
                 </div>
             </section>
