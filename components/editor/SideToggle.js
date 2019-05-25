@@ -1,5 +1,5 @@
 import BaseComponent from "../BaseComponent.js";
-import {getPath} from "../../lib/paths.js";
+import {getPath} from "../../constants/paths.js";
 
 export default class SideToggle extends BaseComponent {
     // Observe "open" and "closed" attributes s.t. both can be used

@@ -3,10 +3,7 @@ import Router from "../../lib/Router.js";
 import SideBar from "./SideBar.js";
 import {getStorageItem, setStorageItem} from "../../lib/storage-helper.js";
 import NavBar from "../shared/NavBar.js";
-import CVSimple from "../cvs/CVSimple.js";
-import CVModern from "../cvs/CVModern.js";
-import CVOctagon from "../cvs/CVOctagon.js";
-import {layouts, templates} from "../../constants/editor-definitions.js";
+import {templates, colors} from "../../constants/themes.js";
 import CustomButton from "../shared/CustomButton.js";
 import Logo from "../shared/Logo.js";
 import {postCV} from "../../lib/api.js";
@@ -18,13 +15,11 @@ export default class PageEditor extends BaseComponent {
 
     usedComponents = [
         CustomButton,
-        CVSimple,
-        CVModern,
-        CVOctagon,
         NavBar,
         SideBar,
         CustomButton,
-        Logo
+        Logo,
+        ...Object.keys(templates).map(t => templates[t].class)
     ];
 
     // language=HTML
@@ -110,16 +105,16 @@ export default class PageEditor extends BaseComponent {
         }
         // Navigate to the cv page
         alert("Dit CV blev sendt til serveren.");
-        // TODO: Navigate to cv page
+        Router.navigate("/preview");
     };
 
     setDefaultColors() {
         const defaultColor = 0; //should be an index of the list of color schemes found in editorDefinitions
         setStorageItem("colors", {
-            fontColor: templates[defaultColor].fontColor,
-            backgroundColor: templates[defaultColor].backgroundColor,
-            accentColor: templates[defaultColor].accentColor,
-            extraBackgroundColor: templates[defaultColor].extraBackgroundColor
+            fontColor: colors[defaultColor].fontColor,
+            backgroundColor: colors[defaultColor].backgroundColor,
+            accentColor: colors[defaultColor].accentColor,
+            extraBackgroundColor: colors[defaultColor].extraBackgroundColor
         });
         this.changeColors();
     }
@@ -146,7 +141,7 @@ export default class PageEditor extends BaseComponent {
         if (this.cvType !== cvType) { // If the gotten type is different from the current one
             const cvContainer = this.shadowRoot.getElementById("cv-container");
             cvContainer.innerHTML = ""; // Get content div and reset contents
-            this.cv = document.createElement(layouts[cvType].class.elementName); // Spawn a new CV
+            this.cv = document.createElement(templates[cvType].class.elementName); // Spawn a new CV
             cvContainer.appendChild(this.cv); // Add new CV to container
             this.cvType = cvType; // Remember which type is selected
         }

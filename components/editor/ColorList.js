@@ -1,7 +1,6 @@
 import BaseComponent from "../BaseComponent.js";
 import ColorHolder from "./ColorHolder.js";
-import {templates} from "../../constants/editor-definitions.js";
-import {kebabToCamelCase} from "../../lib/string-utils.js";
+import {colors} from "../../constants/themes.js";
 
 export default class ColorList extends BaseComponent {
     static observedAttributes = [];
@@ -17,7 +16,7 @@ export default class ColorList extends BaseComponent {
 
     script = () => {
         this.empty();
-        for (const item of templates) { //create color picker buttons based on available templates
+        for (const item of colors) { //create color picker buttons based on available templates
             const element = document.createElement(ColorHolder.elementName);
             element.setAttribute("font-color", item.fontColor);
             element.setAttribute("background-color", item.backgroundColor);
