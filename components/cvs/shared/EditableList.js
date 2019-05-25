@@ -1,6 +1,6 @@
 import BaseComponent from "../../BaseComponent.js";
 
-export default class AppendableComponentList extends BaseComponent {
+export default class EditableList extends BaseComponent {
     static observedAttributes = [
         "item-component",
         "starting-amount",
@@ -33,6 +33,11 @@ export default class AppendableComponentList extends BaseComponent {
         removeButton.onClick = this.remove;
         for (let i = 0; i < (this.startingAmount || 0); i++) {
             this.addItem();
+        }
+
+        if (!BaseComponent.editMode) {
+            const buttonHolder = this.shadowRoot.querySelector(".button-holder");
+            buttonHolder.parentNode.removeChild(buttonHolder);
         }
     };
 

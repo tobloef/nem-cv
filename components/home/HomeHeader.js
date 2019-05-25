@@ -95,7 +95,8 @@ export default class HomeHeader extends BaseComponent {
 
                 --image-extra-top-offset: 60px;
                 --top-padding: 60px;
-
+                --background-color: hsl(47, 50%, 85%);
+                --background-gradient: radial-gradient(circle, hsl(47, 50%, 85%) 0%, hsl(12, 5%, 30%) 100%);
                 --height: 100vh;
             }
 
@@ -120,8 +121,8 @@ export default class HomeHeader extends BaseComponent {
             header {
                 padding-top: var(--top-padding);
                 height: var(--height);
-                background: hsl(12, 5%, 80%);
-                background: radial-gradient(circle, hsl(12, 5%, 80%) 0%, hsl(12, 5%, 30%) 100%);
+                background: var(--background-color);
+                background: var(--background-gradient);
 
                 display: flex;
                 justify-content: center;
@@ -178,7 +179,7 @@ export default class HomeHeader extends BaseComponent {
             .image-container {
                 overflow: hidden;
                 width: 100%;
-                height: 300px;
+                height: var(--image-height);
 
                 display: flex;
                 justify-content: center;
@@ -207,8 +208,8 @@ export default class HomeHeader extends BaseComponent {
             }
 
             .image-container .image-bg {
-                background: hsl(12, 5%, 80%);
-                background: radial-gradient(circle, hsl(12, 5%, 80%) 0%, hsl(12, 5%, 30%) 100%);
+                background: var(--background-color);
+                background: var(--background-gradient);
                 position: absolute;
                 z-index: -1;
                 width: 100vw;
@@ -395,6 +396,17 @@ export default class HomeHeader extends BaseComponent {
                 .infobox {
                     --infobox-large-left-margin: 75px;
                     max-width: 500px;
+                }
+            }
+
+            @media(min-height: 1000px) {
+                :host {
+                    --image-extra-top-offset: 30px;
+                    --top-padding: 30px;
+                }
+
+                .fakecv {
+                    --image-height: 500px;
                 }
             }
         `;

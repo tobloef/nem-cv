@@ -23,12 +23,14 @@ export default class WorkAreaItem extends BaseComponent {
 
     script = () => {
         this.span = this.shadowRoot.querySelector(".dropdown");
-        this.dropdown.setAttribute("part", "dropdown");
-        this.addOptions();
-        this.span.addEventListener("click", this.onClick);
-        this.dropdown.addEventListener("focusout", this.onFocusOut);
-        this.updateStyles();
-        addStorageItemListener("sectors", this.addOptions);
+        if(BaseComponent.editMode) {
+            this.dropdown.setAttribute("part", "dropdown");
+            this.addOptions();
+            this.span.addEventListener("click", this.onClick);
+            this.dropdown.addEventListener("focusout", this.onFocusOut);
+            this.updateStyles();
+            addStorageItemListener("sectors", this.addOptions);
+        }
     };
 
     getContent = () => {

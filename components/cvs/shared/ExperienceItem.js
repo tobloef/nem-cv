@@ -1,4 +1,4 @@
-import EditableComponent from "./EditableComponent.js";
+import EditableText from "./EditableText.js";
 import BaseComponent from "../../BaseComponent.js";
 
 export default class ExperienceItem extends BaseComponent {
@@ -8,7 +8,7 @@ export default class ExperienceItem extends BaseComponent {
     ];
 
     usedComponents = [
-        EditableComponent
+        EditableText
     ];
 
     // language=HTML
@@ -16,32 +16,37 @@ export default class ExperienceItem extends BaseComponent {
         return `
             <div content-type="object" class="container">
                 <span class="divider where">
-                    <editable-component
+                    <${EditableText.elementName}
+                            validate-type="string"
                             placeholder="${this.experienceType}"
                             element="div"
                             content-key="name"
                             content-type="component"
-                    ></editable-component><span class="separator">${this.whereSeparator || ""}</span>
-                    <editable-component
+                    ></${EditableText.elementName}><span class="separator">${this.whereSeparator || ""}</span>
+                    <${EditableText.elementName}
+                            validate-type="string"
                             placeholder="Titel"
                             element="div"
                             content-key="title"
                             content-type="component"
-                    ></editable-component>
+                    ></${EditableText.elementName}>
                 </span>
                 <span class="divider when">
-                    <editable-component
+                    <${EditableText.elementName}
+                            validate-type="date"
                             placeholder="Startår"
                             element="div"
                             content-key="from"
                             content-type="component"
-                    ></editable-component> -
-                    <editable-component
+                    ></${EditableText.elementName}> -
+                    <${EditableText.elementName}
+                            validate-type="nullable-date"
+                            validate-type="string"
                             placeholder="Slutår"
                             element="div"
                             content-key="to"
                             content-type="component"
-                    ></editable-component>
+                    ></${EditableText.elementName}>
                 </span>
             </div>
         `;
@@ -66,6 +71,9 @@ export default class ExperienceItem extends BaseComponent {
             }
             button {
                 display: inline;
+            }
+            .where {
+                padding-right: 3em;
             }
         `
     };

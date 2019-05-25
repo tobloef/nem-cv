@@ -1,12 +1,14 @@
 import BaseComponent from "../../BaseComponent.js";
+import {validate} from "../../../lib/validation.js";
 
-export default class EditableComponent extends BaseComponent {
+export default class EditableText extends BaseComponent {
     node = null;
 
     static observedAttributes = [
         "placeholder",
         "element",
         "multiline",
+        "validate-type"
     ];
 
     // language=HTML
@@ -16,7 +18,7 @@ export default class EditableComponent extends BaseComponent {
                 id="content" 
                 class="empty-text"
                 part="inner" 
-                contenteditable="true" 
+                contenteditable=${BaseComponent.editMode}
                 role="textbox" 
                 aria-placeholder=${this.placeholder} 
                 data-placeholder=${this.placeholder}
@@ -42,7 +44,7 @@ export default class EditableComponent extends BaseComponent {
         }
     };
 
-    onFocus = () => {
+    onFocus = (e) => {
         this.node.classList.remove("empty-text");
         this.node.style.minWidth = this.node.getBoundingClientRect().width + "px";
         if (this.node.innerText === this.placeholder) {
@@ -52,12 +54,13 @@ export default class EditableComponent extends BaseComponent {
         }
     };
 
-    focusOut = () => {
+    focusOut = (e) => {
         this.node.style.minWidth = "0";
         if (this.node.innerText === "") {
             this.node.innerText = this.placeholder;
             this.node.classList.add("empty-text");
         }
+        this.validate();
     };
 
     keyPress = (e) => {
@@ -70,8 +73,31 @@ export default class EditableComponent extends BaseComponent {
         }
     };
 
+    validate = () => {
+        if (this.validateType == null || this.validateType === "") {
+            return;
+        }
+        const content = this.node.innerText;
+        if (content === this.placeholder) {
+            return null;
+        }
+        const isValid = validate(content, this.validateType);
+        if (!isValid) {
+            this.node.classList.add("error");
+        } else {
+            this.node.classList.remove("error");
+        }
+    };
+
     script = () => {
         this.node = this.shadowRoot.querySelector("#content");
+        if (!BaseComponent.editMode && this.node.innerText === this.placeholder) {
+            this.placeholder = "";
+            this.node.setAttribute("aria-placeholder", "");
+            this.node.setAttribute("data-placeholder", "");
+            this.node.innerText = "";
+
+        }
         this.node.addEventListener("focus", this.onFocus);
         this.node.addEventListener("focusout", this.focusOut);
         this.node.addEventListener("keypress", this.keyPress);
@@ -82,13 +108,17 @@ export default class EditableComponent extends BaseComponent {
         if (content === "") {
             return null;
         }
+        if (content === this.placeholder) {
+            return null;
+        }
         return content;
     };
 
     setContent = (content) => {
-        this.node.innerText = (content || "");
-        if (this.node.innerText !== "") {
+        this.node.innerText = (content || this.placeholder);
+        if (this.node.innerText !== this.placeholder) {
             this.node.classList.remove("empty-text");
+
         }
     };
 
@@ -100,6 +130,17 @@ export default class EditableComponent extends BaseComponent {
             }
             :host {
                 display: flex;
+                align-items:center;
+            }
+            
+            .error {
+                background: rgba(255, 0, 0, 0.15);
+                text-decoration: underline;
+                text-decoration-color: red;
+                
+                /*border: 1.5px solid red;
+                border-radius: 3px;
+                padding: 3px 5px;*/
             }
         `
     };

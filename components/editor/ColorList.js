@@ -47,16 +47,20 @@ export default class ColorList extends BaseComponent {
                 flex-direction: row;
                 justify-content: space-around;
             }
-            
+
             color-holder {
                 flex: 1 1 0;
-                padding: 10px;
+                margin: 10px;
             }
-            
+
+            color-holder:hover {
+                box-shadow: hsla(0, 0%, 60%, 1) 0 0 7px 0;
+            }
+
             :host(.vertical) {
                 flex-direction: column;
             }
-            
+
             /*@media(max-width: 340px) {*/
             /*    color-holder>p {*/
             /*        font-size: 2em;*/

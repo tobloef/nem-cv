@@ -7,6 +7,7 @@ import {stringToStyleSheet} from "../lib/stylesheet-utils.js";
 export default class BaseComponent extends HTMLElement {
     static _template = null;
     static _colors = null;
+    static editMode = false;
 
     enableResetCSS = true;
 
