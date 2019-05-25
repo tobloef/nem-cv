@@ -98,6 +98,10 @@ export default class BaseComponent extends HTMLElement {
                 }
                 const contentKey = child.getAttribute("content-key");
                 if (contentKey != null) {
+                    const ignoreIfNull = child.getAttribute("content-ignore-if-null");
+                    if (ignoreIfNull != null && newContent == null) {
+                        continue;
+                    }
                     //console.log(this.constructor.name, "Setting", contentKey, "to", newContent, "on", content);
                     content[contentKey] = newContent;
                 } else if (content.push != null) {
@@ -120,7 +124,6 @@ export default class BaseComponent extends HTMLElement {
         console.debug("Setting content", content, "on children of", element);
         for (const child of element.children) {
             const key = child.getAttribute("content-key");
-            const type = child.getAttribute("content-type");
             if (key != null) {
                 child.setContent(content[key]);
             } else {
@@ -131,6 +134,28 @@ export default class BaseComponent extends HTMLElement {
                 }
             }
         }
+    };
+
+    validate() {
+        return this._recurseValidate(this.shadowRoot);
+    };
+
+    _recurseValidate = (element) => {
+        for (const child of element.children) {
+            let result = null;
+            if (child.validate != null) {
+                result = child.validate();
+            } else {
+                result = this._recurseValidate(child);
+            }
+            if (result != null) {
+                if (child.updateValidationStyle != null) {
+                    child.updateValidationStyle();
+                }
+                return result;
+            }
+        }
+        return null;
     };
 
     _defineUsedComponents() {

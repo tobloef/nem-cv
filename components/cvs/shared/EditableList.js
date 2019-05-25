@@ -6,7 +6,8 @@ export default class EditableList extends BaseComponent {
         "starting-amount",
         "separator",
         "item-attributes",
-        "button-diameter"
+        "button-diameter",
+        "name"
     ];
 
     get html() {
@@ -90,6 +91,19 @@ export default class EditableList extends BaseComponent {
         for (const item of content) {
             const element = this.addItem();
             element.setContent(item);
+        }
+    };
+
+    validate = () => {
+        const list = this.shadowRoot.getElementById("list");
+        if (list.childNodes.length === 0) {
+            if (this.name == null) {
+                return `En listes indhold er tomt.`;
+            } else {
+                return `Ingen ${this.name.toLowerCase()} tilføjet.`;
+            }
+        } else {
+            super.validate();
         }
     };
 
