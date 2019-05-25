@@ -107,7 +107,7 @@ export default class PageEditor extends BaseComponent {
     };
 
     setDefaultColors() {
-        const defaultColor = 4
+        const defaultColor = 0;
         setStorageItem("colors", {
             fontColor: templates[defaultColor].fontColor,
             backgroundColor: templates[defaultColor].backgroundColor,

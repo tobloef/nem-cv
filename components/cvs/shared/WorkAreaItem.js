@@ -32,7 +32,6 @@ export default class WorkAreaItem extends BaseComponent {
             this.updateStyles();
             addStorageItemListener("sectors", this.addOptions);
         }
-        this.updateValidationStyle();
     };
 
     getContent = () => {
