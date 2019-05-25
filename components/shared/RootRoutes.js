@@ -28,7 +28,7 @@ export default class RootRoutes extends BaseComponent {
         CVModern,
     ];
 
-    routes = [
+    routes = [ //list over available pages within the website
         {pattern: "^/?$", component: PageHome},
         {pattern: "^/templates$", component: PageTemplates},
         {pattern: "^/editor$", component: PageEditor},
@@ -46,7 +46,7 @@ export default class RootRoutes extends BaseComponent {
     ];
 
     script = () => {
-        Router.clear();
+        Router.clear(); //when starting, add all routes to the router
         for (const route of this.routes) {
             if (route.pattern == null) {
                 continue;
