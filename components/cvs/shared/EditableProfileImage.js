@@ -36,7 +36,9 @@ export default class EditableProfileImage extends BaseComponent {
 
     script = () => {
         this.image = this.shadowRoot.querySelector(".profile-picture");
-        this.image.addEventListener("click", this.onClick);
+        if (BaseComponent.editMode) {
+            this.image.addEventListener("click", this.onClick);
+        }
     };
 
     getContent = () => {
