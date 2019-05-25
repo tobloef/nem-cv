@@ -5,7 +5,8 @@ import templates from "../../lib/constants/templates.js";
 
 export default class CVPReview extends BaseComponent {
     usedComponents = [
-        ...(templates.map(t => t.class))
+        // Automatically add all CV template components
+        ...Object.keys(templates).map(t => templates[t].class)
     ];
 
     script = () => {

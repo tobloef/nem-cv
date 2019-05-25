@@ -113,6 +113,9 @@ export default class WorkAreaItem extends BaseComponent {
                 font-family: "Open Sans", sans-serif;
                 font-size: 1em;
             }
+            span {
+                cursor: pointer;
+            }
         `;
     }
 }

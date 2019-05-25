@@ -17,6 +17,7 @@ export default class PageEditor extends BaseComponent {
         SideBar,
         CustomButton,
         Logo,
+        // Automatically add all CV template components
         ...Object.keys(templates).map(t => templates[t].class)
     ];
 
@@ -72,6 +73,7 @@ export default class PageEditor extends BaseComponent {
             setStorageItem("colors", colors);
             BaseComponent.colors = colors;
             this.cv.render();
+            this.cv.updateStyles();
             sidebar.toggle();
         });
     }
