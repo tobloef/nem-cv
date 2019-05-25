@@ -5,7 +5,8 @@ import {validateObject} from "../../../lib/validation.js";
 export default class EditableProfileImage extends BaseComponent {
     static observedAttributes = [
         "aspect-ratio",
-        "src"
+        "src",
+        "weirdfix"
     ];
 
     // language=HTML
@@ -72,7 +73,8 @@ export default class EditableProfileImage extends BaseComponent {
         return `
             :host {
                 display: block;
-                max-height: 100%;   
+                max-height: 100%;
+                ${this.weirdfix || ""}
             }
             .square {
                 width: 100%;
