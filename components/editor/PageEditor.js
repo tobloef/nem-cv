@@ -45,13 +45,15 @@ export default class PageEditor extends BaseComponent {
     script = () => {
         this.checkForExistingCV();
 
-        BaseComponent.editMode = true;
+        BaseComponent.editMode = true; //since we are in the editor, turn editing on.
+        //if no cv is chosen, redirect to choose a cv
         if (getStorageItem("template") == null) {
             return Router.navigate(Router.prefix + "/templates");
         } else {
             this.changeCVType();
         }
 
+        //add the ability to toggle the sidebar
         const sidebar = this.shadowRoot.querySelector("side-bar");
         if (sidebar != null) {
             const settingsButton = this.shadowRoot.getElementById("settings-button");
@@ -60,6 +62,7 @@ export default class PageEditor extends BaseComponent {
             });
         }
 
+        //add custom event listener for when a template is selected
         this.addEventListener("select-click", (e) => {
             this.toggleSidebarIfNecessary();
             setStorageItem("template", e.detail);
@@ -67,10 +70,12 @@ export default class PageEditor extends BaseComponent {
             sidebar.toggle();
         });
 
+        //todo maybe we should either do something with this or remove the corresponding event
         this.addEventListener("example-click", (e) => {
             console.log("Example selected:", e.detail);
         });
 
+        //add custom event listener for when a color scheme is selected
         this.addEventListener("color-picked", (e) => {
             this.toggleSidebarIfNecessary();
             setStorageItem("colors", e.detail.colors);
@@ -109,7 +114,7 @@ export default class PageEditor extends BaseComponent {
     };
 
     setDefaultColors() {
-        const defaultColor = 0;
+        const defaultColor = 0; //should be an index of the list of color schemes found in editorDefinitions
         setStorageItem("colors", {
             fontColor: templates[defaultColor].fontColor,
             backgroundColor: templates[defaultColor].backgroundColor,

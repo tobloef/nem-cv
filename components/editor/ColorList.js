@@ -17,12 +17,14 @@ export default class ColorList extends BaseComponent {
 
     script = () => {
         this.empty();
-        for (const item of templates) {
+        for (const item of templates) { //create color picker buttons based on available templates
             const element = document.createElement(ColorHolder.elementName);
             element.setAttribute("font-color", item.fontColor);
             element.setAttribute("background-color", item.backgroundColor);
             element.setAttribute("accent-color", item.accentColor);
             element.setAttribute("extra-background-color", item.extraBackgroundColor);
+            //todo find out of the following should be deleted
+
             // element.addEventListener("resize", evt => {
             //     const elm = evt.target;
             //     const width = elm.style.width;
@@ -31,7 +33,7 @@ export default class ColorList extends BaseComponent {
             //     console.log(width);
             // });
             new ResizeObserver(() => {
-                // noinspection JSSuspiciousNameCombination
+                // noinspection JSSuspiciousNameCombination //todo maybe remove this comment, since it looks weird
                 element.style.height = element.clientWidth + "px";
                 element.resizeFont();
             }).observe(element);

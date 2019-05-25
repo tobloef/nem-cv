@@ -29,6 +29,7 @@ export default class LayoutDescriptor extends BaseComponent {
     }
 
     script = () => {
+        //add event listeners to the different buttons
         const selectButton = this.shadowRoot.getElementById("select");
         selectButton.addEventListener("click", () => {
             this.dispatchEvent(new CustomEvent("select-click", {bubbles: true, composed:true, detail: this.themeId}));

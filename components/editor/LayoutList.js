@@ -18,7 +18,7 @@ export default class LayoutList extends BaseComponent {
 
     script = () => {
         this.empty();
-        for (const key in layouts) {
+        for (const key in layouts) { //for every available layout, create a section with appropiate description, image and buttons
             const item = layouts[key];
             const element = document.createElement(LayoutDescriptor.elementName);
             element.setAttribute("theme-id", key);

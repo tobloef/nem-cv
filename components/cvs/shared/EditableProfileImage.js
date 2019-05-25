@@ -27,6 +27,7 @@ export default class EditableProfileImage extends BaseComponent {
 
     script = () => {
         this.image = this.shadowRoot.querySelector(".profile-picture");
+        //if we are currently editing, add the capability to change the image by clicking on it
         if (BaseComponent.editMode) {
             this.image.addEventListener("click", this.onClick);
         }
@@ -51,16 +52,16 @@ export default class EditableProfileImage extends BaseComponent {
 
     validate = (url) => {
         url = url || this.image.src;
-        if (url.includes(this.getPlaceholder())) {
+        if (url.includes(this.getPlaceholder())) { //if the contents are the same as the placeholder, it is invalid
             return "Du mangler et profilbillede."
         }
-        if (!validateObject(url, "url") || url.endsWith("/null")) {
+        if (!validateObject(url, "url") || url.endsWith("/null")) { //validate if the given url is actually a url
             return "Den indtastede URL for profilbilledet er ugyldigt."
         }
         return null;
     };
 
-    updateValidationStyle = () => {
+    updateValidationStyle = () => { //makes the image signify that there is an error with it.
         if (this.validate() != null) {
             this.image.classList.add("error");
         } else {

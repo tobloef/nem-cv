@@ -20,6 +20,7 @@ export default class ColorHolder extends BaseComponent {
     }
 
     script = () => {
+        //alerts that the color scheme has been changed through a custom event
         const div = this.shadowRoot.querySelector("#outer");
         div.addEventListener("click", evt => {
             evt.preventDefault();
