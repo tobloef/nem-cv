@@ -15,7 +15,7 @@ export default class ExperienceItem extends BaseComponent {
     get html() {
         return `
             <div content-type="object" class="container">
-                <span class="divider where" part="left">
+                <span class="divider where">
                     <${EditableText.elementName}
                             placeholder="${this.experienceType}"
                             element="div"
@@ -66,6 +66,9 @@ export default class ExperienceItem extends BaseComponent {
             }
             button {
                 display: inline;
+            }
+            .where {
+                padding-right: 3em;
             }
         `
     };
