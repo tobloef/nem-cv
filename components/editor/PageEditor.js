@@ -6,7 +6,7 @@ import NavBar from "../shared/NavBar.js";
 import CVSimple from "../cvs/CVSimple.js";
 import CVModern from "../cvs/CVModern.js";
 import CVOctagon from "../cvs/CVOctagon.js";
-import {layouts} from "../../constants/editor-definitions.js";
+import {layouts, templates} from "../../constants/editor-definitions.js";
 import CustomButton from "../shared/CustomButton.js";
 import Logo from "../shared/Logo.js";
 import {postCV} from "../../lib/api.js";
@@ -97,7 +97,19 @@ export default class PageEditor extends BaseComponent {
             // TODO: Navigate to preview page
             alert("Dit CV blev gemt");
         });
+        this.setDefaultColors();
     };
+
+    setDefaultColors() {
+        const defaultColor = 4
+        setStorageItem("colors", {
+            fontColor: templates[defaultColor].fontColor,
+            backgroundColor: templates[defaultColor].backgroundColor,
+            accentColor: templates[defaultColor].accentColor,
+            extraBackgroundColor: templates[defaultColor].extraBackgroundColor
+        });
+        this.changeColors();
+    }
 
     checkForExistingCV = () => {
         if (getStorageItem("cv-content") == null && getStorageItem("template") == null) {

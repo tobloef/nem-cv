@@ -30,7 +30,8 @@ export default class ColorHolder extends BaseComponent {
                     colors: {
                         fontColor: this.fontColor,
                         backgroundColor: this.backgroundColor,
-                        accentColor: this.accentColor
+                        accentColor: this.accentColor,
+                        extraBackgroundColor: this.extraBackgroundColor
                     }
                 }
             }));

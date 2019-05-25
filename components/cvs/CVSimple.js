@@ -75,7 +75,8 @@ export default class CVSimple extends AbstractCV {
     script = () => {
         BaseComponent.template = simple;
         BaseComponent.colors = colors;
-        this.colors = JSON.parse(getStorageItem("grp2_colors"));
+        this.colors = getStorageItem("colors");
+        console.log(this.colors);
     };
 
         educationWhereSeparator = ", ";
@@ -86,7 +87,7 @@ export default class CVSimple extends AbstractCV {
         return `
             body {
                 margin: 0;
-                color: ${"black" || this.colors.fontColor};
+                color: ${this.colors.fontColor};
             }
             li {
                 user-select: none;
@@ -105,7 +106,6 @@ export default class CVSimple extends AbstractCV {
             }
 
             .other {
-                background-color: lightgray;
                 width: 100%;
             }
             .other section {
@@ -113,16 +113,16 @@ export default class CVSimple extends AbstractCV {
             }
             .other section h1 {
                 font-family: var(--h1);
+                color: ${this.colors.fontColor};
                 font-size: var(--h1-size);
-                color: var(--font);
                 margin-bottom: 0.5em;
                 margin-left: -2px;
             }
             .education {
-                background-color: ${"gray" || this.colors.accentColor};
+                background-color: ${this.colors.extraBackgroundColor};
             }
             .experience {
-                background-color: rebeccapurple;
+                background-color: ${this.colors.accentColor};
             }
 
             .education, .experience {
@@ -181,7 +181,8 @@ export default class CVSimple extends AbstractCV {
                 }
                 
                 intro-box {
-                min-width: 500px;
+                    min-width: 500px;
+                    min-height: 100vh;
                 }
                 
                 .other section {
