@@ -9,7 +9,7 @@ import Router from "../../lib/Router.js";
 import CVModern from "../cvs/CVModern.js";
 import CVSimple from "../cvs/CVSimple.js";
 import CVOctagon from "../cvs/CVOctagon.js";
-import CVPReview from "../cv-preview/CVPReview.js";
+import CVPReview from "../preview/CVPReview.js";
 
 export default class RootRoutes extends BaseComponent {
     usedComponents = [

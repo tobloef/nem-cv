@@ -143,6 +143,7 @@ export default class EditableText extends BaseComponent {
             :host {
                 display: flex;
                 align-items:center;
+                cursor: pointer;
             }
             
             .error {

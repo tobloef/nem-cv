@@ -1,8 +1,8 @@
 import {classNameToElementName, kebabToCamelCase} from "../lib/string-utils.js";
 import {resetCSSStyleSheet} from "../lib/constants/reset-css.js";
 import {colorsToStyleSheet, stringToStyleSheet} from "../lib/stylesheet-utils.js";
-import templateStyles from "../lib/constants/template-styles.js";
-import colors from "../lib/constants/colors.js";
+import templateStyles, {getDefaultTemplateId} from "../lib/constants/template-styles.js";
+import {getDefaultColors} from "../lib/constants/colors.js";
 
 export default class BaseComponent extends HTMLElement {
     static templateId = null;
@@ -52,19 +52,21 @@ export default class BaseComponent extends HTMLElement {
         // Colors
         let colorScheme = BaseComponent.colors;
         if (colorScheme == null) {
-            colorScheme = colors[0];
+            colorScheme = getDefaultColors();
         }
         const colorsStyleSheet = colorsToStyleSheet(colorScheme);
         if (colorsStyleSheet != null) {
             styleSheets.push(colorsStyleSheet);
         }
         // Template
-        if (BaseComponent.templateId != null) {
-            const template = templateStyles[BaseComponent.templateId];
-            if (template != null) {
-                const templateStyleSheet = stringToStyleSheet(template.css);
-                styleSheets.push(templateStyleSheet);
-            }
+        let templateId = BaseComponent.templateId;
+        if (BaseComponent.templateId == null) {
+            templateId = getDefaultTemplateId();
+        }
+        const template = templateStyles[templateId];
+        if (template != null) {
+            const templateStyleSheet = stringToStyleSheet(template.css);
+            styleSheets.push(templateStyleSheet);
         }
         // Component style
         if (this.css != null) {
@@ -130,7 +132,6 @@ export default class BaseComponent extends HTMLElement {
     };
 
     _recurseSetContent(content, element) {
-        console.debug("Setting content", content, "on children of", element);
         for (const child of element.children) {
             const key = child.getAttribute("content-key");
             if (key != null) {
