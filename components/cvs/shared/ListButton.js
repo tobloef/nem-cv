@@ -1,5 +1,5 @@
 import BaseComponent from "../../BaseComponent.js";
-import {getPath} from "../../../constants/paths.js";
+import paths from "../../../lib/constants/paths.js";
 
 export default class ListButton extends BaseComponent {
     static observedAttributes = [
@@ -11,7 +11,7 @@ export default class ListButton extends BaseComponent {
     // language=HTML
     get html() {
         return `
-            <img id="button" part="button" src="${getPath(this.icon)}"></button>
+            <img id="button" part="button" src="${paths[this.icon]}"></button>
         `;
     }
 

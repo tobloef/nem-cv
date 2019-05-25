@@ -1,13 +1,9 @@
-import BaseComponent from "../BaseComponent.js";
 import IntroBox from "./shared/IntroBox.js";
-import simple from "./templates/simple.js";
-import colors from "./templates/colors.js";
 import EditableList from "./shared/EditableList.js";
 import ExperienceItem from "./shared/ExperienceItem.js";
 import WorkAreaItem from "./shared/WorkAreaItem.js";
 import ListButton from "./shared/ListButton.js";
 import AbstractCV from "./AbstractCV.js";
-import {getStorageItem} from "../../lib/storage-helper.js";
 
 export default class CVSimple extends AbstractCV {
     usedComponents = [
@@ -17,8 +13,6 @@ export default class CVSimple extends AbstractCV {
         ListButton,
         EditableList
     ];
-
-    colors = null;
 
     // language=HTML
     get html() {
@@ -75,22 +69,19 @@ export default class CVSimple extends AbstractCV {
         `;
     }
 
-    script = () => {
-        BaseComponent.template = simple;
-        BaseComponent.colors = colors;
-        this.colors = getStorageItem("colors");
-        console.log(this.colors);
-    };
-
-        educationWhereSeparator = ", ";
-        experienceWhereSeparator = ", ";
+    educationWhereSeparator = ", ";
+    experienceWhereSeparator = ", ";
 
     // language=CSS
     get css() {
         return `
+            * {
+                background-color: var(--background-color);
+            }
+            
             body {
                 margin: 0;
-                color: ${this.colors.fontColor};
+                color: var(--font-color);
             }
             li {
                 user-select: none;
@@ -115,17 +106,17 @@ export default class CVSimple extends AbstractCV {
                 min-height: 50vh;
             }
             .other section h1 {
-                font-family: var(--h1);
-                color: ${this.colors.fontColor};
+                font-family: var(--h1),sans-serif;
+                color: var(--font-color);
                 font-size: var(--h1-size);
                 margin-bottom: 0.5em;
                 margin-left: -2px;
             }
             .education {
-                background-color: ${this.colors.extraBackgroundColor};
+                background-color: var(--extra-background-color);
             }
             .experience {
-                background-color: ${this.colors.accentColor};
+                background-color: var(--accent-color);
             }
 
             .education, .experience {
@@ -141,7 +132,7 @@ export default class CVSimple extends AbstractCV {
             }
             ${EditableList.elementName}::part(list-item) {
                 margin-bottom: 0.8em;
-                font-family: var(--p);
+                font-family: var(--p),sans-serif;
                 flex-direction: row-reverse;    
             }
 

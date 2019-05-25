@@ -1,15 +1,13 @@
-"use strict";
-
 import {classNameToElementName, kebabToCamelCase} from "../lib/string-utils.js";
-import {resetCSSStyleSheet} from "../lib/reset-css.js";
-import {stringToStyleSheet} from "../lib/stylesheet-utils.js";
+import {resetCSSStyleSheet} from "../lib/constants/reset-css.js";
+import {colorsToStyleSheet, stringToStyleSheet} from "../lib/stylesheet-utils.js";
+import templateStyles from "../lib/constants/template-styles.js";
+import colors from "../lib/constants/colors.js";
 
 export default class BaseComponent extends HTMLElement {
-    static template = null;
+    static templateId = null;
     static colors = null;
     static editMode = false;
-
-    enableResetCSS = true;
 
     constructor() {
         super();
@@ -49,18 +47,31 @@ export default class BaseComponent extends HTMLElement {
     updateStyles() {
         console.debug(`Updating styles of ${this.constructor.name}`);
         const styleSheets = [];
-        if (this.enableResetCSS != null) {
-            styleSheets.push(resetCSSStyleSheet);
+        // Reset CSS
+        styleSheets.push(resetCSSStyleSheet);
+        // Colors
+        let colorScheme = BaseComponent.colors;
+        if (colorScheme == null) {
+            colorScheme = colors[0];
         }
-        if (BaseComponent.colors != null) {
-            styleSheets.push(BaseComponent.colors);
+        const colorsStyleSheet = colorsToStyleSheet(colorScheme);
+        if (colorsStyleSheet != null) {
+            styleSheets.push(colorsStyleSheet);
         }
-        if (BaseComponent.template != null) {
-            styleSheets.push(BaseComponent.template);
+        // Template
+        if (BaseComponent.templateId != null) {
+            const template = templateStyles[BaseComponent.templateId];
+            if (template != null) {
+                const templateStyleSheet = stringToStyleSheet(template.css);
+                styleSheets.push(templateStyleSheet);
+            }
         }
+        // Component style
         if (this.css != null) {
-            styleSheets.push(stringToStyleSheet(this.css));
+            const styleSheet = stringToStyleSheet(this.css);
+            styleSheets.push(styleSheet);
         }
+        // Set stylesheets
         this.shadowRoot.adoptedStyleSheets = styleSheets;
     };
 
@@ -102,10 +113,8 @@ export default class BaseComponent extends HTMLElement {
                     if (ignoreIfNull != null && newContent == null) {
                         continue;
                     }
-                    //console.log(this.constructor.name, "Setting", contentKey, "to", newContent, "on", content);
                     content[contentKey] = newContent;
                 } else if (content.push != null) {
-                    //console.log(this.constructor.name, "Pushing", newContent, "into", content);
                     content.push(newContent);
                 }
             } else if (child.getContent != null) {
@@ -182,30 +191,6 @@ export default class BaseComponent extends HTMLElement {
             }
         }
     };
-
-    static get template() {
-        return BaseComponent.template;
-    }
-
-    static set template(value) {
-        if ((typeof value) === "string") {
-            BaseComponent.template = stringToStyleSheet(value);
-        } else {
-            BaseComponent.template = value;
-        }
-    }
-
-    static get colors() {
-        return BaseComponent.colors;
-    }
-
-    static set colors(value) {
-        if ((typeof value) === "string") {
-            BaseComponent.colors = stringToStyleSheet(value);
-        } else {
-            BaseComponent.colors = value;
-        }
-    }
 
     static get elementName() {
         return classNameToElementName(this.name);

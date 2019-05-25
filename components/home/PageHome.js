@@ -354,7 +354,7 @@ export default class PageHome extends BaseComponent {
 
     _handleRotateColorWheel() {
         const wheel = this.shadowRoot.querySelector(".color-wheel");
-        document.addEventListener('scroll', evt => {
+        document.addEventListener('scroll', e => {
             const angle = (window.pageYOffset / 7) % 360;
             wheel.style.transform = `rotate(${angle}deg)`;
         })

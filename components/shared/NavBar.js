@@ -24,9 +24,9 @@ export default class NavBar extends BaseComponent {
         const button = this.shadowRoot.querySelector("custom-button");
         if (this.noButton == null) {
             if (this.buttonHref != null) {
-                button.addEventListener("click", (evt) => {
-                    evt.preventDefault();
-                    Router.navigate(Router.prefix + this.buttonHref);
+                button.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    Router.navigate(this.buttonHref);
                 });
             }
         } else {

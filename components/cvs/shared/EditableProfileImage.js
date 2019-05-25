@@ -1,6 +1,6 @@
 import BaseComponent from "../../BaseComponent.js";
-import {getPath} from "../../../constants/paths.js";
 import {validateObject} from "../../../lib/validation.js";
+import paths from "../../../lib/constants/paths.js";
 
 export default class EditableProfileImage extends BaseComponent {
     static observedAttributes = [
@@ -33,7 +33,7 @@ export default class EditableProfileImage extends BaseComponent {
     };
 
     getPlaceholder = () => {
-        return getPath("placeholder-person");
+        return paths["placeholder-person"];
     };
 
     getContent = () => {

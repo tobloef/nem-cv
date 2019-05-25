@@ -2,7 +2,7 @@ import BaseComponent from "../BaseComponent.js";
 import RouterLink from "../shared/RouterLink.js";
 import CustomButton from "../shared/CustomButton.js";
 import wait from "../../lib/wait.js";
-import {getPath} from "../../constants/paths.js";
+import paths from "../../lib/constants/paths.js";
 
 
 export default class HomeHeader extends BaseComponent {
@@ -17,7 +17,7 @@ export default class HomeHeader extends BaseComponent {
                 <div class="fakecv clip">
                     <div class="image-row">
                         <div class="image-container">
-                            <img alt="Kvinde" src="${getPath("landing-page-person")}"/>
+                            <img alt="Kvinde" src="${paths["landing-page-person"]}"/>
                             <div class="image-bg"></div>
                         </div>
                         <div class="fake-content-title">
@@ -79,7 +79,7 @@ export default class HomeHeader extends BaseComponent {
                 </div>
 
                 <div class="background-container">
-                    <img alt="Kvinde" class="background" src="${getPath("landing-page-person")}"/>
+                    <img alt="Kvinde" class="background" src="${paths["landing-page-person"]}"/>
                 </div>
             </header>
         `;
