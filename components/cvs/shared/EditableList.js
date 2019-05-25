@@ -1,6 +1,6 @@
 import BaseComponent from "../../BaseComponent.js";
 
-export default class AppendableComponentList extends BaseComponent {
+export default class EditableList extends BaseComponent {
     static observedAttributes = [
         "item-component",
         "starting-amount",

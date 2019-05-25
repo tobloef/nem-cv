@@ -1,11 +1,22 @@
 import BaseComponent from "../BaseComponent.js";
-import ProfileImage from "./shared/ProfileImage.js";
+import EditableProfileImage from "./shared/EditableProfileImage.js";
+import WorkAreaItem from "./shared/WorkAreaItem.js";
+import EditableList from "./shared/EditableList.js";
+import EditableText from "./shared/EditableText.js";
+import ListButton from "./shared/ListButton.js";
+import ExperienceItem from "./shared/ExperienceItem.js";
+import AbstractCV from "./AbstractCV.js";
 
-export default class CVModern extends BaseComponent {
+export default class CVModern extends AbstractCV {
     static observedAttributes = [];
 
     usedComponents = [
-        ProfileImage
+        EditableProfileImage,
+        WorkAreaItem,
+        EditableList,
+        EditableText,
+        ListButton,
+        ExperienceItem
     ];
 
 
@@ -15,41 +26,41 @@ export default class CVModern extends BaseComponent {
         return `
             <header>
                 <div class="left">
-                    <profile-image class="image" aspect-ratio="1.5"></profile-image>
+                    <${EditableProfileImage.elementName} class="image" aspect-ratio="1.5"></${EditableProfileImage.elementName}>
                 </div>
                 <div class = "right">
-                    <editable-component
+                    <${EditableText.elementName}
                             content-key="name"
                             content-type="component"
                             class="name"
                             placeholder="Dit fulde navn"
                             element="h1">
-                    </editable-component>
+                    </${EditableText.elementName}>
                     <div class="color1"></div>
                     <ul class="listinfo">
                         <li class="age">
-                            <editable-component
+                            <${EditableText.elementName}
                                     content-key="age"
                                     content-type="component"
                                     placeholder="Din alder"
                                     element="div">
-                            </editable-component>
+                            </${EditableText.elementName}>
                         </li>
                         <li class="city">
-                            <editable-component
+                            <${EditableText.elementName}
                                     content-key="city"
                                     content-type="component"
                                     placeholder="Din by"
                                     element="div"
-                            ></editable-component>
+                            ></${EditableText.elementName}>
                         </li>
                         <li class="email">
-                            <editable-component
+                            <${EditableText.elementName}
                                     placeholder="Din email"
                                     element="div"
                                     content-key="email"
                                     content-type="component"
-                            ></editable-component>
+                            ></${EditableText.elementName}>
                         </li>
                     </ul>
                 </div>
@@ -58,59 +69,66 @@ export default class CVModern extends BaseComponent {
             <section class="about">
                 <div class="content">
                         <h2 class="aboutme">OM MIG</h2>
-                        <p class="text">Lorem ipsum dolor sit amet, 
-                            consectetur adipiscing elit, sed do eiusmod 
-                            tempor incididunt ut labore et dolore magna 
-                            aliqua. Ut enim ad minim veniam, quis nostrud 
-                            exercitation ullamco laboris nisi ut aliquip 
-                            ex ea commodo consequat. Duis aute irure dolor 
-                            in reprehenderit in voluptate velit esse cillum 
-                            dolore eu fugiat nulla pariatur. 
-                        </p>
+                        <${EditableText.elementName}
+                                class="description"
+                                element="p"
+                                content-key="description"
+                                content-type="component"
+                                multiline
+                                placeholder="Her kan du skrive en kort beskrivelse af dig selv.">
+                        </${EditableText.elementName}>
                         <h2 class="workareas">BRANCHER</h2>
-                        <ul class = "listindustry">
-                            <li>1</li>
-                            <li>2</li>
-                            <li>3</li>
-                        </ul>
+                        <${EditableList.elementName}
+                            id="sector-list"
+                            content-key="sectors"
+                            content-type="array"
+                            class="work-areas"
+                            item-component="${WorkAreaItem.elementName}"
+                            separator=", "
+                            starting-amount="1"
+                        >
+                            <list-button icon="add" slot="append-button"></list-button>
+                            <list-button icon="remove" slot="remove-button"></list-button>
+                        </${EditableList.elementName}>
                 </div>
             </section>
             
             <section class="education">
                 <div class="content">
                     <h2 class="educationtitle">UDDANNELSE</h2>
-                    <div class = "educations">
-                        <div class = "oneeducation">
-                            <div class="left1">
-                                <p class="year">2018-2019</p> 
-                            </div>
-                            <div class = "right1">
-                                <p class="place">IT Universitetet</p>
-                                <p class="title">Softwareudvikling</p>
-                            </div>
-                        </div>
-                    </div>
+                    <${EditableList.elementName}
+                            id="education-list"
+                            content-key="education"
+                            content-type="array"
+                            item-component="${ExperienceItem.elementName}" 
+                            starting-amount="1"
+                        >
+                            <list-button icon="add" slot="append-button"></list-button>
+                            <list-button icon="remove" slot="remove-button"></list-button>  
+                    </${EditableList.elementName}>
                 </div>
             </section>
             
             <section class="experience">
                 <div class="content">
                     <h2 class="experiencetitle">ERFARING</h2>
-                    <div class="experiences">
-                        <div class="oneexperience">
-                            <div class="left2">
-                                <p class = "place">Arbejdsplads</p>
-                                <p class = "title">Beskrivelse</p>
-                            </div>
-                            <div class="right2">
-                                <p class = "year">2019-2019</p>
-                            </div>
-                        </div>
-                    </div>
+                    <${EditableList.elementName}
+                            id="experience-list"
+                            content-key="employers"
+                            content-type="array"
+                            item-component="${ExperienceItem.elementName}" 
+                            starting-amount="1"
+                        >
+                            <list-button icon="add" slot="append-button"></list-button>
+                            <list-button icon="remove" slot="remove-button"></list-button>
+                        </${EditableList.elementName}>
                 </div>
             </section>
         `;
     }
+
+    educationWhereSeparator = ", ";
+    experienceWhereSeparator = ", ";
 
     script = () => {
 
@@ -152,6 +170,7 @@ export default class CVModern extends BaseComponent {
 
            .image {
                 max-width: 400px;
+               max-height: 100%;
             }
 
             .about {
@@ -259,7 +278,7 @@ export default class CVModern extends BaseComponent {
                 font-size: 0.7em;
             }
 
-            .educations {
+            #education-list {
                 margin-left: auto;
                 margin-right: auto;
                 width: 100%;
@@ -273,7 +292,7 @@ export default class CVModern extends BaseComponent {
                 padding: 5px;
             }
 
-            .experiences {
+            #experience-list {
                 transform: translateX(15%);
             }
 

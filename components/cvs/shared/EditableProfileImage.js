@@ -1,7 +1,7 @@
 import BaseComponent from "../../BaseComponent.js";
 import {getPath} from "../../../lib/paths.js";
 
-export default class ProfileImage extends BaseComponent {
+export default class EditableProfileImage extends BaseComponent {
     static observedAttributes = [
         "aspect-ratio",
         "src"
@@ -44,7 +44,7 @@ export default class ProfileImage extends BaseComponent {
     };
 
     setContent = (content) => {
-        this.setAttribute("src", content);
+        this.setAttribute("src", content || getPath("placeholder-person"));
         this.render();
     };
 
@@ -57,6 +57,7 @@ export default class ProfileImage extends BaseComponent {
             .square {
                 width: 100%;
                 height: 100%;
+                max-height: 100%;
                 position: relative;
                 display: block;
             }
@@ -69,6 +70,7 @@ export default class ProfileImage extends BaseComponent {
                 position: absolute;
                 width: 100%;
                 height: 100%;
+                max-height: 100%;
                 object-fit: cover;
             }
         `

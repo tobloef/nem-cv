@@ -1,6 +1,6 @@
 import BaseComponent from "../../BaseComponent.js";
 
-export default class EditableComponent extends BaseComponent {
+export default class EditableText extends BaseComponent {
     node = null;
 
     static observedAttributes = [
@@ -86,9 +86,10 @@ export default class EditableComponent extends BaseComponent {
     };
 
     setContent = (content) => {
-        this.node.innerText = (content || "");
-        if (this.node.innerText !== "") {
+        this.node.innerText = (content || this.placeholder);
+        if (this.node.innerText !== this.placeholder) {
             this.node.classList.remove("empty-text");
+
         }
     };
 
