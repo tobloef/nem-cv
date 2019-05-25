@@ -55,6 +55,7 @@ export default class EditableProfileImage extends BaseComponent {
         return `
             :host {
                 display: block;
+                max-height: 100%;   
             }
             .square {
                 width: 100%;
