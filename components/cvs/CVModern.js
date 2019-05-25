@@ -284,18 +284,17 @@ export default class CVModern extends AbstractCV {
                 font-size: 0.7em;
             }
             
+            .education .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            }
+            
             #education-list {
-                margin-left: auto;
-                margin-right: auto;
                 width: 100%;
-                max-width: 30%;
+                max-width: 40%;
                 display: flex;
                 justify-content: center;
-            }
-            #education-list::part(container) {
-                max-width: 30%;
-            }
-            #education-list::part(list-item) {
             }
             
             .oneeducation {

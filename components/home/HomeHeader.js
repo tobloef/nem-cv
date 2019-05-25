@@ -179,7 +179,7 @@ export default class HomeHeader extends BaseComponent {
             .image-container {
                 overflow: hidden;
                 width: 100%;
-                height: 300px;
+                height: var(--image-height);
 
                 display: flex;
                 justify-content: center;
@@ -396,6 +396,17 @@ export default class HomeHeader extends BaseComponent {
                 .infobox {
                     --infobox-large-left-margin: 75px;
                     max-width: 500px;
+                }
+            }
+
+            @media(min-height: 1000px) {
+                :host {
+                    --image-extra-top-offset: 30px;
+                    --top-padding: 30px;
+                }
+
+                .fakecv {
+                    --image-height: 500px;
                 }
             }
         `;
