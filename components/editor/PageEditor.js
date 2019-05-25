@@ -43,6 +43,8 @@ export default class PageEditor extends BaseComponent {
     };
 
     script = () => {
+        this.checkForExistingCV();
+
         BaseComponent.editMode = true;
         if (getStorageItem("template") == null) {
             return Router.navigate(Router.prefix + "/templates");
@@ -96,6 +98,16 @@ export default class PageEditor extends BaseComponent {
             alert("Dit CV blev gemt");
         });
     };
+
+    checkForExistingCV = () => {
+        if (getStorageItem("cv-content") == null && getStorageItem("template") == null) {
+            return;
+        }
+        if (!confirm("Der blev fundet et eksisterende CV fra tidligere brug. Ønsker du at bruge dette?")) {
+            localStorage.clear();
+        }
+    };
+
 
     toggleSidebarIfNecessary = () => {
         const width = document.documentElement.clientWidth;

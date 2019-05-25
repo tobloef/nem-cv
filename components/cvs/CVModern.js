@@ -21,16 +21,19 @@ export default class CVModern extends AbstractCV {
     ];
 
 
-
     // language=HTML
     get html() {
         return `
             <header>
                 <div class="left">
-                    <${EditableProfileImage.elementName} class="image" aspect-ratio="1.5"></${EditableProfileImage.elementName}>
+                    <${EditableProfileImage.elementName}
+                        class="image"
+                        aspect-ratio="1.5">
+                    </${EditableProfileImage.elementName}>
                 </div>
                 <div class = "right">
                     <${EditableText.elementName}
+                            validate-type="string"
                             content-key="name"
                             content-type="component"
                             class="name"
@@ -41,6 +44,7 @@ export default class CVModern extends AbstractCV {
                     <ul class="listinfo">
                         <li class="age">
                             <${EditableText.elementName}
+                                    validate-type="number"
                                     content-key="age"
                                     content-type="component"
                                     placeholder="Din alder"
@@ -49,6 +53,7 @@ export default class CVModern extends AbstractCV {
                         </li>
                         <li class="city">
                             <${EditableText.elementName}
+                                    validate-type="string"
                                     content-key="city"
                                     content-type="component"
                                     placeholder="Din by"
@@ -57,6 +62,7 @@ export default class CVModern extends AbstractCV {
                         </li>
                         <li class="email">
                             <${EditableText.elementName}
+                                    validate-type="email"
                                     placeholder="Din email"
                                     element="div"
                                     content-key="email"
@@ -72,6 +78,7 @@ export default class CVModern extends AbstractCV {
                         <h2 class="aboutme">OM MIG</h2>
                         <${EditableText.elementName}
                                 class="description"
+                                validate-type="string"
                                 element="p"
                                 content-key="description"
                                 content-type="component"
@@ -134,8 +141,6 @@ export default class CVModern extends AbstractCV {
     script = () => {
         BaseComponent.template = modern;
     };
-
-    externalStyles = [];
 
     // language=CSS
     get css() {

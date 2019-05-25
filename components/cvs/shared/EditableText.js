@@ -1,4 +1,5 @@
 import BaseComponent from "../../BaseComponent.js";
+import {validate} from "../../../lib/validation.js";
 
 export default class EditableText extends BaseComponent {
     node = null;
@@ -7,6 +8,7 @@ export default class EditableText extends BaseComponent {
         "placeholder",
         "element",
         "multiline",
+        "validate-type"
     ];
 
     // language=HTML
@@ -42,7 +44,7 @@ export default class EditableText extends BaseComponent {
         }
     };
 
-    onFocus = () => {
+    onFocus = (e) => {
         this.node.classList.remove("empty-text");
         this.node.style.minWidth = this.node.getBoundingClientRect().width + "px";
         if (this.node.innerText === this.placeholder) {
@@ -52,12 +54,13 @@ export default class EditableText extends BaseComponent {
         }
     };
 
-    focusOut = () => {
+    focusOut = (e) => {
         this.node.style.minWidth = "0";
         if (this.node.innerText === "") {
             this.node.innerText = this.placeholder;
             this.node.classList.add("empty-text");
         }
+        this.validate();
     };
 
     keyPress = (e) => {
@@ -67,6 +70,22 @@ export default class EditableText extends BaseComponent {
         if (e.key === "Enter" && !this.multiline) {
             e.preventDefault();
             this.node.blur();
+        }
+    };
+
+    validate = () => {
+        if (this.validateType == null || this.validateType === "") {
+            return;
+        }
+        const content = this.node.innerText;
+        if (content === this.placeholder) {
+            return null;
+        }
+        const isValid = validate(content, this.validateType);
+        if (!isValid) {
+            this.node.classList.add("error");
+        } else {
+            this.node.classList.remove("error");
         }
     };
 
@@ -89,6 +108,9 @@ export default class EditableText extends BaseComponent {
         if (content === "") {
             return null;
         }
+        if (content === this.placeholder) {
+            return null;
+        }
         return content;
     };
 
@@ -108,6 +130,17 @@ export default class EditableText extends BaseComponent {
             }
             :host {
                 display: flex;
+                align-items:center;
+            }
+            
+            .error {
+                background: rgba(255, 0, 0, 0.15);
+                text-decoration: underline;
+                text-decoration-color: red;
+                
+                /*border: 1.5px solid red;
+                border-radius: 3px;
+                padding: 3px 5px;*/
             }
         `
     };

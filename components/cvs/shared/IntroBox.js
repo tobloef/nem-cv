@@ -16,8 +16,13 @@ export default class IntroBox extends BaseComponent {
     get html() {
         return `
             <section class="introbox">
-                <${EditableProfileImage.elementName} aspect-ratio="1" content-key="picture" content-type="component"></${EditableProfileImage.elementName}>
+                <${EditableProfileImage.elementName}
+                    aspect-ratio="1"
+                    content-key="picture"
+                    content-type="component">
+                </${EditableProfileImage.elementName}>
                 <${EditableText.elementName}
+                                validate-type="string"
                                 content-key="name"
                                 content-type="component"
                                 class="name"
@@ -27,6 +32,7 @@ export default class IntroBox extends BaseComponent {
                 <ul class="facts">
                     <li class="age">
                         <${EditableText.elementName}
+                                validate-type="number"
                                 content-key="age"
                                 content-type="component"
                                 placeholder="Din alder"
@@ -35,6 +41,7 @@ export default class IntroBox extends BaseComponent {
                     </li>
                     <li class="city">
                         <${EditableText.elementName}
+                                validate-type="string"
                                 content-key="city"
                                 content-type="component"        
                                 placeholder="Din by"
@@ -43,6 +50,7 @@ export default class IntroBox extends BaseComponent {
                     </li>
                     <li class="email">
                         <${EditableText.elementName}
+                                validate-type="email"
                                 placeholder="Din email" 
                                 element="div"
                                 content-key="email"
@@ -52,6 +60,7 @@ export default class IntroBox extends BaseComponent {
                 </ul>
                 <h1 class="s-h1">Om mig</h1>
                 <${EditableText.elementName}
+                                validate-type="string"
                                 class="description"
                                 element="p"
                                 content-key="description"
