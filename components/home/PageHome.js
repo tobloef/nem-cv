@@ -207,7 +207,16 @@ export default class PageHome extends BaseComponent {
                 </div>
             </section>
             <footer>
-                <p>This is a footer</p>
+                <div class="wrapper">
+                    <div class="left">
+                        <logo-></logo->
+                        <p>Rued Langgaards Vej 7, 2300 København S</p>
+                    </div>
+
+                    <div class="right">
+                        <p>Denne hjemmeside er udarbejdet i forbindelse med eksamen i Systematisk Design af Brugergrænseflader på IT universitetet i København, og repræsentere derfor ikke en rigtig virksomhed.</p>
+                    </div>
+                </div>
             </footer>
         `;
     }
@@ -310,13 +319,31 @@ export default class PageHome extends BaseComponent {
            section.cta custom-button {
                display: inline-block;
                font-size: 1.5em;
-
            }
 
            footer {
                background-color: black;
                color: white;
-               padding: 60px;
+               display: flex;
+               justify-content: center;
+               padding: 30px;
+           }
+
+           footer .wrapper {
+               display: flex;
+               width: 100%;
+               max-width: 1100px;
+               flex-direction: column;
+           }
+
+           footer logo- {
+               display: flex;
+               margin-bottom: 5px;
+           }
+
+           footer p {
+               line-height: 1.3;
+               margin-bottom: 10px;
            }
 
            @media(min-width: 400px) {
@@ -348,6 +375,21 @@ export default class PageHome extends BaseComponent {
                section.cta custom-button {
                    display: inline-block;
                    font-size: 2em;
+               }
+
+               footer {
+                   padding: 60px;
+               }
+
+               footer .wrapper {
+                   flex-direction: row;
+                   justify-content: space-between;
+               }
+
+               footer .left,
+               footer .right {
+                   flex: 1;
+                   max-width: 400px;
                }
            }
 
