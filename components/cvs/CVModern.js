@@ -150,7 +150,8 @@ export default class CVModern extends AbstractCV {
         return `            
             :host{
                 font-family: 'Open Sans', sans-serif;
-                background-color: #F6F5EE;
+                background-color: var(--background-color);
+                color: var(--font-color);
                 display: block;
             }
             
@@ -245,7 +246,7 @@ export default class CVModern extends AbstractCV {
             
             .color1 {
                 height: 80px;
-                background-color: #302f2d;
+                background-color: var(--accent-color);
                 position: relative;
                 margin-bottom: 30px;
             }
@@ -253,19 +254,19 @@ export default class CVModern extends AbstractCV {
             .about .content {
                 padding: 50px;
                 max-width: 40%;
-                background-color: #E4E3D9;
+                background-color: var(--extra-background-color);
             }
             
             .experience .content{
                 padding: 50px;
                 max-width: 40%;
-                background-color: #E4E3D9;
+                background-color: var(--extra-background-color);
             }
             
             .color3 {
                 height: 200px;
                 width: 300px;
-                background-color: #E4E3D9;
+                background-color: var(--extra-background-color);
                 position: relative;
             }
             
@@ -325,9 +326,6 @@ export default class CVModern extends AbstractCV {
 
             
             @media(max-width: 800px) {
-                :host{
-                    background-color: #F6F5EE;
-                }
                 
                 header{
                     display: flex;
@@ -356,7 +354,6 @@ export default class CVModern extends AbstractCV {
                 .about .content{
                     padding: 50px;
                     max-width: 100%;
-                    background-color: #E4E3D9;
                 }
                 
                 .description {
@@ -366,7 +363,6 @@ export default class CVModern extends AbstractCV {
                 .experience .content{
                     padding: 50px;
                     max-width: 100%;
-                    background-color: #E4E3D9;
                 }
 
                 .education .content{
