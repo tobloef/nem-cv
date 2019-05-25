@@ -9,15 +9,19 @@ import Router from "../../lib/Router.js";
 import CVModern from "../cvs/CVModern.js";
 import CVSimple from "../cvs/CVSimple.js";
 import CVOctagon from "../cvs/CVOctagon.js";
-import CVPReview from "../preview/CVPReview.js";
+import PagePreview from "../preview/PagePreview.js";
+import PageThemePreview from "../preview/PageThemePreview.js";
+import templateStyles from "../../lib/constants/template-styles.js";
+import {setStorageItem} from "../../lib/storage-helper.js";
 
 export default class RootRoutes extends BaseComponent {
     usedComponents = [
         PageHome,
         PageTemplates,
         PageEditor,
-        CVPReview,
+        PagePreview,
         PageNotFound,
+        PageThemePreview,
 
         CVSimple,
         CVOctagon,
@@ -28,11 +32,15 @@ export default class RootRoutes extends BaseComponent {
         {pattern: "^/?$", component: PageHome},
         {pattern: "^/templates$", component: PageTemplates},
         {pattern: "^/editor$", component: PageEditor},
-        {pattern: "^/preview", component: CVPReview},
+        {pattern: "^/preview$", component: PagePreview},
 
-        {pattern: "^/cv-simple$", component: CVSimple},
-        {pattern: "^/cv-octagon$", component: CVOctagon},
-        {pattern: "^/cv-modern$", component: CVModern},
+        ...Object.keys(templateStyles).map(template => ({
+            pattern: `^/examples/${template}`,
+            component: PageThemePreview,
+            onNavigate: () => {
+                setStorageItem("preview-template-id", template);
+            }
+        })),
 
         {pattern: "", component: PageNotFound},
     ];
@@ -44,6 +52,9 @@ export default class RootRoutes extends BaseComponent {
                 continue;
             }
             Router.add(route.pattern, () => {
+                if (route.onNavigate != null) {
+                    route.onNavigate();
+                }
                 this.empty();
                 if (route.component != null) {
                     const element = document.createElement(route.component.elementName);

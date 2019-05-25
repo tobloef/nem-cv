@@ -34,13 +34,6 @@ export default class AbstractCV extends BaseComponent {
         const sectorList = this.shadowRoot.getElementById("sector-list");
         sectorList.itemAttributes = {"content-type": "component"};
         sectorList.render();
-
-        whenReady(() => {
-            //if the user has previously worked on the cv, the content is filled in after the page is loaded
-            const content = getStorageItem("cv-content");
-            this.setContent(content);
-            addStorageItemListener("cv-content", this.setContent);
-        });
     };
 
     educationWhereSeparator = null;

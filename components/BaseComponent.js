@@ -82,6 +82,7 @@ export default class BaseComponent extends HTMLElement {
     };
 
     _recurseGetContent(content, element) {
+        console.debug("Setting content", content, "on children of", element);
         for (const child of element.children) {
             let newContent = null;
             const contentType = child.getAttribute("content-type");

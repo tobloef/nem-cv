@@ -1,12 +1,13 @@
 import BaseComponent from "../BaseComponent.js";
 import Router from "../../lib/Router.js";
 import SideBar from "./SideBar.js";
-import {getStorageItem, setStorageItem} from "../../lib/storage-helper.js";
+import {addStorageItemListener, getStorageItem, setStorageItem} from "../../lib/storage-helper.js";
 import NavBar from "../shared/NavBar.js";
 import CustomButton from "../shared/CustomButton.js";
 import Logo from "../shared/Logo.js";
 import {postCV} from "../../lib/api.js";
 import templates from "../../lib/constants/templates.js";
+import whenReady from "../../lib/whenReady.js";
 
 export default class PageEditor extends BaseComponent {
     cv = null;
@@ -74,9 +75,39 @@ export default class PageEditor extends BaseComponent {
             BaseComponent.colors = colors;
             this.cv.render();
             this.cv.updateStyles();
+            const content = getStorageItem("cv-content");
+            this.cv.setContent(content);
             sidebar.toggle();
         });
     }
+
+    _checkForExistingCV = () => {
+        if (getStorageItem("cv-content") == null) {
+            return;
+        }
+        /*if (!confirm("Der blev fundet et eksisterende CV fra tidligere brug. Ønsker du at bruge dette?")) {
+            setStorageItem("cv-content", null);
+        }*/
+    };
+
+    _setCV = (template) => {
+        if (template == null) {
+            return;
+        }
+        // Create the CV element
+        const cvContainer = this.shadowRoot.getElementById("cv-container");
+        cvContainer.innerHTML = "";
+        const cvElement = document.createElement(template.class.elementName);
+        this.cv = cvElement;
+        cvContainer.appendChild(cvElement);
+        // When ready set the CV content
+        whenReady(() => {
+            //if the user has previously worked on the cv, the content is filled in after the page is loaded
+            const content = getStorageItem("cv-content");
+            this.cv.setContent(content);
+            addStorageItemListener("cv-content", this.cv.setContent);
+        });
+    };
 
     _handleFinish = async () => {
         if (this.cv == null) {
@@ -102,26 +133,6 @@ export default class PageEditor extends BaseComponent {
         // Navigate to the cv page
         alert("Dit CV blev sendt til serveren.");
         Router.navigate("/preview");
-    };
-
-    _checkForExistingCV = () => {
-        if (getStorageItem("cv-content") == null) {
-            return;
-        }
-        if (!confirm("Der blev fundet et eksisterende CV fra tidligere brug. Ønsker du at bruge dette?")) {
-            localStorage.clear();
-        }
-    };
-
-    _setCV = (template) => {
-        if (template == null) {
-            return;
-        }
-        const cvContainer = this.shadowRoot.getElementById("cv-container");
-        cvContainer.innerHTML = "";
-        const cvElement = document.createElement(template.class.elementName);
-        this.cv = cvElement;
-        cvContainer.appendChild(cvElement);
     };
 
     // language=CSS
