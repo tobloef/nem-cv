@@ -34,9 +34,7 @@ export default class PageHome extends BaseComponent {
             <section class="colors">
                 <h2>Vælg farver efter din personlighed</h2>
 
-                <div class="color-wheel">
-
-                </div>
+                <div class="color-wheel"></div>
             </section>
 
             <section class="testimonials">
@@ -345,8 +343,8 @@ export default class PageHome extends BaseComponent {
     }
 
     _handleRotateColorWheel() {
+        const wheel = this.shadowRoot.querySelector(".color-wheel");
         document.addEventListener('scroll', evt => {
-            const wheel = this.shadowRoot.querySelector(".color-wheel");
             const angle = (window.pageYOffset / 7) % 360;
             wheel.style.transform = `rotate(${angle}deg)`;
         })

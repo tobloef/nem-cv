@@ -6,6 +6,7 @@ import EditableText from "./shared/EditableText.js";
 import ListButton from "./shared/ListButton.js";
 import ExperienceItem from "./shared/ExperienceItem.js";
 import AbstractCV from "./AbstractCV.js";
+import modern from "./templates/modern.js";
 
 export default class CVModern extends AbstractCV {
     static observedAttributes = [];
@@ -131,7 +132,7 @@ export default class CVModern extends AbstractCV {
     experienceWhereSeparator = ", ";
 
     script = () => {
-
+        BaseComponent.template = modern;
     };
 
     externalStyles = [];
