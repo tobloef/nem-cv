@@ -17,12 +17,14 @@ export default class ExperienceItem extends BaseComponent {
             <div content-type="object" class="container">
                 <span class="divider where" part="left">
                     <${EditableText.elementName}
+                            validate-type="string"
                             placeholder="${this.experienceType}"
                             element="div"
                             content-key="name"
                             content-type="component"
                     ></${EditableText.elementName}><span class="separator">${this.whereSeparator || ""}</span>
                     <${EditableText.elementName}
+                            validate-type="string"
                             placeholder="Titel"
                             element="div"
                             content-key="title"
@@ -31,12 +33,15 @@ export default class ExperienceItem extends BaseComponent {
                 </span>
                 <span class="divider when">
                     <${EditableText.elementName}
+                            validate-type="date"
                             placeholder="Startår"
                             element="div"
                             content-key="from"
                             content-type="component"
                     ></${EditableText.elementName}> -
                     <${EditableText.elementName}
+                            validate-type="nullable-date"
+                            validate-type="string"
                             placeholder="Slutår"
                             element="div"
                             content-key="to"

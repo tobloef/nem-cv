@@ -111,7 +111,7 @@ export default class SideBar extends BaseComponent {
             }
             
             #color-list {
-                background-color: inherit;
+                background-color: hsl(0, 0%, 99%);
                 padding: 0.5em;
                 max-width: 500px;
                 width: 100%;

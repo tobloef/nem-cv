@@ -7,7 +7,6 @@ import WorkAreaItem from "./components/cvs/shared/WorkAreaItem.js";
 RootRoutes.define();
 addStorageHook();
 addResetCSS();
-checkForExistingCV();
 // noinspection JSIgnoredPromiseFromCall
 fetchSectors();
 
@@ -16,14 +15,6 @@ function addResetCSS() {
     const style = document.createElement("style");
     style.innerText = resetCSSString;
     document.body.appendChild(style);
-}
-
-function checkForExistingCV() {
-    if (getStorageItem("cv-content") != null || getStorageItem("template") != null) {
-        if (!confirm("Der blev fundet et eksisterende CV fra tidligere brug. Ønsker du at bruge denne?")) {
-            localStorage.clear();
-        }
-    }
 }
 
 async function fetchSectors() {
