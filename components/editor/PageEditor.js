@@ -164,6 +164,10 @@ export default class PageEditor extends BaseComponent {
                 z-index: 10;
             }
             
+            logo- {
+                padding: 0 1em;
+            }
+            
             #cv-container {
                 flex: 1;
             }

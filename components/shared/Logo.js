@@ -11,8 +11,18 @@ export default class Logo extends BaseComponent {
     get html() {
         return `
             <router-link href="/">
-              <img class="logo" src="${getPath("logo-white")}" alt="Nem CV" style="width: 150px;">
+              <img class="logo" src="${getPath("logo-white")}" alt="Nem CV">
             </router-link>
         `;
+    }
+
+    // language=CSS
+    get css() {
+        return `
+            img {
+                max-width: 150px;
+                width: 100%;
+            }
+        `
     }
 }
