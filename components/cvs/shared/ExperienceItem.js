@@ -12,6 +12,8 @@ export default class ExperienceItem extends BaseComponent {
         EditableText
     ];
 
+
+
     get html() {
         const experienceType = this.experienceType || "erfaring";
         let endDateValidation;

@@ -1,49 +1,61 @@
-import BaseComponent from "../../BaseComponent.js";
 import EditableText from "../shared/EditableText.js";
 import ExperienceItem from "../shared/ExperienceItem.js";
 
-export default class ExperienceItemOctagon extends ExperienceItem {
+export default class ExperienceItemEdges extends ExperienceItem {
     static observedAttributes = [
         "experience-type",
-        "where-separator"
+        "where-separator",
+        "end-date-optional"
     ];
 
     usedComponents = [
         EditableText
     ];
 
-    // language=HTML
     get html() {
+        const experienceType = this.experienceType || "erfaring";
+        let endDateValidation;
+        if (this.endDateOptional) {
+            endDateValidation = `validate-type="nullable-date" content-ignore-if-null`;
+        } else {
+            endDateValidation = `validate-type="date"`;
+        }
+
+        // language=HTML
         return `
             <div content-type="object" part="experience-item">
                 <span class="when small">
                     <editable-text
-                            placeholder="Startår"
+                            validate-type="date"
+                            placeholder="Startdato"
                             element="p"
-                            multiline="false"
+                            name="Startdato"
                             content-key="from"
                             content-type="component"
                     ></editable-text>
                     &nbsp;-&nbsp;
                     <editable-text
-                            placeholder="Slutår"
+                            placeholder="Slutdato"
+                            name="Slutdato"
                             element="p"
-                            multiline="false"
                             content-key="to"
                             content-type="component"
+                            ${endDateValidation}
                     ></editable-text>
                 </span>
                 <editable-text id="bigger"
-                        placeholder="${this.experienceType}"
+                        validate-type="string"
+                        placeholder="${experienceType}"
                         element="p"
-                        multiline="false"
                         content-key="name"
+                        name="Navn på ${experienceType.toLowerCase()}"
                         content-type="component"
                 ></editable-text>
                 <editable-text
+                        validate-type="string"
                         placeholder="Titel"
                         element="p"
-                        multiline="false"
+                        name="Titel hos ${experienceType.toLowerCase()}"
                         content-key="title"
                         content-type="component"
                 ></editable-text>
