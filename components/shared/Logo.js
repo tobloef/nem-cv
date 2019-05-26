@@ -7,11 +7,15 @@ export default class Logo extends BaseComponent {
         RouterLink
     ];
 
+    static observedAttributes = ["color"];
+
     // language=HTML
     get html() {
+        const path = paths[this.color == "black" ? "logo-black" : "logo-white"];
+
         return `
             <router-link href="/">
-              <img class="logo" src="${paths["logo-white"]}" alt="Nem CV">
+              <img class="logo" src="${path}" alt="Nem CV">
             </router-link>
         `;
     }
@@ -19,8 +23,11 @@ export default class Logo extends BaseComponent {
     // language=CSS
     get css() {
         return `
+            :host {
+                --max-width: 150px;
+            }
             img {
-                max-width: 150px;
+                max-width: var(--max-width);
                 width: 100%;
             }
         `

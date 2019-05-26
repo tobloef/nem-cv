@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+    frontend:
+        build: .
+        volumes:
+            - .:/var/www
+        ports:
+            - 80:80

@@ -81,6 +81,8 @@ export default class IntroBox extends BaseComponent {
                 background-color: var(--background-color);
                 padding: 4em;
                 height: 100%;
+                display: flex;
+                flex-direction: column;
             }
 
             h1, .name {
@@ -106,6 +108,10 @@ export default class IntroBox extends BaseComponent {
 
             li ${EditableText.elementName} {
                 font-size: var(--p-size);
+            }
+            
+            ${EditableProfileImage.elementName} {
+                max-width: 600px;
             }
         `
     };

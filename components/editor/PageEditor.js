@@ -131,8 +131,9 @@ export default class PageEditor extends BaseComponent {
             return;
         }
         // Navigate to the cv page
-        alert("Dit CV blev sendt til serveren.");
-        Router.navigate("/preview");
+        if (confirm("Dit CV blev sendt til serveren. Vil du gerne se dit færdige CV nu?")) {
+            Router.navigate("/preview")
+        }
     };
 
     // language=CSS
