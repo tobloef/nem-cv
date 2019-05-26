@@ -7,7 +7,7 @@ import CustomButton from "../shared/CustomButton.js";
 import Logo from "../shared/Logo.js";
 import {postCV} from "../../lib/api.js";
 import templates from "../../lib/constants/templates.js";
-import whenReady from "../../lib/whenReady.js";
+import {whenReady} from "../../lib/wait.js";
 
 export default class PageEditor extends BaseComponent {
     cv = null;

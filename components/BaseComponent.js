@@ -1,5 +1,5 @@
 import {classNameToElementName, kebabToCamelCase} from "../lib/string-utils.js";
-import {resetCSSString, resetCSSStyleSheet} from "../lib/constants/reset-css.js";
+import {resetCSSString} from "../lib/constants/reset-css.js";
 import {colorsToCSS, stringToStyleSheet} from "../lib/stylesheet-utils.js";
 import templateStyles, {getDefaultTemplateId} from "../lib/constants/template-styles.js";
 import {getDefaultColors} from "../lib/constants/colors.js";

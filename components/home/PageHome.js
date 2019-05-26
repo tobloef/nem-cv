@@ -1,5 +1,4 @@
 import BaseComponent from "../BaseComponent.js";
-import whenReady from '../../lib/whenReady.js';
 import RouterLink from "../shared/RouterLink.js";
 import CustomButton from "../shared/CustomButton.js";
 import NavBar from "../shared/NavBar.js";
@@ -7,6 +6,7 @@ import HomeHeader from './HomeHeader.js';
 import TestimonialSlider from './TestimonialSlider.js';
 import TemplateSlider from './TemplateSlider.js';
 import Logo from "../shared/Logo.js";
+import {whenReady} from "../../lib/wait.js";
 
 export default class PageHome extends BaseComponent {
     usedComponents = [

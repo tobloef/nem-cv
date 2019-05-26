@@ -1,5 +1,4 @@
 import BaseComponent from "../BaseComponent.js";
-import wait from '../../lib/wait.js';
 import SliderButton from './SliderButton.js';
 
 export default class TestimonialSlider extends BaseComponent {

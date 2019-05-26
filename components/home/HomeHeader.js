@@ -1,8 +1,8 @@
 import BaseComponent from "../BaseComponent.js";
 import RouterLink from "../shared/RouterLink.js";
 import CustomButton from "../shared/CustomButton.js";
-import wait from "../../lib/wait.js";
 import paths from "../../lib/constants/paths.js";
+import {wait} from "../../lib/wait.js";
 
 //this should probably be renamed to landingComponent or something similar
 export default class HomeHeader extends BaseComponent {
