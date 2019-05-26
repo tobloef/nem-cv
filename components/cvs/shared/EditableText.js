@@ -10,6 +10,7 @@ export default class EditableText extends BaseComponent {
         "multiline",
         "validate-type",
         "name",
+        "content-key"
     ];
 
     // language=HTML
@@ -18,11 +19,11 @@ export default class EditableText extends BaseComponent {
             <${this.element} 
                 id="content" 
                 class="empty-text"
-                part="inner" 
+                part="${this.contentKey}" 
                 contenteditable=${BaseComponent.editMode}
                 role="textbox" 
-                aria-placeholder=${this.placeholder} 
-                data-placeholder=${this.placeholder}
+                aria-placeholder="${this.placeholder}" 
+                data-placeholder="${this.placeholder}"
             >
                 ${this.placeholder}
             </${this.element}>

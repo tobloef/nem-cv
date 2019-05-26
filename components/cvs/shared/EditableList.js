@@ -29,7 +29,7 @@ export default class EditableList extends BaseComponent {
         appendButton.onClick = this.addItem;
 
         // Add the Remove item button
-        const slot2 = this.shadowRoot.querySelector(`slot[name="remove-button"`);
+        const slot2 = this.shadowRoot.querySelector(`slot[name="remove-button"]`);
         const removeButton = (slot2.assignedNodes() || [])[0];
         removeButton.onClick = this.remove;
 

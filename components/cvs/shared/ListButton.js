@@ -24,7 +24,7 @@ export default class ListButton extends BaseComponent {
             }
             this.onClick();
         });
-    }
+    };
 
     externalStyles = [];
 

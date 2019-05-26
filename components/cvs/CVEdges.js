@@ -27,7 +27,8 @@ export default class CVEdges extends AbstractCV {
                             class="octagon" 
                             aspect-ratio="1" 
                             content-key="picture" 
-                            content-type="component">
+                            content-type="component"
+                            tabindex="0">
                     </${EditableProfileImage.elementName}>
                     <div id="info-box">
                         <div id="name-box">
@@ -88,8 +89,8 @@ export default class CVEdges extends AbstractCV {
                                         starting-amount="1"
                                         name="Brancher"
                                 >
-                                    <list-button icon="add" slot="append-button"></list-button>
-                                    <list-button icon="remove" slot="remove-button"></list-button>
+                                    <list-button icon="add" slot="append-button" tabindex="0"></list-button>
+                                    <list-button icon="remove" slot="remove-button" tabindex="0"></list-button>
                                 </${EditableList.elementName}>
                             </div>
                         </div>
@@ -123,8 +124,8 @@ export default class CVEdges extends AbstractCV {
                             starting-amount="1"
                             name="Erfaringer"
                         >
-                            <list-button icon="add" slot="append-button"></list-button>
-                            <list-button icon="remove" slot="remove-button"></list-button>
+                            <list-button icon="add" slot="append-button" tabindex="0"></list-button>
+                            <list-button icon="remove" slot="remove-button" tabindex="0"></list-button>
                         </${EditableList.elementName}>
                     </div>
                     
@@ -138,8 +139,8 @@ export default class CVEdges extends AbstractCV {
                             starting-amount="1"
                             name="Uddannelser"
                         >
-                            <list-button icon="add" slot="append-button"></list-button>
-                            <list-button icon="remove" slot="remove-button"></list-button>
+                            <list-button icon="add" slot="append-button" tabindex="0"></list-button>
+                            <list-button icon="remove" slot="remove-button" tabindex="0"></list-button>
                         </${EditableList.elementName}>
                     </div>
                 </section>
