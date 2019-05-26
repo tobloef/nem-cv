@@ -101,6 +101,11 @@ export default class PageEditor extends BaseComponent {
         if (template == null) {
             return;
         }
+        if (this.cv != null) {
+            // Set CV content in local storage
+            const content = this.cv.getContent();
+            setStorageItem("cv-content", content);
+        }
         // Create the CV element
         const cvContainer = this.shadowRoot.getElementById("cv-container");
         cvContainer.innerHTML = "";

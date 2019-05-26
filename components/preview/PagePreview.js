@@ -3,9 +3,11 @@ import {getStorageItem} from "../../lib/storage-helper.js";
 import Router from "../../lib/Router.js";
 import templates from "../../lib/constants/templates.js";
 import paths from "../../lib/constants/paths.js";
+import RouterLink from "../shared/RouterLink.js";
 
 export default class PagePreview extends BaseComponent {
     usedComponents = [
+        RouterLink,
         // Automatically add all CV template components
         ...Object.keys(templates).map(t => templates[t].class)
     ];
