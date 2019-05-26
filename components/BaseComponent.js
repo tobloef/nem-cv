@@ -148,7 +148,9 @@ export default class BaseComponent extends HTMLElement {
     };
 
     validate() {
-        return this._recurseValidate(this.shadowRoot);
+        const result = this._recurseValidate(this.shadowRoot);
+        console.log(this.constructor.name, "validates to", result);
+        return result;
     };
 
     _recurseValidate = (element) => {

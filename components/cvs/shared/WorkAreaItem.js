@@ -9,7 +9,7 @@ export default class WorkAreaItem extends BaseComponent {
     // language=HTML
     get html() {
         return `
-            <span class="dropdown">Vælg en branche</span>
+            <span class="dropdown">${this.placeholder}</span>
         `;
     }
 
