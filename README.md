@@ -53,11 +53,11 @@ Python 2 har en indbygget pakke, kaldet `SimpleHTTPServer`, som fungerer som en 
 python -m SimpleHTTPServer
 ```
 
-Hjemmesiden kan herefter tilgås på addressen `localhost:8080`, så længe `SimpleHTTPServer` programmet kører i terminalen.
+Hjemmesiden kan herefter tilgås på addressen `localhost:8000`, så længe `SimpleHTTPServer` programmet kører i terminalen.
 
 ### Python 3
 ```
 python -m http.server
 ```
 
-Hjemmesiden kan herefter tilgås på addressen `localhost:8080`, så længe `http.server` programmet kører i terminalen.
+Hjemmesiden kan herefter tilgås på addressen `localhost:8000`, så længe `http.server` programmet kører i terminalen.
