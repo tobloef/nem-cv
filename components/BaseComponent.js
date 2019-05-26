@@ -9,13 +9,12 @@ export default class BaseComponent extends HTMLElement {
     static colors = null;
     static editMode = false;
 
-    _elementName = null;
-
     constructor() {
         super();
         this.attachShadow({mode: "open"});
     }
 
+    // Gets called by the browser when the component is created
     connectedCallback() {
         this._defineUsedComponents();
         this._checkForUndefinedComponents();
@@ -23,6 +22,7 @@ export default class BaseComponent extends HTMLElement {
         this.updateStyles();
     };
 
+    // GEts called by the browser when one of the observed attributes changes
     attributeChangedCallback(attrName, oldValue, newValue) {
         if (oldValue !== newValue) {
             const propName = kebabToCamelCase(attrName);
