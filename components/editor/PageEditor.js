@@ -45,6 +45,7 @@ export default class PageEditor extends BaseComponent {
         if (templateId == null || templates[templateId] == null) {
             return Router.navigate("/templates");
         }
+        BaseComponent.templateId = templateId;
         this._setCV(templates[templateId]);
         // Set up sidebar event listeners
         const sidebar = this.shadowRoot.querySelector("side-bar");
@@ -85,9 +86,9 @@ export default class PageEditor extends BaseComponent {
         if (getStorageItem("cv-content") == null) {
             return;
         }
-        /*if (!confirm("Der blev fundet et eksisterende CV fra tidligere brug. Ønsker du at bruge dette?")) {
+        if (!confirm("Der blev fundet et eksisterende CV fra tidligere brug. Ønsker du at bruge dette?")) {
             setStorageItem("cv-content", null);
-        }*/
+        }
     };
 
     _setCV = (template) => {
