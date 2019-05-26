@@ -33,6 +33,7 @@ export default class WorkAreaItem extends BaseComponent {
             this.updateStyles();
             addStorageItemListener("sectors", this.addOptions);
         }
+        this.greyIfDefault();
     };
 
     getContent = () => {
@@ -101,6 +102,7 @@ export default class WorkAreaItem extends BaseComponent {
         this.shadowRoot.appendChild(this.span);
         this.span.innerText = value;
         this.updateValidationStyle();
+        this.greyIfDefault();
     };
 
     get css() {
@@ -118,6 +120,19 @@ export default class WorkAreaItem extends BaseComponent {
             span {
                 cursor: pointer;
             }
+            .placeholder {
+                color: var(--editable-empty-text-color  );
+            }
         `;
+    }
+
+    greyIfDefault = () => {
+        console.log(this.span.innerText);
+        if (this.span.innerText === this.placeholder) {
+            this.span.classList.add("placeholder");
+        }
+        else {
+            this.span.classList.remove("placeholder");
+        }
     }
 }
