@@ -65,7 +65,7 @@ export default class BaseComponent extends HTMLElement {
         }
         const template = templateStyles[templateId];
         if (template != null) {
-            const templateStyleSheet = stringToStyleSheet(template.css);
+            const templateStyleSheet = stringToStyleSheet(template);
             styleSheets.push(templateStyleSheet);
         }
         // Component style
@@ -148,7 +148,8 @@ export default class BaseComponent extends HTMLElement {
     };
 
     validate() {
-        return this._recurseValidate(this.shadowRoot);
+        const result = this._recurseValidate(this.shadowRoot);
+        return result;
     };
 
     _recurseValidate = (element) => {

@@ -8,7 +8,7 @@ import PageNotFound from "../not-found/PageNotFound.js";
 import Router from "../../lib/Router.js";
 import CVModern from "../cvs/CVModern.js";
 import CVSimple from "../cvs/CVSimple.js";
-import CVOctagon from "../cvs/CVOctagon.js";
+import CVEdges from "../cvs/CVEdges.js";
 import PagePreview from "../preview/PagePreview.js";
 import PageThemePreview from "../preview/PageThemePreview.js";
 import templateStyles from "../../lib/constants/template-styles.js";
@@ -24,7 +24,7 @@ export default class RootRoutes extends BaseComponent {
         PageThemePreview,
 
         CVSimple,
-        CVOctagon,
+        CVEdges,
         CVModern,
     ];
 

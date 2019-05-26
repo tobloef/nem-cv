@@ -29,8 +29,9 @@ export default class CVModern extends AbstractCV {
                             <${EditableProfileImage.elementName}
                                 class="image"
                                 aspect-ratio="1.5"
-                                weirdfix="height: 100%;">
-                            </${EditableProfileImage.elementName}>
+                                weirdfix="height: 100%;"
+                            content-key="picture"
+                        content-type="component"></${EditableProfileImage.elementName}>
                         </div>
                         <div class = "right">
                             <${EditableText.elementName}
@@ -89,7 +90,7 @@ export default class CVModern extends AbstractCV {
                                         content-key="description"
                                         content-type="component"
                                         multiline
-                                        placeholder="Her kan du skrive en kort beskrivelse af dig selv.">
+                                        placeholder="Her kan du skrive en kort beskrivelse om dig selv.">
                                 </${EditableText.elementName}>
                                 <h2 class="workareas">BRANCHER</h2>
                                 <${EditableList.elementName}
