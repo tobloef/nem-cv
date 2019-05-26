@@ -22,123 +22,127 @@ export default class CVModern extends AbstractCV {
     // language=HTML
     get html() {
         return `
-            <header>
-                <div class="left">
-                    <${EditableProfileImage.elementName}
-                        class="image"
-                        aspect-ratio="1.5"
-                        weirdfix="height: 100%;">
-                    </${EditableProfileImage.elementName}>
-                </div>
-                <div class = "right">
-                    <${EditableText.elementName}
-                            validate-type="string"
-                            content-key="name"
-                            content-type="component"
-                            class="name"
-                            name="Navn"
-                            placeholder="Dit fulde navn"
-                            element="h1">
-                    </${EditableText.elementName}>
-                    <div class="color1"></div>
-                    <ul class="listinfo">
-                        <li class="age">
-                            <${EditableText.elementName}
-                                    validate-type="number"
-                                    content-key="age"
-                                    content-type="component"
-                                    placeholder="Din alder"
-                                    name="Alder"
-                                    element="div">
-                            </${EditableText.elementName}>
-                        </li>
-                        <li class="city">
+            <div class="background">
+                <main class="content">
+                    <header>
+                        <div class="left">
+                            <${EditableProfileImage.elementName}
+                                class="image"
+                                aspect-ratio="1.5"
+                                weirdfix="height: 100%;">
+                            </${EditableProfileImage.elementName}>
+                        </div>
+                        <div class = "right">
                             <${EditableText.elementName}
                                     validate-type="string"
-                                    content-key="city"
+                                    content-key="name"
                                     content-type="component"
-                                    placeholder="Din by"
-                                    name="By"
-                                    element="div"
-                            ></${EditableText.elementName}>
-                        </li>
-                        <li class="email">
-                            <${EditableText.elementName}
-                                    validate-type="email"
-                                    placeholder="Din email"
-                                    element="div"
-                                    name="Email"
-                                    content-key="email"
-                                    content-type="component"
-                            ></${EditableText.elementName}>
-                        </li>
-                    </ul>
-                </div>
-            </header>
-            
-            <section class="about">
-                <div class="content">
-                        <h2 class="aboutme">OM MIG</h2>
-                        <${EditableText.elementName}
-                                class="description"
-                                validate-type="string"
-                                name="Beskrivelse"
-                                element="p"
-                                content-key="description"
-                                content-type="component"
-                                multiline
-                                placeholder="Her kan du skrive en kort beskrivelse af dig selv.">
-                        </${EditableText.elementName}>
-                        <h2 class="workareas">BRANCHER</h2>
-                        <${EditableList.elementName}
-                            id="sector-list"
-                            content-key="sectors"
-                            content-type="array"
-                            class="work-areas"
-                            item-component="${WorkAreaItem.elementName}"
-                            separator=", "
-                            starting-amount="1"
-                            name="Brancher"
-                        >
-                            <list-button icon="add" slot="append-button"></list-button>
-                            <list-button icon="remove" slot="remove-button"></list-button>
-                        </${EditableList.elementName}>
-                </div>
-            </section>
-            
-            <section class="education">
-                <div class="content">
-                    <h2 class="educationtitle">UDDANNELSE</h2>
-                    <${EditableList.elementName}
-                            id="education-list"
-                            content-key="education"
-                            content-type="array"
-                            item-component="${ExperienceItem.elementName}" 
-                            starting-amount="1"
-                            name="Uddannelser"
-                        >
-                            <list-button icon="add" slot="append-button"></list-button>
-                            <list-button icon="remove" slot="remove-button"></list-button>  
-                    </${EditableList.elementName}>
-                </div>
-            </section>
-            
-            <section class="experience">
-                <div class="content">
-                    <h2 class="experiencetitle">ERFARING</h2>
-                    <${EditableList.elementName}
-                            id="experience-list"
-                            content-key="employers"
-                            content-type="array"
-                            item-component="${ExperienceItem.elementName}" 
-                            starting-amount="1"
-                            name="Erfaringer"
-                        >
-                            <list-button icon="add" slot="append-button"></list-button>
-                            <list-button icon="remove" slot="remove-button"></list-button>
-                        </${EditableList.elementName}>
-                </div>
-            </section>
+                                    class="name"
+                                    name="Navn"
+                                    placeholder="Dit fulde navn"
+                                    element="h1">
+                            </${EditableText.elementName}>
+                            <div class="color1"></div>
+                            <ul class="listinfo">
+                                <li class="age">
+                                    <${EditableText.elementName}
+                                            validate-type="number"
+                                            content-key="age"
+                                            content-type="component"
+                                            placeholder="Din alder"
+                                            name="Alder"
+                                            element="div">
+                                    </${EditableText.elementName}>
+                                </li>
+                                <li class="city">
+                                    <${EditableText.elementName}
+                                            validate-type="string"
+                                            content-key="city"
+                                            content-type="component"
+                                            placeholder="Din by"
+                                            name="By"
+                                            element="div"
+                                    ></${EditableText.elementName}>
+                                </li>
+                                <li class="email">
+                                    <${EditableText.elementName}
+                                            validate-type="email"
+                                            placeholder="Din email"
+                                            element="div"
+                                            name="Email"
+                                            content-key="email"
+                                            content-type="component"
+                                    ></${EditableText.elementName}>
+                                </li>
+                            </ul>
+                        </div>
+                    </header>
+                    
+                    <section class="about">
+                        <div class="content">
+                                <h2 class="aboutme">OM MIG</h2>
+                                <${EditableText.elementName}
+                                        class="description"
+                                        validate-type="string"
+                                        name="Beskrivelse"
+                                        element="p"
+                                        content-key="description"
+                                        content-type="component"
+                                        multiline
+                                        placeholder="Her kan du skrive en kort beskrivelse af dig selv.">
+                                </${EditableText.elementName}>
+                                <h2 class="workareas">BRANCHER</h2>
+                                <${EditableList.elementName}
+                                    id="sector-list"
+                                    content-key="sectors"
+                                    content-type="array"
+                                    class="work-areas"
+                                    item-component="${WorkAreaItem.elementName}"
+                                    separator=", "
+                                    starting-amount="1"
+                                    name="Brancher"
+                                >
+                                    <list-button icon="add" slot="append-button"></list-button>
+                                    <list-button icon="remove" slot="remove-button"></list-button>
+                                </${EditableList.elementName}>
+                        </div>
+                    </section>
+                    
+                    <section class="education">
+                        <div class="content">
+                            <h2 class="educationtitle">UDDANNELSE</h2>
+                            <${EditableList.elementName}
+                                    id="education-list"
+                                    content-key="education"
+                                    content-type="array"
+                                    item-component="${ExperienceItem.elementName}" 
+                                    starting-amount="1"
+                                    name="Uddannelser"
+                                >
+                                    <list-button icon="add" slot="append-button"></list-button>
+                                    <list-button icon="remove" slot="remove-button"></list-button>  
+                            </${EditableList.elementName}>
+                        </div>
+                    </section>
+                    
+                    <section class="experience">
+                        <div class="content">
+                            <h2 class="experiencetitle">ERFARING</h2>
+                            <${EditableList.elementName}
+                                    id="experience-list"
+                                    content-key="employers"
+                                    content-type="array"
+                                    item-component="${ExperienceItem.elementName}" 
+                                    starting-amount="1"
+                                    name="Erfaringer"
+                                >
+                                    <list-button icon="add" slot="append-button"></list-button>
+                                    <list-button icon="remove" slot="remove-button"></list-button>
+                                </${EditableList.elementName}>
+                        </div>
+                    </section>
+                </main>
+            </div>
         `;
     }
 
@@ -153,6 +157,16 @@ export default class CVModern extends AbstractCV {
                 background-color: var(--background-color);
                 color: var(--font-color);
                 display: block;
+            }
+            
+            .background {
+                background-color: var(--background-color);
+                display: flex;
+                justify-content: center;
+            }
+            main {
+                max-width: 1200px;
+                width: 100%;
             }
             
             ul{
