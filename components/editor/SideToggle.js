@@ -60,7 +60,9 @@ export default class SideToggle extends BaseComponent {
                 cursor: pointer;
             }
 
-            button:hover {
+            button:hover,
+            button:active,
+            button:focus {
                 background-color: #fafafa;
             }
 

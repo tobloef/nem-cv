@@ -5,7 +5,8 @@ export default class CustomButton extends BaseComponent {
 
     // language=HTML
     get html() {
-        return `<button aria-label="${this.label}"><slot></slot></button>`;
+        const label = this.label != undefined ? `aria-label="${this.label}"` : "";
+        return `<button ${label}><slot></slot></button>`;
     }
 
     get css() {
@@ -56,11 +57,18 @@ export default class CustomButton extends BaseComponent {
                 border-bottom-color: var(--border-color);
             }
 
-            button:hover{
+            button:hover,
+            button:focus,
+            button:active{
                 background-color: var(--hover-background-color);
                 color: var(--hover-text-color);
                 border-color: var(--hover-border-color);
             }
         `;
     };
+
+    focus() {
+        const button = this.shadowRoot.querySelector("button");
+        button.focus();
+    }
 }
