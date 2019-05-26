@@ -47,11 +47,12 @@ export default class CVModern extends AbstractCV {
                             <ul class="listinfo">
                                 <li class="age">
                                     <${EditableText.elementName}
-                                            validate-type="number"
+                                            validate-type="age"
                                             content-key="age"
                                             content-type="component"
                                             placeholder="Din alder"
                                             name="Alder"
+                                            trim-number
                                             element="div">
                                     </${EditableText.elementName}>
                                 </li>

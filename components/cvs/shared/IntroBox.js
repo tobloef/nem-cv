@@ -29,10 +29,11 @@ export default class IntroBox extends BaseComponent {
                 <ul class="facts">
                     <li class="age">
                         <${EditableText.elementName}
-                                validate-type="number"
+                                validate-type="age"
                                 content-key="age"
                                 content-type="component"
                                 placeholder="Din alder"
+                                trim-number
                                 name="Alder"
                                 element="div">
                         </${EditableText.elementName}>

@@ -10,6 +10,7 @@ export default class EditableText extends BaseComponent {
         "multiline",
         "validate-type",
         "name",
+        "trim-number"
     ];
 
     // language=HTML
@@ -19,10 +20,10 @@ export default class EditableText extends BaseComponent {
                 id="content" 
                 class="empty-text"
                 part="inner" 
-                contenteditable=${BaseComponent.editMode}
+                contenteditable="${BaseComponent.editMode}"
                 role="textbox" 
-                aria-placeholder=${this.placeholder} 
-                data-placeholder=${this.placeholder}
+                aria-placeholder="${this.placeholder}" 
+                data-placeholder="${this.placeholder}"
             >
                 ${this.placeholder}
             </${this.element}>
@@ -120,6 +121,9 @@ export default class EditableText extends BaseComponent {
         }
         if (content === this.placeholder) {
             return null;
+        }
+        if (this.trimNumber) {
+            return parseInt(content);
         }
         return content;
     };
