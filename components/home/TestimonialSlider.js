@@ -298,6 +298,7 @@ export default class TestimonialSlider extends BaseComponent {
         img.classList.add('testimonial-image');
         img.src = testimonial.image;
         img.setAttribute('alt', testimonial.alt);
+        img.setAttribute('loading', 'lazy');
 
         return img;
 
