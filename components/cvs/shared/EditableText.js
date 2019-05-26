@@ -10,7 +10,7 @@ export default class EditableText extends BaseComponent {
         "multiline",
         "validate-type",
         "name",
-        "trim-number",
+        "is-age",
         "content-key"
     ];
 
@@ -123,7 +123,7 @@ export default class EditableText extends BaseComponent {
         if (content === this.placeholder) {
             return null;
         }
-        if (this.trimNumber) {
+        if (this.isAge) {
             return parseInt(content);
         }
         return content;
@@ -131,6 +131,9 @@ export default class EditableText extends BaseComponent {
 
     setContent = (content) => {
         this.node.innerText = (content || this.placeholder);
+        if (this.isAge && !this.node.innerText.endsWith(" år")) {
+            this.node.innerText += " år";
+        }
         if (this.node.innerText !== this.placeholder) {
             this.node.classList.remove("empty-text");
         }
@@ -146,7 +149,7 @@ export default class EditableText extends BaseComponent {
             :host {
                 display: flex;
                 align-items:center;
-                cursor: pointer;
+                ${BaseComponent.editMode ? "cursor: pointer;" : ""}
             }
             
             .error {

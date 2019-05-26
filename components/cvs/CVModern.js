@@ -52,7 +52,7 @@ export default class CVModern extends AbstractCV {
                                             content-type="component"
                                             placeholder="Din alder"
                                             name="Alder"
-                                            trim-number
+                                            is-age
                                             element="div">
                                     </${EditableText.elementName}>
                                 </li>

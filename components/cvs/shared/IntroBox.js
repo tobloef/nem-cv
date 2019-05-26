@@ -33,7 +33,7 @@ export default class IntroBox extends BaseComponent {
                                 content-key="age"
                                 content-type="component"
                                 placeholder="Din alder"
-                                trim-number
+                                is-age
                                 name="Alder"
                                 element="div">
                         </${EditableText.elementName}>

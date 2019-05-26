@@ -68,7 +68,10 @@ export default class EditableList extends BaseComponent {
             newChild.setAttribute(attribute, attributes[attribute]);
         }
         newChild.setAttribute("part", "list-item");
-        list.appendChild(newChild);
+        // Insert
+        const li = document.createElement("li");
+        li.appendChild(newChild);
+        list.appendChild(li);
         return newChild;
     };
 
@@ -126,7 +129,11 @@ export default class EditableList extends BaseComponent {
             .container {
                 display: flex;
                 flex-direction: column;
-            }            
+            }
+            
+            li {
+                margin-bottom: 10px;
+            }
         `
     }
 }

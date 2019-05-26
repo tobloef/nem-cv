@@ -49,6 +49,7 @@ export default class WorkAreaItem extends BaseComponent {
             this.span.innerText = content || this.placeholder;
             this.updateValidationStyle();
         }
+        this.greyIfDefault();
     };
 
     validate = () => {
@@ -113,13 +114,14 @@ export default class WorkAreaItem extends BaseComponent {
                 text-decoration: underline;
                 text-decoration-color: red;
             }
-            select, option {
+            select,
+            option {
                 font-family: "Open Sans", sans-serif;
                 font-size: 1em;
             }
-            span {
-                cursor: pointer;
-            }
+            
+            ${BaseComponent.editMode ? "span { cursor: pointer; }" : ""}
+            
             .placeholder {
                 color: var(--editable-empty-text-color  );
             }
@@ -127,7 +129,6 @@ export default class WorkAreaItem extends BaseComponent {
     }
 
     greyIfDefault = () => {
-        console.log(this.span.innerText);
         if (this.span.innerText === this.placeholder) {
             this.span.classList.add("placeholder");
         }
