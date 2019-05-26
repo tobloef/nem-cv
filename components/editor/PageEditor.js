@@ -109,7 +109,7 @@ export default class PageEditor extends BaseComponent {
         cvContainer.appendChild(cvElement);
         // When ready set the CV content
         whenReady(() => {
-            //if the user has previously worked on the cv, the content is filled in after the page is loaded
+            // If the user has previously worked on the cv, the content is filled in after the page is loaded
             const content = getStorageItem("cv-content");
             this.cv.setContent(content);
             addStorageItemListener("cv-content", this.cv.setContent);

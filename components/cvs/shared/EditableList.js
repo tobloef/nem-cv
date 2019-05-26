@@ -37,12 +37,13 @@ export default class EditableList extends BaseComponent {
             removeButton.onClick = this.remove;
         }
 
-        //if startingAmount is set, insert the given amount of items
+        // If startingAmount is set, insert the given amount of items
         for (let i = 0; i < (this.startingAmount || 0); i++) {
             this.addItem();
         }
 
-        //if the page is not supposed to be editable, remove the buttons again. Due to some quirks with slots, this is easier to do than prevent them from being made.
+        // If the page is not supposed to be editable, remove the buttons again.
+        // Due to some quirks with slots, this is easier to do than prevent them from being made.
         if (!BaseComponent.editMode) {
             const buttonHolder = this.shadowRoot.querySelector(".button-holder");
             buttonHolder.parentNode.removeChild(buttonHolder);
@@ -59,7 +60,6 @@ export default class EditableList extends BaseComponent {
         // Add attributes based on the this component's item attributes.
         if (this.itemAttributes != null) {
             for (const attribute in this.itemAttributes) {
-                //const attributeName = camelToKebabCase(attribute);
                 newChild.setAttribute(attribute, this.itemAttributes[attribute]);
             }
         }
@@ -76,12 +76,12 @@ export default class EditableList extends BaseComponent {
     };
 
     remove = () => {
-        //find the list, and return if it is already empty
+        // Find the list, and return if it is already empty
         const list = this.shadowRoot.getElementById("list");
         if (list.childNodes.length === 0) {
             return;
         }
-        //remove the last element, along with the seperator if it is present.
+        // Remove the last element, along with the seperator if it is present.
         this.removeLast();
         if (this.separator && list.childNodes.length > 0) {
             this.removeLast();
@@ -98,7 +98,7 @@ export default class EditableList extends BaseComponent {
         list.innerHTML = "";
     };
 
-    //inserts given content into the list
+    // Inserts given content into the list
     setContent = (content) => {
         this.removeAll();
         for (const item of content) {
@@ -109,7 +109,7 @@ export default class EditableList extends BaseComponent {
         }
     };
 
-    //check if the list itself is valid
+    // Check if the list itself is valid
     validate = () => {
         const list = this.shadowRoot.getElementById("list");
         if (list.childNodes.length === 0) {
