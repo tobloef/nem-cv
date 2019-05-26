@@ -1,7 +1,8 @@
 import BaseComponent from "../../BaseComponent.js";
 import EditableText from "../shared/EditableText.js";
+import ExperienceItem from "../shared/ExperienceItem.js";
 
-export default class ExperienceItemOctagon extends BaseComponent {
+export default class ExperienceItemOctagon extends ExperienceItem {
     static observedAttributes = [
         "experience-type",
         "where-separator"
@@ -58,15 +59,21 @@ export default class ExperienceItemOctagon extends BaseComponent {
                 justify-content: space-between;
                 padding: 34px;
                 background-color: #F3F3F3;
+                max-width: 100%;
 
                 flex-basis: 0;
-                /*flex: 1 1 0;*/
                 margin: 5px;
             }
             
             div {
                 border-left: 5px solid black;
                 padding-left: 10px;
+                max-width: 100%;
+            }
+            
+            editable-text {
+                max-width: 100%;
+                word-wrap: break-word;
             }
             
             .when {
@@ -82,6 +89,12 @@ export default class ExperienceItemOctagon extends BaseComponent {
             #bigger {
                 font-size: 1.2em;
                 margin-bottom: 0.2em;
+            }
+            
+            @media(max-width: 350px) {
+                :host {
+                    font-size: 0.9em;
+                }
             }
         `
     };

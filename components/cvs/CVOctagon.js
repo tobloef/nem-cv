@@ -27,7 +27,7 @@ export default class CVOctagon extends AbstractCV {
             <main>
                 <section id="top" class="higher">
                     <${EditableProfileImage.elementName} class="octagon" aspect-ratio="1" content-key="picture" content-type="component"></${EditableProfileImage.elementName}>
-                    <div>
+                    <div id="info-box">
                         <div id="name-box">
                             <editable-text
                                         content-key="name"
@@ -38,51 +38,55 @@ export default class CVOctagon extends AbstractCV {
                                         multiline="false">
                             </editable-text>
                         </div>
-                        
-                        <h2>Info</h2>
-                        <ul class="facts">
-                            <li class="age">
-                                <editable-text
-                                        content-key="age"
-                                        content-type="component"
-                                        placeholder="Din alder"
-                                        element="p"
-                                        multiline="false"
-                                ></editable-text>
-                            </li>
-                            <li class="city">
-                                <editable-text
-                                        content-key="city"
-                                        content-type="component"        
-                                        placeholder="Din by"
-                                        element="p"
-                                        multiline="false"
-                                ></editable-text>
-                            </li>
-                            <li class="email">
-                                <editable-text
-                                        placeholder="Din email" 
-                                        element="p"
-                                        content-key="email"
-                                        content-type="component"
-                                        multiline="false"
-                                ></editable-text>
-                            </li>
-                        </ul>
-                    
-                        <h2>Brancher</h2>
-                        <${EditableList.elementName}
-                            id="sector-list"
-                            content-key="sectors"
-                            content-type="array"
-                            class="work-areas"
-                            item-component="${WorkAreaItem.elementName}"
-                            separator=", "
-                            starting-amount="1"
-                        >
-                            <list-button icon="add" slot="append-button"></list-button>
-                            <list-button icon="remove" slot="remove-button"></list-button>
-                        </${EditableList.elementName}>
+                        <div id="under-name">
+                            <div class="column">
+                                <h2>Info</h2>
+                                <ul class="facts">
+                                    <li class="age">
+                                        <editable-text
+                                                content-key="age"
+                                                content-type="component"
+                                                placeholder="Din alder"
+                                                element="p"
+                                                multiline="false"
+                                        ></editable-text>
+                                    </li>
+                                    <li class="city">
+                                        <editable-text
+                                                content-key="city"
+                                                content-type="component"        
+                                                placeholder="Din by"
+                                                element="p"
+                                                multiline="false"
+                                        ></editable-text>
+                                    </li>
+                                    <li class="email">
+                                        <editable-text
+                                                placeholder="Din email" 
+                                                element="p"
+                                                content-key="email"
+                                                content-type="component"
+                                                multiline="false"
+                                        ></editable-text>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="column">
+                                <h2>Brancher</h2>
+                                <${EditableList.elementName}
+                                    id="sector-list"
+                                    content-key="sectors"
+                                    content-type="array"
+                                    class="work-areas"
+                                    item-component="${WorkAreaItem.elementName}"
+                                    separator=", "
+                                    starting-amount="1"
+                                >
+                                    <list-button icon="add" slot="append-button"></list-button>
+                                    <list-button icon="remove" slot="remove-button"></list-button>
+                                </${EditableList.elementName}>
+                            </div>
+                        </div>
                     </div>
                 </section>
                 
@@ -141,6 +145,10 @@ export default class CVOctagon extends AbstractCV {
     // language=CSS
     get css() {
         return `
+            :host {
+                font-size: 1.2em;
+            }
+            
             main {
                 padding-top: 70px;
                 display: flex;
@@ -161,14 +169,19 @@ export default class CVOctagon extends AbstractCV {
             }
             
             editable-profile-image {
-                max-height: 50%;
-                max-width: 50%;
+                height: 80%;
+                width: 80%;
+                margin-bottom: 1em;
             }
 
             .higher {
                 background-color: #99B2B4;
                 padding: 5%;
                 width: 80%;
+            }
+
+            .higher li {
+                font-family: var(--p);
             }
 
             .lower {
@@ -183,13 +196,21 @@ export default class CVOctagon extends AbstractCV {
                 width: 100%;
                 padding: 1em;
             }
-
-            .lower p {
-
-            }
             
             .experience {
                 margin-bottom: 2em;
+            }
+            
+            .column {
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 1em;
+                flex-grow: 0;
+                font-size: 0.9em;
+            }
+            
+            .work-areas {
+                display: inline-block;
             }
             
             *::part(container) {
@@ -201,6 +222,36 @@ export default class CVOctagon extends AbstractCV {
                 display: flex;
                 flex-wrap: wrap;
                 flex-direction: row;
+            }
+
+            .column *::part(list) {
+                list-style-type: disc;
+                color: black;
+                margin-left: 1em;
+                font-family: var(--p);
+            }
+            
+            *::part(buttons) {
+                padding: 5px;
+            }
+            
+            #top {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            #name-box {
+                word-wrap: break-word;
+                max-width: 100%;
+                padding: 15px;
+                margin-bottom: 1em;
+                color: white;
+                --editable-empty-text-color: #aaa;
+                text-align: center;
+                letter-spacing: 0.2em;
+                text-transform: uppercase;
+                background-color: #595959;
             }
             
             #experiences {
@@ -224,15 +275,58 @@ export default class CVOctagon extends AbstractCV {
                 clip-path: polygon(50% 0%, var(--h) var(--l), 100% 50%, var(--h) var(--h), 50% 100%, var(--l) var(--h), 0% 50%, var(--l) var(--l));
             }
             
-            @media(min-width: 1000px) {
+            @media(max-width: 400px) {
+                main {
+                    padding-top: 30px;
+                }
+                
                 .higher {
-                    width: 800px;
-                    max-width: 800px;
+                    padding: 7%;
+                    width: 90%;
+                }
+            }
+            
+            @media(min-width: 500px) {
+                editable-profile-image {
+                    min-width: 50%;
+                    height: 50%;
+                    width: 50%;
+                }
+                
+                .column {
+                    padding: 10px;
+                }
+
+                .column *::part(container) {
+                    display: flex;
+                    flex-direction: column;
+                    line-height: 1.2em;
+                }
+                
+                #top {
+                    padding: 5% 8%;
+                    flex-direction: row;
+                    justify-content: space-between;
+                }
+                
+                #info-box {
+                    margin-left: 5%;
+                }
+
+                #under-name {
+                    display: flex;
+                }
+            }
+            
+            @media(min-width: 1200px) {
+                .higher {
+                    width: 1000px;
+                    max-width: 1000px;
                     padding: 50px;
                 }
                 
                 #about {
-                    max-width: 560px;
+                    max-width: 700px;
                 }
             }
         `
