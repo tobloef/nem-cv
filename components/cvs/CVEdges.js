@@ -22,13 +22,14 @@ export default class CVEdges extends AbstractCV {
     get html() {
         return `
             <main>
+                <!-- Top section, contains picture and info -->
                 <section id="top" class="higher">
                     <${EditableProfileImage.elementName} 
                             class="octagon" 
                             aspect-ratio="1" 
                             content-key="picture" 
                             content-type="component"
-                            tabindex="0">
+                            tabindex="0"> 
                     </${EditableProfileImage.elementName}>
                     <div id="info-box">
                         <div id="name-box">
@@ -41,6 +42,7 @@ export default class CVEdges extends AbstractCV {
                                         multiline="false">
                             </editable-text>
                         </div>
+                        <!-- For bunching together info under name -->
                         <div id="under-name">
                             <div class="column">
                                 <h2>Info</h2>
@@ -158,6 +160,7 @@ export default class CVEdges extends AbstractCV {
             
             main {
                 padding-top: 70px;
+                /* align all items in column */
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -165,11 +168,13 @@ export default class CVEdges extends AbstractCV {
             
             h1, h2 {
                 font-family: var(--h1);
+                /* headings should have some spacing between letters */
                 letter-spacing: 0.2em;
                 margin-bottom: 0.5em;
             }
             
             ul {
+                /* Give lists back their list disc after reset.css.js removed them */
                 list-style-type: disc;
                 color: black;
                 margin-left: 1em;
@@ -181,6 +186,7 @@ export default class CVEdges extends AbstractCV {
                 margin-bottom: 1em;
             }
 
+            /* "higher" refers to z-axis space as can be seen in the mock-up */
             .higher {
                 background-color: #99B2B4;
                 padding: 5%;
@@ -192,10 +198,12 @@ export default class CVEdges extends AbstractCV {
             }
 
             .lower {
+                /* An artifact of an attempt to change the low contrast text color */
                 --editable-empty-text-color: #aaa;
                 
                 color: white;
                 background-color: #3F3F3F;
+                /* Center items on column */
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -249,6 +257,7 @@ export default class CVEdges extends AbstractCV {
             }
             
             #name-box {
+                /* Make text box wrapping */
                 word-wrap: break-word;
                 max-width: 100%;
                 padding: 15px;
@@ -275,7 +284,7 @@ export default class CVEdges extends AbstractCV {
             
             .octagon {
                 /* Heavily inspired by https://stackoverflow.com/questions/19418486/hexagon-shape-with-a-border-outline */
-                /* Clips the content to a octagon */
+                /* Clips the content to an octagon */
                 --l: 14.645%;
                 --h: 85.355%;
                 -webkit-clip-path: polygon(50% 0%, var(--h) var(--l), 100% 50%, var(--h) var(--h), 50% 100%, var(--l) var(--h), 0% 50%, var(--l) var(--l));
@@ -283,10 +292,13 @@ export default class CVEdges extends AbstractCV {
             }
             
             @media(max-width: 400px) {
+                /* Make top padding less extreme on narrow screens */
                 main {
                     padding-top: 30px;
                 }
                 
+                /* Make content go further towards the edges */
+                /* such that more content can fit */
                 .higher {
                     padding: 7%;
                     width: 90%;
@@ -310,6 +322,8 @@ export default class CVEdges extends AbstractCV {
                     line-height: 1.2em;
                 }
                 
+                /* Make top be compressed vertically instead of 
+                   some long list on mobile platforms           */
                 #top {
                     padding: 5% 8%;
                     flex-direction: row;
@@ -326,6 +340,7 @@ export default class CVEdges extends AbstractCV {
             }
             
             @media(min-width: 1200px) {
+                /* Cap width out on desktop platforms */
                 .higher {
                     width: 1000px;
                     max-width: 1000px;

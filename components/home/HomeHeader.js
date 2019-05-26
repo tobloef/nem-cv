@@ -4,7 +4,6 @@ import CustomButton from "../shared/CustomButton.js";
 import paths from "../../lib/constants/paths.js";
 import {wait} from "../../lib/wait.js";
 
-//this should probably be renamed to landingComponent or something similar
 export default class HomeHeader extends BaseComponent {
     usedComponents = [
         RouterLink, CustomButton

@@ -13,8 +13,9 @@ export default class RouterLink extends BaseComponent {
             url = Router.prefix + url;
         }
         return `<a href="${url}" ${this.newTab ? "target='_blank' rel='noopener noreferrer'" : ""}>
-          <slot></slot>
-        </a>`;
+                    <slot></slot>
+                </a>
+        `;
     };
 
     script = () => {
