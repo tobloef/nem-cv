@@ -7,7 +7,9 @@ export default class Logo extends BaseComponent {
         RouterLink
     ];
 
-    static observedAttributes = ["color"];
+    static observedAttributes = [
+        "color"
+    ];
 
     // language=HTML
     get html() {

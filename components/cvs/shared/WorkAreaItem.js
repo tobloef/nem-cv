@@ -47,7 +47,6 @@ export default class WorkAreaItem extends BaseComponent {
     setContent = (content) => {
         if (this.span != null) {
             this.span.innerText = content || this.placeholder;
-            this.updateValidationStyle();
         }
         this.greyIfDefault();
     };

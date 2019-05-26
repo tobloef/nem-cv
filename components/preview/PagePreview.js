@@ -2,24 +2,16 @@ import BaseComponent from "../BaseComponent.js";
 import {getStorageItem} from "../../lib/storage-helper.js";
 import Router from "../../lib/Router.js";
 import templates from "../../lib/constants/templates.js";
-import paths from "../../lib/constants/paths.js";
 import RouterLink from "../shared/RouterLink.js";
+import Logo from "../shared/Logo.js";
 
 export default class PagePreview extends BaseComponent {
     usedComponents = [
         RouterLink,
+        Logo,
         // Automatically add all CV template components
         ...Object.keys(templates).map(t => templates[t].class)
     ];
-
-    // language=HTML
-    get html() {
-        return `
-            <router-link>
-                <img src="${paths["logo-white"]}">
-            </router-link>
-        `
-    }
 
     script = () => {
         // Load CV data
@@ -51,9 +43,13 @@ export default class PagePreview extends BaseComponent {
         // Insert the CV into the page
         this.shadowRoot.innerHTML = "";
         this.shadowRoot.appendChild(cvElement);
-        // Add the content
+        // Add the content to the CV
         cvElement.setContent(content);
-        this.shadowRoot.innerHtml += this.html;
+        // Insert a watermark
+        const watermark = document.createElement(Logo.elementName);
+        watermark.setAttribute("color", "black");
+        watermark.classList.add("watermark");
+        this.shadowRoot.appendChild(watermark);
     };
 
     get css() {
@@ -63,6 +59,13 @@ export default class PagePreview extends BaseComponent {
                 position: fixed;
                 right: 0;
                 bottom: 0;
+            }
+            
+            .watermark {
+                position: fixed;
+                right: 20px;
+                bottom: 20px;
+                opacity: 0.5;
             }
         `
     }
