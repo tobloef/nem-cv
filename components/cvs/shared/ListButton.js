@@ -6,7 +6,6 @@ export default class ListButton extends BaseComponent {
         "icon",
         "diameter"
     ];
-    usedComponents = [];
 
     // language=HTML
     get html() {
@@ -24,9 +23,7 @@ export default class ListButton extends BaseComponent {
             }
             this.onClick();
         });
-    }
-
-    externalStyles = [];
+    };
 
     // language=CSS
     get css() {

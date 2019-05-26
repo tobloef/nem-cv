@@ -26,12 +26,16 @@ export default class EditableList extends BaseComponent {
         // Add the append item button
         const slot = this.shadowRoot.querySelector(`slot[name="append-button"]`);
         const appendButton = (slot.assignedNodes() || [])[0];
-        appendButton.onClick = this.addItem;
+        if (appendButton != null) {
+            appendButton.onClick = this.addItem;
+        }
 
         // Add the Remove item button
         const slot2 = this.shadowRoot.querySelector(`slot[name="remove-button"`);
         const removeButton = (slot2.assignedNodes() || [])[0];
-        removeButton.onClick = this.remove;
+        if (appendButton) {
+            removeButton.onClick = this.remove;
+        }
 
         //if startingAmount is set, insert the given amount of items
         for (let i = 0; i < (this.startingAmount || 0); i++) {
@@ -96,7 +100,9 @@ export default class EditableList extends BaseComponent {
         this.removeAll();
         for (const item of content) {
             const element = this.addItem();
-            element.setContent(item);
+            if (element != null) {
+                element.setContent(item);
+            }
         }
     };
 

@@ -25,10 +25,11 @@ export default class ColorList extends BaseComponent {
             element.setAttribute("background-color", colorScheme.backgroundColor);
             element.setAttribute("accent-color", colorScheme.accentColor);
             element.setAttribute("extra-background-color", colorScheme.extraBackgroundColor);
-            new ResizeObserver(() => {
+            let resizeObserver = new ResizeObserver(() => {
                 element.style.height = element.clientWidth + "px";
                 element.resizeFont();
-            }).observe(element);
+            });
+            resizeObserver.observe(element);
             this.shadowRoot.appendChild(element);
         }
     };

@@ -1,5 +1,4 @@
 import BaseComponent from "../BaseComponent.js";
-import wait from "../../lib/wait.js";
 import whenReady from '../../lib/whenReady.js';
 import RouterLink from "../shared/RouterLink.js";
 import CustomButton from "../shared/CustomButton.js";
@@ -354,7 +353,7 @@ export default class PageHome extends BaseComponent {
 
     _handleRotateColorWheel() {
         const wheel = this.shadowRoot.querySelector(".color-wheel");
-        document.addEventListener('scroll', e => {
+        document.addEventListener("scroll", e => {
             const angle = (window.pageYOffset / 7) % 360;
             wheel.style.transform = `rotate(${angle}deg)`;
         })
