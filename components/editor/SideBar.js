@@ -33,9 +33,6 @@ export default class SideBar extends BaseComponent {
     };
 
     toggle = () => {
-        //const toggle = this.shadowRoot.querySelector("side-toggle");
-        //toggle.toggle();
-
         // Get valueless attribute "open" and toggle it based on if it is there
         const open = this.getAttribute("open");
         if (open != null) {

@@ -48,7 +48,9 @@ export default class ColorList extends BaseComponent {
                 margin: 10px;
             }
 
-            color-holder:hover {
+            color-holder:hover,
+            color-holder:active,
+            color-holder:focus {
                 box-shadow: hsla(0, 0%, 60%, 1) 0 0 7px 0;
             }
 

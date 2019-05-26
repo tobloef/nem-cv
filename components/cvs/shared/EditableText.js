@@ -49,16 +49,20 @@ export default class EditableText extends BaseComponent {
 
     onFocus = (e) => {
         this.node.classList.remove("empty-text");
-        this.node.style.minWidth = this.node.getBoundingClientRect().width + "px"; //keeps the component from getting too small while the user hasn't written anything
-        if (this.node.innerText === this.placeholder) {//if the text contains placeholder content, empty it
+        // Keeps the component from getting too small while the user hasn't written anything
+        this.node.style.minWidth = this.node.getBoundingClientRect().width + "px";
+        // If the text contains placeholder content, empty it
+        if (this.node.innerText === this.placeholder) {
             this.node.innerText = "";
         }
         this.node.classList.remove("error");
     };
 
     focusOut = (e) => {
-        this.node.style.minWidth = "0"; //allow the item to shrink if nescessary
-        if (this.node.innerText === "") { //replace the placeholder if needed
+        // Allow the item to shrink if necessary
+        this.node.style.minWidth = "0";
+        // Replace the placeholder if needed
+        if (this.node.innerText === "") {
             this.node.innerText = this.placeholder;
             this.node.classList.add("empty-text");
         }
@@ -66,7 +70,7 @@ export default class EditableText extends BaseComponent {
     };
 
     keyPress = (e) => {
-        //allows the item to shrink to fit content if the user has started typing.
+        // Allows the item to shrink to fit content if the user has started typing.
         if (this.node.innerText !== "") {
             this.node.style.minWidth = "0";
         }
@@ -91,7 +95,7 @@ export default class EditableText extends BaseComponent {
     };
 
     updateValidationStyle = () => {
-        //update styling to indicate if there is an error with the element
+        // Update styling to indicate if there is an error with the element
         if (this.validate() != null) {
             this.node.classList.add("error");
         } else {
@@ -101,7 +105,7 @@ export default class EditableText extends BaseComponent {
 
     script = () => {
         this.node = this.shadowRoot.querySelector("#content");
-        //if we are not editing, and the content of the component hasn't been set, remove placeholders
+        // if we are not editing, and the content of the component hasn't been set, remove placeholders
         if (!BaseComponent.editMode && this.node.innerText === this.placeholder) {
             this.placeholder = "";
             this.node.setAttribute("aria-placeholder", "");
@@ -109,7 +113,7 @@ export default class EditableText extends BaseComponent {
             this.node.innerText = "";
 
         }
-        //add event listernes
+        // Add event listernes
         this.node.addEventListener("focus", this.onFocus);
         this.node.addEventListener("focusout", this.focusOut);
         this.node.addEventListener("keypress", this.keyPress);
@@ -150,6 +154,10 @@ export default class EditableText extends BaseComponent {
                 display: flex;
                 align-items:center;
                 ${BaseComponent.editMode ? "cursor: pointer;" : ""}
+            }
+
+            *[contenteditable="false"] {
+                cursor: default;
             }
             
             .error {

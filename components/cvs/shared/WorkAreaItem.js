@@ -23,7 +23,7 @@ export default class WorkAreaItem extends BaseComponent {
     };
 
     script = () => {
-        //if we are editing, add event listener for dropdown functionality
+        // If we are editing, add event listener for dropdown functionality
         this.span = this.shadowRoot.querySelector(".dropdown");
         if (BaseComponent.editMode) {
             this.dropdown.setAttribute("part", "dropdown");
@@ -91,13 +91,13 @@ export default class WorkAreaItem extends BaseComponent {
     };
 
     swapToDropdown = () => {
-        //swaps the span element with the dropdown element so that the user can choose a work area
+        // Swaps the span element with the dropdown element so that the user can choose a work area
         this.shadowRoot.removeChild(this.span);
         this.shadowRoot.appendChild(this.dropdown);
     };
 
     swapToSpan = () => {
-        //swaps the dropdown element with the swap element so that the cv looks static again
+        // Swaps the dropdown element with the swap element so that the cv looks static again
         const value = this.dropdown.value || this.placeholder;
         this.shadowRoot.removeChild(this.dropdown);
         this.shadowRoot.appendChild(this.span);
