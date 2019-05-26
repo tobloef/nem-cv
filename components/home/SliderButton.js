@@ -33,7 +33,9 @@ export default class SliderButton extends BaseComponent {
                 width: var(--size);
                 height: var(--size);
             }
-            button:hover {
+            button:hover,
+            button:active,
+            button:focus {
                 cursor: pointer;
                 background: var(--hover-color);
             }

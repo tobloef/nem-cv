@@ -7,14 +7,23 @@ export default class RouterLink extends BaseComponent {
         "new-tab"
     ];
 
+    static clickableChildren = [
+        'a', 'custom-button', 'button'
+    ];
+
     get html() {
         let url = this.href;
         if (this.href !== "/") {
             url = Router.prefix + url;
         }
-        return `<a href="${url}" ${this.newTab ? "target='_blank' rel='noopener noreferrer'" : ""}>
-          <slot></slot>
-        </a>`;
+
+        const tabindex = this.getFirstClickableChild() == undefined ? "0" : "-1";
+
+        return `
+            <a tabindex="${tabindex}" href="${url}" ${this.newTab ? "target='_blank' rel='noopener noreferrer'" : ""}>
+                <slot></slot>
+            </a>
+        `;
     };
 
     script = () => {
@@ -27,6 +36,14 @@ export default class RouterLink extends BaseComponent {
                 return false;
             }
         });
+
+        a.addEventListener('focus', evt => {
+            const child = this.getFirstClickableChild();
+
+            if(child != undefined && child !== evt.relatedTarget) {
+                child.focus();
+            }
+        });
     };
 
     get css() {
@@ -36,5 +53,19 @@ export default class RouterLink extends BaseComponent {
                 text-decoration: none;
             }
         `
+    }
+
+    getFirstClickableChild() {
+        for(let child of this.children) {
+            const name = child.tagName.toLowerCase();
+
+            const tabIndex = child.getAttribute('tabindex');
+            const hasManualTapIndex = !(tabIndex == null || tabIndex == "-1");
+
+            if(RouterLink.clickableChildren.includes(name) || hasManualTapIndex) {
+                return child;
+            }
+        }
+        return undefined;
     }
 }

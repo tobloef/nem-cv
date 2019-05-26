@@ -57,7 +57,6 @@ export default class PageTemplates extends BaseComponent {
                 margin: 0.7em 0;
                 max-width: unset;
                 font-weight: normal;
-                text-decoration: underline;
             }
 
             nav-bar {

@@ -36,11 +36,11 @@ export default class ListButton extends BaseComponent {
                 background: none;
                 cursor: pointer;
             }
-            #button:hover {
+            #button:hover,
+            #button:active,
+            #button:focus {
               transform: scale(1.2);
                 cursor: pointer;
-            }
-            #button:active {
             }
         `
     };
