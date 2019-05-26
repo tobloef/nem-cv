@@ -51,8 +51,6 @@ export default class EditableText extends BaseComponent {
         this.node.style.minWidth = this.node.getBoundingClientRect().width + "px"; //keeps the component from getting too small while the user hasn't written anything
         if (this.node.innerText === this.placeholder) {//if the text contains placeholder content, empty it
             this.node.innerText = "";
-        } else {
-            //this.selectTextInNode(); //todo figure out if this should be deleted or not.
         }
         this.node.classList.remove("error");
     };

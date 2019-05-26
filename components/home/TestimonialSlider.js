@@ -1,5 +1,4 @@
 import BaseComponent from "../BaseComponent.js";
-import wait from '../../lib/wait.js';
 import SliderButton from './SliderButton.js';
 
 export default class TestimonialSlider extends BaseComponent {
@@ -21,27 +20,27 @@ export default class TestimonialSlider extends BaseComponent {
             text : "Det tog kun 5 minutter. Nu har jeg et personligt CV, som har skaffet mig tre jobsamtaler alene den " +
                 "sidste uge. Det er vanvttigt fedt, at jeg selv kan vælge farver og layout. Det giver så mange muligheder!",
             person: "Jonas",
-            image: "/img/testimonials/testimonial1.jpg",
+            image: "/img/testimonials/testimonial1.webp",
             alt: "Author of Testimonial 1",
         },
         {
             text : "Jeg skulle søge mit drømmejob, og ledte med lys og lygte efter et godt værktøj til at lave et CV " +
                 "som var flot, moderne og simpelt at sammensætte. Så fik jeg anbefalet NemCV og jeg har sjældent været så tilfreds med et produkt.",
             person: "Sanne",
-            image: "/img/testimonials/testimonial2.jpg",
+            image: "/img/testimonials/testimonial2.webp",
             alt: "Author of Testimonial 2",
         },
         {
             text : "Et CV er meget vigtigt for din profil på arbejdsmarkedet, så det er essentielt at have et godt værktøj " +
                 "når man skal lave det. NemCV må i allerhøjeste grad påstås at opfylde det kriterie, og er derudover lækkert og nemt at bruge",
             person: "Helene",
-            image: "/img/testimonials/testimonial3.jpg",
+            image: "/img/testimonials/testimonial3.webp",
             alt: "Author of Testimonial 3",
         },
         {
             text : "Før var jeg tit træt og deprimeret, men så prøvede jeg NemCV. Nu har jeg det meget bedre. Tak for hjælpen NemCV!",
             person: "Anders",
-            image: "/img/testimonials/testimonial4.jpg",
+            image: "/img/testimonials/testimonial4.webp",
             alt: "Author of Testimonial 4",
         },
     ];
@@ -298,6 +297,7 @@ export default class TestimonialSlider extends BaseComponent {
         img.classList.add('testimonial-image');
         img.src = testimonial.image;
         img.setAttribute('alt', testimonial.alt);
+        img.setAttribute('loading', 'lazy');
 
         return img;
 

@@ -7,34 +7,40 @@ export default class AbstractCV extends BaseComponent {
     usedComponents = [];
 
     commonScript = () => {
-        //assign mandatory attirbutes to expperienceList
+        // Assign mandatory attirbutes to expperienceList
         const experienceList = this.shadowRoot.getElementById("experience-list");
-        experienceList.itemAttributes = {
-            "experience-type": "Firma",
-            "end-date-optional": ""
-        };
-        //assigns seperator for where (a component in ExperienceItem
-        if (this.experienceWhereSeparator !== null) {
-            experienceList.itemAttributes["where-separator"] = this.experienceWhereSeparator;
+        if (experienceList != null) {
+            experienceList.itemAttributes = {
+                "experience-type": "Firma",
+                "end-date-optional": ""
+            };
+            // Assigns seperator for where (a component in ExperienceItem
+            if (this.experienceWhereSeparator !== null) {
+                experienceList.itemAttributes["where-separator"] = this.experienceWhereSeparator;
+            }
+            experienceList.render();
         }
-        experienceList.render();
 
         //Does the same as above for educationList
         const educationList = this.shadowRoot.getElementById("education-list");
-        educationList.itemAttributes = {
-            "experience-type": "Uddannelsessted"
-        };
-        if (this.experienceWhereSeparator !== null) {
-            educationList.itemAttributes["where-separator"] = this.educationWhereSeparator;
+        if (educationList) {
+            educationList.itemAttributes = {
+                "experience-type": "Uddannelsessted"
+            };
+            if (this.experienceWhereSeparator !== null) {
+                educationList.itemAttributes["where-separator"] = this.educationWhereSeparator;
+            }
+            educationList.render();
         }
-        educationList.render();
 
         const sectorList = this.shadowRoot.getElementById("sector-list");
-        sectorList.itemAttributes = {
+        if (sectorList) {
+            sectorList.itemAttributes = {
             "content-type": "component",
             "tabindex": "0"
         };
-        sectorList.render();
+            sectorList.render();
+        }
     };
 
     educationWhereSeparator = null;

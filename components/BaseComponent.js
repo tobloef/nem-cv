@@ -1,6 +1,6 @@
 import {classNameToElementName, kebabToCamelCase} from "../lib/string-utils.js";
-import {resetCSSStyleSheet} from "../lib/constants/reset-css.js";
-import {colorsToStyleSheet, stringToStyleSheet} from "../lib/stylesheet-utils.js";
+import {resetCSSString} from "../lib/constants/reset-css.js";
+import {colorsToCSS, stringToStyleSheet} from "../lib/stylesheet-utils.js";
 import templateStyles, {getDefaultTemplateId} from "../lib/constants/template-styles.js";
 import {getDefaultColors} from "../lib/constants/colors.js";
 
@@ -8,6 +8,8 @@ export default class BaseComponent extends HTMLElement {
     static templateId = null;
     static colors = null;
     static editMode = false;
+
+    _elementName = null;
 
     constructor() {
         super();
@@ -40,23 +42,25 @@ export default class BaseComponent extends HTMLElement {
         console.debug(`Rendering DOM of ${this.constructor.name}`);
         this.shadowRoot.innerHTML = this.html;
         if (this.script != null) {
+            console.debug(`Running script of ${this.constructor.name}`);
             this.script();
+            console.debug(`Finished running script of ${this.constructor.name}`);
         }
+        console.debug(`Finished rendering DOM of ${this.constructor.name}`);
     };
 
     updateStyles() {
         console.debug(`Updating styles of ${this.constructor.name}`);
-        const styleSheets = [];
+        let styleSheets = "";
         // Reset CSS
-        styleSheets.push(resetCSSStyleSheet);
+        styleSheets += resetCSSString;
         // Colors
         let colorScheme = BaseComponent.colors;
         if (colorScheme == null) {
             colorScheme = getDefaultColors();
         }
-        const colorsStyleSheet = colorsToStyleSheet(colorScheme);
-        if (colorsStyleSheet != null) {
-            styleSheets.push(colorsStyleSheet);
+        if (colorScheme != null) {
+            styleSheets += colorsToCSS(colorScheme);
         }
         // Template
         let templateId = BaseComponent.templateId;
@@ -65,16 +69,15 @@ export default class BaseComponent extends HTMLElement {
         }
         const template = templateStyles[templateId];
         if (template != null) {
-            const templateStyleSheet = stringToStyleSheet(template);
-            styleSheets.push(templateStyleSheet);
+            styleSheets += template;
         }
         // Component style
         if (this.css != null) {
-            const styleSheet = stringToStyleSheet(this.css);
-            styleSheets.push(styleSheet);
+            styleSheets += this.css;
         }
         // Set stylesheets
-        this.shadowRoot.adoptedStyleSheets = styleSheets;
+        this.shadowRoot.adoptedStyleSheets = [stringToStyleSheet(styleSheets)];
+        console.debug(`Finished updating styles of ${this.constructor.name}`);
     };
 
     getContent(content) {
@@ -82,7 +85,7 @@ export default class BaseComponent extends HTMLElement {
     };
 
     _recurseGetContent(content, element) {
-        console.debug("Setting content", content, "on children of", element);
+        console.debug("Setting content", content, "on children of", element, "...");
         for (const child of element.children) {
             let newContent = null;
             const contentType = child.getAttribute("content-type");
@@ -126,6 +129,7 @@ export default class BaseComponent extends HTMLElement {
                 this._recurseGetContent(content, child);
             }
         }
+        console.debug("Finished setting content", content, "on children of", element, "...");
     };
 
     setContent(content) {
@@ -148,8 +152,7 @@ export default class BaseComponent extends HTMLElement {
     };
 
     validate() {
-        const result = this._recurseValidate(this.shadowRoot);
-        return result;
+        return this._recurseValidate(this.shadowRoot);
     };
 
     _recurseValidate = (element) => {

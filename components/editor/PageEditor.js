@@ -7,7 +7,7 @@ import CustomButton from "../shared/CustomButton.js";
 import Logo from "../shared/Logo.js";
 import {postCV} from "../../lib/api.js";
 import templates from "../../lib/constants/templates.js";
-import whenReady from "../../lib/whenReady.js";
+import {whenReady} from "../../lib/wait.js";
 
 export default class PageEditor extends BaseComponent {
     cv = null;
@@ -45,6 +45,7 @@ export default class PageEditor extends BaseComponent {
         if (templateId == null || templates[templateId] == null) {
             return Router.navigate("/templates");
         }
+        BaseComponent.templateId = templateId;
         this._setCV(templates[templateId]);
         // Set up sidebar event listeners
         const sidebar = this.shadowRoot.querySelector("side-bar");
@@ -85,9 +86,9 @@ export default class PageEditor extends BaseComponent {
         if (getStorageItem("cv-content") == null) {
             return;
         }
-        /*if (!confirm("Der blev fundet et eksisterende CV fra tidligere brug. Ønsker du at bruge dette?")) {
+        if (!confirm("Der blev fundet et eksisterende CV fra tidligere brug. Ønsker du at bruge dette?")) {
             setStorageItem("cv-content", null);
-        }*/
+        }
     };
 
     _setCV = (template) => {
@@ -131,8 +132,9 @@ export default class PageEditor extends BaseComponent {
             return;
         }
         // Navigate to the cv page
-        alert("Dit CV blev sendt til serveren.");
-        Router.navigate("/preview");
+        if (confirm("Dit CV blev sendt til serveren. Vil du gerne se dit færdige CV nu?")) {
+            Router.navigate("/preview")
+        }
     };
 
     // language=CSS

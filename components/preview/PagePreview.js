@@ -20,7 +20,6 @@ export default class PagePreview extends BaseComponent {
     createPreview = (content, templateId, colors) => {
         // Check if data is valid
         if (content == null || templateId == null) {
-            console.log(content, templateId, colors);
             alert("Intet CV at vise, omdirigerer dig til forsiden.");
             Router.navigate("/");
             return;

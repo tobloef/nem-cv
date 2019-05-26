@@ -44,8 +44,10 @@ export default class WorkAreaItem extends BaseComponent {
     };
 
     setContent = (content) => {
-        this.span.innerText = content || this.placeholder;
-        this.updateValidationStyle();
+        if (this.span != null) {
+            this.span.innerText = content || this.placeholder;
+            this.updateValidationStyle();
+        }
     };
 
     validate = () => {
