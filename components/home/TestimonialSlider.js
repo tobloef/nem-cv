@@ -46,7 +46,7 @@ export default class TestimonialSlider extends BaseComponent {
         },
     ];
 
-    slideSpeed = 4000;
+    slideSpeed = 7000;
 
     _shouldBeRunning = false;
 
