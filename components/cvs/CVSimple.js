@@ -84,9 +84,6 @@ export default class CVSimple extends AbstractCV {
                 margin: 0;
                 color: var(--font-color);
             }
-            li {
-                user-select: none;
-            }
 
             .divider {
                 display: flex;
@@ -132,6 +129,12 @@ export default class CVSimple extends AbstractCV {
             ${EditableList.elementName}::part(list) {
                 margin-bottom: 0.8em;
             }
+
+            ${EditableList.elementName}#sector-list::part(list) {
+                display: flex;
+                align-items: center;
+            }
+            
             ${EditableList.elementName}::part(list-item) {
                 margin-bottom: 0.8em;
                 font-family: var(--p),sans-serif;
