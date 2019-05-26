@@ -47,7 +47,6 @@ export default class EditableProfileImage extends BaseComponent {
         }
         this.setAttribute("src", content);
         this.render();
-        this.updateValidationStyle();
     };
 
     validate = (url) => {

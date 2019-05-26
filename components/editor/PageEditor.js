@@ -38,14 +38,16 @@ export default class PageEditor extends BaseComponent {
     };
 
     script = () => {
-        const hasVisitedBefore = getStorageItem("has-visited-before");
-        if (!hasVisitedBefore) {
-            alert("For at ændre dine oplysninger skal du blot trykke på den tekst du vil redigere, så kan du ændre den direkte i dit CV. Nemt!");
-            setStorageItem("has-visited-before", true);
-        }
+        setTimeout(() => {
+            const hasVisitedBefore = getStorageItem("has-visited-before");
+            if (!hasVisitedBefore) {
+                alert("For at ændre dine oplysninger skal du blot trykke på den tekst du vil redigere, så kan du ændre den direkte i dit CV. Nemt!");
+                setStorageItem("has-visited-before", true);
+            }
+            this._checkForExistingCV();
+        }, 100);
 
         BaseComponent.editMode = true;
-        this._checkForExistingCV();
         // Try to create CV with template or redirect to choose template
         const templateId = getStorageItem("template-id");
         if (templateId == null || templates[templateId] == null) {
@@ -101,10 +103,13 @@ export default class PageEditor extends BaseComponent {
         if (template == null) {
             return;
         }
+        // Save the CV if needed, before we re-render
         if (this.cv != null) {
             // Set CV content in local storage
             const content = this.cv.getContent();
-            setStorageItem("cv-content", content);
+            if (content != null) {
+                setStorageItem("cv-content", content);
+            }
         }
         // Create the CV element
         const cvContainer = this.shadowRoot.getElementById("cv-container");
@@ -139,7 +144,7 @@ export default class PageEditor extends BaseComponent {
             await postCV(content);
         } catch (error) {
             console.error(error);
-            alert("Der opstod en fejl da CV'et skulle sendes til serveren. Dit CV vil blive gemt lokalt.");
+            alert("Der opstod en fejl da CV'et skulle sendes til serveren (se konsollen for detaljer). Dit CV vil blive gemt lokalt.");
             return;
         }
         // Navigate to the cv page

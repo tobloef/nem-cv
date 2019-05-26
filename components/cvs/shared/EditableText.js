@@ -31,22 +31,6 @@ export default class EditableText extends BaseComponent {
         `;
     }
 
-    selectTextInNode = () => {
-        if (document.body.createTextRange) {
-            const range = document.body.createTextRange();
-            range.moveToElementText(this.node);
-            range.select();
-        } else if (window.getSelection) {
-            const selection = window.getSelection();
-            const range = document.createRange();
-            range.selectNodeContents(this.node);
-            selection.removeAllRanges();
-            selection.addRange(range);
-        } else {
-            console.warn("Could not select text in node: Unsupported browser.");
-        }
-    };
-
     onFocus = (e) => {
         this.node.classList.remove("empty-text");
         // Keeps the component from getting too small while the user hasn't written anything
@@ -141,7 +125,6 @@ export default class EditableText extends BaseComponent {
         if (this.node.innerText !== this.placeholder) {
             this.node.classList.remove("empty-text");
         }
-        this.updateValidationStyle();
     };
 
     // language=CSS
