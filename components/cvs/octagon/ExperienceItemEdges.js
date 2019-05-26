@@ -72,7 +72,8 @@ export default class ExperienceItemEdges extends ExperienceItem {
                 padding: 34px;
                 background-color: #F3F3F3;
                 max-width: 100%;
-
+                background-color: var(--background-color);
+                color: var(--font-color);;
                 flex-basis: 0;
                 margin: 5px;
             }

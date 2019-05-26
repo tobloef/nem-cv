@@ -165,6 +165,7 @@ export default class CVEdges extends AbstractCV {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+                background-color: var(--background-color);
             }
             
             h1, h2 {
@@ -189,7 +190,7 @@ export default class CVEdges extends AbstractCV {
 
             /* "higher" refers to z-axis space as can be seen in the mock-up */
             .higher {
-                background-color: #99B2B4;
+                background-color: var(--extra-background-color);
                 padding: 5%;
                 width: 80%;
             }
@@ -202,8 +203,9 @@ export default class CVEdges extends AbstractCV {
                 /* An artifact of an attempt to change the low contrast text color */
                 --editable-empty-text-color: #aaa;
                 
-                color: white;
-                background-color: #3F3F3F;
+                /* Opposite colors due to inverted colorscheme on this element*/
+                color: var(--background-color);
+                background-color: var(--font-color);
                 /* Center items on column */
                 display: flex;
                 flex-direction: column;
@@ -229,6 +231,10 @@ export default class CVEdges extends AbstractCV {
                 display: inline-block;
             }
             
+            .facts {
+                color: var(--font-color);
+            }
+            
             *::part(container) {
                 display: flex;
                 flex-direction: row;
@@ -242,7 +248,7 @@ export default class CVEdges extends AbstractCV {
 
             .column *::part(list) {
                 list-style-type: disc;
-                color: black;
+                color: var(--font-color);
                 margin-left: 1em;
                 font-family: var(--p);
             }
@@ -263,12 +269,12 @@ export default class CVEdges extends AbstractCV {
                 max-width: 100%;
                 padding: 15px;
                 margin-bottom: 1em;
-                color: white;
+                color: var(--background-color);
                 --editable-empty-text-color: #ddd;
                 text-align: center;
                 letter-spacing: 0.2em;
                 text-transform: uppercase;
-                background-color: #595959;
+                background-color: var(--font-color);
             }
             
             #experiences {
@@ -337,6 +343,7 @@ export default class CVEdges extends AbstractCV {
 
                 #under-name {
                     display: flex;
+                    color: var(--font-color);
                 }
             }
             
