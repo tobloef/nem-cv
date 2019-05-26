@@ -1,4 +1,4 @@
-# NemCV - Gruppe 2
+# NemCV (in Danish)
 
 Dette projekt er oprettet til faget **Systematisk Design af Brugergrænseflader**
 på bachelor-studiet i **Softwareudvikling** hos **IT-universitetet i København**.  
