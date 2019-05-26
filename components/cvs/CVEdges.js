@@ -1,68 +1,148 @@
-import IntroBox from "./shared/IntroBox.js";
-import ExperienceItem from "./shared/ExperienceItem.js";
+import ExperienceItemEdges from "./octagon/ExperienceItemEdges.js";
 import WorkAreaItem from "./shared/WorkAreaItem.js";
 import ListButton from "./shared/ListButton.js";
 import EditableList from "./shared/EditableList.js";
 import AbstractCV from "./AbstractCV.js";
+import EditableText from "./shared/EditableText.js";
+import EditableProfileImage from "./shared/EditableProfileImage.js";
 
 export default class CVEdges extends AbstractCV {
     static observedAttributes = [];
 
     usedComponents = [
-        IntroBox,
-        ExperienceItem,
+        ExperienceItemEdges,
+        EditableProfileImage,
         WorkAreaItem,
         ListButton,
-        EditableList
+        EditableList,
+        EditableText
     ];
 
     // language=HTML
     get html() {
         return `
             <main>
-                <section class="higher">
-                    <${EditableList.elementName}
-                        id="sector-list"
-                        content-key="sectors"
-                        content-type="array"
-                        class="work-areas"
-                        item-component="${WorkAreaItem.elementName}"
-                        separator=", "
-                        starting-amount="1"
-                        name="Brancher"
-                    >
-                        <list-button icon="add" slot="append-button"></list-button>
-                        <list-button icon="remove" slot="remove-button"></list-button>
-                    </${EditableList.elementName}>
+                <section id="top" class="higher">
+                    <${EditableProfileImage.elementName} 
+                            class="octagon" 
+                            aspect-ratio="1" 
+                            content-key="picture" 
+                            content-type="component"
+                            tabindex="0">
+                    </${EditableProfileImage.elementName}>
+                    <div id="info-box">
+                        <div id="name-box">
+                            <editable-text
+                                        content-key="name"
+                                        content-type="component"
+                                        class="name"
+                                        placeholder="DIT FULDE NAVN"
+                                        element="h1"
+                                        multiline="false">
+                            </editable-text>
+                        </div>
+                        <div id="under-name">
+                            <div class="column">
+                                <h2>Info</h2>
+                                <ul class="facts">
+                                    <li class="age">
+                                        <editable-text
+                                                validate-type="number"
+                                                content-key="age"
+                                                content-type="component"
+                                                placeholder="Din alder"
+                                                name="Alder"
+                                                element="p">
+                                        ></editable-text>
+                                    </li>
+                                    <li class="city">
+                                        <editable-text
+                                                validate-type="string"
+                                                content-key="city"
+                                                content-type="component"        
+                                                placeholder="Din by"
+                                                name="By"
+                                                element="p"
+                                        ></editable-text>
+                                    </li>
+                                    <li class="email">
+                                        <editable-text
+                                                validate-type="email"
+                                                placeholder="Din email" 
+                                                element="p"
+                                                content-key="email"
+                                                name="Email"
+                                                content-type="component"
+                                        ></editable-text>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="column">
+                                <h2>Brancher</h2>
+                                <${EditableList.elementName}
+                                        id="sector-list"
+                                        content-key="sectors"
+                                        content-type="array"
+                                        class="work-areas"
+                                        item-component="${WorkAreaItem.elementName}"
+                                        separator=", "
+                                        starting-amount="1"
+                                        name="Brancher"
+                                >
+                                    <list-button icon="add" slot="append-button" tabindex="0"></list-button>
+                                    <list-button icon="remove" slot="remove-button" tabindex="0"></list-button>
+                                </${EditableList.elementName}>
+                            </div>
+                        </div>
+                    </div>
                 </section>
+                
                 <section class="lower">
-                    
+                    <div id="about">
+                        <h1>OM MIG</h1>
+                        <editable-text
+                                validate-type="string"
+                                class="description"
+                                element="p"
+                                content-key="description"
+                                content-type="component"
+                                name="Beskrivelse"
+                                multiline
+                                placeholder="Her kan du skrive en kort beskrivelse af dig selv."
+                        </editable-text>
+                    </div>
                 </section>
-                <section class="higher">
-                    <h1>Erfaring</h1>
+                
+                <section id="experiences" class="higher">
+                    <div class="experience">
+                        <h2>ERFARING</h2>
                         <${EditableList.elementName}
                             id="experience-list"
                             content-key="employers"
                             content-type="array"
-                            item-component="${ExperienceItem.elementName}" 
+                            item-component="${ExperienceItemEdges.elementName}" 
                             starting-amount="1"
                             name="Erfaringer"
                         >
-                            <list-button icon="add" slot="append-button"></list-button>
-                            <list-button icon="remove" slot="remove-button"></list-button>
+                            <list-button icon="add" slot="append-button" tabindex="0"></list-button>
+                            <list-button icon="remove" slot="remove-button" tabindex="0"></list-button>
                         </${EditableList.elementName}>
-                    <h1>Uddannelse</h1>
+                    </div>
+                    
+                    <div class="experience">
+                        <h2>UDDANNELSE</h2>
                         <${EditableList.elementName}
                             id="education-list"
                             content-key="education"
                             content-type="array"
-                            item-component="${ExperienceItem.elementName}" 
+                            item-component="${ExperienceItemEdges.elementName}" 
                             starting-amount="1"
                             name="Uddannelser"
                         >
-                            <list-button icon="add" slot="append-button"></list-button>
-                            <list-button icon="remove" slot="remove-button"></list-button>
+                            <list-button icon="add" slot="append-button" tabindex="0"></list-button>
+                            <list-button icon="remove" slot="remove-button" tabindex="0"></list-button>
                         </${EditableList.elementName}>
+                    </div>
                 </section>
             </main>
         `;
@@ -71,26 +151,126 @@ export default class CVEdges extends AbstractCV {
     // language=CSS
     get css() {
         return `
-            .higher {
-                background-color: #99B2B4;
+            :host {
+                font-size: 1.2em;
+                --filter: sepia(100%) hue-rotate(-50deg);
             }
             
-            .lower {
-                background-color: #3F3F3F;
+            main {
+                padding-top: 70px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
             }
             
-            /* Styling for experience items */
+            h1, h2 {
+                font-family: var(--h1);
+                letter-spacing: 0.2em;
+                margin-bottom: 0.5em;
+            }
             
-            *::part(list-item) {
-                padding: 34px;
-                background-color: #F3F3F3;
+            ul {
+                list-style-type: disc;
+                color: black;
+                margin-left: 1em;
+            }
+            
+            editable-profile-image {
+                height: 80%;
+                width: 80%;
+                margin-bottom: 1em;
             }
 
-            *::part(list-item) div {
-                border-left: 5px solid black;
-                padding-left: 10px;
+            .higher {
+                background-color: #99B2B4;
+                padding: 5%;
+                width: 80%;
+            }
+
+            .higher li {
+                font-family: var(--p);
+            }
+
+            .lower {
+                --editable-empty-text-color: #aaa;
+                
+                color: white;
+                background-color: #3F3F3F;
                 display: flex;
-                flex-direction: column-reverse;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                padding: 1em;
+            }
+            
+            .experience {
+                margin-bottom: 2em;
+            }
+            
+            .column {
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 1em;
+                flex-grow: 0;
+                font-size: 0.9em;
+            }
+            
+            .work-areas {
+                display: inline-block;
+            }
+            
+            *::part(container) {
+                display: flex;
+                flex-direction: row;
+            }
+            
+            *::part(list) {
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: row;
+            }
+
+            .column *::part(list) {
+                list-style-type: disc;
+                color: black;
+                margin-left: 1em;
+                font-family: var(--p);
+            }
+            
+            *::part(buttons) {
+                padding: 5px;
+            }
+            
+            #top {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            #name-box {
+                word-wrap: break-word;
+                max-width: 100%;
+                padding: 15px;
+                margin-bottom: 1em;
+                color: white;
+                --editable-empty-text-color: #ddd;
+                text-align: center;
+                letter-spacing: 0.2em;
+                text-transform: uppercase;
+                background-color: #595959;
+            }
+            
+            #experiences {
+                display: flex;
+                flex-direction: column;
+            }
+            
+            #about {
+                min-width: 250px;
+                max-width: 55%;
+                margin-top: 2em; /* breaks principle on purpose to let boxes touch */
+                margin-bottom: 3em;
             }
             
             .octagon {
@@ -100,6 +280,61 @@ export default class CVEdges extends AbstractCV {
                 --h: 85.355%;
                 -webkit-clip-path: polygon(50% 0%, var(--h) var(--l), 100% 50%, var(--h) var(--h), 50% 100%, var(--l) var(--h), 0% 50%, var(--l) var(--l));
                 clip-path: polygon(50% 0%, var(--h) var(--l), 100% 50%, var(--h) var(--h), 50% 100%, var(--l) var(--h), 0% 50%, var(--l) var(--l));
+            }
+            
+            @media(max-width: 400px) {
+                main {
+                    padding-top: 30px;
+                }
+                
+                .higher {
+                    padding: 7%;
+                    width: 90%;
+                }
+            }
+            
+            @media(min-width: 500px) {
+                editable-profile-image {
+                    min-width: 50%;
+                    height: 50%;
+                    width: 50%;
+                }
+                
+                .column {
+                    padding: 10px;
+                }
+
+                .column *::part(container) {
+                    display: flex;
+                    flex-direction: column;
+                    line-height: 1.2em;
+                }
+                
+                #top {
+                    padding: 5% 8%;
+                    flex-direction: row;
+                    justify-content: space-between;
+                }
+                
+                #info-box {
+                    margin-left: 5%;
+                }
+
+                #under-name {
+                    display: flex;
+                }
+            }
+            
+            @media(min-width: 1200px) {
+                .higher {
+                    width: 1000px;
+                    max-width: 1000px;
+                    padding: 50px;
+                }
+                
+                #about {
+                    max-width: 700px;
+                }
             }
         `
     };

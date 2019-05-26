@@ -35,7 +35,10 @@ export default class AbstractCV extends BaseComponent {
 
         const sectorList = this.shadowRoot.getElementById("sector-list");
         if (sectorList) {
-            sectorList.itemAttributes = {"content-type": "component"};
+            sectorList.itemAttributes = {
+            "content-type": "component",
+            "tabindex": "0"
+        };
             sectorList.render();
         }
     };

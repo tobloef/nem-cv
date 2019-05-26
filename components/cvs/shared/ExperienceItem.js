@@ -12,6 +12,8 @@ export default class ExperienceItem extends BaseComponent {
         EditableText
     ];
 
+
+
     get html() {
         const experienceType = this.experienceType || "erfaring";
         let endDateValidation;
@@ -23,12 +25,12 @@ export default class ExperienceItem extends BaseComponent {
 
         // language=HTML
         return `
-            <div content-type="object" class="container" id="experience-container">
+            <div content-type="object" class="container" part="experience-item" id="experience-container">
                 <span class="divider where">
                     <${EditableText.elementName}
                             validate-type="string"
                             placeholder="${experienceType}"
-                            element="div"
+                            element="p"
                             content-key="name"
                             name="Navn på ${experienceType.toLowerCase()}"
                             content-type="component"
@@ -36,7 +38,7 @@ export default class ExperienceItem extends BaseComponent {
                     <${EditableText.elementName}
                             validate-type="string"
                             placeholder="Titel"
-                            element="div"
+                            element="p"
                             name="Titel hos ${experienceType.toLowerCase()}"
                             content-key="title"
                             content-type="component"
@@ -46,15 +48,15 @@ export default class ExperienceItem extends BaseComponent {
                     <${EditableText.elementName}
                             validate-type="date"
                             placeholder="Startdato"
-                            element="div"
+                            element="p"
                             name="Startdato"
                             content-key="from"
                             content-type="component"
-                    ></${EditableText.elementName}> -
+                    ></${EditableText.elementName}><p> - </p>
                     <${EditableText.elementName}
                             placeholder="Slutdato"
                             name="Slutdato"
-                            element="div"
+                            element="p"
                             content-key="to"
                             content-type="component"
                             ${endDateValidation}

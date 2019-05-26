@@ -11,6 +11,7 @@ export default class EditableText extends BaseComponent {
         "validate-type",
         "name",
         "trim-number"
+        "content-key"
     ];
 
     // language=HTML
@@ -19,8 +20,8 @@ export default class EditableText extends BaseComponent {
             <${this.element} 
                 id="content" 
                 class="empty-text"
-                part="inner" 
-                contenteditable="${BaseComponent.editMode}"
+                part="${this.contentKey}" 
+                contenteditable=${BaseComponent.editMode}
                 role="textbox" 
                 aria-placeholder="${this.placeholder}" 
                 data-placeholder="${this.placeholder}"
@@ -152,6 +153,18 @@ export default class EditableText extends BaseComponent {
                 background: rgba(255, 0, 0, 0.15);
                 text-decoration: underline;
                 text-decoration-color: red;
+            }
+            
+            h1 {
+                font-family: var(--h1);
+            }
+
+            h2 {
+                font-family: var(--h2);
+            }
+            
+            p {
+                font-family: var(--p);
             }
         `
     };

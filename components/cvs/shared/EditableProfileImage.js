@@ -99,8 +99,9 @@ export default class EditableProfileImage extends BaseComponent {
             }
             
             .error {
-                border: 2px solid red;
+                border: 2px solid hsl(0,100%,50%);
                 border-radius: 3px; 
+                filter: var(--filter);
             }
         `
     };
