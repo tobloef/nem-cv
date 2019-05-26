@@ -121,7 +121,6 @@ export default class HomeHeader extends BaseComponent {
             header {
                 padding-top: var(--top-padding);
                 height: var(--height);
-                background: var(--background-color);
                 background: var(--background-gradient);
 
                 display: flex;
@@ -208,7 +207,6 @@ export default class HomeHeader extends BaseComponent {
             }
 
             .image-container .image-bg {
-                background: var(--background-color);
                 background: var(--background-gradient);
                 position: absolute;
                 z-index: -1;

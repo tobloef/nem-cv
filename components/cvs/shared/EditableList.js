@@ -110,7 +110,7 @@ export default class EditableList extends BaseComponent {
                 return `Ingen ${this.name.toLowerCase()} tilføjet.`;
             }
         } else {
-            super.validate();
+            return super.validate();
         }
     };
 

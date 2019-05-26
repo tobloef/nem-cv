@@ -1,6 +1,4 @@
 import BaseComponent from "../BaseComponent.js";
-import whenReady from "../../lib/whenReady.js";
-import {addStorageItemListener, getStorageItem} from "../../lib/storage-helper.js";
 
 export default class AbstractCV extends BaseComponent {
     //a baseline for CVs that takes care of tasks that are common between them
