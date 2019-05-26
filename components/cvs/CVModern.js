@@ -336,6 +336,9 @@ export default class CVModern extends AbstractCV {
             margin-bottom: 1em;
             }
             
+            .description {
+                margin-bottom: 1em;
+            }
             
             
 
