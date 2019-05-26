@@ -130,10 +130,6 @@ export default class EditableList extends BaseComponent {
                 display: flex;
                 flex-direction: column;
             }
-            
-            li {
-                margin-bottom: 10px;
-            }
         `
     }
 }
