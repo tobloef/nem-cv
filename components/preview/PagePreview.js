@@ -2,12 +2,22 @@ import BaseComponent from "../BaseComponent.js";
 import {getStorageItem} from "../../lib/storage-helper.js";
 import Router from "../../lib/Router.js";
 import templates from "../../lib/constants/templates.js";
+import paths from "../../lib/constants/paths.js";
 
 export default class PagePreview extends BaseComponent {
     usedComponents = [
         // Automatically add all CV template components
         ...Object.keys(templates).map(t => templates[t].class)
     ];
+
+    // language=HTML
+    get html() {
+        return `
+            <router-link>
+                <img src="${paths["logo-white"]}">
+            </router-link>
+        `
+    }
 
     script = () => {
         // Load CV data
@@ -41,5 +51,17 @@ export default class PagePreview extends BaseComponent {
         this.shadowRoot.appendChild(cvElement);
         // Add the content
         cvElement.setContent(content);
+        this.shadowRoot.innerHtml += this.html;
     };
+
+    get css() {
+        // language=CSS
+        return `
+            router-link {
+                position: fixed;
+                right: 0;
+                bottom: 0;
+            }
+        `
+    }
 }
