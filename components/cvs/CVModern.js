@@ -47,11 +47,12 @@ export default class CVModern extends AbstractCV {
                             <ul class="listinfo">
                                 <li class="age">
                                     <${EditableText.elementName}
-                                            validate-type="number"
+                                            validate-type="age"
                                             content-key="age"
                                             content-type="component"
                                             placeholder="Din alder"
                                             name="Alder"
+                                            is-age
                                             element="div">
                                     </${EditableText.elementName}>
                                 </li>
@@ -99,7 +100,7 @@ export default class CVModern extends AbstractCV {
                                     content-type="array"
                                     class="work-areas"
                                     item-component="${WorkAreaItem.elementName}"
-                                    separator=", "
+                                    separator=" "
                                     starting-amount="1"
                                     name="Brancher"
                                 >
@@ -165,6 +166,7 @@ export default class CVModern extends AbstractCV {
                 display: flex;
                 justify-content: center;
             }
+                        
             main {
                 max-width: 1200px;
                 width: 100%;
@@ -187,6 +189,7 @@ export default class CVModern extends AbstractCV {
 
             h2 {
                 font-size: 1.5em;
+                font-weight: bold;
             }
             
             li{
@@ -217,11 +220,11 @@ export default class CVModern extends AbstractCV {
            }
             
             .aboutme {
-                margin-bottom: 30px;
+                margin-bottom: 15px;
             }
             
             .workareas {
-                margin-bottom: 30px;
+                margin-bottom: 15px;
             }
             
             .left {
@@ -248,7 +251,7 @@ export default class CVModern extends AbstractCV {
             
             .experiencetitle {
                 padding-left: -15em;
-                margin-bottom: 10px;
+                margin-bottom: 15px;
                 transform: translateX(20%);
                 text-align: right;
             }
@@ -256,7 +259,7 @@ export default class CVModern extends AbstractCV {
             .educationtitle {
                 text-align: center;
                 margin-left: -15em;
-                margin-bottom: 10px;
+                margin-bottom: 15px;
             }
             
             .color1 {
@@ -269,6 +272,7 @@ export default class CVModern extends AbstractCV {
             .about .content {
                 padding: 50px;
                 max-width: 40%;
+                min-width: 500px;
                 background-color: var(--extra-background-color);
             }
             
@@ -304,9 +308,10 @@ export default class CVModern extends AbstractCV {
             }
             
             .education .content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+                padding: 50px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
             }
             
             #education-list {
@@ -337,14 +342,10 @@ export default class CVModern extends AbstractCV {
             }
             
             .description {
-                margin-bottom: 1em;
+                margin-bottom: 2em;
             }
-            
-            
 
-            
-            @media(max-width: 800px) {
-                
+            @media(max-width: 800px) { 
                 header{
                     display: flex;
                     flex-direction: column;
@@ -369,9 +370,10 @@ export default class CVModern extends AbstractCV {
                     height: 0;
                 }
                 
-                .about .content{
+                .about .content {
                     padding: 50px;
                     max-width: 100%;
+                    min-width: unset;
                 }
                 
                 .description {
@@ -383,8 +385,7 @@ export default class CVModern extends AbstractCV {
                     max-width: 100%;
                 }
 
-                .education .content{
-                    padding: 50px;
+                .education .content {
                     max-width: 100%;
                 }
 
@@ -398,7 +399,7 @@ export default class CVModern extends AbstractCV {
                 .educationtitle {
                     text-align: center;
                     margin-left: 0em;
-                    margin-bottom: 10px;
+                    margin-bottom: 15px;
                 }
 
                 .text{
@@ -410,7 +411,7 @@ export default class CVModern extends AbstractCV {
 
                 .experiencetitle {
                     padding-left: 0em;
-                    margin-bottom: 10px;
+                    margin-bottom: 15px;
                     transform: translateX(0%);
                     text-align: left;
                 }

@@ -1,7 +1,7 @@
 import BaseComponent from "../BaseComponent.js";
 
 export default class AbstractCV extends BaseComponent {
-    //a baseline for CVs that takes care of tasks that are common between them
+    // A baseline for CVs that takes care of tasks that are common between them
     static observedAttributes = [];
 
     usedComponents = [];
@@ -21,7 +21,7 @@ export default class AbstractCV extends BaseComponent {
             experienceList.render();
         }
 
-        //Does the same as above for educationList
+        // Does the same as above for educationList
         const educationList = this.shadowRoot.getElementById("education-list");
         if (educationList) {
             educationList.itemAttributes = {
