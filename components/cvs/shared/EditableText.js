@@ -17,13 +17,13 @@ export default class EditableText extends BaseComponent {
     // language=HTML
     get html() {
         return `
-            <${this.element} 
-                id="content" 
+            <${this.element}
+                id="content"
                 class="empty-text"
-                part="${this.contentKey}" 
+                part="${this.contentKey}"
                 contenteditable=${BaseComponent.editMode}
-                role="textbox" 
-                aria-placeholder="${this.placeholder}" 
+                role="textbox"
+                aria-placeholder="${this.placeholder}"
                 data-placeholder="${this.placeholder}"
             >
                 ${this.placeholder}
@@ -142,13 +142,13 @@ export default class EditableText extends BaseComponent {
             *[contenteditable="false"] {
                 cursor: default;
             }
-            
+
             .error {
                 background: rgba(255, 0, 0, 0.15);
                 text-decoration: underline;
                 text-decoration-color: red;
             }
-            
+
             h1 {
                 font-family: var(--h1);
             }
@@ -156,9 +156,14 @@ export default class EditableText extends BaseComponent {
             h2 {
                 font-family: var(--h2);
             }
-            
+
             p {
                 font-family: var(--p);
+            }
+
+            ${this.element} {
+                padding: 10px;
+                margin: 3px 0px;
             }
         `
     };

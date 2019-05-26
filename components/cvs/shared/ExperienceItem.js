@@ -77,9 +77,10 @@ export default class ExperienceItem extends BaseComponent {
             .divider {
                 display: flex;
                 flex-direction: row;
+                align-items: center;
                 justify-content: space-between;
             }
-            
+
             .separator {
                 white-space: pre-wrap;
             }

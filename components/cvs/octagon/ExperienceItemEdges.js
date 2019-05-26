@@ -76,33 +76,34 @@ export default class ExperienceItemEdges extends ExperienceItem {
                 flex-basis: 0;
                 margin: 5px;
             }
-            
+
             div {
                 border-left: 5px solid black;
                 padding-left: 10px;
                 max-width: 100%;
             }
-            
+
             editable-text {
                 max-width: 100%;
                 word-wrap: break-word;
             }
-            
+
             .when {
                 display: flex;
                 flex-direction: row;
-                margin-bottom: 0.5em;
+                align-items: center;
+                margin-bottom: 0px;
             }
-            
+
             .small {
                 font-size: 0.9em;
             }
-            
+
             #bigger {
                 font-size: 1.2em;
                 margin-bottom: 0.2em;
             }
-            
+
             @media(max-width: 350px) {
                 :host {
                     font-size: 0.9em;
