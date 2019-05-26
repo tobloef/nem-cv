@@ -10,7 +10,7 @@ export default class EditableText extends BaseComponent {
         "multiline",
         "validate-type",
         "name",
-        "trim-number"
+        "trim-number",
         "content-key"
     ];
 
