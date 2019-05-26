@@ -1,15 +1,13 @@
-"use strict";
-
 import {classNameToElementName, kebabToCamelCase} from "../lib/string-utils.js";
-import {resetCSSStyleSheet} from "../lib/reset-css.js";
-import {stringToStyleSheet} from "../lib/stylesheet-utils.js";
+import {resetCSSStyleSheet} from "../lib/constants/reset-css.js";
+import {colorsToStyleSheet, stringToStyleSheet} from "../lib/stylesheet-utils.js";
+import templateStyles, {getDefaultTemplateId} from "../lib/constants/template-styles.js";
+import {getDefaultColors} from "../lib/constants/colors.js";
 
 export default class BaseComponent extends HTMLElement {
-    static _template = null;
-    static _colors = null;
+    static templateId = null;
+    static colors = null;
     static editMode = false;
-
-    enableResetCSS = true;
 
     constructor() {
         super();
@@ -49,18 +47,33 @@ export default class BaseComponent extends HTMLElement {
     updateStyles() {
         console.debug(`Updating styles of ${this.constructor.name}`);
         const styleSheets = [];
-        if (this.enableResetCSS != null) {
-            styleSheets.push(resetCSSStyleSheet);
+        // Reset CSS
+        styleSheets.push(resetCSSStyleSheet);
+        // Colors
+        let colorScheme = BaseComponent.colors;
+        if (colorScheme == null) {
+            colorScheme = getDefaultColors();
         }
-        if (BaseComponent.colors != null) {
-            styleSheets.push(BaseComponent.colors);
+        const colorsStyleSheet = colorsToStyleSheet(colorScheme);
+        if (colorsStyleSheet != null) {
+            styleSheets.push(colorsStyleSheet);
         }
-        if (BaseComponent.template != null) {
-            styleSheets.push(BaseComponent.template);
+        // Template
+        let templateId = BaseComponent.templateId;
+        if (BaseComponent.templateId == null) {
+            templateId = getDefaultTemplateId();
         }
+        const template = templateStyles[templateId];
+        if (template != null) {
+            const templateStyleSheet = stringToStyleSheet(template);
+            styleSheets.push(templateStyleSheet);
+        }
+        // Component style
         if (this.css != null) {
-            styleSheets.push(stringToStyleSheet(this.css));
+            const styleSheet = stringToStyleSheet(this.css);
+            styleSheets.push(styleSheet);
         }
+        // Set stylesheets
         this.shadowRoot.adoptedStyleSheets = styleSheets;
     };
 
@@ -69,6 +82,7 @@ export default class BaseComponent extends HTMLElement {
     };
 
     _recurseGetContent(content, element) {
+        console.debug("Setting content", content, "on children of", element);
         for (const child of element.children) {
             let newContent = null;
             const contentType = child.getAttribute("content-type");
@@ -98,10 +112,12 @@ export default class BaseComponent extends HTMLElement {
                 }
                 const contentKey = child.getAttribute("content-key");
                 if (contentKey != null) {
-                    //console.log(this.constructor.name, "Setting", contentKey, "to", newContent, "on", content);
+                    const ignoreIfNull = child.getAttribute("content-ignore-if-null");
+                    if (ignoreIfNull != null && newContent == null) {
+                        continue;
+                    }
                     content[contentKey] = newContent;
                 } else if (content.push != null) {
-                    //console.log(this.constructor.name, "Pushing", newContent, "into", content);
                     content.push(newContent);
                 }
             } else if (child.getContent != null) {
@@ -117,10 +133,8 @@ export default class BaseComponent extends HTMLElement {
     };
 
     _recurseSetContent(content, element) {
-        console.debug("Setting content", content, "on children of", element);
         for (const child of element.children) {
             const key = child.getAttribute("content-key");
-            const type = child.getAttribute("content-type");
             if (key != null) {
                 child.setContent(content[key]);
             } else {
@@ -131,6 +145,29 @@ export default class BaseComponent extends HTMLElement {
                 }
             }
         }
+    };
+
+    validate() {
+        const result = this._recurseValidate(this.shadowRoot);
+        return result;
+    };
+
+    _recurseValidate = (element) => {
+        for (const child of element.children) {
+            let result = null;
+            if (child.validate != null) {
+                result = child.validate();
+            } else {
+                result = this._recurseValidate(child);
+            }
+            if (result != null) {
+                if (child.updateValidationStyle != null) {
+                    child.updateValidationStyle();
+                }
+                return result;
+            }
+        }
+        return null;
     };
 
     _defineUsedComponents() {
@@ -157,30 +194,6 @@ export default class BaseComponent extends HTMLElement {
             }
         }
     };
-
-    static get template() {
-        return BaseComponent._template;
-    }
-
-    static set template(value) {
-        if ((typeof value) === "string") {
-            BaseComponent._template = stringToStyleSheet(value);
-        } else {
-            BaseComponent._template = value;
-        }
-    }
-
-    static get colors() {
-        return BaseComponent._colors;
-    }
-
-    static set colors(value) {
-        if ((typeof value) === "string") {
-            BaseComponent._colors = stringToStyleSheet(value);
-        } else {
-            BaseComponent._colors = value;
-        }
-    }
 
     static get elementName() {
         return classNameToElementName(this.name);

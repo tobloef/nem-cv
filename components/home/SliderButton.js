@@ -14,12 +14,14 @@ export default class SliderButton extends BaseComponent {
         `;
     }
 
+    // language=CSS
     get css() {
         return `
             :host {
                 display: block;
 
                 --active-color: white;
+                --hover-color: #aaa;
                 --inactive-color: #727272;
                 --size: 15px;
             }
@@ -31,6 +33,10 @@ export default class SliderButton extends BaseComponent {
                 border-radius: 100%;
                 width: var(--size);
                 height: var(--size);
+            }
+            button:hover {
+                cursor: pointer;
+                background: var(--hover-color);
             }
 
             :host([active]) button {

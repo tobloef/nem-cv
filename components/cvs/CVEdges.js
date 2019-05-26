@@ -9,7 +9,7 @@ import colors from "./templates/colors.js";
 import EditableText from "./shared/EditableText.js";
 import EditableProfileImage from "./shared/EditableProfileImage.js";
 
-export default class CVOctagon extends AbstractCV {
+export default class CVEdges extends AbstractCV {
     static observedAttributes = [];
 
     usedComponents = [
@@ -81,6 +81,7 @@ export default class CVOctagon extends AbstractCV {
                                     item-component="${WorkAreaItem.elementName}"
                                     separator=", "
                                     starting-amount="1"
+                                    name="Brancher"
                                 >
                                     <list-button icon="add" slot="append-button"></list-button>
                                     <list-button icon="remove" slot="remove-button"></list-button>
@@ -113,6 +114,7 @@ export default class CVOctagon extends AbstractCV {
                             content-type="array"
                             item-component="${ExperienceItemOctagon.elementName}" 
                             starting-amount="1"
+                            name="Erfaringer"
                         >
                             <list-button icon="add" slot="append-button"></list-button>
                             <list-button icon="remove" slot="remove-button"></list-button>
@@ -127,6 +129,7 @@ export default class CVOctagon extends AbstractCV {
                             content-type="array"
                             item-component="${ExperienceItemOctagon.elementName}" 
                             starting-amount="1"
+                            name="Uddannelser"
                         >
                             <list-button icon="add" slot="append-button"></list-button>
                             <list-button icon="remove" slot="remove-button"></list-button>
@@ -136,11 +139,6 @@ export default class CVOctagon extends AbstractCV {
             </main>
         `;
     }
-
-    script = () => {
-        BaseComponent.template = octagon;
-        BaseComponent.colors = colors;
-    };
 
     // language=CSS
     get css() {

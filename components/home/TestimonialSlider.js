@@ -18,32 +18,35 @@ export default class TestimonialSlider extends BaseComponent {
 
     testimonials = [
         {
-            text : "Det tog kun 5 minutter. Nu har jeg et personligt CV, som har skaffet mig tre jobsamtaler alene den sidste uge. Det er vanvttigt fedt, at jeg selv kan vælge farver og layout. Det giver så mange muligheder!",
+            text : "Det tog kun 5 minutter. Nu har jeg et personligt CV, som har skaffet mig tre jobsamtaler alene den " +
+                "sidste uge. Det er vanvttigt fedt, at jeg selv kan vælge farver og layout. Det giver så mange muligheder!",
             person: "Jonas",
             image: "/img/testimonials/testimonial1.jpg",
-            alt: "Testimonial 1",
+            alt: "Author of Testimonial 1",
         },
         {
-            text : "xD.",
-            person: "Yeet",
+            text : "Jeg skulle søge mit drømmejob, og ledte med lys og lygte efter et godt værktøj til at lave et CV " +
+                "som var flot, moderne og simpelt at sammensætte. Så fik jeg anbefalet NemCV og jeg har sjældent været så tilfreds med et produkt.",
+            person: "Sanne",
             image: "/img/testimonials/testimonial2.jpg",
-            alt: "Testimonial 2",
+            alt: "Author of Testimonial 2",
         },
         {
-            text : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea.",
-            person: "Ma~",
+            text : "Et CV er meget vigtigt for din profil på arbejdsmarkedet, så det er essentielt at have et godt værktøj " +
+                "når man skal lave det. NemCV må i allerhøjeste grad påstås at opfylde det kriterie, og er derudover lækkert og nemt at bruge",
+            person: "Helene",
             image: "/img/testimonials/testimonial3.jpg",
-            alt: "Testimonial 3",
+            alt: "Author of Testimonial 3",
         },
         {
-            text : "Max Najs",
-            person: "Thore Husfeldt",
+            text : "Før var jeg tit træt og deprimeret, men så prøvede jeg NemCV. Nu har jeg det meget bedre. Tak for hjælpen NemCV!",
+            person: "Anders",
             image: "/img/testimonials/testimonial4.jpg",
-            alt: "Testimonial 4",
+            alt: "Author of Testimonial 4",
         },
     ];
 
-    slideSpeed = 4000;
+    slideSpeed = 7000;
 
     _shouldBeRunning = false;
 
@@ -217,8 +220,6 @@ export default class TestimonialSlider extends BaseComponent {
         requestAnimationFrame(_=> {
             this.start();
         });
-
-        console.log("Vi skal lige huske at ændre alt tekst på testimonials :)");
     };
 
     start = () => {
@@ -300,15 +301,15 @@ export default class TestimonialSlider extends BaseComponent {
 
         return img;
 
-    }
+    };
 
     _createDot(testimonial, i) {
         const button = document.createElement(SliderButton.elementName);
 
-        button.addEventListener('click', evt => {
+        button.addEventListener('click', e => {
             this._current = i;
             this._tick();
-        })
+        });
 
         return button;
     }

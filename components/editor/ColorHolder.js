@@ -1,12 +1,11 @@
 import BaseComponent from "../BaseComponent.js";
-import {setStorageItem} from "../../lib/storage-helper.js";
 
 export default class ColorHolder extends BaseComponent {
     static observedAttributes = [
         "font-color",
         "background-color",
         "accent-color",
-        "selected"
+        "extra-background-color"
     ];
 
     // language=HTML
@@ -18,24 +17,6 @@ export default class ColorHolder extends BaseComponent {
 	        </div>
         `;
     }
-
-    script = () => {
-        const div = this.shadowRoot.querySelector("#outer");
-        div.addEventListener("click", evt => {
-            evt.preventDefault();
-            this.dispatchEvent(new CustomEvent("color-picked", {
-                bubbles: true,
-                composed:true,
-                detail: {
-                    colors: {
-                        fontColor: this.fontColor,
-                        backgroundColor: this.backgroundColor,
-                        accentColor: this.accentColor
-                    }
-                }
-            }));
-        });
-    };
 
     resizeFont = () => {
         this.shadowRoot.querySelector("p").style.fontSize = (this.offsetWidth*0.6) + "px";

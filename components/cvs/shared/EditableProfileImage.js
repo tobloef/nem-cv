@@ -1,19 +1,20 @@
 import BaseComponent from "../../BaseComponent.js";
-import {getPath} from "../../../lib/paths.js";
+import {validateObject} from "../../../lib/validation.js";
+import paths from "../../../lib/constants/paths.js";
 
 export default class EditableProfileImage extends BaseComponent {
     static observedAttributes = [
         "aspect-ratio",
-        "src"
+        "src",
+        "weirdfix"
     ];
-    usedComponents = [];
 
     // language=HTML
     get html() {
         return `
             <div class="square">
                 <img class="profile-picture"
-                     src=${this.src || getPath("placeholder-person")}
+                     src=${this.src || this.getPlaceholder()}
                      alt="Image of you">
             </div>
         `;
@@ -21,24 +22,19 @@ export default class EditableProfileImage extends BaseComponent {
 
     onClick = () => {
         let newURL = prompt("Indtast URL'en til dit billede.");
-
-        function isValid(url) {
-            return url != null;
-        }
-
-        if (isValid(newURL)) {
-            this.image.src = newURL;
-        }
-        else {
-            alert("Ugyldig URL for billedet.")
-        }
+        this.setContent(newURL);
     };
 
     script = () => {
         this.image = this.shadowRoot.querySelector(".profile-picture");
+        //if we are currently editing, add the capability to change the image by clicking on it
         if (BaseComponent.editMode) {
             this.image.addEventListener("click", this.onClick);
         }
+    };
+
+    getPlaceholder = () => {
+        return paths["placeholder-person"];
     };
 
     getContent = () => {
@@ -46,8 +42,31 @@ export default class EditableProfileImage extends BaseComponent {
     };
 
     setContent = (content) => {
-        this.setAttribute("src", content || getPath("placeholder-person"));
+        if (content == null || this.validate(content) != null) {
+            content = this.getPlaceholder();
+        }
+        this.setAttribute("src", content);
         this.render();
+        this.updateValidationStyle();
+    };
+
+    validate = (url) => {
+        url = url || this.image.src;
+        if (url.includes(this.getPlaceholder())) { //if the contents are the same as the placeholder, it is invalid
+            return "Du mangler et profilbillede."
+        }
+        if (!validateObject(url, "url") || url.endsWith("/null")) { //validate if the given url is actually a url
+            return "Den indtastede URL for profilbilledet er ugyldigt."
+        }
+        return null;
+    };
+
+    updateValidationStyle = () => { //makes the image signify that there is an error with it.
+        if (this.validate() != null) {
+            this.image.classList.add("error");
+        } else {
+            this.image.classList.remove("error");
+        }
     };
 
     // language=CSS
@@ -55,6 +74,9 @@ export default class EditableProfileImage extends BaseComponent {
         return `
             :host {
                 display: block;
+                max-height: 100%;
+                ${this.weirdfix || ""} /* this is a fix to an unresolved issue with webcomponents that don't act 
+                properly for different pages. Due to time constraints, no better solution has been found so far*/
             }
             .square {
                 width: 100%;
@@ -74,6 +96,11 @@ export default class EditableProfileImage extends BaseComponent {
                 height: 100%;
                 max-height: 100%;
                 object-fit: cover;
+            }
+            
+            .error {
+                border: 2px solid red;
+                border-radius: 3px; 
             }
         `
     };

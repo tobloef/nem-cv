@@ -6,7 +6,8 @@ export default class EditableList extends BaseComponent {
         "starting-amount",
         "separator",
         "item-attributes",
-        "button-diameter"
+        "button-diameter",
+        "name"
     ];
 
     get html() {
@@ -22,19 +23,22 @@ export default class EditableList extends BaseComponent {
     };
 
     script = () => {
-        // Append item button
+        // Add the append item button
         const slot = this.shadowRoot.querySelector(`slot[name="append-button"]`);
         const appendButton = (slot.assignedNodes() || [])[0];
         appendButton.onClick = this.addItem;
 
-        // Remove item button
+        // Add the Remove item button
         const slot2 = this.shadowRoot.querySelector(`slot[name="remove-button"`);
         const removeButton = (slot2.assignedNodes() || [])[0];
         removeButton.onClick = this.remove;
+
+        //if startingAmount is set, insert the given amount of items
         for (let i = 0; i < (this.startingAmount || 0); i++) {
             this.addItem();
         }
 
+        //if the page is not supposed to be editable, remove the buttons again. Due to some quirks with slots, this is easier to do than prevent them from being made.
         if (!BaseComponent.editMode) {
             const buttonHolder = this.shadowRoot.querySelector(".button-holder");
             buttonHolder.parentNode.removeChild(buttonHolder);
@@ -65,10 +69,12 @@ export default class EditableList extends BaseComponent {
     };
 
     remove = () => {
+        //find the list, and return if it is already empty
         const list = this.shadowRoot.getElementById("list");
         if (list.childNodes.length === 0) {
             return;
         }
+        //remove the last element, along with the seperator if it is present.
         this.removeLast();
         if (this.separator && list.childNodes.length > 0) {
             this.removeLast();
@@ -85,11 +91,26 @@ export default class EditableList extends BaseComponent {
         list.innerHTML = "";
     };
 
+    //inserts given content into the list
     setContent = (content) => {
         this.removeAll();
         for (const item of content) {
             const element = this.addItem();
             element.setContent(item);
+        }
+    };
+
+    //check if the list itself is valid
+    validate = () => {
+        const list = this.shadowRoot.getElementById("list");
+        if (list.childNodes.length === 0) {
+            if (this.name == null) {
+                return `En listes indhold er tomt.`;
+            } else {
+                return `Ingen ${this.name.toLowerCase()} tilføjet.`;
+            }
+        } else {
+            return super.validate();
         }
     };
 

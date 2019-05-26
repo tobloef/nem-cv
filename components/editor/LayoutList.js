@@ -1,35 +1,25 @@
 import BaseComponent from "../BaseComponent.js";
-import {layouts} from "../../constants/editor-definitions.js";
 import LayoutDescriptor from "./LayoutDescriptor.js";
+import templates from "../../lib/constants/templates.js";
 
 export default class LayoutList extends BaseComponent {
-    static observedAttributes = [
-
-    ];
-
     usedComponents = [
         LayoutDescriptor
     ];
 
-    // language=HTML
-    get html() {
-        return ``;
-    }
-
     script = () => {
+        // Populate list of templates to choose from.
         this.empty();
-        for (const key in layouts) {
-            const item = layouts[key];
+        for (const key in templates) {
+            const template = templates[key];
             const element = document.createElement(LayoutDescriptor.elementName);
-            element.setAttribute("theme-id", key);
-            element.setAttribute("name", item.name);
-            element.setAttribute("image", item.image);
-            element.setAttribute("description", item.description);
+            element.setAttribute("template-id", key);
+            element.setAttribute("name", template.name);
+            element.setAttribute("image", template.image);
+            element.setAttribute("description", template.description);
             this.shadowRoot.appendChild(element);
         }
     };
-
-    externalStyles = [];
 
     // language=CSS
     get css() {

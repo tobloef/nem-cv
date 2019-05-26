@@ -1,5 +1,5 @@
 import BaseComponent from "../BaseComponent.js";
-import {getPath} from "../../lib/paths.js";
+import paths from "../../lib/constants/paths.js";
 
 export default class SideToggle extends BaseComponent {
     // Observe "open" and "closed" attributes s.t. both can be used
@@ -20,9 +20,9 @@ export default class SideToggle extends BaseComponent {
     updateIcon = () => {
         const button = this.shadowRoot.querySelector("button");
         if (this.open) {
-            button.innerHTML = `<img src="${getPath("settings")}" alt="Åbn indstillinger">`;
+            button.innerHTML = `<img src="${paths["settings"]}" alt="Åbn indstillinger">`;
         } else {
-            button.innerHTML = `<img src="${getPath("arrow")}" alt="Luk indstillinger">`;
+            button.innerHTML = `<img src="${paths["arrow"]}" alt="Luk indstillinger">`;
         }
     };
 
@@ -39,12 +39,12 @@ export default class SideToggle extends BaseComponent {
 
     // language=CSS
     get css() {
-        return `            
+        return `
             img {
                 height: 50%;
                 width: 50%;
             }
-            
+
             button {
                 width: 50px;
                 height: 50px;
@@ -57,27 +57,32 @@ export default class SideToggle extends BaseComponent {
                 padding: 0;
                 border: 0;
                 background-color: #F3F3F3;
+                cursor: pointer;
             }
-            
+
+            button:hover {
+                background-color: #fafafa;
+            }
+
             /* Selector for desktop */
             /* makes button curvy on right side */
-            @media(min-width: 550px) {
+            @media (min-width: 550px) {
                 button {
                     border-top-right-radius: 5px;
                     border-bottom-right-radius: 5px;
                 }
             }
-            
+
             /* Selector for mobile */
             /* Sets curvature of button based on if it is */
             /* on left or right side of screen */
-            @media(max-width: 550px) {
-                :host([closed])>button {
+            @media (max-width: 550px) {
+                :host([closed]) > button {
                     border-top-right-radius: 5px;
                     border-bottom-right-radius: 5px;
                 }
 
-                :host([open])>button {
+                :host([open]) > button {
                     border-top-left-radius: 5px;
                     border-bottom-left-radius: 5px;
                 }
