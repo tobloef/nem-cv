@@ -31,7 +31,7 @@ export default class PageHome extends BaseComponent {
             </section>
 
             <section class="colors">
-                <h2>Vælg farver efter din personlighed</h2>
+                <h2>Med mulighed for at vælge farver efter din personlighed</h2>
 
                 <div class="color-wheel-container">
                     <div class="color-wheel"></div>
@@ -134,7 +134,7 @@ export default class PageHome extends BaseComponent {
             section.colors h2 {
                 text-align: center;
                 margin-bottom: 40px;
-                max-width: 600px;
+                max-width: 700px;
             }
 
             section.colors .color-wheel-container {
