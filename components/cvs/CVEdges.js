@@ -5,7 +5,7 @@ import ListButton from "./shared/ListButton.js";
 import EditableList from "./shared/EditableList.js";
 import AbstractCV from "./AbstractCV.js";
 
-export default class CVOctagon extends AbstractCV {
+export default class CVEdges extends AbstractCV {
     static observedAttributes = [];
 
     usedComponents = [
