@@ -136,7 +136,7 @@ export default class PageEditor extends BaseComponent {
         // Validate before sending to the server
         const validationResult = this.validate();
         if (validationResult != null) {
-            alert(`${validationResult} Ret venligst dette inden CV'et kan sendes til serveren.`);
+            alert(`${validationResult} Ret venligst dette inden CV'et kan færdiggøres.`);
             return;
         }
         // Send CV to server
@@ -144,12 +144,12 @@ export default class PageEditor extends BaseComponent {
             await postCV(content);
         } catch (error) {
             console.error(error);
-            alert("Der opstod en fejl da CV'et skulle sendes til serveren (se konsollen for detaljer). Dit CV vil blive gemt lokalt.");
+            alert("Der opstod en fejl da CV'et skulle gemmes. Dit CV vil blive gemt lokalt.");
             return;
         }
         // Navigate to the cv page
-        if (confirm("Dit CV blev sendt til serveren. Vil du gerne se dit færdige CV nu?")) {
-            Router.navigate("/preview")
+        if (confirm("Dit CV er blevet gemt. Vil du gerne se dit færdige CV nu?")) {
+            Router.navigate("/preview");
         }
     };
 
@@ -161,7 +161,7 @@ export default class PageEditor extends BaseComponent {
                 height: 100%;
                 padding-top: 70px;
             }
-            
+
             side-bar {
                 position: fixed;
                 left: 0;
@@ -169,7 +169,7 @@ export default class PageEditor extends BaseComponent {
                 height: calc(100% - 70px);
                 z-index: 5;
             }
-            
+
             nav-bar {
                 /*width: 100%;*/
                 position: fixed;
@@ -178,11 +178,11 @@ export default class PageEditor extends BaseComponent {
                 right: 0;
                 z-index: 10;
             }
-            
+
             logo- {
                 padding: 0 1em;
             }
-            
+
             #cv-container {
                 flex: 1;
             }
