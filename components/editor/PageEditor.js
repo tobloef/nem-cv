@@ -1,30 +1,25 @@
 import BaseComponent from "../BaseComponent.js";
 import Router from "../../lib/Router.js";
 import SideBar from "./SideBar.js";
-import {getStorageItem, setStorageItem} from "../../lib/storage-helper.js";
+import {addStorageItemListener, getStorageItem, setStorageItem} from "../../lib/storage-helper.js";
 import NavBar from "../shared/NavBar.js";
-import CVSimple from "../cvs/CVSimple.js";
-import CVModern from "../cvs/CVModern.js";
-import CVOctagon from "../cvs/CVOctagon.js";
-import {layouts, templates} from "../../constants/editor-definitions.js";
 import CustomButton from "../shared/CustomButton.js";
 import Logo from "../shared/Logo.js";
 import {postCV} from "../../lib/api.js";
+import templates from "../../lib/constants/templates.js";
+import whenReady from "../../lib/whenReady.js";
 
 export default class PageEditor extends BaseComponent {
-    cvType = null;
-    colorScheme = null;
     cv = null;
 
     usedComponents = [
         CustomButton,
-        CVSimple,
-        CVModern,
-        CVOctagon,
         NavBar,
         SideBar,
         CustomButton,
-        Logo
+        Logo,
+        // Automatically add all CV template components
+        ...Object.keys(templates).map(t => templates[t].class)
     ];
 
     // language=HTML
@@ -34,7 +29,7 @@ export default class PageEditor extends BaseComponent {
                 <div>
                     <custom-button inverted id="settings-button">Indstillinger</custom-button>
                     <logo-></logo->
-                    <custom-button inverted id="finish-button">Færdig</custom-button>
+                    <custom-button inverted id="finish-button">Gem CV</custom-button>
                 </div>
             </nav-bar>
             <side-bar></side-bar>
@@ -43,50 +38,82 @@ export default class PageEditor extends BaseComponent {
     };
 
     script = () => {
-        this.checkForExistingCV();
-
         BaseComponent.editMode = true;
-        if (getStorageItem("template") == null) {
-            return Router.navigate(Router.prefix + "/templates");
-        } else {
-            this.changeCVType();
+        this._checkForExistingCV();
+        // Try to create CV with template or redirect to choose template
+        const templateId = getStorageItem("template-id");
+        if (templateId == null || templates[templateId] == null) {
+            return Router.navigate("/templates");
         }
-
+        this._setCV(templates[templateId]);
+        // Set up sidebar event listeners
         const sidebar = this.shadowRoot.querySelector("side-bar");
-        if (sidebar != null) {
-            const settingsButton = this.shadowRoot.getElementById("settings-button");
-            settingsButton.addEventListener("click", () => {
-                sidebar.toggle();
-            });
-        }
-
-        this.addEventListener("select-click", (e) => {
-            this.toggleSidebarIfNecessary();
-            setStorageItem("template", e.detail);
-            this.changeCVType();
-            sidebar.toggle();
-        });
-
-        this.addEventListener("example-click", (e) => {
-            console.log("Example selected:", e.detail);
-        });
-
-        this.addEventListener("color-picked", (e) => {
-            this.toggleSidebarIfNecessary();
-            setStorageItem("colors", e.detail.colors);
-            this.changeColors();
-        });
-
+        this._setSidebarListeners(sidebar);
+        // Set up finish button event
         const finishButton = this.shadowRoot.getElementById("finish-button");
-        finishButton.addEventListener("click", this.handleFinish);
-        this.setDefaultColors();
+        finishButton.addEventListener("click", this._handleFinish);
     };
 
-    handleFinish = async () => {
+    _setSidebarListeners(sidebar) {
+        if (sidebar == null) {
+            return;
+        }
+        const settingsButton = this.shadowRoot.getElementById("settings-button");
+        settingsButton.addEventListener("click", sidebar.toggle);
+        // Add custom event listener for when a template is selected
+        sidebar.addEventListener("select-click", (e) => {
+            const templateId =  e.detail.templateId;
+            setStorageItem("template-id", templateId);
+            BaseComponent.templateId = templateId;
+            this._setCV(templates[templateId]);
+            sidebar.toggle();
+        });
+        // Add custom event listener for when a color scheme is selected
+        sidebar.addEventListener("color-picked", (e) => {
+            const colors = e.detail.colors;
+            setStorageItem("colors", colors);
+            BaseComponent.colors = colors;
+            this.cv.render();
+            this.cv.updateStyles();
+            const content = getStorageItem("cv-content");
+            this.cv.setContent(content);
+            sidebar.toggle();
+        });
+    }
+
+    _checkForExistingCV = () => {
+        if (getStorageItem("cv-content") == null) {
+            return;
+        }
+        /*if (!confirm("Der blev fundet et eksisterende CV fra tidligere brug. Ønsker du at bruge dette?")) {
+            setStorageItem("cv-content", null);
+        }*/
+    };
+
+    _setCV = (template) => {
+        if (template == null) {
+            return;
+        }
+        // Create the CV element
+        const cvContainer = this.shadowRoot.getElementById("cv-container");
+        cvContainer.innerHTML = "";
+        const cvElement = document.createElement(template.class.elementName);
+        this.cv = cvElement;
+        cvContainer.appendChild(cvElement);
+        // When ready set the CV content
+        whenReady(() => {
+            //if the user has previously worked on the cv, the content is filled in after the page is loaded
+            const content = getStorageItem("cv-content");
+            this.cv.setContent(content);
+            addStorageItemListener("cv-content", this.cv.setContent);
+        });
+    };
+
+    _handleFinish = async () => {
         if (this.cv == null) {
             return;
         }
-        // Set cv content in local storage
+        // Set CV content in local storage
         const content = this.cv.getContent();
         setStorageItem("cv-content", content);
         // Validate before sending to the server
@@ -105,56 +132,7 @@ export default class PageEditor extends BaseComponent {
         }
         // Navigate to the cv page
         alert("Dit CV blev sendt til serveren.");
-        // TODO: Navigate to cv page
-    };
-
-    setDefaultColors() {
-        const defaultColor = 0;
-        setStorageItem("colors", {
-            fontColor: templates[defaultColor].fontColor,
-            backgroundColor: templates[defaultColor].backgroundColor,
-            accentColor: templates[defaultColor].accentColor,
-            extraBackgroundColor: templates[defaultColor].extraBackgroundColor
-        });
-        this.changeColors();
-    }
-
-    checkForExistingCV = () => {
-        if (getStorageItem("cv-content") == null) {
-            return;
-        }
-        if (!confirm("Der blev fundet et eksisterende CV fra tidligere brug. Ønsker du at bruge dette?")) {
-            localStorage.clear();
-        }
-    };
-
-    toggleSidebarIfNecessary = () => {
-        const width = document.documentElement.clientWidth;
-        if (width <= 550) { // Is mobile-sized
-            const sidebar = this.shadowRoot.querySelector("side-bar");
-            sidebar.toggle();
-        }
-    };
-
-    changeCVType = () => {
-        const cvType = getStorageItem("template");
-        if (this.cvType !== cvType) { // If the gotten type is different from the current one
-            const cvContainer = this.shadowRoot.getElementById("cv-container");
-            cvContainer.innerHTML = ""; // Get content div and reset contents
-            this.cv = document.createElement(layouts[cvType].class.elementName); // Spawn a new CV
-            cvContainer.appendChild(this.cv); // Add new CV to container
-            this.cvType = cvType; // Remember which type is selected
-        }
-    };
-
-
-
-    changeColors = () => {
-        const colorScheme = getStorageItem("colors");
-        if (this.colorScheme !== colorScheme) {
-            // TODO: Update styles from the color scheme
-            this.colorScheme = colorScheme;
-        }
+        Router.navigate("/preview");
     };
 
     // language=CSS

@@ -1,12 +1,8 @@
 import EditableText from "./EditableText.js";
 import BaseComponent from "../../BaseComponent.js";
 import EditableProfileImage from "./EditableProfileImage.js";
-import {getStorageItem} from "../../../lib/storage-helper.js";
 
 export default class IntroBox extends BaseComponent {
-    image = null;
-    colors = null;
-    static observedAttributes = [];
     usedComponents = [
         EditableText,
         EditableProfileImage
@@ -77,20 +73,12 @@ export default class IntroBox extends BaseComponent {
         `;
     }
 
-
-    script = () => {
-        this.colors = getStorageItem("colors");
-    };
-
-
-    externalStyles = [];
-
     // language=CSS
     get css() {
         return `
 
             .introbox {
-                background-color: ${this.colors.backgroundColor};
+                background-color: var(--background-color);
                 padding: 4em;
                 height: 100%;
             }
@@ -99,7 +87,7 @@ export default class IntroBox extends BaseComponent {
                 font-size: 2em;
                 margin-bottom: 0.5em;
                 font-family: var(--h1);
-                color: ${this.colors.fontColor};
+                color: var(--font-color);
             }
 
             ${EditableProfileImage.elementName} {

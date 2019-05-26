@@ -2,9 +2,9 @@ import BaseComponent from "../BaseComponent.js";
 import RouterLink from "../shared/RouterLink.js";
 import CustomButton from "../shared/CustomButton.js";
 import wait from "../../lib/wait.js";
-import {getPath} from "../../lib/paths.js";
+import paths from "../../lib/constants/paths.js";
 
-
+//this should probably be renamed to landingComponent or something similar
 export default class HomeHeader extends BaseComponent {
     usedComponents = [
         RouterLink, CustomButton
@@ -17,7 +17,7 @@ export default class HomeHeader extends BaseComponent {
                 <div class="fakecv clip">
                     <div class="image-row">
                         <div class="image-container">
-                            <img alt="Kvinde" src="${getPath("landing-page-person")}"/>
+                            <img alt="Kvinde" src="${paths["landing-page-person"]}"/>
                             <div class="image-bg"></div>
                         </div>
                         <div class="fake-content-title">
@@ -79,7 +79,7 @@ export default class HomeHeader extends BaseComponent {
                 </div>
 
                 <div class="background-container">
-                    <img alt="Kvinde" class="background" src="${getPath("landing-page-person")}"/>
+                    <img alt="Kvinde" class="background" src="${paths["landing-page-person"]}"/>
                 </div>
             </header>
         `;
@@ -121,7 +121,6 @@ export default class HomeHeader extends BaseComponent {
             header {
                 padding-top: var(--top-padding);
                 height: var(--height);
-                background: var(--background-color);
                 background: var(--background-gradient);
 
                 display: flex;
@@ -208,7 +207,6 @@ export default class HomeHeader extends BaseComponent {
             }
 
             .image-container .image-bg {
-                background: var(--background-color);
                 background: var(--background-gradient);
                 position: absolute;
                 z-index: -1;

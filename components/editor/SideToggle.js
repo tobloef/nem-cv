@@ -1,5 +1,5 @@
 import BaseComponent from "../BaseComponent.js";
-import {getPath} from "../../lib/paths.js";
+import paths from "../../lib/constants/paths.js";
 
 export default class SideToggle extends BaseComponent {
     // Observe "open" and "closed" attributes s.t. both can be used
@@ -20,9 +20,9 @@ export default class SideToggle extends BaseComponent {
     updateIcon = () => {
         const button = this.shadowRoot.querySelector("button");
         if (this.open) {
-            button.innerHTML = `<img src="${getPath("settings")}" alt="Åbn indstillinger">`;
+            button.innerHTML = `<img src="${paths["settings"]}" alt="Åbn indstillinger">`;
         } else {
-            button.innerHTML = `<img src="${getPath("arrow")}" alt="Luk indstillinger">`;
+            button.innerHTML = `<img src="${paths["arrow"]}" alt="Luk indstillinger">`;
         }
     };
 

@@ -3,7 +3,7 @@ import CustomButton from "../shared/CustomButton.js";
 
 export default class LayoutDescriptor extends BaseComponent {
     static observedAttributes = [
-        "theme-id",
+        "template-id",
         "name",
         "image",
         "description"
@@ -23,24 +23,30 @@ export default class LayoutDescriptor extends BaseComponent {
             <p>${this.description}</p>
             <div id="buttons">
                 <custom-button id="select">Vælg tema</custom-button>
-                <custom-button secondary id="example">Se eksempel</custom-button>
+                <router-link href="/examples/${this.templateId}" new-tab>
+                    <custom-button secondary id="example">Se eksempel</custom-button>
+                </router-link>
             </div>
         `;
     }
 
     script = () => {
+        //add event listeners to the different buttons
         const selectButton = this.shadowRoot.getElementById("select");
-        selectButton.addEventListener("click", () => {
-            this.dispatchEvent(new CustomEvent("select-click", {bubbles: true, composed:true, detail: this.themeId}));
-        });
-
-        const exampleButton = this.shadowRoot.getElementById("example");
-        exampleButton.addEventListener("click", () => {
-            this.dispatchEvent(new CustomEvent("example-click", {bubbles: true, composed:true, detail: this.themeId}));
-        });
+        selectButton.addEventListener("click", this._handleLayoutSelect);
+        const image = this.shadowRoot.getElementById("image");
+        image.addEventListener("click", this._handleLayoutSelect);
     };
 
-    externalStyles = [];
+    _handleLayoutSelect = () => {
+        this.dispatchEvent(new CustomEvent("select-click", {
+            bubbles: true,
+            composed: true,
+            detail: {
+                templateId: this.templateId
+            }
+        }));
+    };
 
     // language=CSS
     get css() {
@@ -62,6 +68,10 @@ export default class LayoutDescriptor extends BaseComponent {
                 padding: 2px;
                 margin: 0 0 1rem 0;
                 border: 1px solid #aaa;
+            }
+            #image:hover {
+                cursor: pointer;
+                box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
             }
             
             img {

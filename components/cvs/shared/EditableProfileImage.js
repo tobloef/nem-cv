@@ -1,6 +1,6 @@
 import BaseComponent from "../../BaseComponent.js";
-import {getPath} from "../../../lib/paths.js";
 import {validateObject} from "../../../lib/validation.js";
+import paths from "../../../lib/constants/paths.js";
 
 export default class EditableProfileImage extends BaseComponent {
     static observedAttributes = [
@@ -27,13 +27,14 @@ export default class EditableProfileImage extends BaseComponent {
 
     script = () => {
         this.image = this.shadowRoot.querySelector(".profile-picture");
+        //if we are currently editing, add the capability to change the image by clicking on it
         if (BaseComponent.editMode) {
             this.image.addEventListener("click", this.onClick);
         }
     };
 
     getPlaceholder = () => {
-        return getPath("placeholder-person");
+        return paths["placeholder-person"];
     };
 
     getContent = () => {
@@ -51,16 +52,16 @@ export default class EditableProfileImage extends BaseComponent {
 
     validate = (url) => {
         url = url || this.image.src;
-        if (url.includes(this.getPlaceholder())) {
+        if (url.includes(this.getPlaceholder())) { //if the contents are the same as the placeholder, it is invalid
             return "Du mangler et profilbillede."
         }
-        if (!validateObject(url, "url") || url.endsWith("/null")) {
+        if (!validateObject(url, "url") || url.endsWith("/null")) { //validate if the given url is actually a url
             return "Den indtastede URL for profilbilledet er ugyldigt."
         }
         return null;
     };
 
-    updateValidationStyle = () => {
+    updateValidationStyle = () => { //makes the image signify that there is an error with it.
         if (this.validate() != null) {
             this.image.classList.add("error");
         } else {
@@ -74,7 +75,8 @@ export default class EditableProfileImage extends BaseComponent {
             :host {
                 display: block;
                 max-height: 100%;
-                ${this.weirdfix || ""}
+                ${this.weirdfix || ""} /* this is a fix to an unresolved issue with webcomponents that don't act 
+                properly for different pages. Due to time constraints, no better solution has been found so far*/
             }
             .square {
                 width: 100%;

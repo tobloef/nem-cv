@@ -52,7 +52,7 @@ export default class SideBar extends BaseComponent {
         return `
             :host {
                 transform: translateX(calc(-100% - 50px));
-                transition: 750ms cubic-bezier(0.77, 0, 0.175, 1) transform;
+                transition: 500ms cubic-bezier(0.77, 0, 0.175, 1) transform;
                 display: block;
                 height: 100%;
                 max-width: 500px;

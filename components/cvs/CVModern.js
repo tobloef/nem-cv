@@ -1,4 +1,3 @@
-import BaseComponent from "../BaseComponent.js";
 import EditableProfileImage from "./shared/EditableProfileImage.js";
 import WorkAreaItem from "./shared/WorkAreaItem.js";
 import EditableList from "./shared/EditableList.js";
@@ -6,7 +5,6 @@ import EditableText from "./shared/EditableText.js";
 import ListButton from "./shared/ListButton.js";
 import ExperienceItem from "./shared/ExperienceItem.js";
 import AbstractCV from "./AbstractCV.js";
-import modern from "./templates/modern.js";
 
 export default class CVModern extends AbstractCV {
     static observedAttributes = [];
@@ -147,16 +145,13 @@ export default class CVModern extends AbstractCV {
     educationWhereSeparator = ", ";
     experienceWhereSeparator = ", ";
 
-    script = () => {
-        BaseComponent.template = modern;
-    };
-
     // language=CSS
     get css() {
         return `            
             :host{
                 font-family: 'Open Sans', sans-serif;
-                background-color: #F6F5EE;
+                background-color: var(--background-color);
+                color: var(--font-color);
                 display: block;
             }
             
@@ -251,7 +246,7 @@ export default class CVModern extends AbstractCV {
             
             .color1 {
                 height: 80px;
-                background-color: #302f2d;
+                background-color: var(--accent-color);
                 position: relative;
                 margin-bottom: 30px;
             }
@@ -259,19 +254,19 @@ export default class CVModern extends AbstractCV {
             .about .content {
                 padding: 50px;
                 max-width: 40%;
-                background-color: #E4E3D9;
+                background-color: var(--extra-background-color);
             }
             
             .experience .content{
                 padding: 50px;
                 max-width: 40%;
-                background-color: #E4E3D9;
+                background-color: var(--extra-background-color);
             }
             
             .color3 {
                 height: 200px;
                 width: 300px;
-                background-color: #E4E3D9;
+                background-color: var(--extra-background-color);
                 position: relative;
             }
             
@@ -331,9 +326,6 @@ export default class CVModern extends AbstractCV {
 
             
             @media(max-width: 800px) {
-                :host{
-                    background-color: #F6F5EE;
-                }
                 
                 header{
                     display: flex;
@@ -346,6 +338,7 @@ export default class CVModern extends AbstractCV {
                     align-items: flex-end;
                     width: 100%;
                     max-width: 200px;
+                    padding-left: 2em;
                 }
                 
                 .left{
@@ -354,16 +347,22 @@ export default class CVModern extends AbstractCV {
                     max-height: 550px;
                 }
                 
+                .color1 {
+                    height: 0;
+                }
+                
                 .about .content{
                     padding: 50px;
                     max-width: 100%;
-                    background-color: #E4E3D9;
+                }
+                
+                .description {
+                    margin-bottom: 1em;
                 }
 
                 .experience .content{
                     padding: 50px;
                     max-width: 100%;
-                    background-color: #E4E3D9;
                 }
 
                 .education .content{
