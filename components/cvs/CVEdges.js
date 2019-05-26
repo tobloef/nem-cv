@@ -339,10 +339,12 @@ export default class CVEdges extends AbstractCV {
                 
                 #info-box {
                     margin-left: 5%;
+                        
                 }
 
                 #under-name {
                     display: flex;
+                    flex-wrap: wrap;
                     color: var(--font-color);
                 }
             }
@@ -357,6 +359,10 @@ export default class CVEdges extends AbstractCV {
                 
                 #about {
                     max-width: 700px;
+                }
+                
+                #under-name {
+                    flex-wrap: initial;
                 }
             }
         `
