@@ -11,13 +11,12 @@ export default class BaseComponent extends HTMLElement {
     static colors = null;
     static editMode = false;
 
-    _elementName = null;
-
     constructor() {
         super();
         this.attachShadow({mode: "open"});
     }
 
+    // Gets called by the browser when the component is created
     connectedCallback() {
         this._defineUsedComponents();
         this._checkForUndefinedComponents();

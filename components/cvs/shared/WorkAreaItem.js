@@ -23,7 +23,7 @@ export default class WorkAreaItem extends BaseComponent {
     };
 
     script = () => {
-        //if we are editing, add event listener for dropdown functionality
+        // If we are editing, add event listener for dropdown functionality
         this.span = this.shadowRoot.querySelector(".dropdown");
         if (BaseComponent.editMode) {
             this.dropdown.setAttribute("part", "dropdown");
@@ -33,6 +33,7 @@ export default class WorkAreaItem extends BaseComponent {
             this.updateStyles();
             addStorageItemListener("sectors", this.addOptions);
         }
+        this.greyIfDefault();
     };
 
     getContent = () => {
@@ -48,6 +49,7 @@ export default class WorkAreaItem extends BaseComponent {
             this.span.innerText = content || this.placeholder;
             this.updateValidationStyle();
         }
+        this.greyIfDefault();
     };
 
     validate = () => {
@@ -89,18 +91,19 @@ export default class WorkAreaItem extends BaseComponent {
     };
 
     swapToDropdown = () => {
-        //swaps the span element with the dropdown element so that the user can choose a work area
+        // Swaps the span element with the dropdown element so that the user can choose a work area
         this.shadowRoot.removeChild(this.span);
         this.shadowRoot.appendChild(this.dropdown);
     };
 
     swapToSpan = () => {
-        //swaps the dropdown element with the swap element so that the cv looks static again
+        // Swaps the dropdown element with the swap element so that the cv looks static again
         const value = this.dropdown.value || this.placeholder;
         this.shadowRoot.removeChild(this.dropdown);
         this.shadowRoot.appendChild(this.span);
         this.span.innerText = value;
         this.updateValidationStyle();
+        this.greyIfDefault();
     };
 
     get css() {
@@ -111,13 +114,26 @@ export default class WorkAreaItem extends BaseComponent {
                 text-decoration: underline;
                 text-decoration-color: red;
             }
-            select, option {
+            select,
+            option {
                 font-family: "Open Sans", sans-serif;
                 font-size: 1em;
             }
-            span {
-                cursor: pointer;
+            
+            ${BaseComponent.editMode ? "span { cursor: pointer; }" : ""}
+            
+            .placeholder {
+                color: var(--editable-empty-text-color  );
             }
         `;
+    }
+
+    greyIfDefault = () => {
+        if (this.span.innerText === this.placeholder) {
+            this.span.classList.add("placeholder");
+        }
+        else {
+            this.span.classList.remove("placeholder");
+        }
     }
 }

@@ -52,7 +52,7 @@ export default class ExperienceItem extends BaseComponent {
                             name="Startdato"
                             content-key="from"
                             content-type="component"
-                    ></${EditableText.elementName}><p> - </p>
+                    ></${EditableText.elementName}><p class="separator"> – </p>
                     <${EditableText.elementName}
                             placeholder="Slutdato"
                             name="Slutdato"

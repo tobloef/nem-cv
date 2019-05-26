@@ -49,7 +49,8 @@ export default class CVEdges extends AbstractCV {
                                 <ul class="facts">
                                     <li class="age">
                                         <editable-text
-                                                validate-type="number"
+                                                validate-type="age"
+                                                is-age
                                                 content-key="age"
                                                 content-type="component"
                                                 placeholder="Din alder"

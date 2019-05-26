@@ -84,9 +84,6 @@ export default class CVSimple extends AbstractCV {
                 margin: 0;
                 color: var(--font-color);
             }
-            li {
-                user-select: none;
-            }
 
             .divider {
                 display: flex;
@@ -126,15 +123,22 @@ export default class CVSimple extends AbstractCV {
 
             ${EditableList.elementName} {
                 display: block;
+                margin-left: 5px;
             }
 
             ${EditableList.elementName}::part(list) {
                 margin-bottom: 0.8em;
             }
+
+            ${EditableList.elementName}#sector-list::part(list) {
+                display: flex;
+                align-items: center;
+            }
+            
             ${EditableList.elementName}::part(list-item) {
                 margin-bottom: 0.8em;
-                font-family: var(--p);
-                flex-direction: row-reverse;    
+                font-family: var(--p),sans-serif;
+                flex-direction: row-reverse;
             }
 
             .work-areas::part(list) {
@@ -147,7 +151,8 @@ export default class CVSimple extends AbstractCV {
                 flex-direction: row;
                 align-items: center;
             }
-            .work-area-container span, .work-areas::part(list-item) {
+            .work-area-container span,
+            .work-areas::part(list-item) {
                 font-family: var(--p);
                 font-size: 1em;
             }

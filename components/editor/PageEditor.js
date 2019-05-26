@@ -38,6 +38,12 @@ export default class PageEditor extends BaseComponent {
     };
 
     script = () => {
+        const hasVisitedBefore = getStorageItem("has-visited-before");
+        if (!hasVisitedBefore) {
+            alert("For at ændre dine oplysninger skal du blot trykke på den tekst du vil redigere, så kan du ændre den direkte i dit CV. Nemt!");
+            setStorageItem("has-visited-before", true);
+        }
+
         BaseComponent.editMode = true;
         this._checkForExistingCV();
         // Try to create CV with template or redirect to choose template
@@ -103,7 +109,7 @@ export default class PageEditor extends BaseComponent {
         cvContainer.appendChild(cvElement);
         // When ready set the CV content
         whenReady(() => {
-            //if the user has previously worked on the cv, the content is filled in after the page is loaded
+            // If the user has previously worked on the cv, the content is filled in after the page is loaded
             const content = getStorageItem("cv-content");
             this.cv.setContent(content);
             addStorageItemListener("cv-content", this.cv.setContent);
