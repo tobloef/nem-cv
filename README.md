@@ -1,4 +1,10 @@
+# NemCV (Easy Resume)
+
+Prototype of an online resume maker, made in a week. Inspired by Squarespace, the resumes are editable while previewing the page. A small framework around web components was built and used in the project, so the code is pretty modular. 
+
 # NemCV (in Danish)
+
+![](https://i.imgur.com/bvPjS2C.png)
 
 Dette projekt er oprettet til faget **Systematisk Design af Brugergrænseflader**
 på bachelor-studiet i **Softwareudvikling** hos **IT-universitetet i København**.  
