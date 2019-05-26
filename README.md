@@ -12,8 +12,10 @@ Projektet er udarbejdet af:
 * Tobias Løfgren
 
 ## Opsætning af programmet
-Da dette program er en simpel webside kan den kører med flere forskellige serverer (dog ikke med file://).
-Her ses forskellige måder en server nemmest kan startes. Alle kommandoer antager en terminal der er åbnet i projektet rod-mappe. Det skal dog nævnes at hjemmesidens hastighed kan variere meget baseret på valg af webserver. Vi anbefaler docker er eller NodeJS for den bedste oplevelse.
+Da dette program er en simpel webside kan den køre med flere forskellige servere (dog ikke med file://).
+Her ses forskellige måder en server nemmest kan startes. Alle kommandoer antager en terminal der er åbnet i projektets rod-mappe. 
+Det skal dog nævnes at hjemmesidens hastighed kan variere meget baseret på valg af webserver. 
+Vi anbefaler docker eller NodeJS for den bedste oplevelse.
 
 ### Docker Compose
 Hvis docker-compose (og docker) er installeret på din maskine kan hjemmesiden køres med denne kommando.
@@ -43,10 +45,10 @@ Serveren kan herefter startes med følgende kommando.
 ```
 http-server
 ```
-Hjemmesiden kan herefter tilgås på addressen `localhost:8080`, så længe `http-server` programmet kører i terminalen.
+Hjemmesiden kan herefter tilgås på addressen `localhost:8080`, så længe `http-server`-programmet kører i terminalen.
 
 ### Python 2
-Python 2 har en indbygget pakke, kaldet `SimpleHTTPServer`, som fungere som en simpel web server. Denne kan køres med følgende kommando:
+Python 2 har en indbygget pakke, kaldet `SimpleHTTPServer`, som fungerer som en simpel web server. Denne kan køres med følgende kommando:
 ```
 python -m SimpleHTTPServer
 ```
