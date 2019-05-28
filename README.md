@@ -1,4 +1,4 @@
-# NemCV (Easy Resume)
+# EasyResume
 
 Prototype of an online resume maker, made in a week. Inspired by Squarespace, the resumes are editable while previewing the page. A small framework around web components was built and used in the project, so the code is pretty modular. 
 
